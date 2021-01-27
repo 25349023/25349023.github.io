@@ -1,0 +1,35 @@
+.banner {
+  background-image: url("./images/background1.jpg");
+  background-size: cover;
+
+  .foreground {
+    background-image: radial-gradient($banner-inner-color, $banner-outer-color);
+    height: 90vh;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    h1 {
+      margin: 0;
+      font-size: 4.5rem;
+      font-family: $title-font;
+      background-image: linear-gradient(
+        $banner-title-color 65%,
+        rgba($banner-title-color, 0.2)
+      );
+      background-clip: text;
+      color: transparent;
+    }
+
+    &:before {
+      @include skew-banner(4deg, $height: 130px);
+    }
+
+    &:after {
+      @include skew-banner(-8deg, -110px, 160px);
+    }
+  }
+}

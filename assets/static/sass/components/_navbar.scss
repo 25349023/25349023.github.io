@@ -1,0 +1,32 @@
+nav {
+  background-color: $skyblue;
+
+  ul {
+    display: flex;
+    margin: 0;
+    margin-left: 3rem;
+    padding: 0.6rem 0;
+
+    font-size: 1.2rem;
+
+    li {
+      display: inline-block;
+      margin: 0.4rem 0.6rem;
+
+      &.brand {
+        margin-right: 1.6rem;
+        font-family: $brand-font;
+        font-size: 1.4rem;
+      }
+
+      &.active {
+        font-weight: bold;
+      }
+
+      a {
+        color: $navbar-text-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
