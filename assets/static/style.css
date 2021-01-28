@@ -351,9 +351,9 @@ nav {
 }
 nav ul {
   display: flex;
-  margin: 0;
-  margin-left: 3rem;
+  margin: 0 3rem;
   padding: 0.6rem 0;
+  align-items: center;
   font-size: 1.2rem;
 }
 nav ul li {
@@ -361,7 +361,7 @@ nav ul li {
   margin: 0.4rem 0.6rem;
 }
 nav ul li.brand {
-  margin-right: 1.6rem;
+  margin-right: 3rem;
   font-family: "Comfortaa", "Maven Pro", sans-serif;
   font-size: 1.4rem;
 }
@@ -404,6 +404,7 @@ footer {
   font-size: 4.5rem;
   font-family: "Exo 2", "Maven Pro", sans-serif;
   background-image: linear-gradient(#d3f8e4 65%, rgba(211, 248, 228, 0.2));
+  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
@@ -422,14 +423,100 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -110px;
-  height: 160px;
+  bottom: -150px;
+  height: 200px;
   background-color: rgba(255, 255, 255, 0.4);
   transform: skewY(-8deg);
 }
 
+.home .content .articles {
+  display: flex;
+  height: 16rem;
+  padding: 0 3rem 0;
+}
+.home .content .articles .post {
+  flex: 1;
+  min-width: 0;
+  margin-right: 2.4rem;
+  background-color: #fffcf5;
+  background-image: linear-gradient(#fff7e6, #fffcf5 40%);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+.home .content .articles .post:last-of-type {
+  margin-right: 0;
+}
+.home .content .articles .post:hover {
+  transform: translateY(-20px) rotateZ(8deg);
+}
+.home .content .articles .post.dont-rotate:hover {
+  transform: translateY(-20px);
+}
+.home .content .articles .post h3 {
+  margin: 0;
+  padding: 1rem 0.8rem 1rem 1.2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.6rem;
+}
+.home .content .articles .post .preview {
+  position: relative;
+  margin: 0;
+  padding: 0 1.3rem 0 1.2rem;
+  height: 10rem;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.home .content .articles .post .dots {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 0;
+  width: 8rem;
+  height: 1.2rem;
+  background-image: linear-gradient(to right, rgba(255, 252, 245, 0), #fffcf5 60%);
+}
+.home .content .articles:after {
+  content: "";
+  position: absolute;
+  top: 8rem;
+  bottom: -2rem;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background-image: linear-gradient(rgba(217, 238, 247, 0.3), rgba(217, 238, 247, 0.8));
+  border-radius: 10px;
+}
+
 :root {
   font-family: "Maven Pro", "Noto Sans TC", sans-serif;
+}
+
+.home .content {
+  display: flex;
+  justify-content: center;
+  color: #383838;
+}
+.home .content .content-wrapper {
+  position: relative;
+  flex-basis: 1200px;
+  padding: 0 3rem;
+}
+.home .content .content-wrapper section {
+  margin: 3rem 0 6rem;
+  position: relative;
+  z-index: 2;
+}
+.home .content .content-wrapper h2 {
+  font-size: 1.8rem;
+  font-weight: normal;
+  margin: 0 0 2rem 0;
+  padding-bottom: 0.2rem;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-image: linear-gradient(to right, rgba(56, 56, 56, 0.1), rgba(56, 56, 56, 0.7) 8%, rgba(56, 56, 56, 0) 20%) 1;
 }
 
 /*# sourceMappingURL=style.css.map */

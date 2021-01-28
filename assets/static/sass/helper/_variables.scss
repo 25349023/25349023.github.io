@@ -6,6 +6,20 @@ $banner-title-color: rgb(211, 248, 228);
 $banner-outer-color: rgba(0, 79, 168, 0.3);
 $banner-inner-color: rgba(0, 0, 0, 0.1);
 
+$content-color: rgb(248, 248, 248);
+$articles-deck-color: rgb(217, 238, 247);
+$post-color: rgb(255, 252, 245);
+$post-color-deep: adjust-color(
+  $color: $post-color,
+  $saturation: 5%,
+  $lightness: -3%,
+);
+$post-title-color: rgb(56, 56, 56);
+
+$color1: rgb(255, 219, 219);
+$color2: rgb(227, 234, 255);
+$color3: rgb(238, 255, 206);
+
 // $footer-color: rgb(56, 53, 51);
 $footer-color: rgb(92, 87, 83);
 $footer-text-colot: rgb(255, 249, 240);

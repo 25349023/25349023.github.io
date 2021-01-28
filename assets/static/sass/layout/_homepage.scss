@@ -1,0 +1,37 @@
+.home {
+  .content {
+    display: flex;
+    justify-content: center;
+    color: $post-title-color;
+
+    .content-wrapper {
+      position: relative;
+      flex-basis: 1200px;
+      padding: 0 3rem;
+
+      section {
+        margin: 3rem 0 6rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: normal;
+        margin: 0 0 2rem 0;
+        padding-bottom: 0.2rem;
+
+        border-width: 0 0 1px 0;
+        border-style: solid;
+        border-image: linear-gradient(
+            to right,
+            rgba($post-title-color, 0.1),
+            rgba($post-title-color, 0.7) 8%,
+            rgba($post-title-color, 0) 20%
+          )
+          1;
+        // border-image: linear-gradient(#f6b73c, #4d9f0c) 30 0%;
+      }
+    }
+  }
+}

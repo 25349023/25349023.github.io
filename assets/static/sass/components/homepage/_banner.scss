@@ -16,10 +16,12 @@
       margin: 0;
       font-size: 4.5rem;
       font-family: $title-font;
+
       background-image: linear-gradient(
         $banner-title-color 65%,
         rgba($banner-title-color, 0.2)
       );
+      -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
@@ -29,7 +31,7 @@
     }
 
     &:after {
-      @include skew-banner(-8deg, -110px, 160px);
+      @include skew-banner(-8deg, -150px, 200px);
     }
   }
 }

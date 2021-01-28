@@ -1,8 +1,12 @@
 @import "./normalize";
 @import "./helper/variables";
 @import "./helper/mixins";
+
 @import "./components/navbar";
 @import "./components/footer";
 @import "./components/placeholder";
 @import "./components/homepage/banner";
+@import "./components/homepage/article_deck";
+
 @import "./layout/root";
+@import "./layout/homepage";

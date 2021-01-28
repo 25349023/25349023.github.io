@@ -3,9 +3,9 @@ nav {
 
   ul {
     display: flex;
-    margin: 0;
-    margin-left: 3rem;
+    margin: 0 3rem;
     padding: 0.6rem 0;
+    align-items: center;
 
     font-size: 1.2rem;
 
@@ -14,7 +14,7 @@ nav {
       margin: 0.4rem 0.6rem;
 
       &.brand {
-        margin-right: 1.6rem;
+        margin-right: 3rem;
         font-family: $brand-font;
         font-size: 1.4rem;
       }
