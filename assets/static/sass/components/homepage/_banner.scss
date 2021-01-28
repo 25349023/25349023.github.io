@@ -27,11 +27,11 @@
     }
 
     &:before {
-      @include skew-banner(4deg, $height: 130px);
+      @include skew-banner(4deg, $height: 130px, $color: $latest-content-color);
     }
 
     &:after {
-      @include skew-banner(-8deg, -150px, 200px);
+      @include skew-banner(-8deg, -150px, 200px, $color: $latest-content-color);
     }
   }
 }

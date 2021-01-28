@@ -5,8 +5,10 @@
 @import "./components/navbar";
 @import "./components/footer";
 @import "./components/placeholder";
+@import "./components/scroll_top";
 @import "./components/homepage/banner";
-@import "./components/homepage/article_deck";
+@import "./components/homepage/article_grid";
+// @import "./components/homepage/article_deck";
 
 @import "./layout/root";
 @import "./layout/homepage";

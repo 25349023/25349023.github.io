@@ -1,0 +1,126 @@
+%deck-title-block {
+  background-color: transparent;
+  cursor: default;
+
+  h2 {
+    font-size: 2rem;
+    position: absolute;
+    right: 5rem;
+    bottom: 4rem;
+
+    &:after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 4.5rem;
+      height: 3rem;
+
+      bottom: -1.4rem;
+      right: -1.6rem;
+
+      border: solid $latest-ui-color;
+      border-width: 0 12px 12px 0;
+    }
+  }
+}
+
+%deck-more-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+%normal-card-block {
+  position: relative;
+  background-color: $latest-card-color;
+  padding: 1.2rem 1.4rem 2rem;
+
+  transition: color 0.5s, background-color 0.5s;
+  cursor: pointer;
+
+  h2,
+  h3 {
+    margin: 0;
+  }
+
+  h3 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    font-size: 1.6rem;
+  }
+
+  .preview {
+    position: relative;
+    margin: 0;
+    margin-top: 1rem;
+    height: 12.5rem;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+}
+
+.home .content .latest .card {
+  @extend %normal-card-block;
+  color: $latest-ui-color;
+
+  &:nth-of-type(n + 2):hover {
+    color: $latest-content-color;
+    background-color: $latest-card-hover-color;
+  }
+
+  &:first-of-type {
+    @extend %deck-title-block;
+  }
+
+  &:last-of-type {
+    @extend %deck-more-block;
+
+    &:hover {
+      color: $content-color;
+      background-color: rgba($more-card-hover-color, 0.6);
+    }
+  }
+}
+
+.home .content .hot-post .card {
+  @extend %normal-card-block;
+
+  &:nth-of-type(-n + 2),
+  &:nth-of-type(n + 5) {
+    background-color: $hotpost-card-color;
+
+    &:hover {
+      color: $hotpost-card-color;
+      background-color: $hotpost-card-hover-color;
+    }
+  }
+
+  &:nth-of-type(3) {
+    @extend %deck-title-block;
+
+    h2 {
+      left: 5rem;
+    }
+
+    h2:after {
+      left: -1.6rem;
+
+      border-color: $content-color;
+      border-width: 0 0 12px 12px;
+    }
+  }
+
+  &:nth-of-type(4) {
+    @extend %deck-more-block;
+
+    &:hover {
+      background-color: rgba($more-card-hover-color, 0.6);
+    }
+  }
+}

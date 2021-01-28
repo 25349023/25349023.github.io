@@ -1,10 +1,15 @@
-@mixin skew-banner($direction: 5deg, $bottom: -100px, $height: 150px) {
+@mixin skew-banner(
+  $direction: 5deg,
+  $bottom: -100px,
+  $height: 150px,
+  $color: white
+) {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: $bottom;
   height: $height;
-  background-color: rgba(white, 0.4);
+  background-color: rgba($color, 0.5);
   transform: skewY($direction);
 }

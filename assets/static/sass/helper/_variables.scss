@@ -7,6 +7,9 @@ $banner-outer-color: rgba(0, 79, 168, 0.3);
 $banner-inner-color: rgba(0, 0, 0, 0.1);
 
 $content-color: rgb(248, 248, 248);
+$latest-content-color: rgb(229, 241, 250);
+$hotpost-content-color: rgb(202, 61, 36);
+
 $articles-deck-color: rgb(217, 238, 247);
 $post-color: rgb(255, 252, 245);
 $post-color-deep: adjust-color(
@@ -14,7 +17,14 @@ $post-color-deep: adjust-color(
   $saturation: 5%,
   $lightness: -3%,
 );
-$post-title-color: rgb(56, 56, 56);
+$default-ui-color: rgb(56, 56, 56);
+$latest-ui-color: rgb(32, 55, 85);
+
+$latest-card-color: rgb(206, 229, 250);
+$latest-card-hover-color: rgb(49, 85, 129);
+$hotpost-card-color: rgb(167, 51, 31);
+$hotpost-card-hover-color: rgb(250, 218, 214);
+$more-card-hover-color: $default-ui-color;
 
 $color1: rgb(255, 219, 219);
 $color2: rgb(227, 234, 255);
