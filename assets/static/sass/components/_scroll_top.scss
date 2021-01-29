@@ -17,4 +17,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: opacity 1s;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+  }
 }
