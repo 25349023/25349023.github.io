@@ -2,8 +2,8 @@ var mybutton = document.getElementById("scroll-top");
 
 window.onscroll = function scrollFunction() {
   if (
-    document.body.scrollTop > 100 ||
-    document.documentElement.scrollTop > 100
+    document.body.scrollTop > 240 ||
+    document.documentElement.scrollTop > 240
   ) {
     mybutton.classList.remove("hidden");
   } else {

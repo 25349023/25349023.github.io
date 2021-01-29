@@ -3,7 +3,7 @@ nav {
 
   ul {
     display: flex;
-    margin: 0 3rem;
+    margin: 0 5rem;
     padding: 0.6rem 0;
     align-items: center;
 
@@ -11,12 +11,21 @@ nav {
 
     li {
       display: inline-block;
-      margin: 0.4rem 0.6rem;
+      margin: 0.4rem 0;
+      padding: 0 1rem;
 
       &.brand {
-        margin-right: 3rem;
+        margin-right: auto;
         font-family: $brand-font;
         font-size: 1.4rem;
+
+        .fas {
+          margin-right: 0.4rem;
+        }
+      }
+
+      &:nth-of-type(n + 3) {
+        border-left: 1px solid rgba($navbar-text-color, 0.4);
       }
 
       &.active {
