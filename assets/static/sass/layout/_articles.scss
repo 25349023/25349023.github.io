@@ -11,8 +11,8 @@
     flex-basis: 1200px;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    // grid-template-rows: 0.6fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.6fr;
     grid-auto-rows: 1fr;
     gap: 0.5rem;
   }

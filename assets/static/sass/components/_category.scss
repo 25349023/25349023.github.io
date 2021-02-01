@@ -1,0 +1,45 @@
+aside nav > ul {
+  > li:first-of-type {
+    &.expanded {
+      margin-bottom: 0.6rem;
+    }
+
+    a {
+      cursor: pointer;
+      display: flex;
+
+      i {
+        position: relative;
+        top: 1px;
+        font-size: 1.6rem;
+        margin-left: auto;
+        transition: transform 0.2s;
+
+        &.opened {
+          transform: scaleY(-1);
+        }
+      }
+    }
+  }
+
+  .collapsible-category {
+    ul {
+      margin: 0 0 0 1rem;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s;
+
+      display: flex;
+      flex-flow: column;
+
+      li {
+        font-size: max(0.9em, 1.2rem);
+      }
+
+      a {
+        padding: 0.6rem 1rem 0.6rem 0.8rem;
+      }
+    }
+  }
+}

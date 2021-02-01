@@ -4,10 +4,10 @@ let sidebarHandle = document.querySelector("#sidebar .handle");
 let icon = sidebarHandle.querySelector("i");
 
 function toggleSidebar() {
-  icon.classList.toggle("fa-bars");
-  icon.classList.toggle("fa-times");
-  sidebar.classList.toggle("hidden");
-  overlay.classList.toggle("hidden");
+    icon.classList.toggle("fa-bars");
+    icon.classList.toggle("fa-times");
+    sidebar.classList.toggle("hidden");
+    overlay.classList.toggle("hidden");
 }
 
 sidebarHandle.addEventListener("click", toggleSidebar);
