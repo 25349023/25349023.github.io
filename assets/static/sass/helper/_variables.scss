@@ -12,12 +12,6 @@ $hotpost-content-color: rgb(202, 61, 36);
 $about-content-color: rgb(210, 243, 232);
 
 $articles-deck-color: rgb(217, 238, 247);
-$post-color: rgb(255, 252, 245);
-$post-color-deep: adjust-color(
-  $color: $post-color,
-  $saturation: 5%,
-  $lightness: -3%,
-);
 $default-ui-color: rgb(56, 56, 56);
 $latest-ui-color: rgb(32, 55, 85);
 $hotpost-ui-color: $content-color;
@@ -31,13 +25,24 @@ $about-card-color: rgb(173, 226, 208);
 $about-card-hover-color: rgb(19, 95, 70);
 $more-card-hover-color: $default-ui-color;
 
+$articles-page-color: rgb(241, 248, 255);
+$post-color0: rgb(220, 236, 255);
+$post-color1: rgb(204, 228, 255);
+$post-color2: rgb(195, 222, 255);
+
+$sidebar-color1: rgb(209, 234, 255);
+$sidebar-color-mid: rgb(165, 209, 230);
+$sidebar-color2: rgb(136, 207, 166);
+$sidebar-handle-color: rgb(172, 215, 228);
+$sidebar-ui-color: rgb(0, 63, 37);
+
 $color1: rgb(255, 219, 219);
 $color2: rgb(227, 234, 255);
 $color3: rgb(238, 255, 206);
 
 // $footer-color: rgb(56, 53, 51);
 $footer-color: rgb(92, 87, 83);
-$footer-text-colot: rgb(255, 249, 240);
+$footer-text-color: rgb(255, 249, 240);
 
 $default-font: "Maven Pro", "Noto Sans TC", sans-serif;
 $brand-font: "Comfortaa", "Maven Pro", sans-serif;

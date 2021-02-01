@@ -28,9 +28,10 @@
 
     .content-wrapper {
       padding: 5rem 3rem;
-      flex-basis: 1200px;
+      flex-basis: 1080px;
 
       display: grid;
+      grid-auto-flow: dense;
       grid-template-rows: 1fr 1fr;
       grid-template-columns: repeat(3, 1fr);
       row-gap: 0.3rem;
