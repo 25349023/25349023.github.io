@@ -26,28 +26,7 @@
     z-index: 3;
 
     &:after {
-      content: "";
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -14rem;
-      height: 20rem;
-      width: 20rem;
-      border: solid rgba(white, 0.4);
-      border-width: 0 0 8rem 8rem;
-      transform: rotateZ(-45deg);
-      z-index: 2;
+      @include banner-arrow;
     }
-
-    // &:before,
-    // &:after {
-    //   content: "";
-    //   max-height: 0;
-    //   display: inline-block;
-    //   flex: 1;
-    //   margin: 0 4rem;
-    //   border-bottom: 1px solid rgba($articles-ui-color, 0.5);
-    // }
   }
 }

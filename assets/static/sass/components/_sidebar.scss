@@ -45,7 +45,8 @@ aside {
     backdrop-filter: blur(3px);
 
     font-size: 1.2rem;
-    background-color: rgba($sidebar-handle-color, 0.95);
+    color: $sidebar-handle-color;
+    background-color: rgba($sidebar-ui-color, 0.8);
     border: none;
     border-radius: 0 5px 5px 0;
 

@@ -1,7 +1,10 @@
 .articles main .main-wrapper {
-  article {
-    padding: 0.8rem 1.2rem;
-    overflow-y: hidden;
+  a.post-link {
+    display: flex;
+    align-items: stretch;
+
+    text-decoration: none;
+    color: $articles-ui-color;
 
     cursor: pointer;
     transition: color 0.5s, background-color 0.5s;
@@ -41,6 +44,11 @@
         background-color: $post-hover-color2;
       }
     }
+  }
+
+  article {
+    padding: 0.8rem 1.2rem;
+    overflow-y: hidden;
 
     .info {
       display: flex;

@@ -33,7 +33,9 @@ function adjustHeight(target, amount) {
     target.style.maxHeight = target.scrollHeight + amount + "px";
 }
 
-for (let c of categories) {
-    let anchor = c.querySelector(":scope > a");
-    anchor.addEventListener("click", collapseExpand);
-}
+window.onload = function () {
+    for (let c of categories) {
+        let anchor = c.querySelector(":scope > a");
+        anchor.addEventListener("click", collapseExpand);
+    }
+};

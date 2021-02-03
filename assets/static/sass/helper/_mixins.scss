@@ -13,3 +13,51 @@
   background-color: rgba($color, 0.5);
   transform: skewY($direction);
 }
+
+@mixin banner-arrow($size: 20rem, $width: 8rem, $rotation: -45deg, $posY: 50%) {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: $posY;
+  left: 50%;
+  margin: -($size + $width) / 2;
+  height: $size;
+  width: $size;
+  border: solid rgba(white, 0.4);
+  border-width: 0 0 $width $width;
+  transform: rotateZ($rotation);
+  z-index: 2;
+}
+
+@mixin header-style {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @content;
+  }
+}
+
+@mixin header-margin-bottom($size) {
+  @include header-style {
+    margin: 0 0 $size 0;
+  }
+}
+
+@mixin paragraph-margin-bottom($size) {
+  p,
+  pre {
+    margin: 0 0 $size 0;
+  }
+}
+
+@mixin list-margin-bottom($size) {
+  ol,
+  ul,
+  dl {
+    margin-top: 0;
+    margin-bottom: $size;
+  }
+}
