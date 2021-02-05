@@ -12,17 +12,23 @@
 
       &:first-of-type {
         background-color: $latest-content-color;
-        color: $latest-ui-color;
+        .card {
+          color: $latest-ui-color;
+        }
       }
 
       &:nth-of-type(2) {
         background-color: $hotpost-content-color;
-        color: $hotpost-ui-color;
+        .card {
+          color: $hotpost-ui-color;
+        }
       }
 
       &:nth-of-type(3) {
         background-color: $about-content-color;
-        color: $about-ui-color;
+        .card {
+          color: $about-ui-color;
+        }
       }
     }
 

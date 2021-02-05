@@ -1,16 +1,16 @@
 .home .content .latest .card {
   @extend %normal-card-block;
 
-  &:nth-of-type(n + 2):hover {
+  &:nth-child(n + 2):hover {
     color: $latest-content-color;
     background-color: $latest-card-hover-color;
   }
 
-  &:first-of-type {
+  &:first-child {
     @extend %deck-title-block;
   }
 
-  &:last-of-type {
+  &:last-child {
     @extend %deck-more-block;
 
     &:hover {
@@ -23,7 +23,7 @@
 .home .content .hot-post .card {
   @extend %normal-card-block;
 
-  &:nth-of-type(n + 2) {
+  &:nth-child(n + 2) {
     background-color: $hotpost-card-color;
 
     &:hover {
@@ -32,7 +32,7 @@
     }
   }
 
-  &:first-of-type {
+  &:first-child {
     @extend %deck-title-block;
     grid-column: 3 / 3;
 
@@ -48,7 +48,7 @@
     }
   }
 
-  &:last-of-type {
+  &:last-child {
     @extend %deck-more-block;
     background-color: transparent;
     grid-row: 2 / 2;
@@ -64,7 +64,7 @@
 .home .content .about .card {
   @extend %normal-card-block;
 
-  &:first-of-type {
+  &:first-child {
     @extend %deck-title-block;
     grid-column: 1 / 3;
 
@@ -98,7 +98,7 @@
     }
   }
 
-  &:nth-of-type(n + 2) {
+  &:nth-child(n + 2) {
     background-color: $about-card-color;
 
     &:hover {
