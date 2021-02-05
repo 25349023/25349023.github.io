@@ -2,6 +2,7 @@
 @import "./helper/font";
 @import "./helper/variables";
 @import "./helper/mixins";
+@import "./helper/hljs_patch";
 
 @import "./components/navbar";
 @import "./components/footer";
@@ -22,6 +23,7 @@
 
 @import "./components/post/post_content";
 @import "./components/post/banner";
+@import "./components/post/line_numbers";
 
 @import "./layout/root";
 @import "./layout/homepage";

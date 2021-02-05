@@ -32,6 +32,10 @@
       integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-light.min.css"
+    />
   </head>
 
   <body class="postpage">
@@ -412,7 +416,7 @@
           <p>This is a normal paragraph:</p>
           <pre><code>This is a code block.</code></pre>
           <p>Here is an example of AppleScript:</p>
-          <pre><code>tell application &quot;Foo&quot;
+          <pre class="line-numbers"><code>tell application &quot;Foo&quot;
     beep
 end tell</code></pre>
           <p>
@@ -427,7 +431,7 @@ end tell</code></pre>
             it, and Markdown will handle the hassle of encoding the ampersands
             and angle brackets. For example, this:
           </p>
-          <pre><code>&lt;div class=&quot;footer&quot;&gt;
+          <pre class="line-numbers"><code>&lt;div class=&quot;footer&quot;&gt;
       &amp;copy; 2004 Foo Corporation
 &lt;/div&gt;</code></pre>
           <p>
@@ -540,5 +544,10 @@ end tell</code></pre>
     <script src="../js/scroll_top.js"></script>
     <script src="../js/sidebar.js"></script>
     <script src="../js/category.js"></script>
+    <script src="../js/line_numbers.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
   </body>
 </html>

@@ -98,6 +98,10 @@
       margin-top: 2rem;
     }
 
+    pre code {
+      font-weight: normal;
+    }
+
     &:before {
       content: "\f10d";
       position: absolute;

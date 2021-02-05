@@ -351,6 +351,12 @@ template {
   font-family: FakePearl-Light;
   src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Light.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Light.woff) format("woff");
 }
+pre code.hljs {
+  padding: 0;
+  color: #383a42;
+  background: transparent;
+}
+
 header nav {
   background-color: #cbe5ff;
 }
@@ -932,6 +938,9 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content blockquote blockquote {
   margin-top: 2rem;
 }
+.postpage article .post-content blockquote pre code {
+  font-weight: normal;
+}
 .postpage article .post-content blockquote:before {
   content: "";
   position: absolute;
@@ -1022,6 +1031,27 @@ aside nav > ul .collapsible-category ul a {
   border-width: 0 0 5rem 5rem;
   transform: rotateZ(-45deg);
   z-index: 2;
+}
+
+.postpage article .post-content pre.line-numbers {
+  counter-reset: linenumbers 0;
+  padding: 0.6rem 0.5rem 0.6rem 0.8rem;
+  position: relative;
+}
+.postpage article .post-content pre.line-numbers code {
+  counter-increment: linenumbers 1;
+  padding-left: 4.2rem;
+}
+.postpage article .post-content pre.line-numbers code:before {
+  content: counter(linenumbers);
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  width: 3.2rem;
+  padding-right: 0.8rem;
+  border-right: 2px solid rgba(92, 68, 58, 0.2);
+  text-align: right;
+  letter-spacing: -0.5px;
 }
 
 :root {
