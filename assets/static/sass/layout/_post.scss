@@ -5,9 +5,13 @@
     background-color: $postpage-color;
     font-family: $post-font;
 
+    ::selection {
+      background-color: rgba($postpage-ui-color, 0.2);
+    }
+
     article {
-      margin: 3rem 0;
-      padding: 2rem;
+      margin: 3rem 0 3rem 0;
+      padding: 2rem 5rem 2rem 0;
       flex-basis: 1080px;
       color: $postpage-ui-color;
 

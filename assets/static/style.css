@@ -576,11 +576,13 @@ aside nav > ul .collapsible-category ul a {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 1s;
+  transition: opacity 0.4s, visibility 0.4s;
   opacity: 1;
+  visibility: visible;
 }
 .scroll-top.hidden {
   opacity: 0;
+  visibility: hidden;
 }
 
 .home .banner {
@@ -884,8 +886,8 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content > h1:before {
   content: "";
   position: absolute;
-  left: -3.2rem;
-  bottom: 0.3rem;
+  left: -3rem;
+  bottom: 0.25rem;
   font-family: "Font Awesome 5 Free";
   font-size: 2rem;
   color: rgba(27, 177, 89, 0.7);
@@ -1061,6 +1063,113 @@ aside nav > ul .collapsible-category ul a {
   letter-spacing: -0.5px;
 }
 
+.postpage .toc-wrapper {
+  position: fixed;
+  right: 0;
+  bottom: 8rem;
+  max-width: 220px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 0 1.2rem 0 0;
+  transition: opacity 0.4s, visibility 0.4s;
+  opacity: 1;
+  visibility: visible;
+}
+.postpage .toc-wrapper.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.postpage .toc-wrapper ::selection {
+  background-color: rgba(92, 68, 58, 0.2);
+}
+.postpage .toc-wrapper ul {
+  padding: 0;
+  margin: 0;
+}
+.postpage .toc {
+  text-align: right;
+  right: 0;
+  padding-left: 1rem;
+}
+.postpage .toc li {
+  display: block;
+}
+.postpage .toc li a {
+  text-decoration: none;
+  color: #5c443a;
+}
+.postpage .toc li a:hover {
+  color: #1bb159;
+}
+.postpage .toc > li {
+  font-weight: bold;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+.postpage .toc > li > a {
+  position: relative;
+}
+.postpage .toc > li > a:before {
+  content: "";
+  position: absolute;
+  left: -1.3rem;
+  top: 0;
+  font-family: "Font Awesome 5 Free";
+  font-size: 1rem;
+  color: rgba(27, 177, 89, 0.7);
+}
+.postpage .toc > li > ul > li {
+  font-weight: normal;
+  font-size: 1.1rem;
+}
+.postpage .toc > li > ul > li a {
+  color: rgba(92, 68, 58, 0.9);
+}
+.postpage .toc > li > ul > li > ul > li {
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+.postpage .toc > li > ul > li > ul > li a {
+  color: rgba(92, 68, 58, 0.7);
+}
+
+.postpage .adjacent-posts {
+  margin-top: 3rem;
+  padding-left: 2.5rem;
+  display: flex;
+  flex-flow: column;
+}
+.postpage .adjacent-posts span {
+  display: inline-block;
+  font-style: italic;
+  margin-bottom: 0.2rem;
+  color: rgba(92, 68, 58, 0.7);
+}
+.postpage .adjacent-posts a {
+  color: inherit;
+  text-decoration: none;
+}
+.postpage .adjacent-posts h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.postpage .adjacent-posts h3:hover {
+  color: #1bb159;
+}
+.postpage .adjacent-posts .next {
+  align-self: flex-end;
+}
+.postpage .adjacent-posts .next i {
+  margin-left: 1rem;
+}
+.postpage .adjacent-posts .prev {
+  text-align: right;
+  margin-right: auto;
+}
+.postpage .adjacent-posts .prev i {
+  margin-right: 1rem;
+}
+
 .portfolio .banner {
   height: 40vh;
   position: relative;
@@ -1096,6 +1205,9 @@ aside nav > ul .collapsible-category ul a {
 :root {
   font-family: "Maven Pro", "Noto Sans TC", sans-serif;
   scroll-behavior: smooth;
+}
+:root ::selection {
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .home .content {
@@ -1163,9 +1275,12 @@ aside nav > ul .collapsible-category ul a {
   background-color: #fcf9f3;
   font-family: "Maven Pro", "FakePearl", sans-serif;
 }
+.postpage main ::selection {
+  background-color: rgba(92, 68, 58, 0.2);
+}
 .postpage main article {
-  margin: 3rem 0;
-  padding: 2rem;
+  margin: 3rem 0 3rem 0;
+  padding: 2rem 5rem 2rem 0;
   flex-basis: 1080px;
   color: #5c443a;
 }

@@ -53,22 +53,11 @@
       </nav>
     </header>
     <section class="banner"></section>
-    <main>
-      <!-- <div class="main-wrapper"> -->
-      <article>
-        <div class="info">
-          <i class="fas fa-seedling"></i>
-          <h1 class="title">Hello world 你好</h1>
-          <div class="meta-data">
-            <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
-            <time class="publish-date">
-              <i class="fas fa-at"></i> 2021 - 02 - 01</time
-            >
-          </div>
-        </div>
-        <div class="post-content">
-          <h1>Markdown: Syntax</h1>
-          <!-- <ul class="toc">
+    <section class="toc-wrapper hidden" id="toc">
+      <ul class="toc">
+        <li>
+          <a href="#">Markdown: Syntax</a>
+          <ul>
             <li>
               <a href="#overview">Overview</a>
               <ul>
@@ -108,15 +97,24 @@
                 <li><a href="#autolink">Automatic Links</a></li>
               </ul>
             </li>
-          </ul> -->
-          <!-- <p>
-            <strong>Note:</strong> This document is itself written using
-            Markdown; you can
-            <a href="/projects/markdown/syntax.text"
-              >see the source for it by adding ‘.text’ to the URL</a
-            >.
-          </p> -->
-          <!-- <hr /> -->
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <main>
+      <article>
+        <section class="info">
+          <i class="fas fa-seedling"></i>
+          <h1 class="title">Hello world 你好</h1>
+          <div class="meta-data">
+            <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
+            <time class="publish-date">
+              <i class="fas fa-at"></i> 2021 - 02 - 01</time
+            >
+          </div>
+        </section>
+        <section class="post-content">
+          <h1>Markdown: Syntax</h1>
           <h2>Overview</h2>
           <h3>Philosophy</h3>
           <p>
@@ -484,9 +482,22 @@ end tell</code></pre>
             indicates code within a normal paragraph. For example:
           </p>
           <p>Use the <code>printf()</code> function.</p>
-        </div>
+        </section>
+        <section class="adjacent-posts">
+          <div class="next">
+            <span>Next Post</span>
+            <a href="#">
+              <h3>Hello wow! <i class="fas fa-chevron-right"></i></h3>
+            </a>
+          </div>
+          <div class="prev">
+            <span>Prev Post</span>
+            <a href="#">
+              <h3><i class="fas fa-chevron-left"></i> Hello bye!</h3>
+            </a>
+          </div>
+        </section>
       </article>
-      <!-- </div> -->
     </main>
 
     <div class="overlay hidden" id="overlay"></div>
@@ -545,6 +556,7 @@ end tell</code></pre>
     <script src="../js/sidebar.js"></script>
     <script src="../js/category.js"></script>
     <script src="../js/line_numbers.js"></script>
+    <script src="../js/toc.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
     <script>
       hljs.initHighlightingOnLoad();

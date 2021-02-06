@@ -18,10 +18,12 @@
   justify-content: center;
   align-items: center;
 
-  transition: opacity 1s;
+  transition: opacity 0.4s, visibility 0.4s;
   opacity: 1;
+  visibility: visible;
 
   &.hidden {
     opacity: 0;
+    visibility: hidden;
   }
 }
