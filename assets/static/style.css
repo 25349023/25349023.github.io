@@ -1227,6 +1227,7 @@ aside nav > ul .collapsible-category ul a {
 .postpage .adjacent-posts h3 {
   margin: 0;
   font-size: 1.5rem;
+  transition: color 0.2s;
 }
 .postpage .adjacent-posts h3:hover {
   color: #1bb159;
