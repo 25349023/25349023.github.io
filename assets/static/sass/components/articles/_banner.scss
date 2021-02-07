@@ -1,0 +1,32 @@
+.articles .banner {
+  height: 40vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  overflow: hidden;
+
+  background-image: radial-gradient(
+      circle at top left,
+      rgba($articles-banner-color3, 0.9) -15%,
+      rgba($articles-banner-color2, 0.4) 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba($articles-banner-color1, 0.9) -10%,
+      rgba($articles-banner-color2, 0.4) 80%
+    );
+
+  h1 {
+    margin: 0 auto;
+    position: relative;
+
+    font-size: 3rem;
+    font-family: $title-font;
+    color: rgba($articles-title-color, 0.75);
+    z-index: 3;
+
+    &:after {
+      @include banner-arrow;
+    }
+  }
+}

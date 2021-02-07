@@ -1,0 +1,36 @@
+aside .content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  overflow: auto;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  color: $sidebar-ui-color;
+
+  .profile-image {
+    margin-top: 1rem;
+    width: 75%;
+    background-image: url("./images/background2.jpg");
+    background-origin: border-box;
+    background-size: cover;
+    border-radius: 50%;
+    border: 8px solid rgba($color: rgb(0, 0, 0), $alpha: 0.4);
+
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+
+  .name {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+}

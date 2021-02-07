@@ -1,0 +1,16 @@
+.portfolio {
+  main {
+    display: flex;
+    justify-content: center;
+    background-color: $portfolio-color;
+    // font-family: $post-font;
+  }
+
+  .main-wrapper {
+    margin: 3rem 0;
+    height: 80vh;
+    padding: 2rem;
+    flex-basis: 1080px;
+    color: $postpage-ui-color;
+  }
+}

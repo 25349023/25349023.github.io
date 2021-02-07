@@ -1,0 +1,61 @@
+.postpage {
+  main {
+    display: flex;
+    justify-content: center;
+    background-color: $postpage-color;
+    font-family: $post-font;
+
+    ::selection {
+      background-color: rgba($postpage-ui-color, 0.2);
+    }
+
+    article {
+      margin: 3rem 0 3rem 0;
+      padding: 2rem 5rem 2rem 0;
+      flex-basis: 1080px;
+      color: $postpage-ui-color;
+
+      .info {
+        display: flex;
+        align-items: baseline;
+        padding-bottom: 0.2rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid rgba($postpage-ui-color, 0.2);
+        position: relative;
+
+        > i {
+          font-size: 2rem;
+          margin-right: 1rem;
+          color: rgba($postpage-ui-color, 0.6);
+        }
+      }
+
+      .title {
+        margin: 0;
+        margin-right: auto;
+        font-size: 3rem;
+      }
+
+      .meta-data {
+        margin-left: 1rem;
+        font-size: 1.2rem;
+        color: rgba($postpage-ui-color, 0.6);
+
+        i {
+          position: relative;
+          top: 1px;
+          margin-right: 0.3rem;
+        }
+      }
+
+      .author {
+        margin-top: auto;
+        padding: 0 0.8rem 0.3rem 0;
+      }
+
+      .publish-date {
+        padding-top: 0.3rem;
+      }
+    }
+  }
+}

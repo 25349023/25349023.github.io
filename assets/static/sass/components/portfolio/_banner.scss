@@ -1,0 +1,37 @@
+.portfolio .banner {
+  height: 40vh;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  overflow: hidden;
+
+  background-image: radial-gradient(
+      circle at top left,
+      rgba($portfolio-banner-color1, 0.8) -20%,
+      rgba($portfolio-banner-color2, 0.4) 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba($portfolio-banner-color3, 0.9) 0%,
+      rgba($portfolio-banner-color2, 0.4) 60%
+    );
+
+  &:after {
+    @include banner-arrow(16rem, 7.2rem, $rotation: 135deg, $posY: 95%);
+  }
+
+  // &:before {
+  //   @include banner-arrow(6rem, 5rem, $posY: 20%);
+  // }
+
+  h1 {
+    margin: 0 auto;
+    position: relative;
+
+    font-size: 3rem;
+    font-family: $title-font;
+    color: rgba($portfolio-title-color, 0.8);
+    z-index: 3;
+  }
+}

@@ -1,0 +1,76 @@
+$skyblue: rgb(203, 229, 255);
+$placeholder-color: rgb(255, 191, 191);
+$navbar-text-color: rgb(18, 58, 110);
+
+$banner-title-color: rgb(211, 248, 228);
+$banner-outer-color: rgba(0, 79, 168, 0.3);
+$banner-inner-color: rgba(0, 0, 0, 0.1);
+
+$content-color: rgb(248, 248, 248);
+$latest-content-color: rgb(229, 241, 250);
+$hotpost-content-color: rgb(202, 61, 36);
+$about-content-color: rgb(210, 243, 232);
+
+$articles-deck-color: rgb(217, 238, 247);
+$default-ui-color: rgb(56, 56, 56);
+$latest-ui-color: rgb(32, 55, 85);
+$hotpost-ui-color: $content-color;
+$about-ui-color: rgb(41, 77, 57);
+
+$latest-card-color: rgb(206, 229, 250);
+$latest-card-hover-color: rgb(49, 85, 129);
+$hotpost-card-color: rgb(167, 51, 31);
+$hotpost-card-hover-color: rgb(250, 218, 214);
+$about-card-color: rgb(173, 226, 208);
+$about-card-hover-color: rgb(19, 95, 70);
+$about-card-link-color: rgb(246, 255, 169);
+$more-card-hover-color: $default-ui-color;
+
+$articles-page-color: rgb(244, 249, 255);
+$articles-ui-color: rgb(9, 36, 61);
+$articles-title-color: rgb(3, 48, 26);
+$articles-banner-color1: rgb(140, 251, 255);
+$articles-banner-color2: rgb(255, 220, 196);
+$articles-banner-color3: rgb(134, 217, 255);
+
+$post-color0: rgb(220, 236, 255);
+$post-color1: rgb(204, 228, 255);
+$post-color2: rgb(195, 222, 255);
+$post-hover-color0: rgb(46, 81, 128);
+$post-hover-color1: rgb(29, 66, 112);
+$post-hover-color2: rgb(55, 105, 158);
+
+$postpage-banner-color1: rgb(238, 219, 194);
+$postpage-banner-color2: rgb(248, 248, 187);
+$postpage-banner-color3: rgb(217, 245, 199);
+$postpage-color: rgb(252, 249, 243);
+$postpage-ui-color: rgb(92, 68, 58);
+$postpage-link-color: rgb(27, 177, 89);
+$postpage-quote-color: rgb(66, 177, 112);
+$postpage-quote-header-color: rgb(66, 177, 158);
+$postpage-quote-marker-color: rgb(59, 128, 43);
+
+$portfolio-banner-color1: rgb(255, 151, 103);
+$portfolio-banner-color2: rgb(255, 253, 158);
+$portfolio-banner-color3: rgb(228, 159, 245);
+$portfolio-title-color: rgb(116, 7, 7);
+$portfolio-color: rgb(248, 248, 248);
+
+$sidebar-color1: rgb(209, 234, 255);
+$sidebar-color-mid: rgb(165, 209, 230);
+$sidebar-color2: rgb(136, 207, 166);
+$sidebar-handle-color: rgb(203, 234, 240);
+$sidebar-ui-color: rgb(0, 63, 37);
+
+$color1: rgb(255, 219, 219);
+$color2: rgb(227, 234, 255);
+$color3: rgb(238, 255, 206);
+
+$footer-color: rgb(92, 87, 83);
+$footer-text-color: rgb(255, 249, 240);
+
+$default-font: "Maven Pro", "Noto Sans TC", sans-serif;
+$post-font: "Maven Pro", "FakePearl", sans-serif;
+$brand-font: "Comfortaa", "Maven Pro", sans-serif;
+$mono-font: "Ubuntu Mono", monospace;
+$title-font: "Exo 2", "Maven Pro", sans-serif;
