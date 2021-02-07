@@ -736,8 +736,8 @@ aside nav > ul .collapsible-category ul a {
   position: absolute;
   width: 8rem;
   height: 5.2rem;
-  top: -6rem;
-  left: -12rem;
+  top: -5rem;
+  left: -9rem;
   border: solid #294d39;
   border-width: 24px 0 0 26px;
 }
@@ -755,6 +755,75 @@ aside nav > ul .collapsible-category ul a {
 .home .content .about .card:nth-child(n+2):hover {
   color: #d2f3e8;
   background-color: #135f46;
+}
+
+.home .content .about .card.profile-card {
+  position: relative;
+  background-image: url("./images/peashooter.jpg");
+  background-size: cover;
+  color: transparent;
+}
+.home .content .about .card.profile-card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s;
+}
+.home .content .about .card.profile-card:hover:before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.home .content .about .card.profile-card:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+.home .content .about .card.profile-card h3 {
+  position: relative;
+}
+.home .content .about .card.contact-card .preview {
+  display: flex;
+  flex-flow: column;
+}
+.home .content .about .card.contact-card .preview span {
+  display: block;
+  margin: 0.8rem 0;
+}
+.home .content .about .card.contact-card a {
+  color: inherit;
+  text-decoration: none;
+}
+.home .content .about .card.contact-card a:hover {
+  color: #f6ffa9;
+}
+.home .content .about .card.contact-card a i {
+  transform: translateY(1px);
+  margin-right: 0.4rem;
+}
+.home .content .about .card.skill-card .preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 3rem;
+  padding: 0 1rem;
+}
+.home .content .about .card.skill-card .preview > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.5s;
+  text-align: center;
+}
+.home .content .about .card.skill-card .preview > span:nth-of-type(2n) {
+  border-left: 1px solid rgba(41, 77, 57, 0.4);
+}
+.home .content .about .card.skill-card .preview > span:nth-last-of-type(n + 3) {
+  border-bottom: 1px solid rgba(41, 77, 57, 0.4);
+}
+.home .content .about .card.skill-card:hover .preview > span:nth-of-type(2n) {
+  border-left: 1px solid rgba(210, 243, 232, 0.8);
+}
+.home .content .about .card.skill-card:hover .preview > span:nth-last-of-type(n + 3) {
+  border-bottom: 1px solid rgba(210, 243, 232, 0.8);
 }
 
 .articles main .main-wrapper a.post-link {
