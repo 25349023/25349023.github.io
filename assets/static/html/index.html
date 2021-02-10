@@ -37,17 +37,17 @@
           <li class="brand">
             <a href="./index.html"><i class="fas fa-feather"></i> skyblog</a>
           </li>
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="./articles.html">Articles</a></li>
-          <li><a href="./portfolio.html">Portfolio</a></li>
-          <li><a href="#about">About</a></li>
-          <!-- <li><a href="#">Others</a></li> -->
+          <li class="active option"><a href="#">Home</a></li>
+          <li class="option"><a href="./articles.html">Articles</a></li>
+          <li class="option"><a href="./portfolio.html">Portfolio</a></li>
+          <li class="option"><a href="#about">About</a></li>
+          <li id="toggle-navbar"><i class="fas fa-th-large"></i></li>
         </ul>
       </nav>
     </header>
     <section class="banner">
       <div class="foreground">
-        <h1>Hello, Sky</h1>
+        <h1>Le Ciel</h1>
       </div>
     </section>
     <section class="content">
@@ -155,8 +155,11 @@
       </section>
       <section id="about">
         <div class="content-wrapper about">
-          <div class="card">
-            <h2>Hello, I'm Sky</h2>
+          <div class="card name-card">
+            <h2>
+              <span>Hello,</span>
+              <span>I'm Sky</span>
+            </h2>
           </div>
           <div class="card profile-card">
             <h3>About me</h3>
@@ -203,5 +206,6 @@
     <footer>&copy; Copyright 2021 by Skyline Liu.</footer>
 
     <script src="../js/scroll_top.js"></script>
+    <script src="../js/navbar.js"></script>
   </body>
 </html>

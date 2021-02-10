@@ -42,6 +42,19 @@
       grid-template-columns: repeat(3, 1fr);
       row-gap: 0.3rem;
       column-gap: 0.3rem;
+
+      @include brk-down($brk-huge) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include brk-down($brk-small) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.6fr 1fr;
+      }
+
+      @include brk-down($brk-tiny) {
+        padding: 5rem 1.2rem;
+      }
     }
   }
 }

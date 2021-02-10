@@ -1,10 +1,11 @@
 .home .banner {
-  background-image: url("./images/background1.jpg");
+  background-image: url("./images/background3.jpg");
   background-size: cover;
+  background-position: center 0;
 
   .foreground {
     background-image: radial-gradient($banner-inner-color, $banner-outer-color);
-    height: 90vh;
+    height: 100vh;
     position: relative;
 
     display: flex;
@@ -18,12 +19,24 @@
       font-family: $title-font;
 
       background-image: linear-gradient(
-        $banner-title-color 65%,
-        rgba($banner-title-color, 0.2)
+        $banner-title-color 70%,
+        rgba($banner-title-color, 0.3)
       );
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+
+      @include brk-down($brk-large) {
+        font-size: 4rem;
+      }
+
+      @include brk-down($brk-tiny) {
+        font-size: 3.2rem;
+      }
+
+      @include brk-down($brk-x-tiny) {
+        font-size: 2.8rem;
+      }
     }
 
     &:before {

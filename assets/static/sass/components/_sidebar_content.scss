@@ -15,7 +15,7 @@ aside .content {
   .profile-image {
     margin-top: 1rem;
     width: 75%;
-    background-image: url("./images/background2.jpg");
+    background-image: url("./images/peashooter.jpg");
     background-origin: border-box;
     background-size: cover;
     border-radius: 50%;
@@ -32,5 +32,10 @@ aside .content {
     margin-top: 1.5rem;
     font-size: 1.8rem;
     font-weight: bold;
+
+    @include brk-down($brk-small) {
+      margin-top: 1.2rem;
+      font-size: 1.4rem;
+    }
   }
 }

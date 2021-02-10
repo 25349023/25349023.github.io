@@ -1,11 +1,22 @@
 %deck-title-block {
   background-color: transparent;
 
+  @include brk-down($brk-tiny) {
+    place-self: center center;
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.8rem;
+    border-bottom: 16px solid $latest-ui-color;
+  }
+
   h2 {
     font-size: 2rem;
     position: absolute;
     bottom: 4rem;
     right: 5rem;
+
+    @include brk-down($brk-tiny) {
+      position: static;
+    }
 
     &:after {
       content: "";
@@ -18,6 +29,10 @@
 
       border: solid $latest-ui-color;
       border-width: 0 12px 12px 0;
+
+      @include brk-down($brk-tiny) {
+        display: none;
+      }
     }
   }
 }
@@ -27,6 +42,7 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
+  padding: 2rem 1.4rem;
 }
 
 %normal-card-block {
@@ -61,5 +77,9 @@
     font-size: 1.2rem;
     line-height: 1.3;
     font-family: $post-font;
+
+    @include brk-down($brk-tiny) {
+      height: 8rem;
+    }
   }
 }

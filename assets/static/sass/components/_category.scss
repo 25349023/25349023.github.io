@@ -39,6 +39,10 @@ aside nav > ul {
 
       a {
         padding: 0.6rem 1rem 0.6rem 0.8rem;
+
+        @include brk-down($brk-small) {
+          padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+        }
       }
     }
   }
