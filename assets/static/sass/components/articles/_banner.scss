@@ -1,5 +1,6 @@
 .articles .banner {
   height: 40vh;
+  position: relative;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -16,6 +17,18 @@
       rgba($articles-banner-color2, 0.4) 80%
     );
 
+  &:after {
+    @include banner-arrow($posY: 43%);
+
+    @include brk-down($brk-large) {
+      @include banner-arrow(16rem, 7rem, $posY: 50%);
+    }
+
+    @include brk-down($brk-small) {
+      @include banner-arrow(14rem, 6rem, $posY: 50%);
+    }
+  }
+
   h1 {
     margin: 0 auto;
     position: relative;
@@ -24,9 +37,5 @@
     font-family: $title-font;
     color: rgba($articles-title-color, 0.75);
     z-index: 3;
-
-    &:after {
-      @include banner-arrow;
-    }
   }
 }

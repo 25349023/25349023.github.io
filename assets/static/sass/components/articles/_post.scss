@@ -11,10 +11,18 @@
 
     &:nth-of-type(4n + 1) {
       grid-column: 1 / 3;
+
+      @include brk-down($brk-large) {
+        grid-column: 1 / 1;
+      }
     }
 
     &:nth-of-type(4n) {
       grid-column: 2 / 4;
+
+      @include brk-down($brk-large) {
+        grid-column: 1 / 1;
+      }
     }
 
     &:hover {
@@ -24,24 +32,33 @@
       }
     }
 
-    &:nth-of-type(3n) {
+    @include brk-up($brk-large) {
+      &:nth-of-type(3n) {
+        background-color: $post-color0;
+        &:hover {
+          background-color: $post-hover-color0;
+        }
+      }
+
+      &:nth-of-type(3n + 1) {
+        background-color: $post-color1;
+        &:hover {
+          background-color: $post-hover-color1;
+        }
+      }
+
+      &:nth-of-type(3n + 2) {
+        background-color: $post-color2;
+        &:hover {
+          background-color: $post-hover-color2;
+        }
+      }
+    }
+
+    @include brk-down($brk-large) {
       background-color: $post-color0;
       &:hover {
         background-color: $post-hover-color0;
-      }
-    }
-
-    &:nth-of-type(3n + 1) {
-      background-color: $post-color1;
-      &:hover {
-        background-color: $post-hover-color1;
-      }
-    }
-
-    &:nth-of-type(3n + 2) {
-      background-color: $post-color2;
-      &:hover {
-        background-color: $post-hover-color2;
       }
     }
   }

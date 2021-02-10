@@ -22,6 +22,14 @@ aside {
     transform: translateX(-320px);
   }
 
+  @include brk-down($brk-small) {
+    width: 240px;
+
+    &.hidden {
+      transform: translateX(-240px);
+    }
+  }
+
   .blur {
     position: absolute;
     top: 0;
