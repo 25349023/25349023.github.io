@@ -134,3 +134,11 @@ header nav {
     }
   }
 }
+
+.postpage header nav {
+  .option a {
+    @include brk-down($brk-small) {
+      color: rgba($postpage-ui-color, 0.9);
+    }
+  }
+}

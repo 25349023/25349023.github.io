@@ -3,7 +3,7 @@ function splitCodeTags() {
     for (let p of preBlocks) {
         let c = p.querySelector("code");
         let clist = c.classList;
-        let codeArray = c.innerHTML.split(/(?<=\n)/g);
+        let codeArray = c.innerHTML.split("\n");
         p.removeChild(p.firstChild);
 
         for (let cstr of codeArray) {

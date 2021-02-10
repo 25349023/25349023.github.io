@@ -93,8 +93,12 @@
     color: rgba($postpage-ui-color, 0.8);
   }
 
+  li blockquote {
+    margin-left: 1.2rem;
+  }
+
   blockquote {
-    margin: 2.2rem 0 0 1.8rem;
+    margin: 1.2rem 0 0 1.8rem;
     padding: 0.2rem 0 0.2rem 0.8rem;
     position: relative;
     font-style: italic;
@@ -128,7 +132,7 @@
     }
 
     @include header-margin-bottom(0.8rem);
-    @include paragraph-margin-bottom(0.6rem);
+    @include paragraph-margin-bottom(0.8rem);
     @include header-style {
       color: $postpage-quote-header-color;
     }
@@ -138,6 +142,16 @@
     padding: 0.4rem 0.5rem 0.4rem 0.8rem;
     border-radius: 5px;
     background-color: rgba($postpage-ui-color, 0.1);
+    overflow: auto;
+
+    code {
+      overflow: visible;
+
+      &:after {
+        content: "";
+        margin-right: 0.8rem;
+      }
+    }
   }
 
   code {

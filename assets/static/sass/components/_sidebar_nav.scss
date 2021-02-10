@@ -17,10 +17,18 @@ aside nav {
     li {
       display: inline-block;
       font-size: 1.4rem;
+
+      @include brk-down($brk-small) {
+        font-size: 1.2rem;
+      }
     }
 
     i.fa-github {
       margin-right: 0.6rem;
+
+      @include brk-down($brk-small) {
+        margin-right: 0.4rem;
+      }
     }
 
     a {
@@ -34,6 +42,10 @@ aside nav {
       &:hover {
         color: white;
         background-color: rgba($sidebar-ui-color, 0.2);
+      }
+
+      @include brk-down($brk-small) {
+        padding: 0.8rem;
       }
     }
   }

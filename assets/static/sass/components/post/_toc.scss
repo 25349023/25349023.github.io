@@ -12,6 +12,15 @@
     opacity: 1;
     visibility: visible;
 
+    @include brk-down($brk-x-huge) {
+      max-width: 160px;
+      max-height: 40vh;
+    }
+
+    @include brk-down($brk-huge) {
+      display: none;
+    }
+
     &.hidden {
       opacity: 0;
       visibility: hidden;

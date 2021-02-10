@@ -1,0 +1,53 @@
+@include brk-down($brk-large) {
+  .postpage article .post-content {
+    padding: 0 2rem 0 1.6rem;
+    line-height: 1.4;
+    font-size: 1.2rem;
+
+    @include header-margin-bottom(1rem);
+    @include paragraph-margin-bottom(0.9rem);
+    @include list-margin-bottom(0.9rem);
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    > h1:before {
+      left: -1.8rem;
+      bottom: 0.3rem;
+      font-size: 1.4rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    h3 {
+      font-size: 1.6rem;
+    }
+
+    h4 {
+      font-size: 1.4rem;
+    }
+
+    h5 {
+      font-size: 1.3rem;
+    }
+
+    h6 {
+      font-size: 1.2rem;
+    }
+
+    img {
+      max-width: 60%;
+    }
+
+    pre code {
+      font-size: 1.1rem;
+    }
+
+    hr {
+      margin: 0.8rem 0;
+    }
+  }
+}

@@ -373,7 +373,7 @@ header nav ul {
   align-items: center;
   font-size: 1.2rem;
 }
-@media (max-width: 1236px) {
+@media (max-width: 1296px) {
   header nav ul {
     margin: 0 2rem;
   }
@@ -484,6 +484,12 @@ header nav ul li a {
   color: rgba(255, 255, 255, 0.95);
 }
 
+@media (max-width: 668px) {
+  .postpage header nav .option a {
+    color: rgba(92, 68, 58, 0.9);
+  }
+}
+
 footer {
   padding: 1rem 0;
   text-align: center;
@@ -570,6 +576,12 @@ aside .content .name {
   font-size: 1.8rem;
   font-weight: bold;
 }
+@media (max-width: 668px) {
+  aside .content .name {
+    margin-top: 1.2rem;
+    font-size: 1.4rem;
+  }
+}
 
 aside nav {
   width: 100%;
@@ -588,8 +600,18 @@ aside nav > ul li {
   display: inline-block;
   font-size: 1.4rem;
 }
+@media (max-width: 668px) {
+  aside nav > ul li {
+    font-size: 1.2rem;
+  }
+}
 aside nav > ul i.fa-github {
   margin-right: 0.6rem;
+}
+@media (max-width: 668px) {
+  aside nav > ul i.fa-github {
+    margin-right: 0.4rem;
+  }
 }
 aside nav > ul a {
   width: 100%;
@@ -602,6 +624,11 @@ aside nav > ul a {
 aside nav > ul a:hover {
   color: white;
   background-color: rgba(0, 63, 37, 0.2);
+}
+@media (max-width: 668px) {
+  aside nav > ul a {
+    padding: 0.8rem;
+  }
 }
 
 aside nav > ul > li:first-of-type.expanded {
@@ -635,6 +662,11 @@ aside nav > ul .collapsible-category ul li {
 }
 aside nav > ul .collapsible-category ul a {
   padding: 0.6rem 1rem 0.6rem 0.8rem;
+}
+@media (max-width: 668px) {
+  aside nav > ul .collapsible-category ul a {
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+  }
 }
 
 .overlay {
@@ -1326,8 +1358,11 @@ aside nav > ul .collapsible-category ul a {
   font-weight: bold;
   color: rgba(92, 68, 58, 0.8);
 }
+.postpage article .post-content li blockquote {
+  margin-left: 1.2rem;
+}
 .postpage article .post-content blockquote {
-  margin: 2.2rem 0 0 1.8rem;
+  margin: 1.2rem 0 0 1.8rem;
   padding: 0.2rem 0 0.2rem 0.8rem;
   position: relative;
   font-style: italic;
@@ -1365,7 +1400,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content blockquote p,
 .postpage article .post-content blockquote pre {
-  margin: 0 0 0.6rem 0;
+  margin: 0 0 0.8rem 0;
 }
 .postpage article .post-content blockquote h1,
 .postpage article .post-content blockquote h2,
@@ -1379,6 +1414,14 @@ aside nav > ul .collapsible-category ul a {
   padding: 0.4rem 0.5rem 0.4rem 0.8rem;
   border-radius: 5px;
   background-color: rgba(92, 68, 58, 0.1);
+  overflow: auto;
+}
+.postpage article .post-content pre code {
+  overflow: visible;
+}
+.postpage article .post-content pre code:after {
+  content: "";
+  margin-right: 0.8rem;
 }
 .postpage article .post-content code {
   font-family: "Ubuntu Mono", monospace;
@@ -1394,6 +1437,148 @@ aside nav > ul .collapsible-category ul a {
   border-bottom: 1px solid rgba(92, 68, 58, 0.3);
 }
 
+@media (max-width: 824px) {
+  .postpage article .post-content {
+    padding: 0 2rem 0 1.6rem;
+    line-height: 1.4;
+    font-size: 1.2rem;
+  }
+  .postpage article .post-content h1,
+.postpage article .post-content h2,
+.postpage article .post-content h3,
+.postpage article .post-content h4,
+.postpage article .post-content h5,
+.postpage article .post-content h6 {
+    margin: 0 0 1rem 0;
+  }
+  .postpage article .post-content p,
+.postpage article .post-content pre {
+    margin: 0 0 0.9rem 0;
+  }
+  .postpage article .post-content ol,
+.postpage article .post-content ul,
+.postpage article .post-content dl {
+    margin-top: 0;
+    margin-bottom: 0.9rem;
+  }
+  .postpage article .post-content h1 {
+    font-size: 2rem;
+  }
+  .postpage article .post-content > h1:before {
+    left: -1.8rem;
+    bottom: 0.3rem;
+    font-size: 1.4rem;
+  }
+  .postpage article .post-content h2 {
+    font-size: 1.8rem;
+  }
+  .postpage article .post-content h3 {
+    font-size: 1.6rem;
+  }
+  .postpage article .post-content h4 {
+    font-size: 1.4rem;
+  }
+  .postpage article .post-content h5 {
+    font-size: 1.3rem;
+  }
+  .postpage article .post-content h6 {
+    font-size: 1.2rem;
+  }
+  .postpage article .post-content img {
+    max-width: 60%;
+  }
+  .postpage article .post-content pre code {
+    font-size: 1.1rem;
+  }
+  .postpage article .post-content hr {
+    margin: 0.8rem 0;
+  }
+}
+@media (max-width: 668px) {
+  .postpage article .post-content {
+    padding: 0 2rem 0 1.6rem;
+  }
+  .postpage article .post-content h1,
+.postpage article .post-content h2,
+.postpage article .post-content h3,
+.postpage article .post-content h4,
+.postpage article .post-content h5,
+.postpage article .post-content h6 {
+    margin: 0 0 0.8rem 0;
+  }
+  .postpage article .post-content p,
+.postpage article .post-content pre {
+    margin: 0 0 0.8rem 0;
+  }
+  .postpage article .post-content ol,
+.postpage article .post-content ul,
+.postpage article .post-content dl {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+  }
+  .postpage article .post-content h1 {
+    font-size: 1.6rem;
+  }
+  .postpage article .post-content > h1:before {
+    left: -1.6rem;
+    bottom: 0.24rem;
+    font-size: 1.2rem;
+  }
+  .postpage article .post-content h2 {
+    font-size: 1.4rem;
+  }
+  .postpage article .post-content h3 {
+    font-size: 1.3rem;
+  }
+  .postpage article .post-content h4 {
+    font-size: 1.2rem;
+  }
+  .postpage article .post-content h5 {
+    font-size: 1.1rem;
+  }
+  .postpage article .post-content h6 {
+    font-size: 1rem;
+  }
+  .postpage article .post-content blockquote {
+    margin-left: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .postpage article .post-content {
+    padding: 0 1.2rem 0 1rem;
+  }
+  .postpage article .post-content img {
+    max-width: 80%;
+  }
+  .postpage article .post-content blockquote {
+    margin: 1.8rem 0 0 0.8rem;
+  }
+}
+@media (max-width: 320px) {
+  .postpage article .post-content {
+    padding: 0 1rem 0 0.8rem;
+  }
+  .postpage article .post-content h1 {
+    font-size: 1.4rem;
+  }
+  .postpage article .post-content > h1:before {
+    left: -1.4rem;
+    bottom: 0.15rem;
+    font-size: 1.1rem;
+  }
+  .postpage article .post-content h2 {
+    font-size: 1.3rem;
+  }
+  .postpage article .post-content h3 {
+    font-size: 1.2rem;
+  }
+  .postpage article .post-content h4 {
+    font-size: 1.1rem;
+  }
+  .postpage article .post-content h5 {
+    font-size: 1rem;
+  }
+}
 .postpage .banner {
   height: 40vh;
   position: relative;
@@ -1465,6 +1650,17 @@ aside nav > ul .collapsible-category ul a {
   opacity: 1;
   visibility: visible;
 }
+@media (max-width: 1296px) {
+  .postpage .toc-wrapper {
+    max-width: 160px;
+    max-height: 40vh;
+  }
+}
+@media (max-width: 1080px) {
+  .postpage .toc-wrapper {
+    display: none;
+  }
+}
 .postpage .toc-wrapper.hidden {
   opacity: 0;
   visibility: hidden;
@@ -1524,10 +1720,31 @@ aside nav > ul .collapsible-category ul a {
 }
 
 .postpage .adjacent-posts {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   padding-left: 2.5rem;
   display: flex;
   flex-flow: column;
+}
+@media (max-width: 1080px) {
+  .postpage .adjacent-posts {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 824px) {
+  .postpage .adjacent-posts {
+    margin-top: 1.8rem;
+    padding: 0 1rem;
+  }
+}
+@media (max-width: 668px) {
+  .postpage .adjacent-posts {
+    margin-top: 1.4rem;
+  }
+}
+@media (max-width: 320px) {
+  .postpage .adjacent-posts {
+    margin-top: 1rem;
+  }
 }
 .postpage .adjacent-posts span {
   display: inline-block;
@@ -1556,9 +1773,21 @@ aside nav > ul .collapsible-category ul a {
 .postpage .adjacent-posts .prev {
   text-align: right;
   margin-right: auto;
+  margin-top: 1rem;
 }
 .postpage .adjacent-posts .prev i {
   margin-right: 1rem;
+}
+@media (max-width: 480px) {
+  .postpage .adjacent-posts .next {
+    align-self: center;
+    margin-left: 2rem;
+    min-width: 0;
+  }
+  .postpage .adjacent-posts .prev {
+    align-self: center;
+    margin-right: 2rem;
+  }
 }
 
 .postpage .modal {
@@ -1734,14 +1963,55 @@ aside nav > ul .collapsible-category ul a {
   background-color: #fcf9f3;
   font-family: "Maven Pro", "FakePearl", sans-serif;
 }
+@media (max-width: 1296px) {
+  .postpage main {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 1080px) {
+  .postpage main {
+    justify-content: center;
+  }
+}
 .postpage main ::selection {
   background-color: rgba(92, 68, 58, 0.2);
 }
 .postpage main article {
-  margin: 3rem 0 3rem 0;
+  margin: 3rem 0 3rem -4rem;
   padding: 2rem 5rem 2rem 0;
   flex-basis: 1080px;
   color: #5c443a;
+}
+@media (max-width: 1296px) {
+  .postpage main article {
+    margin-left: 3rem;
+    margin-top: 2rem;
+    flex-basis: 960px;
+  }
+}
+@media (max-width: 1080px) {
+  .postpage main article {
+    margin-left: 0;
+    padding: 1.2rem 3rem;
+    flex: 1;
+    min-width: 0;
+  }
+}
+@media (max-width: 824px) {
+  .postpage main article {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 668px) {
+  .postpage main article {
+    padding: 0 1.4rem;
+  }
+}
+@media (max-width: 320px) {
+  .postpage main article {
+    margin-top: 1.2rem;
+    padding: 0 1rem 0 1.2rem;
+  }
 }
 .postpage main article .info {
   display: flex;
@@ -1751,20 +2021,73 @@ aside nav > ul .collapsible-category ul a {
   border-bottom: 1px solid rgba(92, 68, 58, 0.2);
   position: relative;
 }
-.postpage main article .info > i {
-  font-size: 2rem;
-  margin-right: 1rem;
-  color: rgba(92, 68, 58, 0.6);
+@media (max-width: 1080px) {
+  .postpage main article .info {
+    margin-bottom: 1.6rem;
+  }
+}
+@media (max-width: 824px) {
+  .postpage main article .info {
+    flex-flow: column;
+    margin-bottom: 1rem;
+  }
 }
 .postpage main article .title {
   margin: 0;
   margin-right: auto;
   font-size: 3rem;
 }
+.postpage main article .title i {
+  font-size: 2rem;
+  margin-right: 0.8rem;
+  color: rgba(92, 68, 58, 0.6);
+}
+@media (max-width: 1080px) {
+  .postpage main article .title {
+    font-size: 2.6rem;
+  }
+  .postpage main article .title i {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 824px) {
+  .postpage main article .title {
+    font-size: 2.2rem;
+  }
+  .postpage main article .title i {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 668px) {
+  .postpage main article .title {
+    font-size: 1.8rem;
+  }
+  .postpage main article .title i {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 320px) {
+  .postpage main article .title {
+    font-size: 1.5rem;
+  }
+  .postpage main article .title i {
+    font-size: 1rem;
+  }
+}
 .postpage main article .meta-data {
   margin-left: 1rem;
   font-size: 1.2rem;
   color: rgba(92, 68, 58, 0.6);
+}
+@media (max-width: 824px) {
+  .postpage main article .meta-data {
+    margin: 0.6rem 0 0.3rem;
+  }
+}
+@media (max-width: 668px) {
+  .postpage main article .meta-data {
+    font-size: 1rem;
+  }
 }
 .postpage main article .meta-data i {
   position: relative;
