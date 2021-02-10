@@ -21,10 +21,6 @@
     @include banner-arrow(16rem, 7.2rem, $rotation: 135deg, $posY: 95%);
   }
 
-  // &:before {
-  //   @include banner-arrow(6rem, 5rem, $posY: 20%);
-  // }
-
   h1 {
     margin: 0 auto;
     position: relative;
@@ -33,5 +29,9 @@
     font-family: $title-font;
     color: rgba($portfolio-title-color, 0.8);
     z-index: 3;
+
+    @include brk-down($brk-tiny) {
+      font-size: 2.4rem;
+    }
   }
 }

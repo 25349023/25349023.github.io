@@ -1,5 +1,5 @@
 .home .banner {
-  background-image: url("./images/background1.jpg");
+  background-image: url("./images/background3.jpg");
   background-size: cover;
   background-position: center 0;
 
@@ -12,10 +12,6 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
-    @include brk-down($brk-tiny) {
-      height: 80vh;
-    }
 
     h1 {
       margin: 0;
@@ -39,7 +35,7 @@
       }
 
       @include brk-down($brk-x-tiny) {
-        font-size: 2.4rem;
+        font-size: 2.8rem;
       }
     }
 

@@ -77,6 +77,14 @@
     h2 {
       margin: 0 auto 0 0;
       font-size: 1.8rem;
+
+      @include brk-down($brk-small) {
+        font-size: 1.6rem;
+      }
+
+      @include brk-down($brk-tiny) {
+        font-size: 1.4rem;
+      }
     }
 
     time {
@@ -84,6 +92,10 @@
       margin-top: 0.2rem;
       color: rgba($articles-ui-color, 0.7);
       transition: color 0.5s;
+
+      @include brk-down($brk-tiny) {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -95,5 +107,10 @@
 
     font-size: 1.3rem;
     line-height: 1.5;
+
+    @include brk-down($brk-tiny) {
+      max-height: 8rem;
+      font-size: 1.1rem;
+    }
   }
 }

@@ -397,7 +397,7 @@ header nav ul li {
     transform: translateX(120px);
     align-self: flex-end;
     margin-right: 0.8rem;
-    padding: 0.2rem 0;
+    padding: 0;
     position: relative;
     z-index: 10;
     visibility: collapse;
@@ -407,7 +407,7 @@ header nav ul li {
     transform: translateX(0);
   }
   header nav ul li:nth-of-type(2) {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
   }
 }
 header nav ul li.brand {
@@ -467,7 +467,9 @@ header nav ul li a {
 @media (max-width: 668px) {
   .home header nav ul li.option {
     border-left: none;
-    padding: 0.2rem 0;
+  }
+  .home header nav ul li:nth-of-type(2) {
+    margin-top: 0.8rem;
   }
 }
 .home header nav ul li:last-of-type {
@@ -485,8 +487,20 @@ header nav ul li a {
 }
 
 @media (max-width: 668px) {
+  .articles header nav .option a {
+    color: rgba(18, 58, 110, 0.9);
+  }
+}
+
+@media (max-width: 668px) {
   .postpage header nav .option a {
     color: rgba(92, 68, 58, 0.9);
+  }
+}
+
+@media (max-width: 668px) {
+  .portfolio header nav .option a {
+    color: rgba(116, 7, 7, 0.8);
   }
 }
 
@@ -713,7 +727,7 @@ aside nav > ul .collapsible-category ul a {
 }
 
 .home .banner {
-  background-image: url("./images/background1.jpg");
+  background-image: url("./images/background3.jpg");
   background-size: cover;
   background-position: center 0;
 }
@@ -725,11 +739,6 @@ aside nav > ul .collapsible-category ul a {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-@media (max-width: 480px) {
-  .home .banner .foreground {
-    height: 80vh;
-  }
 }
 .home .banner .foreground h1 {
   margin: 0;
@@ -752,7 +761,7 @@ aside nav > ul .collapsible-category ul a {
 }
 @media (max-width: 320px) {
   .home .banner .foreground h1 {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
   }
 }
 .home .banner .foreground:before {
@@ -1192,11 +1201,26 @@ aside nav > ul .collapsible-category ul a {
   margin: 0 auto 0 0;
   font-size: 1.8rem;
 }
+@media (max-width: 668px) {
+  .articles main .main-wrapper article h2 {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 480px) {
+  .articles main .main-wrapper article h2 {
+    font-size: 1.4rem;
+  }
+}
 .articles main .main-wrapper article time {
   font-size: 1.1rem;
   margin-top: 0.2rem;
   color: rgba(9, 36, 61, 0.7);
   transition: color 0.5s;
+}
+@media (max-width: 480px) {
+  .articles main .main-wrapper article time {
+    font-size: 1rem;
+  }
 }
 .articles main .main-wrapper .preview {
   margin: 0;
@@ -1205,6 +1229,12 @@ aside nav > ul .collapsible-category ul a {
   font-family: "Maven Pro", "FakePearl", sans-serif;
   font-size: 1.3rem;
   line-height: 1.5;
+}
+@media (max-width: 480px) {
+  .articles main .main-wrapper .preview {
+    max-height: 8rem;
+    font-size: 1.1rem;
+  }
 }
 
 .articles .banner {
@@ -1269,6 +1299,11 @@ aside nav > ul .collapsible-category ul a {
   font-family: "Exo 2", "Maven Pro", "Noto Sans TC", sans-serif;
   color: rgba(3, 48, 26, 0.75);
   z-index: 3;
+}
+@media (max-width: 480px) {
+  .articles .banner h1 {
+    font-size: 2.4rem;
+  }
 }
 
 .postpage article .post-content {
@@ -1856,6 +1891,11 @@ aside nav > ul .collapsible-category ul a {
   color: rgba(116, 7, 7, 0.8);
   z-index: 3;
 }
+@media (max-width: 480px) {
+  .portfolio .banner h1 {
+    font-size: 2.4rem;
+  }
+}
 
 :root {
   font-family: "Maven Pro", "Noto Sans TC", sans-serif;
@@ -1949,11 +1989,13 @@ aside nav > ul .collapsible-category ul a {
 @media (max-width: 668px) {
   .articles .main-wrapper {
     row-gap: 1rem;
+    grid-auto-rows: 16.4rem;
   }
 }
 @media (max-width: 480px) {
   .articles .main-wrapper {
     padding: 2rem 1.6rem;
+    grid-auto-rows: 12rem;
   }
 }
 

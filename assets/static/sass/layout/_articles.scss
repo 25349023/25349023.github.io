@@ -29,10 +29,12 @@
 
     @include brk-down($brk-small) {
       row-gap: 1rem;
+      grid-auto-rows: 16.4rem;
     }
 
     @include brk-down($brk-tiny) {
       padding: 2rem 1.6rem;
+      grid-auto-rows: 12rem;
     }
   }
 }
