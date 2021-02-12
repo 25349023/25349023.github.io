@@ -14,8 +14,6 @@
       {% endfor %}
     </div>
   </main>
-  {% if this.pagination.pages > 1 %}
-    {{ render_pagination(this.pagination) }}
-  {% endif %}
+  {{ render_pagination(this.pagination) }}
 {% endblock %}
 

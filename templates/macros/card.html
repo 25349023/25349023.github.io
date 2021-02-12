@@ -1,16 +1,31 @@
 {% macro render_post_card(post) %}
-  <a href="#" class="card">
-    <h3>Hello sky</h3>
+  <a href="{{ post|url }}" class="card">
+    <h3>{{ post.title }}</h3>
     <p class="preview">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-      enim ad minim venia
+      {{ post.body|striphtmltags|truncate(500) }}
     </p>
   </a>
 {% endmacro %}
 
+{% macro render_empty_card() %}
+  <a class="card">
+    <h3>Empty</h3>
+    <p class="preview">
+      There is no post yet.
+    </p>
+  </a>
+{% endmacro %}
+
+{% macro pad_empty_card(count) %}
+  {% if count > 0 %}
+    {% for i in range(count) %}
+      {{ render_empty_card() }}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
 {% macro render_article_post(post) %}
-  <a href="{{ post.path|url }}" class="post-link">
+  <a href="{{ post|url }}" class="post-link">
     <article>
       <div class="info">
         <h2>{{ post.title }}</h2>

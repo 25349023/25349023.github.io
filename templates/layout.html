@@ -46,7 +46,7 @@
         ['/portfolio', 'Portfolio'],
         ['/#about', 'About'],
       ] %}
-        <li class="option{% if this.path == href %} active{% endif %}">
+        <li class="option{% if this._path == href %} active{% endif %}">
           <a href="{{ href|url }}">{{ title }}</a>
         </li>
       {% endfor %}

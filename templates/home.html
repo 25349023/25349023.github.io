@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% from 'macros/card.html' import render_post_card %}
+{% from 'macros/card.html' import render_post_card, pad_empty_card %}
 
 {% block title %}skyblog - Welcome{% endblock %}
 {% block banner %}
@@ -15,10 +15,12 @@
         <div class="card">
           <h2>最新文章</h2>
         </div>
-        {% for item in range(4) %}
-          {{ render_post_card(item) }}
+        {% for post in site.get('/articles').children.limit(4) %}
+          {{ render_post_card(post) }}
         {% endfor %}
-        <a href="./articles.html" class="card">
+        {% set count = site.get('/articles').children.count() %}
+        {{ pad_empty_card(4 - count) }}
+        <a href="{{ './articles'|url }}" class="card">
           <h3>更多文章 <i class="fas fa-angle-double-right"></i></h3>
         </a>
       </div>
@@ -28,10 +30,11 @@
         <div class="card">
           <h2>熱門文章</h2>
         </div>
-        {% for item in range(4) %}
-          {{ render_post_card(item) }}
+        {% for post in site.get('/articles').children.limit(4) %}
+          {{ render_post_card(post) }}
         {% endfor %}
-        <a href="./articles.html" class="card">
+        {{ pad_empty_card(4 - count) }}
+        <a href="{{ './articles'|url }}" class="card">
           <h3>更多文章 <i class="fas fa-angle-double-right"></i></h3>
         </a>
       </div>
