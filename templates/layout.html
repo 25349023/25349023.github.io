@@ -1,29 +1,72 @@
 <!doctype html>
-<meta charset="utf-8">
-<link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<title>{% block title %}Welcome{% endblock %} — skyblog</title>
-<body>
-  <header>
-    <h1>skyblog</h1>
-    <nav>
-      <ul class="nav navbar-nav">
-        <li{% if this._path == '/' %} class="active"{% endif
-          %}><a href="{{ '/'|url }}">Welcome</a></li>
-        {% for href, title in [
-          ['/blog', 'Blog'],
-          ['/projects', 'Projects'],
-          ['/about', 'About']
-        ] %}
-          <li{% if this.is_child_of(href) %} class="active"{% endif
-            %}><a href="{{ href|url }}">{{ title }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </header>
-  <div class="page">
-    {% block body %}{% endblock %}
-  </div>
-  <footer>
-    &copy; Copyright 2021 by Skyline Liu.
-  </footer>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}{% endblock %}</title>
+
+  <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+    crossorigin="anonymous"
+  />
+  {% block head %}{% endblock %}
+</head>
+
+{#<body class="{{ this._model }}">#}
+<body class="{{ bag('body_class', this._model) }}">
+<header>
+  <nav>
+    <ul>
+      <li class="brand">
+        <a href="{{ '/'|url }}"><i class="fas fa-feather"></i> skyblog</a>
+      </li>
+      {% for href, title in [
+        ['/', 'Home'],
+        ['/articles', 'Articles'],
+        ['/portfolio', 'Portfolio'],
+        ['/#about', 'About'],
+      ] %}
+        <li class="option{% if this.path == href %} active{% endif %}">
+          <a href="{{ href|url }}">{{ title }}</a>
+        </li>
+      {% endfor %}
+      <li id="toggle-navbar"><i class="fas fa-th-large"></i></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner">
+  {% block banner %}{% endblock %}
+</section>
+
+{% block body %}{% endblock %}
+
+<a href="{{ '#'|url }}" class="scroll-top hidden" id="scroll-top">
+  <i class="fas fa-chevron-up"></i>
+</a>
+<footer>&copy; Copyright 2021 by Skyline Liu.</footer>
+<script src="{{ '/static/js/scroll_top.js'|url }}"></script>
+<script src="{{ '/static/js/navbar.js'|url }}"></script>
+{% block scripts %}{% endblock %}
 </body>
+</html>

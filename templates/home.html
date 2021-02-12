@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% from 'macros/card.html' import render_post_card %}
+
+{% block title %}skyblog - Welcome{% endblock %}
+{% block banner %}
+  <div class="foreground">
+    <h1>Le Ciel</h1>
+  </div>
+{% endblock %}
+
+{% block body %}
+  <section class="content">
+    <section>
+      <div class="content-wrapper latest">
+        <div class="card">
+          <h2>最新文章</h2>
+        </div>
+        {% for item in range(4) %}
+          {{ render_post_card(item) }}
+        {% endfor %}
+        <a href="./articles.html" class="card">
+          <h3>更多文章 <i class="fas fa-angle-double-right"></i></h3>
+        </a>
+      </div>
+    </section>
+    <section>
+      <div class="content-wrapper hot-post">
+        <div class="card">
+          <h2>熱門文章</h2>
+        </div>
+        {% for item in range(4) %}
+          {{ render_post_card(item) }}
+        {% endfor %}
+        <a href="./articles.html" class="card">
+          <h3>更多文章 <i class="fas fa-angle-double-right"></i></h3>
+        </a>
+      </div>
+    </section>
+    <section id="about">
+      <div class="content-wrapper about">
+        <div class="card name-card">
+          <h2>
+            <span>Hello,</span>
+            <span>I'm Sky</span>
+          </h2>
+        </div>
+        <div class="card profile-card">
+          <h3>About me</h3>
+          <p class="preview">{{ this.about }}</p>
+        </div>
+        <div class="card contact-card">
+          <h3>Contact me</h3>
+          <p class="preview">
+              <span>
+                <a href="mailto:25349023.qq@gmail.com">
+                  <i class="fas fa-paper-plane"></i> 25349023.qq@gmail.com
+                </a>
+              </span>
+            <span>
+                <a href="https://github.com/25349023/">
+                  <i class="fab fa-github-alt"></i> 25349023
+                </a>
+              </span>
+          </p>
+        </div>
+        <div class="card skill-card">
+          <h3>Skills</h3>
+          <p class="preview">
+            {% for skill in this.skills %}
+              <span><span>{{ skill }}</span></span>
+            {% endfor %}
+          </p>
+        </div>
+        <div class="card project-card">
+          <h3>Projects</h3>
+          <p class="preview">some projects here</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+{% endblock %}

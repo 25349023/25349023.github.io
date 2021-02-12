@@ -1395,6 +1395,10 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content li blockquote {
   margin-left: 1.2rem;
+  margin-top: 2rem;
+}
+.postpage article .post-content li p:last-of-type {
+  margin-bottom: 0;
 }
 .postpage article .post-content blockquote {
   margin: 1.2rem 0 0 1.8rem;

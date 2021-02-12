@@ -95,6 +95,11 @@
 
   li blockquote {
     margin-left: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  li p:last-of-type {
+    margin-bottom: 0;
   }
 
   blockquote {
