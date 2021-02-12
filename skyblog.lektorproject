@@ -1,2 +1,6 @@
 [project]
 name = skyblog
+
+[packages]
+lektor-strip-html-tags = 0.3.1
+lektor-markdown-excerpt = 0.1

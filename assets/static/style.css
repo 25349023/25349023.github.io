@@ -726,6 +726,52 @@ aside nav > ul .collapsible-category ul a {
   visibility: hidden;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  background-color: #f4f9ff;
+  padding-bottom: 2rem;
+}
+.pagination a {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #09243d;
+  transition: background-color 0.4s;
+}
+.pagination a:nth-of-type(n + 2) {
+  margin-left: 0.6rem;
+}
+.pagination a.disabled {
+  color: #8aa9da;
+}
+.pagination a.disabled:hover {
+  background-color: inherit;
+}
+.pagination a.active {
+  color: #f4f9ff;
+  background-color: #1e64b7;
+}
+.pagination a.active:hover {
+  background-color: #1e64b7;
+}
+.pagination a:hover {
+  background-color: #b4d2ff;
+}
+.pagination a i {
+  transform: translateY(1px);
+}
+@media (max-width: 668px) {
+  .pagination a {
+    display: none;
+  }
+  .pagination a:first-of-type, .pagination a:last-of-type, .pagination a.active {
+    display: inline-block;
+  }
+}
+
 .home .banner {
   background-image: url("./images/background3.jpg");
   background-size: cover;
@@ -1188,6 +1234,7 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 .articles main .main-wrapper article {
+  flex: 1;
   padding: 0.8rem 1.2rem;
   overflow-y: hidden;
 }
@@ -1199,6 +1246,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .articles main .main-wrapper article h2 {
   margin: 0 auto 0 0;
+  padding-right: 1rem;
   font-size: 1.8rem;
 }
 @media (max-width: 668px) {
@@ -1967,8 +2015,6 @@ aside nav > ul .collapsible-category ul a {
 
 .articles main {
   display: flex;
-  flex-flow: column;
-  align-items: center;
   background-color: #f4f9ff;
   color: #09243d;
 }
@@ -1976,8 +2022,10 @@ aside nav > ul .collapsible-category ul a {
   height: 30vh;
 }
 .articles .main-wrapper {
-  padding: 5rem 3rem;
+  padding: 5rem 3rem 2rem;
   max-width: 1200px;
+  flex: 1;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 18rem;
