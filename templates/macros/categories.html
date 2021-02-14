@@ -1,0 +1,16 @@
+{% macro render_categories() %}
+  {% set categories = bag('post_tags') %}
+  <ul>
+    {% for key, value in categories.items() recursive %}
+      {% if value %}
+        <li class="collapsible-category">
+          <a>{{ key }} <i class="fas fa-angle-down"></i></a>
+          <ul>{{ loop(value.items()) }}</ul>
+        </li>
+      {% else %}
+        <li><a href="#">{{ key }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endmacro %}
+

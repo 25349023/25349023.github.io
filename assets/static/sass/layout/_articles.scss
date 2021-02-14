@@ -1,19 +1,17 @@
 .articles {
   main {
-    display: flex;
+    padding-top: 3rem;
+    display: grid;
+    flex-flow: column;
 
     background-color: $articles-page-color;
     color: $articles-ui-color;
-
-    header {
-      height: 30vh;
-    }
   }
 
   .main-wrapper {
-    padding: 5rem 3rem 2rem;
+    padding: 2rem 3rem 2rem;
     max-width: 1200px;
-    flex: 1;
+    width: 100%;
     margin: 0 auto;
 
     display: grid;

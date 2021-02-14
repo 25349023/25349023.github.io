@@ -1,21 +1,22 @@
-{% extends "layout-normal.html" %}
+{% extends "articles.html" %}
 {% from "macros/card.html" import render_article_post %}
 {% from "macros/pagination.html" import render_pagination %}
-{% block title %}Articles - skyblog{% endblock %}
 
-{% block banner %}
-  <h1>Articles</h1>
-{% endblock %}
 {% block main %}
   <main>
+    <div class="breadcrumb-wrapper">
+      <div class="breadcrumb">
+        {%- for t in this.tag.split(' - ') -%}<span>{{ t }}</span>{% endfor %}
+      </div>
+    </div>
     <div class="main-wrapper">
-      {% for post in this.pagination.items %}
+      {% for post in this.items %}
         {{ render_article_post(post) }}
       {% endfor %}
     </div>
   </main>
+
   {% block pagination %}
-    {{ render_pagination(this.pagination) }}
+    <div class="pagination"></div>
   {% endblock %}
 {% endblock %}
-

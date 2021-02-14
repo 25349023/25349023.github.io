@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from "macros/categories.html" import render_categories %}
 
 {% block body %}
   {% block main %}{% endblock %}
@@ -12,29 +13,7 @@
         <ul>
           <li class="collapsible-category" id="root-collapsible">
             <a>Category <i class="fas fa-angle-down"></i></a>
-            <ul>
-              <li class="collapsible-category">
-                <a>C++ <i class="fas fa-angle-down"></i></a>
-                <ul>
-                  <li><a href="#">STL</a></li>
-                  <li><a href="#">boost</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Go</a></li>
-              <li class="collapsible-category">
-                <a>Python <i class="fas fa-angle-down"></i></a>
-                <ul>
-                  <li><a href="#">flask</a></li>
-                  <li class="collapsible-category">
-                    <a>async <i class="fas fa-angle-down"></i></a>
-                    <ul>
-                      <li><a href="#">asyncio</a></li>
-                      <li><a href="#">aiohttp</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            {{ render_categories() }}
           </li>
           <li>
             <a href="#">Archives</a>

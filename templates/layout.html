@@ -33,7 +33,8 @@
 </head>
 
 {#<body class="{{ this._model }}">#}
-<body class="{{ bag('body_class', this._model) }}">
+{% set model = this._model if this._model else this.parent._model %}
+<body class="{{ bag('body_class', model) }}">
 <header>
   <nav>
     <ul>
@@ -61,7 +62,7 @@
 
 {% block body %}{% endblock %}
 
-<a href="{{ '#'|url }}" class="scroll-top hidden" id="scroll-top">
+<a href="#" class="scroll-top hidden" id="scroll-top">
   <i class="fas fa-chevron-up"></i>
 </a>
 <footer>&copy; Copyright 2021 by Skyline Liu.</footer>
