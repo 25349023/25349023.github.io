@@ -1,13 +1,7 @@
 {
-  "C++": {
-    "STL": {}
-  },
-  "Go": {},
+  "C++": {},
+  "C#": {},
   "Python": {
-    "flask": {},
-    "async": {
-      "asyncio": {},
-      "aiohttp": {}
-    }
+    "flask": {}
   }
 }
