@@ -1,0 +1,20 @@
+{% macro render_categories() %}
+  {% set categories = bag('post_tags') %}
+  <ul>
+    {% set stack = [] %}
+    {% for key, value in categories.items() recursive %}
+      {% do stack.append(key) %}
+      {% if value %}
+        <li class="collapsible-category">
+          <a>{{ key }} <i class="fas fa-angle-down"></i></a>
+          <ul>{{ loop(value.items()) }}</ul>
+        </li>
+      {% else %}
+        <li><a href="{{ ('/articles@tag/' ~ ' - '.join(stack))|url }}"
+        >{{ key }}</a></li>
+      {% endif %}
+      {% do stack.pop() %}
+    {% endfor %}
+  </ul>
+{% endmacro %}
+

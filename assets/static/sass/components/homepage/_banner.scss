@@ -1,0 +1,50 @@
+.home .banner {
+  background-image: url("./images/background3.jpg");
+  background-size: cover;
+  background-position: center 0;
+
+  .foreground {
+    background-image: radial-gradient($banner-inner-color, $banner-outer-color);
+    height: 100vh;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    h1 {
+      margin: 0;
+      font-size: 4.5rem;
+      font-family: $title-font;
+
+      background-image: linear-gradient(
+        $banner-title-color 70%,
+        rgba($banner-title-color, 0.3)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      @include brk-down($brk-large) {
+        font-size: 4rem;
+      }
+
+      @include brk-down($brk-tiny) {
+        font-size: 3.2rem;
+      }
+
+      @include brk-down($brk-x-tiny) {
+        font-size: 2.8rem;
+      }
+    }
+
+    &:before {
+      @include skew-banner(4deg, $height: 130px, $color: $latest-content-color);
+    }
+
+    &:after {
+      @include skew-banner(-8deg, -150px, 200px, $color: $latest-content-color);
+    }
+  }
+}

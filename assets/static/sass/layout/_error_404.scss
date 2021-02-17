@@ -1,0 +1,24 @@
+.error-404 {
+  main {
+    display: flex;
+    justify-content: center;
+    background-color: $error404-color;
+  }
+
+  .main-wrapper {
+    margin: 3rem 0;
+    position: relative;
+    height: 80vh;
+    padding: 2rem;
+    flex-basis: 1080px;
+    color: rgba($error404-title-color, 0.4);
+
+    i {
+      font-size: 20rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

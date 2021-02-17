@@ -1,0 +1,103 @@
+@use "sass:list";
+
+@mixin skew-banner(
+  $direction: 5deg,
+  $bottom: -100px,
+  $height: 150px,
+  $color: white
+) {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: $bottom;
+  height: $height;
+  background-color: rgba($color, 0.5);
+  transform: skewY($direction);
+}
+
+@mixin banner-arrow($size: 20rem, $width: 8rem, $rotation: -45deg, $posY: 50%) {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: $posY;
+  left: 50%;
+  margin: -($size + $width) / 2;
+  height: $size;
+  width: $size;
+  border: solid rgba(white, 0.4);
+  border-width: 0 0 $width $width;
+  transform: rotateZ($rotation);
+  z-index: 2;
+}
+
+@mixin question-mark(
+  $size: 20rem,
+  $alpha: 0.1,
+  $posXY: 50% 50%,
+  $rotation: 5deg
+) {
+  content: "\f128";
+  position: absolute;
+  left: list.nth($posXY, 1);
+  top: list.nth($posXY, 2);
+
+  font-size: $size;
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: rgba($error404-title-color, $alpha);
+  transform: translate(-50%, -50%) rotateZ($rotation);
+  z-index: 2;
+}
+
+@mixin header-style {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @content;
+  }
+}
+
+@mixin header-margin-bottom($size) {
+  @include header-style {
+    margin: 0 0 $size 0;
+  }
+}
+
+@mixin paragraph-margin-bottom($size) {
+  p,
+  pre,
+  .admonition {
+    margin: 0 0 $size 0;
+  }
+}
+
+@mixin list-margin-bottom($size) {
+  ol,
+  ul,
+  dl {
+    margin-top: 0;
+    margin-bottom: $size;
+  }
+}
+
+@mixin brk-down($brk: $brk-x-huge) {
+  @media (max-width: $brk) {
+    @content;
+  }
+}
+
+@mixin brk-up($brk: $brk-x-tiny) {
+  @media (min-width: $brk) {
+    @content;
+  }
+}
+
+@mixin brk-between($brk-head, $brk-tail) {
+  @media (max-width: $brk-head) and (min-width: $brk-tail) {
+    @content;
+  }
+}

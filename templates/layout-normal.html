@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% from "macros/categories.html" import render_categories %}
+
+{% block body %}
+  {% block main %}{% endblock %}
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="hidden" id="sidebar">
+    <div class="blur"></div>
+    <div class="content">
+      <div class="profile-image"></div>
+      <div class="name">天ほし</div>
+      <nav>
+        <ul>
+          <li class="collapsible-category" id="root-collapsible">
+            <a>Category <i class="fas fa-angle-down"></i></a>
+            {{ render_categories() }}
+          </li>
+          <li>
+            <a href="#">Archives</a>
+          </li>
+          <li>
+            <a href="#">Contact Me</a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <button class="handle"><i class="fas fa-bars"></i></button>
+  </aside>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ '/static/js/sidebar.js'|url }}"></script>
+  <script src="{{ '/static/js/category.js'|url }}"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+.postpage .tags {
+  margin: 2rem 0 0 3rem;
+  padding: 0 0.6rem 0 1rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border-left: 12px solid $postpage-tag-border-color;
+
+  @include brk-down($brk-large) {
+    margin-left: 0.4rem;
+  }
+
+  @include brk-down($brk-small) {
+    font-size: 1rem;
+  }
+
+  @include brk-down($brk-x-tiny) {
+    font-size: 0.8rem;
+    border-radius: 0;
+    border-left-width: 8px;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0.3rem 0.4rem 0.3rem 0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    background-color: $postpage-tag-color;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $postpage-tag-hover-color;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba($postpage-ui-color, 0.9);
+  }
+}

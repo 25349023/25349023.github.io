@@ -1,0 +1,76 @@
+.postpage .adjacent-posts {
+  margin-top: 2.5rem;
+  padding-left: 2.5rem;
+  display: flex;
+  flex-flow: column;
+
+  @include brk-down($brk-huge) {
+    padding: 0 2rem;
+  }
+
+  @include brk-down($brk-large) {
+    margin-top: 1.8rem;
+    padding: 0 1rem;
+  }
+
+  @include brk-down($brk-small) {
+    margin-top: 1.4rem;
+  }
+
+  @include brk-down($brk-x-tiny) {
+    margin-top: 1rem;
+  }
+
+  span {
+    display: inline-block;
+    font-style: italic;
+    margin-bottom: 0.2rem;
+
+    color: rgba($postpage-ui-color, 0.7);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+
+    &:hover {
+      color: rgba($postpage-link-color, 1);
+    }
+  }
+
+  .next {
+    align-self: flex-end;
+
+    i {
+      margin-left: 1rem;
+    }
+  }
+
+  .prev {
+    text-align: right;
+    margin-right: auto;
+    margin-top: 1rem;
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+
+  @include brk-down($brk-tiny) {
+    .next {
+      align-self: center;
+      margin-left: 2rem;
+      min-width: 0;
+    }
+    .prev {
+      align-self: center;
+      margin-right: 2rem;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+aside nav {
+  width: 100%;
+
+  > ul {
+    margin: 4rem 0 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+
+    > li {
+      &:nth-of-type(n + 2) {
+        border-top: 1px solid rgba($sidebar-ui-color, 0.4);
+      }
+    }
+
+    li {
+      display: inline-block;
+      font-size: 1.4rem;
+
+      @include brk-down($brk-small) {
+        font-size: 1.2rem;
+      }
+    }
+
+    i.fa-github {
+      margin-right: 0.6rem;
+
+      @include brk-down($brk-small) {
+        margin-right: 0.4rem;
+      }
+    }
+
+    a {
+      width: 100%;
+      display: inline-block;
+      padding: 1rem;
+      text-decoration: none;
+      color: $sidebar-ui-color;
+      transition: background-color 0.3s, color 0.3s;
+
+      &:hover {
+        color: white;
+        background-color: rgba($sidebar-ui-color, 0.2);
+      }
+
+      @include brk-down($brk-small) {
+        padding: 0.8rem;
+      }
+    }
+  }
+}
