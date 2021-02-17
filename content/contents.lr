@@ -1,6 +1,13 @@
 _model: home
 ---
-about: Some words about me.
+about:
+喜歡寫程式、覺得程式應是一門藝術而不只是工具
+
+喜歡學一些學校沒教的東西
+喜歡水彩的透明
+
+NTHU CS
+
 ---
 skills:
 
@@ -9,6 +16,6 @@ C
 C++
 C#
 JavaScript
-Lua
-ML
-Perl
+Go
+Unity
+M

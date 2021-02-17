@@ -1,5 +1,6 @@
 [project]
 name = skyblog
+excluded_assets = *.html
 
 [packages]
 lektor-strip-html-tags = 0.3.1
