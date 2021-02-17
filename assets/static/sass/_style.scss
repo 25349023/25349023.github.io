@@ -37,8 +37,11 @@
 
 @import "./components/portfolio/banner";
 
+@import "./components/error_404/banner";
+
 @import "./layout/root";
 @import "./layout/homepage";
 @import "./layout/articles";
 @import "./layout/post";
 @import "./layout/portfolio";
+@import "./layout/error_404";

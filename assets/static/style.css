@@ -2009,6 +2009,53 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 
+.error-404 .banner {
+  height: 40vh;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  overflow: hidden;
+  background-image: radial-gradient(circle at top left, rgba(190, 190, 190, 0.8) -15%, rgba(247, 247, 247, 0.4) 60%), radial-gradient(circle at bottom right, rgba(219, 219, 219, 0.9) 0%, rgba(247, 247, 247, 0.4) 60%);
+}
+.error-404 .banner:after {
+  content: "";
+  position: absolute;
+  left: 54%;
+  top: 50%;
+  font-size: 20rem;
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: rgba(50, 50, 50, 0.1);
+  transform: translate(-50%, -50%) rotateZ(5deg);
+  z-index: 2;
+}
+.error-404 .banner::before {
+  content: "";
+  position: absolute;
+  left: 44%;
+  top: 66%;
+  font-size: 10rem;
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: rgba(50, 50, 50, 0.1);
+  transform: translate(-50%, -50%) rotateZ(-20deg);
+  z-index: 2;
+}
+.error-404 .banner h1 {
+  margin: 0 auto;
+  position: relative;
+  font-size: 3rem;
+  font-family: "Exo 2", "Maven Pro", "Noto Sans TC", sans-serif;
+  color: rgba(50, 50, 50, 0.8);
+  z-index: 3;
+}
+@media (max-width: 480px) {
+  .error-404 .banner h1 {
+    font-size: 2.4rem;
+  }
+}
+
 :root {
   font-family: "Maven Pro", "Noto Sans TC", sans-serif;
   scroll-behavior: smooth;
@@ -2266,6 +2313,27 @@ aside nav > ul .collapsible-category ul a {
   padding: 2rem;
   flex-basis: 1080px;
   color: #5c443a;
+}
+
+.error-404 main {
+  display: flex;
+  justify-content: center;
+  background-color: #f8f8f8;
+}
+.error-404 .main-wrapper {
+  margin: 3rem 0;
+  position: relative;
+  height: 80vh;
+  padding: 2rem;
+  flex-basis: 1080px;
+  color: rgba(50, 50, 50, 0.4);
+}
+.error-404 .main-wrapper i {
+  font-size: 20rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*# sourceMappingURL=style.css.map */
