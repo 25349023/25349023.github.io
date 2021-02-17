@@ -1,3 +1,5 @@
+@use "sass:list";
+
 @mixin skew-banner(
   $direction: 5deg,
   $bottom: -100px,
@@ -26,6 +28,25 @@
   border: solid rgba(white, 0.4);
   border-width: 0 0 $width $width;
   transform: rotateZ($rotation);
+  z-index: 2;
+}
+
+@mixin question-mark(
+  $size: 20rem,
+  $alpha: 0.1,
+  $posXY: 50% 50%,
+  $rotation: 5deg
+) {
+  content: "\f128";
+  position: absolute;
+  left: list.nth($posXY, 1);
+  top: list.nth($posXY, 2);
+
+  font-size: $size;
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: rgba($error404-title-color, $alpha);
+  transform: translate(-50%, -50%) rotateZ($rotation);
   z-index: 2;
 }
 

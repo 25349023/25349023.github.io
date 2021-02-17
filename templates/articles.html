@@ -1,0 +1,21 @@
+{% extends "layout-normal.html" %}
+{% from "macros/card.html" import render_article_post %}
+{% from "macros/pagination.html" import render_pagination %}
+{% block title %}Articles - skyblog{% endblock %}
+
+{% block banner %}
+  <h1>Articles</h1>
+{% endblock %}
+{% block main %}
+  <main>
+    <div class="main-wrapper">
+      {% for post in this.pagination.items %}
+        {{ render_article_post(post) }}
+      {% endfor %}
+    </div>
+  </main>
+  {% block pagination %}
+    {{ render_pagination(this.pagination) }}
+  {% endblock %}
+{% endblock %}
+

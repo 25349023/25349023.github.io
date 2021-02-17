@@ -27,11 +27,16 @@ $about-card-link-color: rgb(246, 255, 169);
 $more-card-hover-color: $default-ui-color;
 
 $articles-page-color: rgb(244, 249, 255);
+$articles-breadcrumb-color: rgb(233, 241, 251);
 $articles-ui-color: rgb(9, 36, 61);
 $articles-title-color: rgb(3, 48, 26);
 $articles-banner-color1: rgb(140, 251, 255);
 $articles-banner-color2: rgb(255, 220, 196);
 $articles-banner-color3: rgb(134, 217, 255);
+
+$pagination-active-color: rgb(30, 100, 183);
+$pagination-hover-color: rgb(180, 210, 255);
+$pagination-disabled-color: rgb(138, 169, 218);
 
 $post-color0: rgb(220, 236, 255);
 $post-color1: rgb(204, 228, 255);
@@ -49,12 +54,21 @@ $postpage-link-color: rgb(27, 177, 89);
 $postpage-quote-color: rgb(66, 177, 112);
 $postpage-quote-header-color: rgb(66, 177, 158);
 $postpage-quote-marker-color: rgb(59, 128, 43);
+$postpage-tag-border-color: rgb(102, 212, 138);
+$postpage-tag-color: rgb(217, 247, 215);
+$postpage-tag-hover-color: rgb(228, 252, 227);
 
 $portfolio-banner-color1: rgb(255, 151, 103);
 $portfolio-banner-color2: rgb(255, 253, 158);
 $portfolio-banner-color3: rgb(228, 159, 245);
 $portfolio-title-color: rgb(116, 7, 7);
 $portfolio-color: rgb(248, 248, 248);
+
+$error404-banner-color1: rgb(190, 190, 190);
+$error404-banner-color2: rgb(247, 247, 247);
+$error404-banner-color3: rgb(219, 219, 219);
+$error404-title-color: rgb(50, 50, 50);
+$error404-color: rgb(248, 248, 248);
 
 $sidebar-color1: rgb(209, 234, 255);
 $sidebar-color-mid: rgb(165, 209, 230);

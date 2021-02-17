@@ -726,6 +726,52 @@ aside nav > ul .collapsible-category ul a {
   visibility: hidden;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  background-color: #f4f9ff;
+  padding-bottom: 2rem;
+}
+.pagination a {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #09243d;
+  transition: background-color 0.4s;
+}
+.pagination a:nth-of-type(n + 2) {
+  margin-left: 0.6rem;
+}
+.pagination a.disabled {
+  color: #8aa9da;
+}
+.pagination a.disabled:hover {
+  background-color: inherit;
+}
+.pagination a.active {
+  color: #f4f9ff;
+  background-color: #1e64b7;
+}
+.pagination a.active:hover {
+  background-color: #1e64b7;
+}
+.pagination a:hover {
+  background-color: #b4d2ff;
+}
+.pagination a i {
+  transform: translateY(1px);
+}
+@media (max-width: 668px) {
+  .pagination a {
+    display: none;
+  }
+  .pagination a:first-of-type, .pagination a:last-of-type, .pagination a.active {
+    display: inline-block;
+  }
+}
+
 .home .banner {
   background-image: url("./images/background3.jpg");
   background-size: cover;
@@ -1188,6 +1234,7 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 .articles main .main-wrapper article {
+  flex: 1;
   padding: 0.8rem 1.2rem;
   overflow-y: hidden;
 }
@@ -1199,7 +1246,9 @@ aside nav > ul .collapsible-category ul a {
 }
 .articles main .main-wrapper article h2 {
   margin: 0 auto 0 0;
+  padding-right: 1rem;
   font-size: 1.8rem;
+  line-height: 1.3;
 }
 @media (max-width: 668px) {
   .articles main .main-wrapper article h2 {
@@ -1306,6 +1355,25 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 
+.articles .breadcrumb-wrapper {
+  margin: 0 auto;
+  padding: 0 3rem;
+  width: 100%;
+  max-width: 1200px;
+}
+.articles .breadcrumb-wrapper .breadcrumb {
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  color: rgba(9, 36, 61, 0.8);
+  font-size: 1.2rem;
+  background-color: #e9f1fb;
+}
+.articles .breadcrumb-wrapper .breadcrumb span:after {
+  content: "/";
+  margin: 0 0.6rem;
+  color: rgba(9, 36, 61, 0.4);
+}
+
 .postpage article .post-content {
   font-size: 1.3rem;
   line-height: 1.5;
@@ -1395,6 +1463,10 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content li blockquote {
   margin-left: 1.2rem;
+  margin-top: 2rem;
+}
+.postpage article .post-content li p:last-of-type {
+  margin-bottom: 0;
 }
 .postpage article .post-content blockquote {
   margin: 1.2rem 0 0 1.8rem;
@@ -1677,7 +1749,7 @@ aside nav > ul .collapsible-category ul a {
   position: fixed;
   right: 0;
   bottom: 8rem;
-  max-width: 220px;
+  width: 220px;
   max-height: 50vh;
   overflow-y: auto;
   padding: 0 1.2rem 0 0;
@@ -1687,7 +1759,7 @@ aside nav > ul .collapsible-category ul a {
 }
 @media (max-width: 1296px) {
   .postpage .toc-wrapper {
-    max-width: 160px;
+    width: 160px;
     max-height: 40vh;
   }
 }
@@ -1860,6 +1932,61 @@ aside nav > ul .collapsible-category ul a {
   visibility: hidden;
 }
 
+.postpage .tags {
+  margin: 2rem 0 0 3rem;
+  padding: 0 0.6rem 0 1rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border-left: 12px solid #66d48a;
+}
+@media (max-width: 824px) {
+  .postpage .tags {
+    margin-left: 0.4rem;
+  }
+}
+@media (max-width: 668px) {
+  .postpage .tags {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 320px) {
+  .postpage .tags {
+    font-size: 0.8rem;
+    border-radius: 0;
+    border-left-width: 8px;
+  }
+}
+.postpage .tags li {
+  display: inline-block;
+  margin: 0.3rem 0.4rem 0.3rem 0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  background-color: #d9f7d7;
+  transition: background-color 0.3s;
+}
+.postpage .tags li:hover {
+  background-color: #e4fce3;
+}
+.postpage .tags a {
+  text-decoration: none;
+  color: rgba(92, 68, 58, 0.9);
+}
+
+.postpage .comments {
+  margin-top: 3rem;
+  padding-left: 3rem;
+}
+@media (max-width: 1080px) {
+  .postpage .comments {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 824px) {
+  .postpage .comments {
+    padding: 0 1rem;
+  }
+}
+
 .portfolio .banner {
   height: 40vh;
   position: relative;
@@ -1893,6 +2020,53 @@ aside nav > ul .collapsible-category ul a {
 }
 @media (max-width: 480px) {
   .portfolio .banner h1 {
+    font-size: 2.4rem;
+  }
+}
+
+.error-404 .banner {
+  height: 40vh;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  overflow: hidden;
+  background-image: radial-gradient(circle at top left, rgba(190, 190, 190, 0.8) -15%, rgba(247, 247, 247, 0.4) 60%), radial-gradient(circle at bottom right, rgba(219, 219, 219, 0.9) 0%, rgba(247, 247, 247, 0.4) 60%);
+}
+.error-404 .banner:after {
+  content: "";
+  position: absolute;
+  left: 54%;
+  top: 50%;
+  font-size: 20rem;
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: rgba(50, 50, 50, 0.1);
+  transform: translate(-50%, -50%) rotateZ(5deg);
+  z-index: 2;
+}
+.error-404 .banner::before {
+  content: "";
+  position: absolute;
+  left: 44%;
+  top: 66%;
+  font-size: 10rem;
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: rgba(50, 50, 50, 0.1);
+  transform: translate(-50%, -50%) rotateZ(-20deg);
+  z-index: 2;
+}
+.error-404 .banner h1 {
+  margin: 0 auto;
+  position: relative;
+  font-size: 3rem;
+  font-family: "Exo 2", "Maven Pro", "Noto Sans TC", sans-serif;
+  color: rgba(50, 50, 50, 0.8);
+  z-index: 3;
+}
+@media (max-width: 480px) {
+  .error-404 .banner h1 {
     font-size: 2.4rem;
   }
 }
@@ -1962,18 +2136,17 @@ aside nav > ul .collapsible-category ul a {
 }
 
 .articles main {
-  display: flex;
+  padding-top: 3rem;
+  display: grid;
   flex-flow: column;
-  align-items: center;
   background-color: #f4f9ff;
   color: #09243d;
 }
-.articles main header {
-  height: 30vh;
-}
 .articles .main-wrapper {
-  padding: 5rem 3rem;
+  padding: 2rem 3rem 2rem;
   max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 18rem;
@@ -2155,6 +2328,27 @@ aside nav > ul .collapsible-category ul a {
   padding: 2rem;
   flex-basis: 1080px;
   color: #5c443a;
+}
+
+.error-404 main {
+  display: flex;
+  justify-content: center;
+  background-color: #f8f8f8;
+}
+.error-404 .main-wrapper {
+  margin: 3rem 0;
+  position: relative;
+  height: 80vh;
+  padding: 2rem;
+  flex-basis: 1080px;
+  color: rgba(50, 50, 50, 0.4);
+}
+.error-404 .main-wrapper i {
+  font-size: 20rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*# sourceMappingURL=style.css.map */

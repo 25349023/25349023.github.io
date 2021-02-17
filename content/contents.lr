@@ -1,6 +1,14 @@
-title: Welcome to skyblog!
+_model: home
 ---
-body:
+about: Some words about me.
+---
+skills:
 
-This is a basic demo website that shows how to use Lektor for a basic
-website with some pages and a blog.
+Python
+C
+C++
+C#
+JavaScript
+Lua
+ML
+Perl
