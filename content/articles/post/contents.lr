@@ -257,7 +257,7 @@ Regular Markdown syntax is not processed within code blocks. E.g.,
 asterisks are just literal asterisks within a code block. This means
 it's also easy to use Markdown to write about Markdown's own syntax.
 
-```css=
+```,=
 tell application "Foo"
     beep
 end tell
@@ -294,6 +294,20 @@ _single underscores_
 **double asterisks**
 
 __double underscores__
+
+### Admonition
+
+Use 1 ~ 4 `!` to create a admonition block.
+
+! Hello Note
+wowor
+df
+
+!! Hello Info
+
+!!! Hello Tip
+
+!!!! Hello Warning
 
 ### Code
 

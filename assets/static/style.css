@@ -772,6 +772,49 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 
+.post-content .admonition {
+  padding: 0.6rem 1.2rem 1rem;
+  border-radius: 10px;
+}
+.post-content .admonition p:last-child {
+  margin-bottom: 0;
+}
+.post-content .admonition:before {
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free", "Maven Pro", "Noto Sans TC", sans-serif;
+  word-spacing: 0.4rem;
+  font-size: 0.9em;
+  margin-bottom: 0.4rem;
+}
+.post-content .admonition.admonition-note {
+  background-color: rgba(218, 231, 245, 0.8);
+  color: rgba(3, 44, 83, 0.7);
+}
+.post-content .admonition.admonition-note:before {
+  content: " Note";
+}
+.post-content .admonition.admonition-info {
+  background-color: rgba(222, 245, 207, 0.8);
+  color: rgba(17, 68, 0, 0.7);
+}
+.post-content .admonition.admonition-info:before {
+  content: " Info";
+}
+.post-content .admonition.admonition-tip {
+  background-color: rgba(247, 236, 216, 0.8);
+  color: rgba(71, 45, 0, 0.7);
+}
+.post-content .admonition.admonition-tip:before {
+  content: " Warning";
+}
+.post-content .admonition.admonition-warning {
+  background-color: rgba(245, 224, 223, 0.8);
+  color: rgba(75, 5, 0, 0.7);
+}
+.post-content .admonition.admonition-warning:before {
+  content: " Danger";
+}
+
 .home .banner {
   background-image: url("./images/background3.jpg");
   background-size: cover;
@@ -1393,7 +1436,8 @@ aside nav > ul .collapsible-category ul a {
   margin: 0 0 1.2rem 0;
 }
 .postpage article .post-content p,
-.postpage article .post-content pre {
+.postpage article .post-content pre,
+.postpage article .post-content .admonition {
   margin: 0 0 1rem 0;
 }
 .postpage article .post-content ol,
@@ -1509,7 +1553,8 @@ aside nav > ul .collapsible-category ul a {
   margin: 0 0 0.8rem 0;
 }
 .postpage article .post-content blockquote p,
-.postpage article .post-content blockquote pre {
+.postpage article .post-content blockquote pre,
+.postpage article .post-content blockquote .admonition {
   margin: 0 0 0.8rem 0;
 }
 .postpage article .post-content blockquote h1,
@@ -1562,7 +1607,8 @@ aside nav > ul .collapsible-category ul a {
     margin: 0 0 1rem 0;
   }
   .postpage article .post-content p,
-.postpage article .post-content pre {
+.postpage article .post-content pre,
+.postpage article .post-content .admonition {
     margin: 0 0 0.9rem 0;
   }
   .postpage article .post-content ol,
@@ -1617,7 +1663,8 @@ aside nav > ul .collapsible-category ul a {
     margin: 0 0 0.8rem 0;
   }
   .postpage article .post-content p,
-.postpage article .post-content pre {
+.postpage article .post-content pre,
+.postpage article .post-content .admonition {
     margin: 0 0 0.8rem 0;
   }
   .postpage article .post-content ol,

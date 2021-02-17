@@ -69,7 +69,8 @@
 
 @mixin paragraph-margin-bottom($size) {
   p,
-  pre {
+  pre,
+  .admonition {
     margin: 0 0 $size 0;
   }
 }
