@@ -9,3 +9,7 @@ lektor-tags = 0.3
 lektor-slugify = 0.4
 lektor-disqus-comments = 0.4.1
 lektor-markdown-admonition = 0.3.1
+
+[servers.ghpages]
+name = GitHub Page
+target = ghpages+https://25349023/25349023.github.io
