@@ -295,6 +295,20 @@ _single underscores_
 
 __double underscores__
 
+### Admonition
+
+Use 1 ~ 4 `!` to create a admonition block.
+
+! Hello Note
+wowor
+df
+
+!! Hello Info
+
+!!! Hello Tip
+
+!!!! Hello Warning
+
 ### Code
 
 To indicate a span of code, wrap it with backtick quotes (`` ` ``).

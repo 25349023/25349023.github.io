@@ -1,0 +1,52 @@
+.post-content .admonition {
+  padding: 0.6rem 1.2rem 1rem;
+  border-radius: 10px;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  &:before {
+    font-weight: bold;
+    font-family: $icon-font;
+    word-spacing: 0.4rem;
+    font-size: 0.9em;
+    margin-bottom: 0.4rem;
+  }
+
+  &.admonition-note {
+    background-color: $admonition-note-color;
+    color: $admonition-note-ui-color;
+
+    &:before {
+      content: '\f249  Note';
+    }
+  }
+
+  &.admonition-info {
+    background-color: $admonition-info-color;
+    color: $admonition-info-ui-color;
+
+    &:before {
+      content: '\f0eb  Info';
+    }
+  }
+
+  &.admonition-tip {
+    background-color: $admonition-tip-color;
+    color: $admonition-tip-ui-color;
+
+    &:before {
+      content: '\f071  Warning';
+    }
+  }
+
+  &.admonition-warning {
+    background-color: $admonition-warning-color;
+    color: $admonition-warning-ui-color;
+
+    &:before {
+      content: '\f06d  Danger';
+    }
+  }
+}
