@@ -6,6 +6,8 @@ title: Hello wow 你好
 ---
 body:
 
+! 這是個用來測試的文章。
+
 # Markdown: Syntax
 
 ## Overview
@@ -300,8 +302,6 @@ __double underscores__
 Use 1 ~ 4 `!` to create a admonition block.
 
 ! Hello Note
-wowor
-df
 
 !! Hello Info
 
@@ -320,3 +320,5 @@ Use the `printf()` function.
 tags:
 
 Test
+---
+popular: 20

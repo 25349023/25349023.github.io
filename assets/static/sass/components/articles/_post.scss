@@ -106,8 +106,9 @@
     margin: 0;
     max-height: 12rem;
     overflow: hidden;
-    font-family: $post-font;
+    overflow-wrap: anywhere;
 
+    font-family: $post-font;
     font-size: 1.3rem;
     line-height: 1.5;
 
