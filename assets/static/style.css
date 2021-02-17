@@ -1972,6 +1972,21 @@ aside nav > ul .collapsible-category ul a {
   color: rgba(92, 68, 58, 0.9);
 }
 
+.postpage .comments {
+  margin-top: 3rem;
+  padding-left: 3rem;
+}
+@media (max-width: 1080px) {
+  .postpage .comments {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 824px) {
+  .postpage .comments {
+    padding: 0 1rem;
+  }
+}
+
 .portfolio .banner {
   height: 40vh;
   position: relative;

@@ -1,0 +1,12 @@
+.postpage .comments {
+  margin-top: 3rem;
+  padding-left: 3rem;
+
+  @include brk-down($brk-huge) {
+    padding: 0 2rem;
+  }
+
+  @include brk-down($brk-large) {
+    padding: 0 1rem;
+  }
+}

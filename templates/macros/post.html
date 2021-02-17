@@ -33,17 +33,17 @@
 {% endmacro %}
 
 {% macro render_tag_list(post) %}
-    {% if post.tags %}
-      <ul class="tags">
-        {% for t in post.tags -%}
-          <li>
-            <a href="{{ ('/articles@tag/' ~ t)|url }}">
-              {{ t }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+  {% if post.tags %}
+    <ul class="tags">
+      {% for t in post.tags -%}
+        <li>
+          <a href="{{ ('/articles@tag/' ~ t)|url }}">
+            {{ t }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endmacro %}
 
 {% macro render_post(post) %}
@@ -52,5 +52,6 @@
     {{ post.body }}
   </section>
   {{ render_tag_list(post) }}
+  <div class="comments">{{ render_disqus_comments() }}</div>
   {{ render_adj_post(post) }}
 {% endmacro %}
