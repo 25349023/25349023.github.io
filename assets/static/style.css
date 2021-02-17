@@ -1101,6 +1101,9 @@ aside nav > ul .collapsible-category ul a {
 .home .content .about .card.profile-card h3 {
   position: relative;
 }
+.home .content .about .card.profile-card p {
+  line-height: 1.5;
+}
 .home .content .about .card.contact-card .preview {
   display: flex;
   flex-flow: column;
