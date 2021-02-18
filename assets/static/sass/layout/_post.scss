@@ -70,25 +70,25 @@
       .title {
         margin: 0;
         margin-right: auto;
-        font-size: 3rem;
+        font-size: 2.4rem;
 
         i {
-          font-size: 2rem;
+          font-size: 1.8rem;
           margin-right: 0.8rem;
           color: rgba($postpage-ui-color, 0.6);
         }
 
         @include brk-down($brk-huge) {
-          font-size: 2.6rem;
+          font-size: 2.2rem;
           i {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
           }
         }
 
         @include brk-down($brk-large) {
-          font-size: 2.2rem;
+          font-size: 2rem;
           i {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
           }
         }
 

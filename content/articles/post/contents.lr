@@ -2,7 +2,7 @@ author: Sky
 ---
 pub_date: 2021-02-09
 ---
-title: Hello wow 你好
+title: Hello world 你好
 ---
 body:
 
@@ -317,8 +317,6 @@ normal paragraph. For example:
 
 Use the `printf()` function.
 ---
-tags:
-
-Test
+tags: Test
 ---
 popular: 20
