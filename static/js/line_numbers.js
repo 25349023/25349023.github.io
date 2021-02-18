@@ -1,5 +1,5 @@
 function splitCodeTags() {
-    let preBlocks = document.querySelectorAll("pre.line-numbers");
+    let preBlocks = document.querySelectorAll("pre");
     for (let p of preBlocks) {
         let c = p.querySelector("code");
         let clist = c.classList;

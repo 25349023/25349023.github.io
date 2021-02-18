@@ -798,7 +798,7 @@ aside nav > ul .collapsible-category ul a {
   color: rgba(17, 68, 0, 0.7);
 }
 .post-content .admonition.admonition-info:before {
-  content: " Info";
+  content: " Tip";
 }
 .post-content .admonition.admonition-tip {
   background-color: rgba(247, 236, 216, 0.8);
@@ -1648,6 +1648,9 @@ aside nav > ul .collapsible-category ul a {
   .postpage article .post-content pre code {
     font-size: 1.1rem;
   }
+  .postpage article .post-content code {
+    font-size: 1.1rem;
+  }
   .postpage article .post-content hr {
     margin: 0.8rem 0;
   }
@@ -1700,6 +1703,9 @@ aside nav > ul .collapsible-category ul a {
   }
   .postpage article .post-content blockquote {
     margin-left: 1.2rem;
+  }
+  .postpage article .post-content code {
+    font-size: 1.1rem;
   }
 }
 @media (max-width: 480px) {
@@ -2302,27 +2308,27 @@ aside nav > ul .collapsible-category ul a {
 .postpage main article .title {
   margin: 0;
   margin-right: auto;
-  font-size: 3rem;
+  font-size: 2.4rem;
 }
 .postpage main article .title i {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-right: 0.8rem;
   color: rgba(92, 68, 58, 0.6);
 }
 @media (max-width: 1080px) {
   .postpage main article .title {
-    font-size: 2.6rem;
-  }
-  .postpage main article .title i {
-    font-size: 1.8rem;
-  }
-}
-@media (max-width: 824px) {
-  .postpage main article .title {
     font-size: 2.2rem;
   }
   .postpage main article .title i {
     font-size: 1.6rem;
+  }
+}
+@media (max-width: 824px) {
+  .postpage main article .title {
+    font-size: 2rem;
+  }
+  .postpage main article .title i {
+    font-size: 1.4rem;
   }
 }
 @media (max-width: 668px) {
