@@ -1593,6 +1593,9 @@ aside nav > ul .collapsible-category ul a {
   border: none;
   border-bottom: 1px solid rgba(92, 68, 58, 0.3);
 }
+.postpage article .post-content del {
+  color: rgba(92, 68, 58, 0.6);
+}
 
 @media (max-width: 824px) {
   .postpage article .post-content {
