@@ -15,24 +15,24 @@
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 18rem;
+    grid-template-columns: repeat(3, minmax(0,  1fr));
+    grid-auto-rows: minmax(0, auto);
     gap: 0.2rem 0.2rem;
 
     @include brk-down($brk-large) {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0,  1fr);
       padding: 3rem 2.4rem;
       row-gap: 0.5rem;
     }
 
     @include brk-down($brk-small) {
       row-gap: 1rem;
-      grid-auto-rows: 16.4rem;
+      //grid-auto-rows: 16.4rem;
     }
 
     @include brk-down($brk-tiny) {
       padding: 2rem 1.6rem;
-      grid-auto-rows: 12rem;
+      //grid-auto-rows: 12rem;
     }
   }
 }
