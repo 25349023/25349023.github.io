@@ -1,0 +1,97 @@
+title:
+
+ [Python 3.6] 初探 f-string
+---
+author: Sky
+---
+body:
+
+第一篇技術文章就決定是你了（笑）
+
+# PEP 498: Formatted string literals
+
+Formatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 *f-string*，讓我們來看看要怎麼使用吧：
+```python,=
+name = 'Sky'
+print(f'My name is {name}.')
+# 'My name is Sky.'
+```
+有看到單引號前的 `f` 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的**左大括號**，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
+
+
+## Replacement field  取代欄位
+
+在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
+```python,=
+myNumber = 5
+print(f'''My number is a 
+{(lambda n: "Lucky" if n % 3 == 0 else "Unlucky")(myNumber)} number.''')
+# My number is a 
+# Unlucky number.
+```
+需要注意的是：lambda 主體需要以 ( ) 小括號包住，否則會引起 SyntaxError 例外；這裡同時展現了 *f-string* 另一個特色：可以像我們平常使用字串時那樣以三個引號表達多行字串，同樣地，任何空白字元都會被包起來，成為字串的一部分。
+
+
+## 小問題
+
+如果你寫了一行這樣的程式碼： 
+```python
+print(f'"{" is a opening curly bracket.')
+```
+會發現說引起了 SyntaxError 例外，為什麼呢？  
+```plaintext
+  File "<stdin>", line 1
+SyntaxError: f-string: unterminated string
+```
+應該很淺顯易懂，左大括號代表的是一個欄位的起點，所以上述的例子中，Python直譯器會找不到代表結束的右大括號。
+
+那如果字串中需要一個真正的左 / 右大括號呢？  可以使用 `{{` 或 `}}`，將兩個大括號連在一起： 
+```python,=
+print(f'"{{" is a opening curly bracket.')
+# "{" is a opening curly bracket.
+```
+
+## Conversion field  轉換欄位
+
+轉換欄位以 `!` 作為開始：
+```python,=
+import datetime
+print(f'The time now is {datetime.datetime.now()}.')
+# The time now is 2017-01-24 22:48:13.117520.
+print(f'The time now is {datetime.datetime.now()!r}.')
+# The time now is datetime.datetime(2017, 1, 24, 22, 48, 19, 414828).
+```
+轉換欄位的位置在於取代欄位中，要被轉換的表示式（變數）後面，共有 `!a`、`!r`、`!s` 三種轉換欄位。
+1. `!a` 代表對整個取代結果使用 `ascii()` 函式
+2. `!r` 則是 `repr()`
+3. `!s` 當然就是 `str()` 啦
+
+## 巢狀欄位
+
+其實正式上來說也不算是巢狀欄位啦，就像 `string.format()` 方法一樣，你可以指定取代後的格式，例如說： 
+```python,=
+from decimal import Decimal
+value = Decimal('89.65432')
+allWidth = 10
+precision = 3
+print(f'value:{value:{allWidth}.{precision}}')
+# value:      89.7
+```
+如果是浮點數的話他會幫你四捨五入。
+
+## 小問題－2
+在取代欄位中，不能有反斜線 `\`，就算用 r 包起來也一樣： 
+```python,=
+print(f"newline: {ord('\n')}")
+# SyntaxError: f-string expression part cannot include a backslash
+
+newline = ord('\n')
+print(f"newline: {newline}")
+# newline: 10
+```
+---
+popular: 50
+---
+pub_date: 2021-02-23
+---
+tags: Python

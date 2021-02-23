@@ -19,7 +19,7 @@ class LinenumCodeMixin:
                 if line_num == '=':
                     html = '<pre class="line-numbers"><code'
             html += ' class="language-' + lang + '"'
-        return html + '>' + escape(code).strip() + '</code></pre>\n'
+        return html + '>' + escape(code).rstrip() + '</code></pre>\n'
 
 
 class LinenumCodePlugin(Plugin):
