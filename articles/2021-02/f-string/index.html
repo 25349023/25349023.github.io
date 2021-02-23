@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[短談] 部落格文章搬移計劃 - skyblog</title>
+  <title>[Python 3.6] 初探 f-string - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -97,6 +97,31 @@
   <section class="toc-wrapper hidden" id="toc">
     <ul class="toc">
       
+        
+          <li><a href="#pep-498-formatted-string-literals">PEP 498: Formatted string literals</a>
+            <ul>
+        
+          <li><a href="#replacement-field-qu-dai-lan-wei">Replacement field  取代欄位</a></li>
+        
+      
+        
+          <li><a href="#xiao-wen-ti">小問題</a></li>
+        
+      
+        
+          <li><a href="#conversion-field-zhuan-huan-lan-wei">Conversion field  轉換欄位</a></li>
+        
+      
+        
+          <li><a href="#chao-zhuang-lan-wei">巢狀欄位</a></li>
+        
+      
+        
+          <li><a href="#xiao-wen-ti-2">小問題－2</a></li>
+        
+      </ul></li>
+        
+      
     </ul>
   </section>
 
@@ -105,30 +130,73 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[短談] 部落格文章搬移計劃</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[Python 3.6] 初探 f-string</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 02 - 18
+        <i class="fas fa-at"></i> 2021 - 02 - 23
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>過了一個寒假，我的新部落格終於完成啦～</p>
-<p>接下來我會慢慢地把原本部落格（<a href="https://skylinelimit.blogspot.com/">天上的東東w</a>）上的文章搬過來這裡，主要的目標是一些技術性的文章或翻譯，一些日常閒聊的就看我心情了（笑）。</p>
-<p>另外，我預計（又挖了一個坑）會有新的一兩篇文在寫這個部落格是怎麼建立的，主軸是如何使用 Lektor 來建立靜態網站，外加一些<del>沒人想聽的</del>心路歷程。</p>
-<p>我原本以為 Lektor 應該不會太難，但還是有不少小地方需要注意。</p>
-<p>不過今年可能會比以往還忙，所以還不知道會不會正常更新（藉口）。或許我可以在等 model train 好的過程中來寫個文章，不然每次都呆呆地盯著他跑也是很浪費時間。</p>
-<p>好了，廢話講太多了，這次就這樣吧XD</p>
+    <p>第一篇技術文章就決定是你了（笑）</p>
+<h1 id="pep-498-formatted-string-literals">PEP 498: Formatted string literals</h1><p>Formatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 <em>f-string</em>，讓我們來看看要怎麼使用吧：</p>
+<pre class="line-numbers"><code class="language-python">name = &#x27;Sky&#x27;
+print(f&#x27;My name is {name}.&#x27;)
+# &#x27;My name is Sky.&#x27;</code></pre>
+<p>有看到單引號前的 <code>f</code> 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的<strong>左大括號</strong>，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。</p>
+<h2 id="replacement-field-qu-dai-lan-wei">Replacement field  取代欄位</h2><p>在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：</p>
+<pre class="line-numbers"><code class="language-python">myNumber = 5
+print(f&#x27;&#x27;&#x27;My number is a 
+{(lambda n: &quot;Lucky&quot; if n % 3 == 0 else &quot;Unlucky&quot;)(myNumber)} number.&#x27;&#x27;&#x27;)
+# My number is a 
+# Unlucky number.</code></pre>
+<p>需要注意的是：lambda 主體需要以 ( ) 小括號包住，否則會引起 SyntaxError 例外；這裡同時展現了 <em>f-string</em> 另一個特色：可以像我們平常使用字串時那樣以三個引號表達多行字串，同樣地，任何空白字元都會被包起來，成為字串的一部分。</p>
+<h2 id="xiao-wen-ti">小問題</h2><p>如果你寫了一行這樣的程式碼：</p>
+<pre><code class="language-python">print(f&#x27;&quot;{&quot; is a opening curly bracket.&#x27;)</code></pre>
+<p>會發現說引起了 SyntaxError 例外，為什麼呢？</p>
+<pre><code class="language-plaintext">  File &quot;&lt;stdin&gt;&quot;, line 1
+SyntaxError: f-string: unterminated string</code></pre>
+<p>應該很淺顯易懂，左大括號代表的是一個欄位的起點，所以上述的例子中，Python直譯器會找不到代表結束的右大括號。</p>
+<p>那如果字串中需要一個真正的左 / 右大括號呢？  可以使用 <code>{{</code> 或 <code>}}</code>，將兩個大括號連在一起：</p>
+<pre class="line-numbers"><code class="language-python">print(f&#x27;&quot;{{&quot; is a opening curly bracket.&#x27;)
+# &quot;{&quot; is a opening curly bracket.</code></pre>
+<h2 id="conversion-field-zhuan-huan-lan-wei">Conversion field  轉換欄位</h2><p>轉換欄位以 <code>!</code> 作為開始：</p>
+<pre class="line-numbers"><code class="language-python">import datetime
+print(f&#x27;The time now is {datetime.datetime.now()}.&#x27;)
+# The time now is 2017-01-24 22:48:13.117520.
+print(f&#x27;The time now is {datetime.datetime.now()!r}.&#x27;)
+# The time now is datetime.datetime(2017, 1, 24, 22, 48, 19, 414828).</code></pre>
+<p>轉換欄位的位置在於取代欄位中，要被轉換的表示式（變數）後面，共有 <code>!a</code>、<code>!r</code>、<code>!s</code> 三種轉換欄位。</p>
+<ol>
+<li><code>!a</code> 代表對整個取代結果使用 <code>ascii()</code> 函式</li>
+<li><code>!r</code> 則是 <code>repr()</code></li>
+<li><code>!s</code> 當然就是 <code>str()</code> 啦</li>
+</ol>
+<h2 id="chao-zhuang-lan-wei">巢狀欄位</h2><p>其實正式上來說也不算是巢狀欄位啦，就像 <code>string.format()</code> 方法一樣，你可以指定取代後的格式，例如說：</p>
+<pre class="line-numbers"><code class="language-python">from decimal import Decimal
+value = Decimal(&#x27;89.65432&#x27;)
+allWidth = 10
+precision = 3
+print(f&#x27;value:{value:{allWidth}.{precision}}&#x27;)
+# value:      89.7</code></pre>
+<p>如果是浮點數的話他會幫你四捨五入。</p>
+<h2 id="xiao-wen-ti-2">小問題－2</h2><p>在取代欄位中，不能有反斜線 <code>\</code>，就算用 r 包起來也一樣：</p>
+<pre class="line-numbers"><code class="language-python">print(f&quot;newline: {ord(&#x27;\n&#x27;)}&quot;)
+# SyntaxError: f-string expression part cannot include a backslash
+
+newline = ord(&#x27;\n&#x27;)
+print(f&quot;newline: {newline}&quot;)
+# newline: 10</code></pre>
 
   </section>
   
   
     <ul class="tags">
       <li>
-          <a href="/articles/tag/Ri-Chang-Duan-Tan/">
-            日常 - 短談
+          <a href="/articles/tag/Python/">
+            Python
           </a>
         </li>
       
@@ -138,7 +206,7 @@
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/blog-migration"; };
+  var disqus_config = function() { this.page.identifier = "/articles/f-string"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -155,18 +223,11 @@
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-02/f-string/">
-          <h3>[Python 3.6] 初探 f-string <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-02/post/">
-          <h3><i class="fas fa-chevron-left"></i> Hello world 你好</h3>
+        <a href="/articles/2021-02/blog-migration/">
+          <h3><i class="fas fa-chevron-left"></i> [短談] 部落格文章搬移計劃</h3>
         </a>
       </div>
     
