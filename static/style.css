@@ -1585,7 +1585,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content :not(pre) > code {
   border-radius: 3px;
-  padding: 0 0.4rem 0.1rem;
+  padding: 0.08rem 0.4rem 0.1rem;
   background-color: rgba(92, 68, 58, 0.1);
 }
 .postpage article .post-content hr {
@@ -1648,10 +1648,7 @@ aside nav > ul .collapsible-category ul a {
   .postpage article .post-content img {
     max-width: 60%;
   }
-  .postpage article .post-content pre code {
-    font-size: 1.1rem;
-  }
-  .postpage article .post-content code {
+  .postpage article .post-content code, .postpage article .post-content pre code, .postpage article .post-content .number-list {
     font-size: 1.1rem;
   }
   .postpage article .post-content hr {
@@ -1706,9 +1703,6 @@ aside nav > ul .collapsible-category ul a {
   }
   .postpage article .post-content blockquote {
     margin-left: 1.2rem;
-  }
-  .postpage article .post-content code {
-    font-size: 1.1rem;
   }
 }
 @media (max-width: 480px) {
@@ -1791,19 +1785,29 @@ aside nav > ul .collapsible-category ul a {
   position: relative;
 }
 .postpage article .post-content pre.line-numbers code {
-  counter-increment: linenumbers 1;
   padding-left: 4.2rem;
 }
-.postpage article .post-content pre.line-numbers code:before {
-  content: counter(linenumbers);
+.postpage article .post-content pre.line-numbers .number-list {
   position: absolute;
   left: 0;
-  display: inline-block;
-  width: 3.2rem;
-  padding-right: 0.8rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 4.1rem;
   border-right: 2px solid rgba(92, 68, 58, 0.2);
+  display: flex;
+  flex-flow: column;
+}
+.postpage article .post-content pre.line-numbers .number-list span {
+  padding-right: 0.8rem;
+  flex: 1;
+  min-height: 0;
+  counter-increment: linenumbers 1;
   text-align: right;
   letter-spacing: -0.5px;
+}
+.postpage article .post-content pre.line-numbers .number-list span:before {
+  content: counter(linenumbers);
+  font-family: "Ubuntu Mono", monospace;
 }
 
 .postpage .toc-wrapper {

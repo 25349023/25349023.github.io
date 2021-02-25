@@ -156,8 +156,8 @@ print(f&#x27;&#x27;&#x27;My number is a
 <h2 id="xiao-wen-ti">小問題</h2><p>如果你寫了一行這樣的程式碼：</p>
 <pre><code class="language-python">print(f&#x27;&quot;{&quot; is a opening curly bracket.&#x27;)</code></pre>
 <p>會發現說引起了 SyntaxError 例外，為什麼呢？</p>
-<pre><code class="language-plaintext">  File &quot;&lt;stdin&gt;&quot;, line 1
-SyntaxError: f-string: unterminated string</code></pre>
+<pre><code class="language-python">#   File &quot;&lt;stdin&gt;&quot;, line 1
+# SyntaxError: f-string: unterminated string</code></pre>
 <p>應該很淺顯易懂，左大括號代表的是一個欄位的起點，所以上述的例子中，Python直譯器會找不到代表結束的右大括號。</p>
 <p>那如果字串中需要一個真正的左 / 右大括號呢？  可以使用 <code>{{</code> 或 <code>}}</code>，將兩個大括號連在一起：</p>
 <pre class="line-numbers"><code class="language-python">print(f&#x27;&quot;{{&quot; is a opening curly bracket.&#x27;)
