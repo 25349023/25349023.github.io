@@ -5,7 +5,7 @@
   display: flex;
   flex-flow: column;
 
-  @include header-margin-bottom(1.2rem);
+  @include header-margin(1.2rem);
   @include paragraph-margin-bottom(1rem);
   @include list-margin-bottom(1rem);
 
@@ -18,7 +18,7 @@
     content: "\f1dd";
     position: absolute;
     left: -3rem;
-    bottom: 0.25rem;
+    top: 0.5rem;
     font-family: "Font Awesome 5 Free";
     font-size: 2rem;
     color: rgba($postpage-link-color, 0.7);
@@ -136,7 +136,7 @@
       color: rgba($postpage-quote-marker-color, 0.7);
     }
 
-    @include header-margin-bottom(0.8rem);
+    @include header-margin(0.8rem);
     @include paragraph-margin-bottom(0.8rem);
     @include header-style {
       color: $postpage-quote-header-color;
@@ -165,7 +165,7 @@
 
   :not(pre) > code {
     border-radius: 3px;
-    padding: 0.08rem 0.4rem 0.1rem;
+    padding: 0.08rem 0.4rem 0.15rem;
     background-color: rgba($postpage-ui-color, 0.1);
   }
 

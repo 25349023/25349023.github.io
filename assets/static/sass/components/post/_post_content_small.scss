@@ -2,7 +2,7 @@
   .postpage article .post-content {
     padding: 0 2rem 0 1.6rem;
 
-    @include header-margin-bottom(0.8rem);
+    @include header-margin(0.8rem);
     @include paragraph-margin-bottom(0.8rem);
     @include list-margin-bottom(0.8rem);
 
@@ -12,28 +12,28 @@
 
     > h1:before {
       left: -1.6rem;
-      bottom: 0.24rem;
+      top: 0.3rem;
       font-size: 1.2rem;
     }
 
     h2 {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
 
     h3 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
     h4 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     h5 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     h6 {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
 
     blockquote {

@@ -4,7 +4,7 @@
     line-height: 1.4;
     font-size: 1.2rem;
 
-    @include header-margin-bottom(1rem);
+    @include header-margin(1rem);
     @include paragraph-margin-bottom(0.9rem);
     @include list-margin-bottom(0.9rem);
 
@@ -14,7 +14,7 @@
 
     > h1:before {
       left: -1.8rem;
-      bottom: 0.3rem;
+      bottom: 0.4rem;
       font-size: 1.4rem;
     }
 

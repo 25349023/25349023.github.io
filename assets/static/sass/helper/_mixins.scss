@@ -61,9 +61,9 @@
   }
 }
 
-@mixin header-margin-bottom($size) {
+@mixin header-margin($size) {
   @include header-style {
-    margin: 0 0 $size 0;
+    margin: ($size * 0.6) 0 $size 0;
   }
 }
 
