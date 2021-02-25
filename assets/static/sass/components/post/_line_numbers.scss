@@ -4,21 +4,33 @@
   position: relative;
 
   code {
-    counter-increment: linenumbers 1;
     padding-left: 4.2rem;
+  }
 
-    &:before {
-      content: counter(linenumbers);
-      position: absolute;
-      left: 0;
+  .number-list {
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 4.1rem;
+    border-right: 2px solid rgba($postpage-ui-color, 0.2);
 
-      display: inline-block;
-      width: 3.2rem;
+    display: flex;
+    flex-flow: column;
+
+    span {
       padding-right: 0.8rem;
-      border-right: 2px solid rgba($postpage-ui-color, 0.2);
+      flex: 1;
+      min-height: 0;
 
+      counter-increment: linenumbers 1;
       text-align: right;
       letter-spacing: -0.5px;
+
+      &:before {
+        content: counter(linenumbers);
+        font-family: $mono-font;
+      }
     }
   }
 }

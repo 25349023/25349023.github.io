@@ -39,9 +39,9 @@ print(f'''My number is a
 print(f'"{" is a opening curly bracket.')
 ```
 會發現說引起了 SyntaxError 例外，為什麼呢？  
-```plaintext
-  File "<stdin>", line 1
-SyntaxError: f-string: unterminated string
+```python
+#   File "<stdin>", line 1
+# SyntaxError: f-string: unterminated string
 ```
 應該很淺顯易懂，左大括號代表的是一個欄位的起點，所以上述的例子中，Python直譯器會找不到代表結束的右大括號。
 
