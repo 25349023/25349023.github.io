@@ -32,6 +32,10 @@
     rel="stylesheet"
   />
   <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link
     rel="stylesheet"
     href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
     integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
@@ -42,9 +46,11 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-266M1NLNKL"></script>
   <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
           dataLayer.push(arguments);
       }
+
       gtag('js', new Date());
 
       gtag('config', 'G-266M1NLNKL');
@@ -152,7 +158,7 @@ print(f&#x27;&#x27;&#x27;My number is a
 {(lambda n: &quot;Lucky&quot; if n % 3 == 0 else &quot;Unlucky&quot;)(myNumber)} number.&#x27;&#x27;&#x27;)
 # My number is a 
 # Unlucky number.</code></pre>
-<p>需要注意的是：lambda 主體需要以 ( ) 小括號包住，否則會引起 SyntaxError 例外；這裡同時展現了 <em>f-string</em> 另一個特色：可以像我們平常使用字串時那樣以三個引號表達多行字串，同樣地，任何空白字元都會被包起來，成為字串的一部分。</p>
+<p>需要注意的是：lambda 主體需要以 <code>()</code> 小括號包住，否則會引起 SyntaxError 例外；這裡同時展現了 <em>f-string</em> 另一個特色：可以像我們平常使用字串時那樣以三個引號表達多行字串，同樣地，任何空白字元都會被包起來，成為字串的一部分。</p>
 <h2 id="xiao-wen-ti">小問題</h2><p>如果你寫了一行這樣的程式碼：</p>
 <pre><code class="language-python">print(f&#x27;&quot;{&quot; is a opening curly bracket.&#x27;)</code></pre>
 <p>會發現說引起了 SyntaxError 例外，為什麼呢？</p>

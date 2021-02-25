@@ -1435,7 +1435,7 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content h4,
 .postpage article .post-content h5,
 .postpage article .post-content h6 {
-  margin: 0 0 1.2rem 0;
+  margin: 0.72rem 0 1.2rem 0;
 }
 .postpage article .post-content p,
 .postpage article .post-content pre,
@@ -1456,7 +1456,7 @@ aside nav > ul .collapsible-category ul a {
   content: "";
   position: absolute;
   left: -3rem;
-  bottom: 0.25rem;
+  top: 0.5rem;
   font-family: "Font Awesome 5 Free";
   font-size: 2rem;
   color: rgba(27, 177, 89, 0.7);
@@ -1552,7 +1552,7 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content blockquote h4,
 .postpage article .post-content blockquote h5,
 .postpage article .post-content blockquote h6 {
-  margin: 0 0 0.8rem 0;
+  margin: 0.48rem 0 0.8rem 0;
 }
 .postpage article .post-content blockquote p,
 .postpage article .post-content blockquote pre,
@@ -1585,7 +1585,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content :not(pre) > code {
   border-radius: 3px;
-  padding: 0.08rem 0.4rem 0.1rem;
+  padding: 0.08rem 0.4rem 0.15rem;
   background-color: rgba(92, 68, 58, 0.1);
 }
 .postpage article .post-content hr {
@@ -1609,7 +1609,7 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content h4,
 .postpage article .post-content h5,
 .postpage article .post-content h6 {
-    margin: 0 0 1rem 0;
+    margin: 0.6rem 0 1rem 0;
   }
   .postpage article .post-content p,
 .postpage article .post-content pre,
@@ -1627,7 +1627,7 @@ aside nav > ul .collapsible-category ul a {
   }
   .postpage article .post-content > h1:before {
     left: -1.8rem;
-    bottom: 0.3rem;
+    bottom: 0.4rem;
     font-size: 1.4rem;
   }
   .postpage article .post-content h2 {
@@ -1665,7 +1665,7 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content h4,
 .postpage article .post-content h5,
 .postpage article .post-content h6 {
-    margin: 0 0 0.8rem 0;
+    margin: 0.48rem 0 0.8rem 0;
   }
   .postpage article .post-content p,
 .postpage article .post-content pre,
@@ -1683,23 +1683,23 @@ aside nav > ul .collapsible-category ul a {
   }
   .postpage article .post-content > h1:before {
     left: -1.6rem;
-    bottom: 0.24rem;
+    top: 0.3rem;
     font-size: 1.2rem;
   }
   .postpage article .post-content h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .postpage article .post-content h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .postpage article .post-content h4 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   .postpage article .post-content h5 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   .postpage article .post-content h6 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .postpage article .post-content blockquote {
     margin-left: 1.2rem;
@@ -1725,7 +1725,7 @@ aside nav > ul .collapsible-category ul a {
   }
   .postpage article .post-content > h1:before {
     left: -1.4rem;
-    bottom: 0.15rem;
+    top: 0.25rem;
     font-size: 1.1rem;
   }
   .postpage article .post-content h2 {
