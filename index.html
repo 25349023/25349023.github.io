@@ -106,6 +106,26 @@
         </div>
         
           
+  <a href="/articles/2021-02/c-str-0/" class="card">
+    <h3>[C] 每天來點字串用法（基本篇）</h3>
+    <p class="preview">
+      有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）
+不，你不行。（2021 的我）
+字串的基本使用首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：
+char s1[128] = &amp;quot;hello world&amp;quot;;
+char s2[] = &amp;quot;hello world&amp;quot;;
+另外，許多函式都會使用字元指標來操作字串：
+char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
+而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
+char *s4 = &amp;quot;hello world&amp;quot;;
+像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
+接著讓我們看看字串的輸出：
+char s1[128] = &amp;quot;hello...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-02/f-string/" class="card">
     <h3>[Python 3.6] 初探 f-string</h3>
     <p class="preview">
@@ -154,17 +174,6 @@ Grutatext, and EtText -- the...
         
         
         
-  
-    
-      
-  <a class="card">
-    <h3>Empty</h3>
-    <p class="preview">
-      There is no other post yet.
-    </p>
-  </a>
-
-    
   
 
         <a href="/articles/" class="card">
@@ -211,6 +220,26 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
 
         
           
+  <a href="/articles/2021-02/c-str-0/" class="card">
+    <h3>[C] 每天來點字串用法（基本篇）</h3>
+    <p class="preview">
+      有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）
+不，你不行。（2021 的我）
+字串的基本使用首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：
+char s1[128] = &amp;quot;hello world&amp;quot;;
+char s2[] = &amp;quot;hello world&amp;quot;;
+另外，許多函式都會使用字元指標來操作字串：
+char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
+而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
+char *s4 = &amp;quot;hello world&amp;quot;;
+像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
+接著讓我們看看字串的輸出：
+char s1[128] = &amp;quot;hello...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-02/post/" class="card">
     <h3>Hello world 你好</h3>
     <p class="preview">
@@ -226,17 +255,6 @@ Grutatext, and EtText -- the...
 
         
         
-  
-    
-      
-  <a class="card">
-    <h3>Empty</h3>
-    <p class="preview">
-      There is no other post yet.
-    </p>
-  </a>
-
-    
   
 
         <a href="/articles/" class="card">

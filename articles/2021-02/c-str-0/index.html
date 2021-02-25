@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[Python 3.6] 初探 f-string - skyblog</title>
+  <title>[C] 每天來點字串用法（基本篇） - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -104,26 +104,14 @@
     <ul class="toc">
       
         
-          <li><a href="#pep-498-formatted-string-literals">PEP 498: Formatted string literals</a>
+          <li><a href="#zi-chuan-de-ji-ben-shi-yong">字串的基本使用</a>
             <ul>
         
-          <li><a href="#replacement-field-qu-dai-lan-wei">Replacement field  取代欄位</a></li>
+          <li><a href="#guan-yu-0-zi-yuan">關於 <code>'\0'</code> 字元</a></li>
         
       
         
-          <li><a href="#xiao-wen-ti">小問題</a></li>
-        
-      
-        
-          <li><a href="#conversion-field-zhuan-huan-lan-wei">Conversion field  轉換欄位</a></li>
-        
-      
-        
-          <li><a href="#chao-zhuang-lan-wei">巢狀欄位</a></li>
-        
-      
-        
-          <li><a href="#xiao-wen-ti-2">小問題－2</a></li>
+          <li><a href="#shu-ru-zi-yuan-zhen-lie">輸入字元陣列</a></li>
         
       </ul></li>
         
@@ -136,73 +124,73 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[Python 3.6] 初探 f-string</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法（基本篇）</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 02 - 23
+        <i class="fas fa-at"></i> 2021 - 02 - 25
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>第一篇技術文章就決定是你了（笑）</p>
-<h1 id="pep-498-formatted-string-literals">PEP 498: Formatted string literals</h1><p>Formatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 <em>f-string</em>，讓我們來看看要怎麼使用吧：</p>
-<pre class="line-numbers"><code class="language-python">name = &#x27;Sky&#x27;
-print(f&#x27;My name is {name}.&#x27;)
-# &#x27;My name is Sky.&#x27;</code></pre>
-<p>有看到單引號前的 <code>f</code> 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的<strong>左大括號</strong>，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。</p>
-<h2 id="replacement-field-qu-dai-lan-wei">Replacement field  取代欄位</h2><p>在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：</p>
-<pre class="line-numbers"><code class="language-python">myNumber = 5
-print(f&#x27;&#x27;&#x27;My number is a 
-{(lambda n: &quot;Lucky&quot; if n % 3 == 0 else &quot;Unlucky&quot;)(myNumber)} number.&#x27;&#x27;&#x27;)
-# My number is a 
-# Unlucky number.</code></pre>
-<p>需要注意的是：lambda 主體需要以 <code>()</code> 小括號包住，否則會引起 SyntaxError 例外；這裡同時展現了 <em>f-string</em> 另一個特色：可以像我們平常使用字串時那樣以三個引號表達多行字串，同樣地，任何空白字元都會被包起來，成為字串的一部分。</p>
-<h2 id="xiao-wen-ti">小問題</h2><p>如果你寫了一行這樣的程式碼：</p>
-<pre><code class="language-python">print(f&#x27;&quot;{&quot; is a opening curly bracket.&#x27;)</code></pre>
-<p>會發現說引起了 SyntaxError 例外，為什麼呢？</p>
-<pre><code class="language-python">#   File &quot;&lt;stdin&gt;&quot;, line 1
-# SyntaxError: f-string: unterminated string</code></pre>
-<p>應該很淺顯易懂，左大括號代表的是一個欄位的起點，所以上述的例子中，Python直譯器會找不到代表結束的右大括號。</p>
-<p>那如果字串中需要一個真正的左 / 右大括號呢？  可以使用 <code>{{</code> 或 <code>}}</code>，將兩個大括號連在一起：</p>
-<pre class="line-numbers"><code class="language-python">print(f&#x27;&quot;{{&quot; is a opening curly bracket.&#x27;)
-# &quot;{&quot; is a opening curly bracket.</code></pre>
-<h2 id="conversion-field-zhuan-huan-lan-wei">Conversion field  轉換欄位</h2><p>轉換欄位以 <code>!</code> 作為開始：</p>
-<pre class="line-numbers"><code class="language-python">import datetime
-print(f&#x27;The time now is {datetime.datetime.now()}.&#x27;)
-# The time now is 2017-01-24 22:48:13.117520.
-print(f&#x27;The time now is {datetime.datetime.now()!r}.&#x27;)
-# The time now is datetime.datetime(2017, 1, 24, 22, 48, 19, 414828).</code></pre>
-<p>轉換欄位的位置在於取代欄位中，要被轉換的表示式（變數）後面，共有 <code>!a</code>、<code>!r</code>、<code>!s</code> 三種轉換欄位。</p>
-<ol>
-<li><code>!a</code> 代表對整個取代結果使用 <code>ascii()</code> 函式</li>
-<li><code>!r</code> 則是 <code>repr()</code></li>
-<li><code>!s</code> 當然就是 <code>str()</code> 啦</li>
-</ol>
-<h2 id="chao-zhuang-lan-wei">巢狀欄位</h2><p>其實正式上來說也不算是巢狀欄位啦，就像 <code>string.format()</code> 方法一樣，你可以指定取代後的格式，例如說：</p>
-<pre class="line-numbers"><code class="language-python">from decimal import Decimal
-value = Decimal(&#x27;89.65432&#x27;)
-allWidth = 10
-precision = 3
-print(f&#x27;value:{value:{allWidth}.{precision}}&#x27;)
-# value:      89.7</code></pre>
-<p>如果是浮點數的話他會幫你四捨五入。</p>
-<h2 id="xiao-wen-ti-2">小問題－2</h2><p>在取代欄位中，不能有反斜線 <code>\</code>，就算用 r 包起來也一樣：</p>
-<pre class="line-numbers"><code class="language-python">print(f&quot;newline: {ord(&#x27;\n&#x27;)}&quot;)
-# SyntaxError: f-string expression part cannot include a backslash
+    <p>有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）<br>
+<del>不，你不行。（2021 的我）</del></p>
+<h1 id="zi-chuan-de-ji-ben-shi-yong">字串的基本使用</h1><p>首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：</p>
+<pre><code class="language-c">char s1[128] = &quot;hello world&quot;;
+char s2[] = &quot;hello world&quot;;</code></pre>
+<p>另外，許多函式都會使用字元指標來操作字串：</p>
+<pre><code class="language-c">char *s3 = s1;  // 相當於 char *s3 = &amp;s1[0]</code></pre>
+<p>而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：</p>
+<pre><code class="language-c">char *s4 = &quot;hello world&quot;;</code></pre>
+<p>像 s4 這種情況，是由編譯器在<strong>唯讀</strong>記憶體中放入 <code>"hello world"</code> 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。</p>
+<p>接著讓我們看看字串的輸出：</p>
+<pre class="line-numbers"><code class="language-c">char s1[128] = &quot;hello world&quot;;
+printf(&quot;%s\n&quot;, s1);  // hello world
 
-newline = ord(&#x27;\n&#x27;)
-print(f&quot;newline: {newline}&quot;)
-# newline: 10</code></pre>
+char s2[] = &quot;hello world&quot;;
+printf(&quot;%s\n&quot;, s2);  // hello world
+
+char *s3 = s1;
+printf(&quot;%s\n&quot;, s3);  // hello world
+
+char *s4 = &quot;hello world&quot;;
+printf(&quot;%s\n&quot;, s4);  // hello world</code></pre>
+<h2 id="guan-yu-0-zi-yuan">關於 <code>'\0'</code> 字元</h2><p>說到 C 的字串，絕對不能不提到 <code>\0</code> 這個字元，不要看它有兩個字（<code>\</code> 和 <code>0</code>），其實它是一個單一的字元，就像換行字元 <code>\n</code> 一樣。</p>
+<p>他的功用是：<strong>標記出字串的結束</strong>。看到我們上面輸出中的 s1 字串，我們明明就宣告了 128 個空間，但為什麼輸出結果只有 11 個字元？剩下的去哪了呢？正是被 <code>\0</code> 擋掉了。<code>\0</code> 明確的告訴程式：在我後面的都是垃圾，不要用，因此我們才能正確的輸出。</p>
+<p>但是，我們在初始化的時候並沒有把 <code>\0</code> 寫出來啊？其實是編譯器會幫我們在字串結尾補上 <code>\0</code>，所以基本上我們不用擔心忘記加上 <code>\0</code> 就會世界毀滅之類的（並不會。  另外，<code>\0</code> 的 ASCII 值正好是 0。</p>
+<p>我們可以利用 sizeof 來驗證 '\0' 的存在：</p>
+<pre><code class="language-c">char str[] = &quot;hello world&quot;;
+printf(&quot;%d\n&quot;, sizeof str);  // 12</code></pre>
+<p>可以看到，str 本身只有 11 個字元，但是佔用的空間是 12 個 byte，證實了有一個看不到的字元被放入了 str。</p>
+<h2 id="shu-ru-zi-yuan-zhen-lie">輸入字元陣列</h2><p>如果要輸入字串的話，有以下幾種方法：</p>
+<pre class="line-numbers"><code class="language-c">char s1[48];
+scanf(&quot;%s&quot;, s1);
+printf(&quot;%s\n&quot;, s1);
+
+char s2[48];
+char *s3 = s2;  // 相當於 s3 = &amp;s2[0];
+scanf(&quot;%s&quot;, s3);
+printf(&quot;%s\n&quot;, s3);</code></pre>
+<p>這裡要注意的有幾點：首先是輸入只有兩種選擇，至於為什麼，多看一下應該很容易理解；另外就是在對字串使用 <code>scanf()</code> 時，後面的引數不用加 <code>&amp;</code>，原因是：</p>
+<ol>
+<li>s1 代表 s1[0] 的位址</li>
+<li>因為 s3 指向 s2[0]，所以 s3 本身儲存了 s2[0] 的位址</li>
+</ol>
+<p>最後要注意的是：<code>scanf()</code> 讀字串時遇到空格就會斷開，而如果有剩下的部分，會被留在緩衝區裡等待下一次的 <code>scanf()</code>。另外，<code>scanf()</code> 也會在讀入的字串後補上 <code>\0</code>。</p>
+<p>如果想要連同空格一起吃入字串的話，可以這麼寫：</p>
+<pre class="line-numbers"><code class="language-c">char str[128];
+fgets(str, 128, stdin);</code></pre>
+<p>上述範例中的 <code>fgets()</code> 原本是要從檔案指標中讀取一行字串時使用的函式，一行指的是遇到 <code>\n</code> 或 EOF，讀取完後，會將 <code>\n</code>（如果有遇到）和 <code>\0</code> 放入字串尾。</p>
+<p>把 str 傳入第一個參數，就能把讀取結果存入 str 內，這裡在它的第三個參數傳入了 <code>stdin</code>，這是標準輸入（通常是鍵盤）的指標，讓我們可以獲取鍵盤輸入的資料。而第二個參數控制的是讀取進來的字元數（包含 <code>\0</code>），不能超過這個值。</p>
 
   </section>
   
   
     <ul class="tags">
       <li>
-          <a href="/articles/tag/Python/">
-            Python
+          <a href="/articles/tag/C-Zi-Chuan/">
+            C - 字串
           </a>
         </li>
       
@@ -212,7 +200,7 @@ print(f&quot;newline: {newline}&quot;)
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/f-string"; };
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-0"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -229,18 +217,11 @@ print(f&quot;newline: {newline}&quot;)
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-02/c-str-0/">
-          <h3>[C] 每天來點字串用法（基本篇） <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-02/blog-migration/">
-          <h3><i class="fas fa-chevron-left"></i> [短談] 部落格文章搬移計劃</h3>
+        <a href="/articles/2021-02/f-string/">
+          <h3><i class="fas fa-chevron-left"></i> [Python 3.6] 初探 f-string</h3>
         </a>
       </div>
     
