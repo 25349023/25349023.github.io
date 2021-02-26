@@ -106,6 +106,31 @@
         </div>
         
           
+  <a href="/articles/2021-02/c-str-1/" class="card">
+    <h3>[C] 每天來點字串用法 (1) － strlen</h3>
+    <p class="preview">
+      第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。
+strlen：字串長度所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+size_t strlen( const char *str );
+傳入一個字串 str，回傳這個字串的長度，而 \0 不計入長度（但 \n 計入）。其中的回傳值型態 size_t 通常是無號整數型別。
+以下這個程式示範了 strlen() 的用法：
+#include &amp;lt;stdio.h&amp;gt;
+
+int main(){
+    char s1[16], s2[16];
+    char *s3 = s2;
+    char s4[] = &amp;quot;happy new year\n&amp;quot;;
+    scanf(&amp;quot;%s&amp;quot;, s1);
+    printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
+    scanf(&amp;quot;%s&amp;quot;, s3);
+    printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
+   ...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-02/c-str-0/" class="card">
     <h3>[C] 每天來點字串用法（基本篇）</h3>
     <p class="preview">
@@ -153,21 +178,6 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
 我原本以為 Lektor 應該不會太難，但還是有不少小地方需要注意。
 不過今年可能會比以往還忙，所以還不知道會不會正常更新（藉口）。或許我可以在等 model train 好的過程中來寫個文章，不然每次都呆呆地盯著他跑也是很浪費時間。
 好了，廢話講太多了，這次就這樣吧XD
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-02/post/" class="card">
-    <h3>Hello world 你好</h3>
-    <p class="preview">
-      這是個用來測試的文章。Markdown: SyntaxOverviewPhilosophyMarkdown is intended to be as easy-to-read and easy-to-write as is feasible.
-Readability, however, is emphasized above all else. A Markdown-formatted
-document should be publishable as-is, as plain text, without looking
-like it&#39;s been marked up with tags or formatting instructions. While
-Markdown&#39;s syntax has been influenced by several existing text-to-HTML
-filters -- including Setext, atx, Textile, reStructuredText,
-Grutatext, and EtText -- the...
     </p>
   </a>
 
@@ -220,6 +230,31 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
 
         
           
+  <a href="/articles/2021-02/c-str-1/" class="card">
+    <h3>[C] 每天來點字串用法 (1) － strlen</h3>
+    <p class="preview">
+      第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。
+strlen：字串長度所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+size_t strlen( const char *str );
+傳入一個字串 str，回傳這個字串的長度，而 \0 不計入長度（但 \n 計入）。其中的回傳值型態 size_t 通常是無號整數型別。
+以下這個程式示範了 strlen() 的用法：
+#include &amp;lt;stdio.h&amp;gt;
+
+int main(){
+    char s1[16], s2[16];
+    char *s3 = s2;
+    char s4[] = &amp;quot;happy new year\n&amp;quot;;
+    scanf(&amp;quot;%s&amp;quot;, s1);
+    printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
+    scanf(&amp;quot;%s&amp;quot;, s3);
+    printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
+   ...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-02/c-str-0/" class="card">
     <h3>[C] 每天來點字串用法（基本篇）</h3>
     <p class="preview">
@@ -235,21 +270,6 @@ char *s4 = &amp;quot;hello world&amp;quot;;
 像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
 接著讓我們看看字串的輸出：
 char s1[128] = &amp;quot;hello...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-02/post/" class="card">
-    <h3>Hello world 你好</h3>
-    <p class="preview">
-      這是個用來測試的文章。Markdown: SyntaxOverviewPhilosophyMarkdown is intended to be as easy-to-read and easy-to-write as is feasible.
-Readability, however, is emphasized above all else. A Markdown-formatted
-document should be publishable as-is, as plain text, without looking
-like it&#39;s been marked up with tags or formatting instructions. While
-Markdown&#39;s syntax has been influenced by several existing text-to-HTML
-filters -- including Setext, atx, Textile, reStructuredText,
-Grutatext, and EtText -- the...
     </p>
   </a>
 
