@@ -1,0 +1,50 @@
+title: [C] 每天來點字串用法 (1) － strlen
+---
+author: Sky
+---
+body:
+
+第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。
+
+# `strlen`：字串長度
+
+所屬標頭檔：`<string.h>`  
+函式宣告：
+```c
+size_t strlen( const char *str );
+```
+傳入一個字串 str，回傳這個字串的長度，而 `\0` 不計入長度（但 `\n` 計入）。其中的回傳值型態 `size_t` 通常是無號整數型別。
+
+以下這個程式示範了 `strlen()` 的用法：
+
+```c,=
+#include <stdio.h>
+
+int main(){
+    char s1[16], s2[16];
+    char *s3 = s2;
+    char s4[] = "happy new year\n";
+    scanf("%s", s1);
+    printf("s1: %d\n", strlen(s1));
+    scanf("%s", s3);
+    printf("s3: %d\n", strlen(s3));
+    printf("s4: %d\n", strlen(s4));
+
+    return 0;
+}
+```
+藉由 s4 可以得知，空格和換行字元都計入長度。
+
+之後應該每兩天（說好的每天呢）會更新一篇文章，而每五篇我會把它統合在一篇內，以免我的部落格太雜亂。
+
+
+參考資料：
+1. [cppreference - strlen](https://en.cppreference.com/w/c/string/byte/strlen)
+2. 我的腦袋
+
+---
+pub_date: 2021-02-26
+---
+tags: C - 字串
+---
+popular: 30
