@@ -106,6 +106,35 @@
         </div>
         
           
+  <a href="/articles/2021-03/c-str-2/" class="card">
+    <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
+    <p class="preview">
+      結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
+進入正文吧，今天要介紹的是：
+strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strcpy( char *dest, const char *src );
+char *strncpy( char *dest, const char *src, size_t count );
+先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
+
+第一個參數是目的地（dest），第二個是來源（src）
+會有緩衝區溢位（buffer overflow）的問題
+
+來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
+int i = 5;
+char s[8] = &amp;quot;Hi 1234&amp;quot;;
+那麼這些變數的記憶體配置可能如下：
+
+如果今天我們進行了如下操作：
+strcpy(s, &amp;quot;hello sky&amp;quot;);
+那麼記憶體裡的內容就會變成如下：
+
+於是這時 i...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-02/c-str-1/" class="card">
     <h3>[C] 每天來點字串用法 (1) － strlen</h3>
     <p class="preview">
@@ -164,20 +193,6 @@ Replacement field  取代欄位在這個欄位中，基本上可以放入任何 
 myNumber = 5
 print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
 {(lambda n:...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-02/blog-migration/" class="card">
-    <h3>[短談] 部落格文章搬移計劃</h3>
-    <p class="preview">
-      過了一個寒假，我的新部落格終於完成啦～
-接下來我會慢慢地把原本部落格（天上的東東w）上的文章搬過來這裡，主要的目標是一些技術性的文章或翻譯，一些日常閒聊的就看我心情了（笑）。
-另外，我預計（又挖了一個坑）會有新的一兩篇文在寫這個部落格是怎麼建立的，主軸是如何使用 Lektor 來建立靜態網站，外加一些沒人想聽的心路歷程。
-我原本以為 Lektor 應該不會太難，但還是有不少小地方需要注意。
-不過今年可能會比以往還忙，所以還不知道會不會正常更新（藉口）。或許我可以在等 model train 好的過程中來寫個文章，不然每次都呆呆地盯著他跑也是很浪費時間。
-好了，廢話講太多了，這次就這樣吧XD
     </p>
   </a>
 
@@ -230,6 +245,35 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
 
         
           
+  <a href="/articles/2021-03/c-str-2/" class="card">
+    <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
+    <p class="preview">
+      結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
+進入正文吧，今天要介紹的是：
+strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strcpy( char *dest, const char *src );
+char *strncpy( char *dest, const char *src, size_t count );
+先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
+
+第一個參數是目的地（dest），第二個是來源（src）
+會有緩衝區溢位（buffer overflow）的問題
+
+來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
+int i = 5;
+char s[8] = &amp;quot;Hi 1234&amp;quot;;
+那麼這些變數的記憶體配置可能如下：
+
+如果今天我們進行了如下操作：
+strcpy(s, &amp;quot;hello sky&amp;quot;);
+那麼記憶體裡的內容就會變成如下：
+
+於是這時 i...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-02/c-str-1/" class="card">
     <h3>[C] 每天來點字串用法 (1) － strlen</h3>
     <p class="preview">
@@ -250,26 +294,6 @@ int main(){
     scanf(&amp;quot;%s&amp;quot;, s3);
     printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
    ...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-02/c-str-0/" class="card">
-    <h3>[C] 每天來點字串用法（基本篇）</h3>
-    <p class="preview">
-      有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）
-不，你不行。（2021 的我）
-字串的基本使用首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：
-char s1[128] = &amp;quot;hello world&amp;quot;;
-char s2[] = &amp;quot;hello world&amp;quot;;
-另外，許多函式都會使用字元指標來操作字串：
-char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
-而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
-char *s4 = &amp;quot;hello world&amp;quot;;
-像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
-接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello...
     </p>
   </a>
 

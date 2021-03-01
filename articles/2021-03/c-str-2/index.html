@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C] 每天來點字串用法 (1) － strlen - skyblog</title>
+  <title>[C] 每天來點字串用法 (2) － strcpy、strncpy - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -104,7 +104,21 @@
     <ul class="toc">
       
         
-          <li><a href="#strlen-zi-chuan-chang-du"><code>strlen</code>：字串長度</a></li>
+          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
+            <ul>
+        
+          <li><a href="#undefined-behavior">Undefined Behavior</a>
+            <ul>
+        
+          <li><a href="#strcpy"><code>strcpy</code></a></li>
+        
+      
+        
+          <li><a href="#strncpy"><code>strncpy</code></a></li>
+        
+      </ul></li>
+        
+      </ul></li>
         
       
     </ul>
@@ -115,42 +129,89 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (1) － strlen</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (2) － strcpy、strncpy</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 02 - 26
+        <i class="fas fa-at"></i> 2021 - 03 - 01
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。</p>
-<h1 id="strlen-zi-chuan-chang-du"><code>strlen</code>：字串長度</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+    <p>結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）<br>
+進入正文吧，今天要介紹的是：</p>
+<h1 id="strcpy-strncpy-zi-chuan-fu-zhi"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
-<pre><code class="language-c">size_t strlen( const char *str );</code></pre>
-<p>傳入一個字串 str，回傳這個字串的長度，而 <code>\0</code> 不計入長度（但 <code>\n</code> 計入）。其中的回傳值型態 <code>size_t</code> 通常是無號整數型別。</p>
-<p>以下這個程式示範了 <code>strlen()</code> 的用法：</p>
+<pre><code class="language-c">char *strcpy( char *dest, const char *src );
+char *strncpy( char *dest, const char *src, size_t count );</code></pre>
+<p>先說 <code>strcpy()</code>，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：</p>
+<ol>
+<li>第一個參數是目的地（dest），第二個是來源（src）</li>
+<li>會有<strong>緩衝區溢位</strong>（buffer overflow）的問題</li>
+</ol>
+<p>來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：</p>
+<pre><code class="language-c">int i = 5;
+char s[8] = &quot;Hi 1234&quot;;</code></pre>
+<p>那麼這些變數的記憶體配置可能如下：</p>
+<p><img src="/articles/2021-03/c-str-2/cstr-1.png" alt="string memory allocation"></p>
+<p>如果今天我們進行了如下操作：</p>
+<pre><code class="language-c">strcpy(s, &quot;hello sky&quot;);</code></pre>
+<p>那麼記憶體裡的內容就會變成如下：</p>
+<p><img src="/articles/2021-03/c-str-2/cstr-2.png" alt="buffer overflow"></p>
+<p>於是這時 i 的值就會變成 121，我們可以用以下程式來驗證：</p>
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
 
-int main(){
-    char s1[16], s2[16];
-    char *s3 = s2;
-    char s4[] = &quot;happy new year\n&quot;;
-    scanf(&quot;%s&quot;, s1);
-    printf(&quot;s1: %d\n&quot;, strlen(s1));
-    scanf(&quot;%s&quot;, s3);
-    printf(&quot;s3: %d\n&quot;, strlen(s3));
-    printf(&quot;s4: %d\n&quot;, strlen(s4));
+int main(void){
+    int i = 5;
+    char s[8] = &quot;Hi 1234&quot;;
+    printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);  // i: 0028ff1c, s: 0028ff14
+    strcpy(s, &quot;hello sky&quot;);
+    printf(&quot;value of s: %s\nvalue of i: %d\n&quot;, s, i);  // s: hello sky, : 121
 
     return 0;
 }</code></pre>
-<p>藉由 s4 可以得知，空格和換行字元都計入長度。</p>
-<p>之後應該每兩天（說好的每天呢）會更新一篇文章，而每五篇我會把它統合在一篇內，以免我的部落格太雜亂。</p>
+<p>為了解決這樣的問題，我們可以改用 <code>strncpy()</code>，他比 <code>strcpy()</code> 多了一個參數：count，用來控制最多複製幾個字元，而它一樣會回傳 dest 指向的字串。這裡也有些地方要注意：</p>
+<ol>
+<li>如果 src 字元數（含 <code>\0</code>）比 count 少，會把剩下未滿 count 的部分通通補上 <code>\0</code></li>
+<li>如果 src 字元數（含 <code>\0</code>）比 count 多，他<strong>不會</strong>幫你補 <code>\0</code>，而是要自己補</li>
+</ol>
+<p><code>strncpy()</code> 的使用可參考以下範例：</p>
+<pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(void){
+    int i = 67;  // ASCII 的 &#x27;C&#x27;
+    char s[8] = &quot;Hi 1234&quot;;
+    printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);
+    strncpy(s, &quot;hello sky&quot;, 8);
+    printf(&quot;(1) value of s: %s\nvalue of i: %d\n&quot;, s, i);  // s: hello skC, i: 67
+    s[7] = &#x27;\0&#x27;;  // 自己補 &#x27;\0&#x27;
+    printf(&quot;(2) value of s: %s\n&quot;, s);  //  s: hello s
+
+    return 0;
+}</code></pre>
+<h2 id="undefined-behavior">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
+<h3 id="strcpy"><code>strcpy</code></h3><ol>
+<li>緩衝區溢位（其實是 dest 不夠長）</li>
+<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
+<li>如果 dest 指到的不是一個字元陣列</li>
+<li>如果 src 指向的字串沒有以 <code>\0</code> 結尾</li>
+</ol>
+<h3 id="strncpy"><code>strncpy</code></h3><ol>
+<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
+<li>如果 dest 或 src 其中一個不是指向一個字串</li>
+<li>如果 dest 不夠長（比 count 短）</li>
+<li>如果 src 比 count 短而且 src 沒有以 <code>\0</code> 結尾</li>
+</ol>
+<div class="admonition admonition-note"><p>其實這個部分在 C99 已受到限制：宣告中新增了 restrict 關鍵字，關於這個關鍵字有興趣的人可以自己查查看</p></div><p><del>天啊不是我在說，blogger 首頁的文章預覽圖也太醜了吧 qq，而且是發佈後才知道</del><br>
+（新網站就沒這個問題ㄌ）</p>
 <p>參考資料：</p>
 <ol>
-<li><a href="https://en.cppreference.com/w/c/string/byte/strlen">cppreference - strlen</a></li>
-<li>我的腦袋</li>
+<li><a href="http://en.cppreference.com/w/c/string/byte/strcpy">cppreference - strcpy</a></li>
+<li><a href="http://en.cppreference.com/w/c/string/byte/strncpy">cppreference - strncpy</a></li>
+<li>我休息了 4 天的腦袋</li>
 </ol>
 
   </section>
@@ -169,7 +230,7 @@ int main(){
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/c-str-1"; };
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-2"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -186,18 +247,11 @@ int main(){
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-03/c-str-2/">
-          <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-02/c-str-0/">
-          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法（基本篇）</h3>
+        <a href="/articles/2021-02/c-str-1/">
+          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法 (1) － strlen</h3>
         </a>
       </div>
     
