@@ -1492,11 +1492,11 @@ aside nav > ul .collapsible-category ul a {
   margin-bottom: 1rem;
   align-self: center;
 }
-.postpage article .post-content ul li {
+.postpage article .post-content ul > li {
   list-style-type: none;
   position: relative;
 }
-.postpage article .post-content ul li:before {
+.postpage article .post-content ul > li:before {
   content: "";
   position: absolute;
   left: -1.8rem;
@@ -1506,7 +1506,7 @@ aside nav > ul .collapsible-category ul a {
   color: rgba(92, 68, 58, 0.8);
   transform: scaleX(0.75);
 }
-.postpage article .post-content ol li::marker {
+.postpage article .post-content ol > li::marker {
   font-weight: bold;
   color: rgba(92, 68, 58, 0.8);
 }
@@ -1540,10 +1540,10 @@ aside nav > ul .collapsible-category ul a {
   font-weight: 900;
   color: rgba(27, 177, 89, 0.7);
 }
-.postpage article .post-content blockquote ul li:before {
+.postpage article .post-content blockquote ul > li:before {
   color: rgba(59, 128, 43, 0.7);
 }
-.postpage article .post-content blockquote ol li::marker {
+.postpage article .post-content blockquote ol > li::marker {
   color: rgba(59, 128, 43, 0.7);
 }
 .postpage article .post-content blockquote h1,
@@ -1595,6 +1595,10 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content del {
   color: rgba(92, 68, 58, 0.6);
+}
+.postpage article .post-content .fa-sticky-note {
+  color: rgba(3, 44, 83, 0.5);
+  font-size: 1rem;
 }
 
 @media (max-width: 824px) {
@@ -1869,9 +1873,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage .toc > li > a:before {
   content: "";
-  position: absolute;
-  left: -1.3rem;
-  top: 0;
+  margin-right: 0.4rem;
   font-family: "Font Awesome 5 Free";
   font-size: 1rem;
   color: rgba(27, 177, 89, 0.7);
@@ -2293,7 +2295,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage main article .info {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   padding-bottom: 0.2rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid rgba(92, 68, 58, 0.2);
@@ -2307,6 +2309,7 @@ aside nav > ul .collapsible-category ul a {
 @media (max-width: 824px) {
   .postpage main article .info {
     flex-flow: column;
+    align-items: flex-start;
     margin-bottom: 1rem;
   }
 }
@@ -2353,9 +2356,10 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 .postpage main article .meta-data {
-  margin-left: 1rem;
+  margin: 0 0 0.3rem 1rem;
   font-size: 1.2rem;
   color: rgba(92, 68, 58, 0.6);
+  white-space: nowrap;
 }
 @media (max-width: 824px) {
   .postpage main article .meta-data {

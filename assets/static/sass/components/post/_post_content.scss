@@ -71,7 +71,7 @@
     align-self: center;
   }
 
-  ul li {
+  ul > li {
     list-style-type: none;
     position: relative;
 
@@ -88,7 +88,7 @@
     }
   }
 
-  ol li::marker {
+  ol > li::marker {
     font-weight: bold;
     color: rgba($postpage-ui-color, 0.8);
   }
@@ -128,11 +128,11 @@
       color: rgba($postpage-link-color, 0.7);
     }
 
-    ul li:before {
+    ul > li:before {
       color: rgba($postpage-quote-marker-color, 0.7);
     }
 
-    ol li::marker {
+    ol > li::marker {
       color: rgba($postpage-quote-marker-color, 0.7);
     }
 
@@ -177,5 +177,10 @@
 
   del {
     color: rgba($postpage-ui-color, 0.6);
+  }
+
+  .fa-sticky-note {
+    color: rgba($admonition-note-ui-color, 0.5);
+    font-size: 1rem;
   }
 }

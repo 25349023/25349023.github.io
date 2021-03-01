@@ -67,9 +67,7 @@
 
     > a:before {
       content: "\f1dd";
-      position: absolute;
-      left: -1.3rem;
-      top: 0;
+      margin-right: 0.4rem;
       font-family: "Font Awesome 5 Free";
       font-size: 1rem;
       color: rgba($postpage-link-color, 0.7);

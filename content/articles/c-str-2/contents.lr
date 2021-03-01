@@ -1,0 +1,110 @@
+title: [C] 每天來點字串用法 (2) － strcpy、strncpy
+---
+author: Sky
+---
+body:
+
+結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）  
+進入正文吧，今天要介紹的是：
+
+# `strcpy`、`strncpy`：字串複製
+
+所屬標頭檔：`<string.h>`  
+函式宣告：
+```c
+char *strcpy( char *dest, const char *src );
+char *strncpy( char *dest, const char *src, size_t count );
+```
+先說 `strcpy()`，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
+1. 第一個參數是目的地（dest），第二個是來源（src）
+2. 會有**緩衝區溢位**（buffer overflow）的問題
+
+來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
+```c
+int i = 5;
+char s[8] = "Hi 1234";
+```
+那麼這些變數的記憶體配置可能如下：
+
+![string memory allocation](cstr-1.png)
+
+如果今天我們進行了如下操作：
+```c
+strcpy(s, "hello sky");
+```
+那麼記憶體裡的內容就會變成如下：
+
+![buffer overflow](cstr-2.png)
+
+於是這時 i 的值就會變成 121，我們可以用以下程式來驗證： 
+```c,=
+#include <stdio.h>
+#include <string.h>
+
+int main(void){
+    int i = 5;
+    char s[8] = "Hi 1234";
+    printf("address of i: %p\naddress of s: %p\n", &i, s);  // i: 0028ff1c, s: 0028ff14
+    strcpy(s, "hello sky");
+    printf("value of s: %s\nvalue of i: %d\n", s, i);  // s: hello sky, : 121
+
+    return 0;
+}
+```
+
+為了解決這樣的問題，我們可以改用 `strncpy()`，他比 `strcpy()` 多了一個參數：count，用來控制最多複製幾個字元，而它一樣會回傳 dest 指向的字串。這裡也有些地方要注意：
+1. 如果 src 字元數（含 `\0`）比 count 少，會把剩下未滿 count 的部分通通補上 `\0`
+2. 如果 src 字元數（含 `\0`）比 count 多，他**不會**幫你補 `\0`，而是要自己補
+
+`strncpy()` 的使用可參考以下範例：
+```c,=
+#include <stdio.h>
+#include <string.h>
+
+int main(void){
+    int i = 67;  // ASCII 的 'C'
+    char s[8] = "Hi 1234";
+    printf("address of i: %p\naddress of s: %p\n", &i, s);
+    strncpy(s, "hello sky", 8);
+    printf("(1) value of s: %s\nvalue of i: %d\n", s, i);  // s: hello skC, i: 67
+    s[7] = '\0';  // 自己補 '\0'
+    printf("(2) value of s: %s\n", s);  //  s: hello s
+
+    return 0;
+}
+```
+
+## Undefined Behavior
+
+在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：
+
+### `strcpy`
+
+1. 緩衝區溢位（其實是 dest 不夠長）
+2. dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i>
+3. 如果 dest 指到的不是一個字元陣列
+4. 如果 src 指向的字串沒有以 `\0` 結尾
+
+### `strncpy`
+
+1. dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i>
+2. 如果 dest 或 src 其中一個不是指向一個字串
+3. 如果 dest 不夠長（比 count 短）
+4. 如果 src 比 count 短而且 src 沒有以 `\0` 結尾
+
+! 其實這個部分在 C99 已受到限制：宣告中新增了 restrict 關鍵字，關於這個關鍵字有興趣的人可以自己查查看
+
+~~天啊不是我在說，blogger 首頁的文章預覽圖也太醜了吧 qq，而且是發佈後才知道~~  
+（新網站就沒這個問題ㄌ）
+
+
+參考資料：
+1. [cppreference - strcpy](http://en.cppreference.com/w/c/string/byte/strcpy)
+2. [cppreference - strncpy](http://en.cppreference.com/w/c/string/byte/strncpy)
+3. 我休息了 4 天的腦袋
+---
+popular: 50
+---
+pub_date: 2021-03-01
+---
+tags: C - 字串
