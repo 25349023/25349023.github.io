@@ -1,0 +1,72 @@
+title: [C] 每天來點字串用法 (3) － from const char* to char*
+---
+author: Sky
+---
+body:
+
+這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）  
+今天帶來的不是函式，而是一個小技巧：
+
+# 由 `const char*` 轉成 `char*`
+
+有時候可能在將字串傳入函式時，會出現以下錯誤： 
+```text
+error: invalid conversion from 'const char*' to 'char*'
+note: expected 'char *' but argument is of type 'const char *'
+```
+這是因為 `const char*` 沒辦法自動轉換成 `char*`，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
+
+1. 直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
+2. 用 `const_cast<char*>(cptr)`，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
+3. 使用上一篇提到的 `strcpy()`，但小心**緩衝區覆蓋**，或是使用到不知道指到什麼的指標。
+
+下面這裡提供 2. 和 3. 的使用範例：
+```c,=
+#include <iostream>
+#include <cstring>
+#include <string>
+
+using namespace std;
+
+int main(){
+    string str("hello world");
+    cout << "(before) str: " << str << endl;
+    char s[16];
+    char *ptr1, *ptr2 = s;
+    // ptr1 = str.c_str();   error: c_str() 回傳 const char*
+    ptr1 = const_cast<char*>(str.c_str());
+    ptr1[2] = 'r';  // undefined behavior
+    cout << "ptr1: " << ptr1 << endl;
+    strcpy(ptr2, str.c_str());
+    ptr2[3] = 't';
+    cout << "ptr2: " << ptr2 << endl;
+    cout << "(after) str: " << str << endl;
+
+    return 0;
+}
+```
+
+參考輸出：
+```text
+(before) str: hello world
+ptr1: herlo world
+ptr2: herto world
+(after) str: herlo world
+```
+這裡我們使用 `std::string.c_str()` 方法來取得 `const char*`，並依照上面所說的 2. 和 3. 來進行型別間的轉換。但這裡並不保證在每個編譯器之下都會有相同的輸出，因為在行 14 的地方出現了 undefined behavior。
+
+! 筆者使用的編譯器：g++ 7.5.0（Ubuntu 18.04）
+
+參考資料：
+1. [cppreference - const_cast](https://en.cppreference.com/w/cpp/language/const_cast)
+2. [[C++] 標準類型轉換](http://windsplife.blogspot.tw/2010/09/cstaticcast-dynamiccast-reinterpretcast.html) 中的 const_cast 部分
+3. 我的腦袋
+---
+popular: 50
+---
+pub_date: 2021-03-06
+---
+tags:
+
+C - 字串
+C++
