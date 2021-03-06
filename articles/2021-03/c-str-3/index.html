@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C] 每天來點字串用法 (2) － strcpy、strncpy - skyblog</title>
+  <title>[C] 每天來點字串用法 (3) － from const char* to char* - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -104,21 +104,7 @@
     <ul class="toc">
       
         
-          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
-            <ul>
-        
-          <li><a href="#undefined-behavior">Undefined Behavior</a>
-            <ul>
-        
-          <li><a href="#strcpy"><code>strcpy</code></a></li>
-        
-      
-        
-          <li><a href="#strncpy"><code>strncpy</code></a></li>
-        
-      </ul></li>
-        
-      </ul></li>
+          <li><a href="#you-const-char-zhuan-cheng-char">由 <code>const char*</code> 轉成 <code>char*</code></a></li>
         
       
     </ul>
@@ -129,89 +115,61 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (2) － strcpy、strncpy</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (3) － from const char* to char*</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 03 - 01
+        <i class="fas fa-at"></i> 2021 - 03 - 06
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）<br>
-進入正文吧，今天要介紹的是：</p>
-<h1 id="strcpy-strncpy-zi-chuan-fu-zhi"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
-函式宣告：</p>
-<pre><code class="language-c">char *strcpy( char *dest, const char *src );
-char *strncpy( char *dest, const char *src, size_t count );</code></pre>
-<p>先說 <code>strcpy()</code>，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：</p>
+    <p>這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）<br>
+今天帶來的不是函式，而是一個小技巧：</p>
+<h1 id="you-const-char-zhuan-cheng-char">由 <code>const char*</code> 轉成 <code>char*</code></h1><p>有時候可能在將字串傳入函式時，會出現以下錯誤：</p>
+<pre><code class="language-text">error: invalid conversion from &#x27;const char*&#x27; to &#x27;char*&#x27;
+note: expected &#x27;char *&#x27; but argument is of type &#x27;const char *&#x27;</code></pre>
+<p>這是因為 <code>const char*</code> 沒辦法自動轉換成 <code>char*</code>，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：</p>
 <ol>
-<li>第一個參數是目的地（dest），第二個是來源（src）</li>
-<li>會有<strong>緩衝區溢位</strong>（buffer overflow）的問題</li>
+<li>直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。</li>
+<li>用 <code>const_cast&lt;char*&gt;(cptr)</code>，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。</li>
+<li>使用上一篇提到的 <code>strcpy()</code>，但小心<strong>緩衝區覆蓋</strong>，或是使用到不知道指到什麼的指標。</li>
 </ol>
-<p>來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：</p>
-<pre><code class="language-c">int i = 5;
-char s[8] = &quot;Hi 1234&quot;;</code></pre>
-<p>那麼這些變數的記憶體配置可能如下：</p>
-<p><img src="/articles/2021-03/c-str-2/cstr-1.png" alt="string memory allocation"></p>
-<p>如果今天我們進行了如下操作：</p>
-<pre><code class="language-c">strcpy(s, &quot;hello sky&quot;);</code></pre>
-<p>那麼記憶體裡的內容就會變成如下：</p>
-<p><img src="/articles/2021-03/c-str-2/cstr-2.png" alt="buffer overflow"></p>
-<p>於是這時 i 的值就會變成 121，我們可以用以下程式來驗證：</p>
-<pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
+<p>下面這裡提供 2. 和 3. 的使用範例：</p>
+<pre class="line-numbers"><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
 
-int main(void){
-    int i = 5;
-    char s[8] = &quot;Hi 1234&quot;;
-    printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);  // i: 0028ff1c, s: 0028ff14
-    strcpy(s, &quot;hello sky&quot;);
-    printf(&quot;value of s: %s\nvalue of i: %d\n&quot;, s, i);  // s: hello sky, : 121
+using namespace std;
+
+int main(){
+    string str(&quot;hello world&quot;);
+    cout &lt;&lt; &quot;(before) str: &quot; &lt;&lt; str &lt;&lt; endl;
+    char s[16];
+    char *ptr1, *ptr2 = s;
+    // ptr1 = str.c_str();   error: c_str() 回傳 const char*
+    ptr1 = const_cast&lt;char*&gt;(str.c_str());
+    ptr1[2] = &#x27;r&#x27;;  // undefined behavior
+    cout &lt;&lt; &quot;ptr1: &quot; &lt;&lt; ptr1 &lt;&lt; endl;
+    strcpy(ptr2, str.c_str());
+    ptr2[3] = &#x27;t&#x27;;
+    cout &lt;&lt; &quot;ptr2: &quot; &lt;&lt; ptr2 &lt;&lt; endl;
+    cout &lt;&lt; &quot;(after) str: &quot; &lt;&lt; str &lt;&lt; endl;
 
     return 0;
 }</code></pre>
-<p>為了解決這樣的問題，我們可以改用 <code>strncpy()</code>，他比 <code>strcpy()</code> 多了一個參數：count，用來控制最多複製幾個字元，而它一樣會回傳 dest 指向的字串。這裡也有些地方要注意：</p>
+<p>參考輸出：</p>
+<pre><code class="language-text">(before) str: hello world
+ptr1: herlo world
+ptr2: herto world
+(after) str: herlo world</code></pre>
+<p>這裡我們使用 <code>std::string.c_str()</code> 方法來取得 <code>const char*</code>，並依照上面所說的 2. 和 3. 來進行型別間的轉換。但這裡並不保證在每個編譯器之下都會有相同的輸出，因為在行 14 的地方出現了 undefined behavior。</p>
+<div class="admonition admonition-note"><p>筆者使用的編譯器：g++ 7.5.0（Ubuntu 18.04）</p></div><p>參考資料：</p>
 <ol>
-<li>如果 src 字元數（含 <code>\0</code>）比 count 少，會把剩下未滿 count 的部分通通補上 <code>\0</code></li>
-<li>如果 src 字元數（含 <code>\0</code>）比 count 多，他<strong>不會</strong>幫你補 <code>\0</code>，而是要自己補</li>
-</ol>
-<p><code>strncpy()</code> 的使用可參考以下範例：</p>
-<pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main(void){
-    int i = 67;  // ASCII 的 &#x27;C&#x27;
-    char s[8] = &quot;Hi 1234&quot;;
-    printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);
-    strncpy(s, &quot;hello sky&quot;, 8);
-    printf(&quot;(1) value of s: %s\nvalue of i: %d\n&quot;, s, i);  // s: hello skC, i: 67
-    s[7] = &#x27;\0&#x27;;  // 自己補 &#x27;\0&#x27;
-    printf(&quot;(2) value of s: %s\n&quot;, s);  //  s: hello s
-
-    return 0;
-}</code></pre>
-<h2 id="undefined-behavior">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
-<h3 id="strcpy"><code>strcpy</code></h3><ol>
-<li>緩衝區溢位（其實是 dest 不夠長）</li>
-<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
-<li>如果 dest 指到的不是一個字元陣列</li>
-<li>如果 src 指向的字串沒有以 <code>\0</code> 結尾</li>
-</ol>
-<h3 id="strncpy"><code>strncpy</code></h3><ol>
-<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
-<li>如果 dest 或 src 其中一個不是指向一個字串</li>
-<li>如果 dest 不夠長（比 count 短）</li>
-<li>如果 src 比 count 短而且 src 沒有以 <code>\0</code> 結尾</li>
-</ol>
-<div class="admonition admonition-note"><p>其實這個部分在 C99 已受到限制：宣告中新增了 restrict 關鍵字，關於這個關鍵字有興趣的人可以自己查查看</p></div><p><del>天啊不是我在說，blogger 首頁的文章預覽圖也太醜了吧 qq，而且是發佈後才知道</del><br>
-（新網站就沒這個問題ㄌ）</p>
-<p>參考資料：</p>
-<ol>
-<li><a href="http://en.cppreference.com/w/c/string/byte/strcpy">cppreference - strcpy</a></li>
-<li><a href="http://en.cppreference.com/w/c/string/byte/strncpy">cppreference - strncpy</a></li>
-<li>我休息了 4 天的腦袋</li>
+<li><a href="https://en.cppreference.com/w/cpp/language/const_cast">cppreference - const_cast</a></li>
+<li><a href="http://windsplife.blogspot.tw/2010/09/cstaticcast-dynamiccast-reinterpretcast.html">[C++] 標準類型轉換</a> 中的 const_cast 部分</li>
+<li>我的腦袋</li>
 </ol>
 
   </section>
@@ -223,6 +181,11 @@ int main(void){
             C - 字串
           </a>
         </li>
+      <li>
+          <a href="/articles/tag/Cpp/">
+            C++
+          </a>
+        </li>
       
     </ul>
   
@@ -230,7 +193,7 @@ int main(void){
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/c-str-2"; };
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-3"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -247,18 +210,11 @@ int main(void){
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-03/py-var-ref/">
-          <h3>[Python] 關於變數與參考的二三事 <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-02/c-str-1/">
-          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法 (1) － strlen</h3>
+        <a href="/articles/2021-03/py-var-ref/">
+          <h3><i class="fas fa-chevron-left"></i> [Python] 關於變數與參考的二三事</h3>
         </a>
       </div>
     
