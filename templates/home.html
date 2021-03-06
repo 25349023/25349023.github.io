@@ -30,7 +30,7 @@
         <div class="card">
           <h2>熱門文章</h2>
         </div>
-        {% for post in site.get('/articles').children.order_by('-popular').limit(4) %}
+        {% for post in site.get('/articles').children.order_by('-popular', '-pub_date').limit(4) %}
           {{ render_post_card(post) }}
         {% endfor %}
         {{ pad_empty_card(4 - count) }}
