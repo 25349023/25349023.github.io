@@ -106,6 +106,22 @@
         </div>
         
           
+  <a href="/articles/2021-03/py-var-ref/" class="card">
+    <h3>[Python] 關於變數與參考的二三事</h3>
+    <p class="preview">
+      寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！
+變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：
+x = 1
+就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
+print(id(x))  # 94526375507712
+我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
+這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
+進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-03/c-str-2/" class="card">
     <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
     <p class="preview">
@@ -179,24 +195,6 @@ char s1[128] = &amp;quot;hello...
   </a>
 
         
-          
-  <a href="/articles/2021-02/f-string/" class="card">
-    <h3>[Python 3.6] 初探 f-string</h3>
-    <p class="preview">
-      第一篇技術文章就決定是你了（笑）
-PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧：
-name = &amp;#x27;Sky&amp;#x27;
-print(f&amp;#x27;My name is {name}.&amp;#x27;)
-# &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n:...
-    </p>
-  </a>
-
-        
         
         
   
@@ -222,6 +220,22 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
 我原本以為 Lektor 應該不會太難，但還是有不少小地方需要注意。
 不過今年可能會比以往還忙，所以還不知道會不會正常更新（藉口）。或許我可以在等 model train 好的過程中來寫個文章，不然每次都呆呆地盯著他跑也是很浪費時間。
 好了，廢話講太多了，這次就這樣吧XD
+    </p>
+  </a>
+
+        
+          
+  <a href="/articles/2021-03/py-var-ref/" class="card">
+    <h3>[Python] 關於變數與參考的二三事</h3>
+    <p class="preview">
+      寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！
+變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：
+x = 1
+就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
+print(id(x))  # 94526375507712
+我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
+這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
+進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python...
     </p>
   </a>
 
@@ -269,31 +283,6 @@ strcpy(s, &amp;quot;hello sky&amp;quot;);
 那麼記憶體裡的內容就會變成如下：
 
 於是這時 i...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-02/c-str-1/" class="card">
-    <h3>[C] 每天來點字串用法 (1) － strlen</h3>
-    <p class="preview">
-      第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。
-strlen：字串長度所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-size_t strlen( const char *str );
-傳入一個字串 str，回傳這個字串的長度，而 \0 不計入長度（但 \n 計入）。其中的回傳值型態 size_t 通常是無號整數型別。
-以下這個程式示範了 strlen() 的用法：
-#include &amp;lt;stdio.h&amp;gt;
-
-int main(){
-    char s1[16], s2[16];
-    char *s3 = s2;
-    char s4[] = &amp;quot;happy new year\n&amp;quot;;
-    scanf(&amp;quot;%s&amp;quot;, s1);
-    printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
-    scanf(&amp;quot;%s&amp;quot;, s3);
-    printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
-   ...
     </p>
   </a>
 

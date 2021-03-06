@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[Python] 關於變數與參考的二三事 - skyblog</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/site.webmanifest">
+  <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-266M1NLNKL"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-266M1NLNKL');
+  </script>
+  
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-light.min.css"
+  />
+
+</head>
+
+
+
+<body class="postpage">
+<header>
+  <nav>
+    <ul>
+      <li class="brand">
+        <a href="/"><i class="fas fa-feather"></i> skyblog</a>
+      </li>
+      
+        <li class="option">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="option">
+          <a href="/articles/">Articles</a>
+        </li>
+      
+        <li class="option">
+          <a href="/portfolio/">Portfolio</a>
+        </li>
+      
+        <li class="option">
+          <a href="/#about">About</a>
+        </li>
+      
+      <li id="toggle-navbar"><i class="fas fa-th-large"></i></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner">
+  
+</section>
+
+
+  
+  <section class="toc-wrapper hidden" id="toc">
+    <ul class="toc">
+      
+        
+          <li><a href="#bian-shu">變數</a></li>
+        
+      
+        
+          <li><a href="#list-de-xian-jing">List 的陷阱</a>
+            <ul>
+        
+          <li><a href="#zhi-ding">指定「<code>=</code>」</a></li>
+        
+      
+        
+          <li><a href="#chuan-jie">串接「<code>+</code>」</a></li>
+        
+      
+        
+          <li><a href="#zhong-fu">重複「<code>*</code>」</a></li>
+        
+      </ul></li>
+        
+      
+        
+          <li><a href="#copy-yu-zong-jie">copy() 與總結</a></li>
+        
+      
+    </ul>
+  </section>
+
+  <main>
+    <article>
+      
+  
+  <section class="info">
+    <h1 class="title"><i class="fas fa-seedling"></i>[Python] 關於變數與參考的二三事</h1>
+    <div class="meta-data">
+      <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
+      <time class="publish-date">
+        <i class="fas fa-at"></i> 2021 - 03 - 06
+      </time>
+    </div>
+  </section>
+
+  <section class="post-content">
+    <p>寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 <code>copy</code> 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！</p>
+<h1 id="bian-shu">變數</h1><p>首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：</p>
+<pre><code class="language-python">x = 1</code></pre>
+<p>就代表我們把 x 的值指定為 1 了，<strong>是嗎？</strong>事實上並不是這樣的，而是讓 x 這個變數<strong>參考</strong>到了 1 這個物件，我們可以用 <code>id()</code> 函式來看看這個物件在記憶體中的位址究竟在哪：</p>
+<pre><code class="language-python">print(id(x))  # 94526375507712</code></pre>
+<p>我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 <code>x += 1</code> 之後，再對 x 使用 <code>id()</code> 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。</p>
+<p>這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。</p>
+<p>進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數：<strong>N 次貼</strong>。變數就像 N 次貼一樣，上面寫著變數的名字，然後我們讓他參考到不同的物件時，就像拿著這個 N 次貼到處黏貼一樣，因此只要是黏到（參考）不同的東西（物件），就一定是在不同的位置上（記憶體位址）。</p>
+<p>在這裡我們也可以看到為什麼 Python 的變數可以一下儲存整數，一下又是字串，因為就如同剛剛所說的，我們終究只是拿著 N 次貼在到處黏而已，而這 N 次貼上又沒有規定我們一定要黏在什麼東西上<del>不然就會爆炸什麼的（呃</del>，所以我們可以把他黏到各種型態上面都沒問題。</p>
+<h1 id="list-de-xian-jing">List 的陷阱</h1><h2 id="zhi-ding">指定「<code>=</code>」</h2><p>接下來的小節中都會以上面 N 次貼的概念來講解。當我們把一個參考到 list 的變數指定給另一個變數時：</p>
+<pre><code class="language-python">Lt = [1, 2, 3]
+Lt2 = Lt</code></pre>
+<p>看起來好像是我們把 <code>[1, 2, 3]</code> 複製了一遍，再指定給 Lt2，但實際上只是把寫著「<code>Lt2</code>」的 N 次貼也貼到那個 list 上而已，我們可以透過 <code>id()</code> 來驗證。所以當我們對其中一個 list 做變動的話... 就會兩個變數一起被更改！<del>也就是踏入黑魔法的第一步。</del></p>
+<p>若要解決這個問題，我們需要用到 list 本身的建構式、其底下的 <code>copy()</code> 這個方法、copy 模組的 <code>copy()</code> 函式，或是使用 slice 運算：</p>
+<pre class="line-numbers"><code class="language-python">import copy
+Lt = [1, 2, 3]
+Lt2 = Lt
+Lt3 = list(Lt)
+Lt4 = Lt.copy()
+Lt5 = copy.copy(Lt)
+Lt6 = Lt[:]
+
+Lt[1] = 9
+print(Lt)   # [1, 9, 3]
+print(Lt2)  # [1, 9, 3]
+print(Lt3)  # [1, 2, 3]
+print(Lt4)  # [1, 2, 3]
+print(Lt5)  # [1, 2, 3]
+print(Lt6)  # [1, 2, 3]</code></pre>
+<p>可以看到，透過 <code>copy()</code> 取得的 list 就會是確實的複製過一遍後再讓其他變數去參考，就不會造成一次修改到兩個變數的問題。</p>
+<h2 id="chuan-jie">串接「<code>+</code>」</h2><p>再來看看如果我們有兩個 list 如下：</p>
+<pre><code class="language-python">Lt = [1, 2, 3]
+Lt2 = [4, 5, 6]</code></pre>
+<p>我們可以想像有一個箱子，裡面有編號 1~3 的球。箱子上貼著一個寫著 「Lt」 的 N 次貼，而 1、2、3 號球分別黏了上面寫著 「<code>Lt[0]</code>」、「<code>Lt[1]</code>」、「<code>Lt[2]</code>」的 N 次貼；而 Lt2 亦是如此。</p>
+<p>接下來的比較抽象，如果無法快速理解的話建議可以畫出來。當我們使用 <code>+</code> 號連接 Lt 和 Lt2 如下的指令時，Python 所做的是將寫著 「<code>Lt3[0]</code>」、「<code>Lt3[2]</code>」、...、「<code>Lt3[5]</code>」的 N 次貼分別黏到<strong>原本的</strong> 1、2、...、6 號球上；另外有一個神奇的 U型箱倒扣著 1~6 號球但沒有裝到原本的兩個箱子，而這個 U 型箱上貼著「Lt3」（如圖一）。</p>
+<pre><code class="language-python">Lt3 = Lt + Lt2</code></pre>
+<p><img src="/articles/2021-03/py-var-ref/list1.png" alt="concatenating list 1"></p>
+<p>這時我們如果執行這個指令：<code>Lt[0] = 9</code> 的話會怎麼樣呢？Python 會把 <code>Lt[0]</code> 貼到 9 這個球上，然後這個球會放入 Lt 這個箱子；那麼，原本的 1 號球呢？他會被移到只被 Lt3 裝到而沒有被 Lt 裝到，大概如圖二。</p>
+<div class="admonition admonition-note"><p>這裡的把球移動並不是真的改變他的記憶體位址，而只為了方便說明和理解而使用的動作。</p></div><p><img src="/articles/2021-03/py-var-ref/list2.png" alt="concatenating list 2"></p>
+<p>這看起來沒什麼大問題，因為整數物件是不可變的，同一個位址上的那個整數基本上不會變成另一個整數，但如果是像 list 一樣的<strong>可變物件</strong>呢？</p>
+<p>比如我們寫了以下的程式：</p>
+<pre><code class="language-python">Lt4 = [[1]]
+Lt5 = [[2]]
+Lt6 = Lt4 + Lt5</code></pre>
+<p>應該會是像圖三這樣：</p>
+<p><img src="/articles/2021-03/py-var-ref/list3.png" alt="mutable object in list"></p>
+<p>然後我們來使用 <code>append()</code> 看看：</p>
+<pre><code class="language-python">Lt4[0].append(7)</code></pre>
+<p>這會把一顆 7 號球放進 <code>Lt4[0]</code> 裡面，然後我們就會發現事情不對勁了：明明我們對 <code>Lt4[0]</code> 使用 <code>append()</code>，但 <code>Lt6[0]</code> 也跟著改變了！原因是我們用 <code>append()</code> 的時候就好比在原本的箱子裡放進了新的球，所以在沒有更動任何變數的參考之下，就會造成一次修改多個變數。</p>
+<p>大家也可以試試看分別執行以下兩條指令會發生什麼事：</p>
+<pre><code class="language-python">Lt4[0][0] = 9
+Lt5 = [[3]]</code></pre>
+<p>而如果我們想要解決這個問題的話，可不是區區一個 <code>copy()</code> 函式或 slice 運算就能應付的了，因為在這裡出問題的是<strong>裡面的</strong> list，而一般的 <code>copy()</code> 和 slice 做的只是淺層複製，不會把 list 中的 list 也複製到，所以我們要使用到 copy 模組的 <code>deepcopy()</code> 函式：</p>
+<pre class="line-numbers"><code class="language-python">from copy import deepcopy
+Lt = [[1]]
+Lt2 = [[2]]
+Lt3 = Lt + Lt2
+Lt4 = Lt[:] + Lt2[:]
+Lt5 = deepcopy(Lt) + deepcopy(Lt2)  # 或 deepcopy(Lt1 + Lt2)
+
+Lt[0].append(9)
+print(Lt3)  # [[1, 9], [2]]
+print(Lt4)  # [[1, 9], [2]]
+print(Lt5)  # [[1], [2]]</code></pre>
+<p>這樣就可以了。</p>
+<h2 id="zhong-fu">重複「<code>*</code>」</h2><p>好的，這一小節是最後一個陷阱了，也是我不久前才踩進的陷阱。當初我想製造一個二維的 list，然後每個元素都一樣，所以我寫了類似下面這行的東西：</p>
+<pre><code class="language-python">Lt = [[0] * 3] * 3</code></pre>
+<p>結果我只是改了 <code>Lt[0][0]</code> 的值，就連同 <code>Lt[1][0]</code> 和 <code>Lt[2][0]</code> 一起改到了，因為使用 * 來重複 list 的話，事實上也只是 <code>Lt[0]</code>、<code>Lt[1]</code>、<code>Lt[2]</code> 都貼到（參考到）同一個箱子（list），並不會產生 3 個不一樣的 list。</p>
+<p>解決的方法除了上面的 <code>copy()</code>（這裡要用 <code>copy()</code> 的話好像也不太適合），我們可以使用 for 迴圈來一次次的把一個 list <code>append()</code> 進另一個空的 list：</p>
+<pre><code class="language-python">Lt = []
+for i in range(3)
+    Lt.append([0] * 3)</code></pre>
+<p>像上面這樣。甚至我們還可以搭配 list comprehension，寫成下面這樣：</p>
+<pre><code class="language-python">Lt = [[0] * 3 for i in range(3)]</code></pre>
+<p>就可以完美化解我們遇到的問題了。</p>
+<h1 id="copy-yu-zong-jie">copy() 與總結</h1><p>再稍微講一點點 copy 模組的細節：<code>copy()</code> 函式的運作就像是只複製了最外面的箱子，所以是淺層複製；而 <code>deepcopy()</code> 則會以遞迴的方式去複製箱子裡的任何東西，所以可以給出完全複製過的物件。</p>
+<p>好了，到最後我們就可以來喘口氣、統整一下上面所講的內容：一開始說明了變數與物件的關係，就如同 N 次貼和物品的關係一般；然後提到了三個會呼喚黑魔法的途徑，分別是指定、串接和重複，也講到了各自的解法：copy() 函式、slice 運算，deepcopy() 函式，以及與 for 相關的兩種寫法。</p>
+<p>就這樣了！感謝大家的閱讀，如果有疑慮或指正歡迎留言提出。</p>
+<p>參考資料：</p>
+<ol>
+<li>Python 3.5 技術手冊（林信良著，2016）</li>
+<li><a href="https://docs.python.org/3/library/copy.html">Python docs: copy — Shallow and deep copy operations</a></li>
+<li><a href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">Python docs: Sequence Types</a></li>
+</ol>
+<p>後記：<br>
+　　希望引進 N 次貼的概念後不會把問題更加複雜化，其實這個想法（N 次貼）從我一開始知道有這個情況的時候就開始構築了，但都沒有拿他來解釋其他的現象，所以有點擔心會不會變得太複雜XD</p>
+
+  </section>
+  
+  
+    <ul class="tags">
+      <li>
+          <a href="/articles/tag/Python/">
+            Python
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  <div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/articles/py-var-ref"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//lecielblog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+  
+  
+  <section class="adjacent-posts">
+    
+    
+      <div class="prev">
+        <span>Prev Post</span>
+        <a href="/articles/2021-03/c-str-2/">
+          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
+        </a>
+      </div>
+    
+  </section>
+
+
+    </article>
+  </main>
+
+  <figure class="modal hidden" id="modal">
+    <img src="" alt=""/>
+    <figcaption>Alt text</figcaption>
+  </figure>
+
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="hidden" id="sidebar">
+    <div class="blur"></div>
+    <div class="content">
+      <div class="profile-image"></div>
+      <div class="name">天ほし</div>
+      <nav>
+        <ul>
+          <li class="collapsible-category" id="root-collapsible">
+            <a>Category <i class="fas fa-angle-down"></i></a>
+            
+  
+  <ul>
+    
+    
+      
+      
+        <li class="collapsible-category">
+          <a>C <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/C-Zi-Chuan/"
+        >字串</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Python/"
+        >Python</a></li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>日常 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
+        >短談</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Test/"
+        >Test</a></li>
+      
+      
+    
+  </ul>
+
+          </li>
+          <li>
+            <a href="mailto:25349023.qq@gmail.com">Contact Me</a>
+          </li>
+          <li>
+            <a href="https://github.com/25349023/"><i class="fab fa-github"></i> GitHub</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <button class="handle"><i class="fas fa-bars"></i></button>
+  </aside>
+
+
+<a href="#" class="scroll-top hidden" id="scroll-top">
+  <i class="fas fa-chevron-up"></i>
+</a>
+<footer>&copy; Copyright 2021 by Skyline Liu.</footer>
+<script src="/static/js/scroll_top.js"></script>
+<script src="/static/js/navbar.js"></script>
+
+  
+  <script src="/static/js/sidebar.js"></script>
+  <script src="/static/js/category.js"></script>
+
+  <script src="/static/js/line_numbers.js"></script>
+  <script src="/static/js/toc.js"></script>
+  <script src="/static/js/post_image.js"></script>
+  <script src="/static/js/modal.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+
+</body>
+</html>
