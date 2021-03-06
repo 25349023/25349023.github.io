@@ -241,19 +241,30 @@ print(id(x))  # 94526375507712
 
         
           
-  <a href="/articles/2021-02/f-string/" class="card">
-    <h3>[Python 3.6] 初探 f-string</h3>
+  <a href="/articles/2021-03/c-str-2/" class="card">
+    <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
     <p class="preview">
-      第一篇技術文章就決定是你了（笑）
-PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧：
-name = &amp;#x27;Sky&amp;#x27;
-print(f&amp;#x27;My name is {name}.&amp;#x27;)
-# &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n:...
+      結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
+進入正文吧，今天要介紹的是：
+strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strcpy( char *dest, const char *src );
+char *strncpy( char *dest, const char *src, size_t count );
+先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
+
+第一個參數是目的地（dest），第二個是來源（src）
+會有緩衝區溢位（buffer overflow）的問題
+
+來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
+int i = 5;
+char s[8] = &amp;quot;Hi 1234&amp;quot;;
+那麼這些變數的記憶體配置可能如下：
+
+如果今天我們進行了如下操作：
+strcpy(s, &amp;quot;hello sky&amp;quot;);
+那麼記憶體裡的內容就會變成如下：
+
+於是這時 i...
     </p>
   </a>
 
