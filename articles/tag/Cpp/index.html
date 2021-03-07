@@ -105,6 +105,36 @@
     <div class="main-wrapper">
       
         
+  <a href="/articles/2021-03/algo-dfs-permutation/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[演算法] [C++ / Python] 當 DFS 遇上排列</h2>
+
+        <time>2021 - 03 - 07</time>
+      </div>
+      <p class="preview">
+        深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。
+剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！
+蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！
+C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, &amp;quot;布&amp;quot;};
+bool visited[3] = {false};
+string arrangement[3];
+
+void dfs(int layer){
+    if (layer == 3){
+        for (int i = 0; i &amp;lt; 3; i++){
+            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
+        }
+        cout &amp;lt;&amp;lt; endl;
+        return;
+    }
+    for...
+      </p>
+    </article>
+  </a>
+
+      
+        
   <a href="/articles/2021-03/c-str-3/" class="post-link">
     <article>
       <div class="info">
@@ -179,6 +209,22 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
       
         <li><a href="/articles/tag/Python/"
         >Python</a></li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>演算法 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
+        >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
       
       
     

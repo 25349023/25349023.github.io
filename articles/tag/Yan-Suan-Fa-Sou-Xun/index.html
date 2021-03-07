@@ -99,124 +99,36 @@
   
   <main>
     <div class="breadcrumb-wrapper">
-      <div class="breadcrumb"><span>C</span><span>字串</span>
+      <div class="breadcrumb"><span>演算法</span><span>搜尋</span>
       </div>
     </div>
     <div class="main-wrapper">
       
         
-  <a href="/articles/2021-03/c-str-3/" class="post-link">
+  <a href="/articles/2021-03/algo-dfs-permutation/" class="post-link">
     <article>
       <div class="info">
-        <h2>[C] 每天來點字串用法 (3) － from const char* to char*</h2>
+        <h2>[演算法] [C++ / Python] 當 DFS 遇上排列</h2>
 
-        <time>2021 - 03 - 06</time>
+        <time>2021 - 03 - 07</time>
       </div>
       <p class="preview">
-        這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）
-今天帶來的不是函式，而是一個小技巧：
-由 const char* 轉成 char*有時候可能在將字串傳入函式時，會出現以下錯誤：
-error: invalid conversion from &amp;#x27;const char*&amp;#x27; to &amp;#x27;char*&amp;#x27;
-note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;const char *&amp;#x27;
-這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
+        深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。
+剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！
+蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！
+C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, &amp;quot;布&amp;quot;};
+bool visited[3] = {false};
+string arrangement[3];
 
-直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
-用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
-使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
-
-下面這裡提供 2. 和...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-03/c-str-2/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[C] 每天來點字串用法 (2) － strcpy、strncpy</h2>
-
-        <time>2021 - 03 - 01</time>
-      </div>
-      <p class="preview">
-        結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
-進入正文吧，今天要介紹的是：
-strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-char *strcpy( char *dest, const char *src );
-char *strncpy( char *dest, const char *src, size_t count );
-先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
-
-第一個參數是目的地（dest），第二個是來源（src）
-會有緩衝區溢位（buffer overflow）的問題
-
-來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
-int i = 5;
-char s[8] = &amp;quot;Hi 1234&amp;quot;;
-那麼這些變數的記憶體配置可能如下：
-
-如果今天我們進行了如下操作：
-strcpy(s, &amp;quot;hello sky&amp;quot;);
-那麼記憶體裡的內容就會變成如下：
-
-於是這時 i...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-02/c-str-1/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[C] 每天來點字串用法 (1) － strlen</h2>
-
-        <time>2021 - 02 - 26</time>
-      </div>
-      <p class="preview">
-        第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。
-strlen：字串長度所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-size_t strlen( const char *str );
-傳入一個字串 str，回傳這個字串的長度，而 \0 不計入長度（但 \n 計入）。其中的回傳值型態 size_t 通常是無號整數型別。
-以下這個程式示範了 strlen() 的用法：
-#include &amp;lt;stdio.h&amp;gt;
-
-int main(){
-    char s1[16], s2[16];
-    char *s3 = s2;
-    char s4[] = &amp;quot;happy new year\n&amp;quot;;
-    scanf(&amp;quot;%s&amp;quot;, s1);
-    printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
-    scanf(&amp;quot;%s&amp;quot;, s3);
-    printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
-   ...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-02/c-str-0/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[C] 每天來點字串用法（基本篇）</h2>
-
-        <time>2021 - 02 - 25</time>
-      </div>
-      <p class="preview">
-        有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）
-不，你不行。（2021 的我）
-字串的基本使用首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：
-char s1[128] = &amp;quot;hello world&amp;quot;;
-char s2[] = &amp;quot;hello world&amp;quot;;
-另外，許多函式都會使用字元指標來操作字串：
-char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
-而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
-char *s4 = &amp;quot;hello world&amp;quot;;
-像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
-接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello...
+void dfs(int layer){
+    if (layer == 3){
+        for (int i = 0; i &amp;lt; 3; i++){
+            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
+        }
+        cout &amp;lt;&amp;lt; endl;
+        return;
+    }
+    for...
       </p>
     </article>
   </a>

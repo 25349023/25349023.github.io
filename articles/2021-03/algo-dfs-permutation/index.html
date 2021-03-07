@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[演算法] [C++ / Python] 當 DFS 遇上排列 - skyblog</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/site.webmanifest">
+  <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-266M1NLNKL"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-266M1NLNKL');
+  </script>
+  
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-light.min.css"
+  />
+
+</head>
+
+
+
+<body class="postpage">
+<header>
+  <nav>
+    <ul>
+      <li class="brand">
+        <a href="/"><i class="fas fa-feather"></i> skyblog</a>
+      </li>
+      
+        <li class="option">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="option">
+          <a href="/articles/">Articles</a>
+        </li>
+      
+        <li class="option">
+          <a href="/portfolio/">Portfolio</a>
+        </li>
+      
+        <li class="option">
+          <a href="/#about">About</a>
+        </li>
+      
+      <li id="toggle-navbar"><i class="fas fa-th-large"></i></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner">
+  
+</section>
+
+
+  
+  <section class="toc-wrapper hidden" id="toc">
+    <ul class="toc">
+      
+        
+          <li><a href="#jian-dao-shi-tou-bu-quan-bu-pai-lie-143">剪刀、石頭、布！－全部排列</a>
+            <ul>
+        
+          <li><a href="#c-144">C++</a></li>
+        
+      
+        
+          <li><a href="#python-145">Python</a></li>
+        
+      
+        
+          <li><a href="#jie-mi-shi-jian-146">解密時間！</a></li>
+        
+      </ul></li>
+        
+      
+        
+          <li><a href="#fa-fang-tang-guo-you-xiang-tong-wu-de-pai-lie-147">發放糖果－有相同物的排列</a></li>
+        
+      
+        
+          <li><a href="#shui-shi-qian-san-ming-n-wu-qu-k-wu-de-pai-lie-148">誰是前三名？－ n 物取 k 物的排列</a>
+            <ul>
+        
+          <li><a href="#c-149">C++</a></li>
+        
+      
+        
+          <li><a href="#python-150">Python</a></li>
+        
+      </ul></li>
+        
+      
+        
+          <li><a href="#dong-nao-shi-jian-151">動腦時間！</a></li>
+        
+      
+    </ul>
+  </section>
+
+  <main>
+    <article>
+      
+  
+  <section class="info">
+    <h1 class="title"><i class="fas fa-seedling"></i>[演算法] [C++ / Python] 當 DFS 遇上排列</h1>
+    <div class="meta-data">
+      <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
+      <time class="publish-date">
+        <i class="fas fa-at"></i> 2021 - 03 - 07
+      </time>
+    </div>
+  </section>
+
+  <section class="post-content">
+    <p>深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。</p>
+<h1 id="jian-dao-shi-tou-bu-quan-bu-pai-lie-143">剪刀、石頭、布！－全部排列</h1><p>現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！</p>
+<p>蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！</p>
+<h2 id="c-144">C++</h2><pre class="line-numbers"><code class="language-cpp">string gesture[3] = {&quot;剪刀&quot;, &quot;石頭&quot;, &quot;布&quot;};
+bool visited[3] = {false};
+string arrangement[3];
+
+void dfs(int layer){
+    if (layer == 3){
+        for (int i = 0; i &lt; 3; i++){
+            cout &lt;&lt; arrangement[i] &lt;&lt; &quot;\t&quot;;
+        }
+        cout &lt;&lt; endl;
+        return;
+    }
+    for (int i = 0; i &lt; 3; i++){
+        if (visited[i]){
+            continue;
+        }
+        visited[i] = true;
+        arrangement[layer] = gesture[i];
+        dfs(layer + 1);
+        visited[i] = false;
+    }
+}</code></pre>
+<h2 id="python-145">Python</h2><pre class="line-numbers"><code class="language-python">gesture = [&#x27;剪刀&#x27;, &#x27;石頭&#x27;, &#x27;布&#x27;]
+visited = [False] * 3
+arrangement = [&#x27;&#x27;] * 3
+
+def dfs(layer):
+    if layer == 3:
+        print(*arrangement, sep=&#x27;\t\t&#x27;)
+        return
+
+    for i in range(3):
+        if visited[i]:
+            continue
+        visited[i] = True
+        arrangement[layer] = gesture[i]
+        dfs(layer + 1)
+        visited[i] = False</code></pre>
+<p>完整請見：<a href="https://github.com/25349023/Blogger/blob/master/DFS/Rock_Paper_Scissors.cpp">C++</a> / <a href="https://github.com/25349023/Blogger/blob/master/DFS/Rock_Paper_Scissors.py">Python</a></p>
+<p>輸出：</p>
+<pre><code class="language-text">剪刀  石頭  布
+剪刀  布    石頭
+石頭  剪刀  布
+石頭  布    剪刀
+布    剪刀  石頭
+布    石頭  剪刀</code></pre>
+<h2 id="jie-mi-shi-jian-146">解密時間！</h2><p>到底為什麼我們可以用 DFS 來列出所有排列的可能呢？首先讓我們回想一下，我們平時在窮舉排列方法時會用的方法：先固定前面，再從最後面慢慢的替換。</p>
+<p>比如說，求 1、2、3、4 的排列時，我們通常會先從 1234 出發，下一個變成 1243，再下一個則是 1324...以此類推，可以看到第一位數字都還沒被換掉，而第二位數字只換了一次，換最多次的是三、四位數字。</p>
+<p>根據這樣的想法，我們可以發現 DFS 可以很容易的解決這個問題：將一位數字交由一層 DFS 來處理，而在每一層 DFS 中，我們要做以下這些事情：</p>
+<ol>
+<li>檢查是不是最後一層，如果是的話，代表已經得到一組排列，應將結果輸出，並回到上一層</li>
+<li>選定一個數字（代表欲排列物之<strong>編號</strong>），進行下一層的 DFS</li>
+</ol>
+<p>讓我們看看 2. 這項敘述的詳細內容：首先是選一個數字，由於我們想讓每樣物品都輪過一次，所以我們使用 for 迴圈來依序取得編號。</p>
+<p>接下來很重要的一點，因為有些東西我們可能已經排在前面了，所以我們要用一個陣列 <code>visited[]</code> 來儲存是否用過，如果已經用過，我們就要跳過這次迴圈，獲得下一個物品的編號。</p>
+<p>若這項檢查通過的話，我們要進行以下動作：將這樣物品標示為已用過，再進行下一層的 DFS；而如果下一層的 DFS 已經結束並回到這層，記得要先將這層所使用的物品重設為沒有使用過，再進行下一個 for 迴圈或回到上一層 DFS。</p>
+<p>說了這麼多，好像還是沒有好好的解釋為什麼 DFS 能夠勝任這樣的工作，這裡我就用一張圖來代表剛剛所做的全部事情吧，相信會突然變得很好懂。</p>
+<p><img src="/articles/2021-03/algo-dfs-permutation/perm.png" alt="permutation tree"></p>
+<p>其實我們剛剛就是在對這個樹狀圖做 DFS，每次無路可走時，就代表找到了一種解法。應該滿好理解的吧？</p>
+<p>那我們要進入下一個問題囉：要怎麼處理比較特別的排列？比如說物品不限使用次數的排列，或著有相同物的排列。</p>
+<p>物品不限使用次數的排列，也就是上述的遊戲中，沒有限定三人一定要出不同的拳，想怎麼出就怎麼出。這種的比較簡單，也許你已經知道了，就是不要使用 <code>visited[]</code> 來記錄使用情況嘛！沒錯，所以我們只要把跟 <code>visited[]</code> 有關的部分全部砍掉就好了。</p>
+<p>接下來的比較複雜（其實也還好）：只能用特定數量來排列的有相同物之排列。</p>
+<h1 id="fa-fang-tang-guo-you-xiang-tong-wu-de-pai-lie-147">發放糖果－有相同物的排列</h1><p>現在你手上有四顆糖果，分別是兩顆紅色且完全相同的、一顆藍色的，以及一顆黃色的，要分給甲、乙、丙、丁四人，會有哪些分法呢？</p>
+<p>乍看之下好像有點複雜，因為要考慮那兩顆紅色的糖果，就算交換位置也還是一樣的分法，感覺好像要刪去一些分法，也很麻煩。這時可能會想說「畫個樹狀圖好了」，結果畫出來... 參差不齊的，根本很難對它做 DFS。</p>
+<p>這時候，我們只要換一下想法就好，找出剛剛那個邏輯的不適合處加以替換。很顯然的，是我們用來記錄有沒有用過的 <code>visited[]</code> 陣列出了問題，因為對於紅色糖果來說，用掉一顆並不算真正的用完了，於是在這裡就會出現一些問題。那我們該怎麼處理呢？這裡就交給讀者們想囉。</p>
+<div class="admonition admonition-note"><p>參考答案：<a href="https://github.com/25349023/Blogger/blob/master/DFS/candyDistribution.cpp">C++</a> / <a href="https://github.com/25349023/Blogger/blob/master/DFS/candyDistribution.py">Python</a></p></div><h1 id="shui-shi-qian-san-ming-n-wu-qu-k-wu-de-pai-lie-148">誰是前三名？－ n 物取 k 物的排列</h1><p>最後我們來思考一下，n 物取 k 物的排列方法，也就是高中所學的 P 幾取幾。</p>
+<p>班上有甲～戊五人是段考常勝軍，每次前三名一定是由他們其中三人組成的，能不能用 DFS 排出有幾種可能呢？當然是可以的，來想想看要怎麼處理吧。</p>
+<p>首先是 <code>visited[]</code> 陣列，既然剛剛的案例似乎都是它出問題，這次也是嗎？不，這次不是它的問題，因為甲～戊這五人都是唯一的，所以並沒有違反當初我們使用 <code>visited[]</code> 的用意。</p>
+<p>那麼應該也只剩下一個地方有疑點了：判斷是否為最後一層的地方。一直都沒思考這地方 if 判斷式裡的數字是怎麼來的，因為之前是有幾個要排就填多少，但這次我們只要取前三個，所以數字就填 3 吧。（沒錯，就是這樣）</p>
+<p>先看程式碼應該比較好懂：</p>
+<h2 id="c-149">C++</h2><pre class="line-numbers"><code class="language-cpp">bool visited[5] = {false};
+int arrangement[3];
+string people[5] = {&quot;甲&quot;, &quot;乙&quot;, &quot;丙&quot;, &quot;丁&quot;, &quot;戊&quot;};
+
+void dfs(int layer){
+    if (layer == 3){
+        for (int j = 0; j &lt; 3; j++){
+            cout &lt;&lt; people[arrangement[j]] &lt;&lt; &quot;  &quot;;
+        } cout &lt;&lt; endl;
+        return;
+    }
+    for (int i = 0; i &lt; 5; i++){
+        if (visited[i]){
+            continue;
+        }
+        visited[i] = true;
+        arrangement[layer] = i;
+        dfs(layer + 1);
+        visited[i] = false;
+    }
+}</code></pre>
+<h2 id="python-150">Python</h2><pre class="line-numbers"><code class="language-python">visited = [False] * 5
+arrangement = [&#x27;&#x27;] * 3
+people = [&#x27;甲&#x27;, &#x27;乙&#x27;, &#x27;丙&#x27;, &#x27;丁&#x27;, &#x27;戊&#x27;]
+
+def dfs(layer):
+    if layer == 3:
+        print(*arrangement, sep=&#x27;  &#x27;)
+        return
+
+    for i in range(5):
+        if visited[i]:
+            continue
+        visited[i] = True
+        arrangement[layer] = people[i]
+        dfs(layer + 1)
+        visited[i] = False</code></pre>
+<p>完整請見：<a href="https://github.com/25349023/Blogger/blob/master/DFS/ranking.cpp">C++</a> / <a href="https://github.com/25349023/Blogger/blob/master/DFS/ranking.py">Python</a></p>
+<p>可以看到雖然有五個人在輪，但 if 判斷的地方只要跑 3 層 DFS 就會停止，這樣就可以達到我們只要取前三名的目的了。</p>
+<h1 id="dong-nao-shi-jian-151">動腦時間！</h1><p>看了這麼多到底有沒有吸收到腦中呢？試著思考與回答這些問題吧：</p>
+<ol>
+<li><p>下圖是最後這個程式執行結果的一部分，試問若把 if 判斷中的數字改為 2 的話，會不會造成輸出中有三組「甲 乙」、「甲 丙」...等情況，也就是只有下圖中的第三直行消失而已？為什麼會 / 不會？</p>
+<p><img src="/articles/2021-03/algo-dfs-permutation/dfs-output.png" alt="part of output"></p>
+</li>
+<li>你能簡單的歸納出 DFS 的步驟嗎？</li>
+<li><p>能夠使用 DFS 列出 n 物取 k 物的<strong>組合</strong>種類嗎？如果可以，請實作看看；如果不行，試想想為什麼以及如何用別的方法解決。</p>
+<div class="admonition admonition-info"><p>試著找出排列與組合之間的關聯性。</p></div></li>
+<li>有沒有不需要遞迴就能印出所有排列的方法呢？</li>
+</ol>
+<p>後記：<br>
+　　終於打完這一篇了，看了看上次修改日期，嗯...原來是去年6月就應該要產出的啊，我又在耍廢了XD<br>
+　　至於後面的題目，算是一時興起的吧（欸），列出了我在寫這篇時突然想到的一些問題，可是我明明記得還有很多問題的啊，看來寫一寫就自動消失了呢，真不錯（是嗎</p>
+<p>希望中間那個留給讀者思考不會被發現是我懶得打字。</p>
+
+  </section>
+  
+  
+    <ul class="tags">
+      <li>
+          <a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/">
+            演算法 - 搜尋
+          </a>
+        </li>
+      <li>
+          <a href="/articles/tag/Cpp/">
+            C++
+          </a>
+        </li>
+      <li>
+          <a href="/articles/tag/Python/">
+            Python
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  <div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/articles/algo-dfs-permutation"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//lecielblog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+  
+  
+  <section class="adjacent-posts">
+    
+    
+      <div class="prev">
+        <span>Prev Post</span>
+        <a href="/articles/2021-03/c-str-3/">
+          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法 (3) － from const char* to char*</h3>
+        </a>
+      </div>
+    
+  </section>
+
+
+    </article>
+  </main>
+
+  <figure class="modal hidden" id="modal">
+    <img src="" alt=""/>
+    <figcaption>Alt text</figcaption>
+  </figure>
+
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="hidden" id="sidebar">
+    <div class="blur"></div>
+    <div class="content">
+      <div class="profile-image"></div>
+      <div class="name">天ほし</div>
+      <nav>
+        <ul>
+          <li class="collapsible-category" id="root-collapsible">
+            <a>Category <i class="fas fa-angle-down"></i></a>
+            
+  
+  <ul>
+    
+    
+      
+      
+        <li class="collapsible-category">
+          <a>C <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/C-Zi-Chuan/"
+        >字串</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Cpp/"
+        >C++</a></li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Python/"
+        >Python</a></li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>演算法 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
+        >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>日常 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
+        >短談</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Test/"
+        >Test</a></li>
+      
+      
+    
+  </ul>
+
+          </li>
+          <li>
+            <a href="mailto:25349023.qq@gmail.com">Contact Me</a>
+          </li>
+          <li>
+            <a href="https://github.com/25349023/"><i class="fab fa-github"></i> GitHub</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <button class="handle"><i class="fas fa-bars"></i></button>
+  </aside>
+
+
+<a href="#" class="scroll-top hidden" id="scroll-top">
+  <i class="fas fa-chevron-up"></i>
+</a>
+<footer>&copy; Copyright 2021 by Skyline Liu.</footer>
+<script src="/static/js/scroll_top.js"></script>
+<script src="/static/js/navbar.js"></script>
+
+  
+  <script src="/static/js/sidebar.js"></script>
+  <script src="/static/js/category.js"></script>
+
+  <script src="/static/js/line_numbers.js"></script>
+  <script src="/static/js/toc.js"></script>
+  <script src="/static/js/post_image.js"></script>
+  <script src="/static/js/modal.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+
+</body>
+</html>

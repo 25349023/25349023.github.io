@@ -1514,8 +1514,11 @@ aside nav > ul .collapsible-category ul a {
   margin-left: 1.2rem;
   margin-top: 2rem;
 }
-.postpage article .post-content li p:last-of-type {
-  margin-bottom: 0;
+.postpage article .post-content li :last-child {
+  margin-bottom: 0.4rem;
+}
+.postpage article .post-content li:not(:last-of-type) {
+  margin-bottom: 0.2rem;
 }
 .postpage article .post-content blockquote {
   margin: 1.2rem 0 0 1.8rem;
@@ -1581,7 +1584,7 @@ aside nav > ul .collapsible-category ul a {
   margin-right: 0.8rem;
 }
 .postpage article .post-content code {
-  font-family: "Ubuntu Mono", monospace;
+  font-family: "Ubuntu Mono", "FakePearl", monospace;
 }
 .postpage article .post-content :not(pre) > code {
   border-radius: 3px;
@@ -1811,7 +1814,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content pre.line-numbers .number-list span:before {
   content: counter(linenumbers);
-  font-family: "Ubuntu Mono", monospace;
+  font-family: "Ubuntu Mono", "FakePearl", monospace;
 }
 
 .postpage .toc-wrapper {
@@ -1983,8 +1986,8 @@ aside nav > ul .collapsible-category ul a {
   align-items: center;
 }
 .postpage .modal img {
-  max-width: 60vw;
-  max-height: 60vh;
+  max-width: 80vw;
+  max-height: 80vh;
   box-shadow: 0 2px 10px 3px rgba(0, 0, 0, 0.3);
 }
 .postpage .modal figcaption {
