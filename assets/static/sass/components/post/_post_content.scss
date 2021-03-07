@@ -98,8 +98,12 @@
     margin-top: 2rem;
   }
 
-  li p:last-of-type {
-    margin-bottom: 0;
+  li :last-child {
+    margin-bottom: 0.4rem;
+  }
+
+  li:not(:last-of-type) {
+    margin-bottom: 0.2rem;
   }
 
   blockquote {

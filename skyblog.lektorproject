@@ -5,7 +5,6 @@ url_style = absolute
 
 [packages]
 lektor-strip-html-tags = 0.3.1
-lektor-markdown-header-anchors = 0.3.1
 lektor-tags = 0.3
 lektor-slugify = 0.4
 lektor-disqus-comments = 0.4.1
