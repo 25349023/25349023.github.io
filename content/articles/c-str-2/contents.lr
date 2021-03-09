@@ -97,6 +97,7 @@ int main(void){
 ~~天啊不是我在說，blogger 首頁的文章預覽圖也太醜了吧 qq，而且是發佈後才知道~~  
 （新網站就沒這個問題ㄌ）
 
+----
 
 參考資料：
 1. [cppreference - strcpy](http://en.cppreference.com/w/c/string/byte/strcpy)

@@ -145,6 +145,8 @@ Lt = [[0] * 3 for i in range(3)]
 
 就這樣了！感謝大家的閱讀，如果有疑慮或指正歡迎留言提出。
 
+----
+
 參考資料：
 1. Python 3.5 技術手冊（林信良著，2016）
 2. [Python docs: copy — Shallow and deep copy operations](https://docs.python.org/3/library/copy.html)

@@ -57,6 +57,8 @@ ptr2: herto world
 
 ! 筆者使用的編譯器：g++ 7.5.0（Ubuntu 18.04）
 
+----
+
 參考資料：
 1. [cppreference - const_cast](https://en.cppreference.com/w/cpp/language/const_cast)
 2. [[C++] 標準類型轉換](http://windsplife.blogspot.tw/2010/09/cstaticcast-dynamiccast-reinterpretcast.html) 中的 const_cast 部分

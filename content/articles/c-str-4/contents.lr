@@ -1,0 +1,101 @@
+title: [C] 每天來點字串用法 (4) － strchr、strrchr、strstr
+---
+author: Sky
+---
+body:
+
+就直接進入正題吧，今天要講的是：
+
+# 字串搜尋
+
+## `strchr`、`strrchr`：字串中搜尋字元
+
+所屬標頭檔：`<string.h>`  
+函式宣告：
+```c
+char *strchr( const char *str, int ch );
+char *strrchr( const char *str, int ch );
+```
+先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 `int`，但 `char` 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳**第一個** ch 的所在位址；如果找不到，回傳 `NULL`。
+
+而這兩個函式的差別在於：`strchr()` 是從前面開始找 ch，而 `strrchr()` 則是從後面開始找。
+
+這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
+
+另外，如果你想找 `\0` 這個字元的話也是可以的，反正一個字串一定會有一個 `\0` 嘛。
+
+我們可以看看下面的範例：給定一個 DNA 序列，把其中的 `T` 全部換成 `U`，使其成為合法的 RNA 序列。（轉錄什麼的不重要啦 XD）
+```c,=
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char s1[16];
+    scanf("%s", s1);  // 可以輸入 ATAGCTACTG 看看
+    char *ptr = s1;
+    while (ptr != NULL){
+        ptr = strchr(s1, 'T');
+        if (ptr){
+            *ptr = 'U';  // 取得或修改 ptr 指到的字元
+        }
+    }
+
+    printf("%s\n", s1);  // 輸出 AUAGCUACUG
+
+    return 0;
+}
+```
+這裡請特別注意 8 ～ 11 行，我想多介紹一些字串的用法。
+
+首先是第 8 和 10 行，因為 `NULL` 的值是 0，所以我們可以利用 C 的特性：非零數值皆為真，只有 0 為假，來進行判斷式的簡化，也就是說，當 start、ptr 並不是指向 `NULL` 時，就會回傳真，代表有東西要處理，反之回傳假，代表可以結束了。
+
+其次是行 11，如果我們使用「`*`」來對指向字串的字元指標取值，就會只取到開頭的第一個字元，而我們也可以對其修改，把其他字元指定給它。
+
+這次還要介紹另一個函式：`strstr`，詳細如下。
+
+## `strstr`：字串中搜尋字串
+
+所屬標頭檔：`<string.h>`  
+函式宣告：
+```c
+char *strstr( const char* str, const char* substr );
+```
+這個函式會在 str 中尋找 substr，一樣回傳 substr 的第一個出現位址，如果沒找到的話則是 `NULL`。
+
+直接看範例吧：在一串 RNA 序列中找到起始密碼子 `"AUG"`，並輸出只留下 `"AUG"` 以及其後剩餘的 RNA 序列。 
+```c,=
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char s1[32];
+    scanf("%s", s1);  // ACUGCUAUGCUACAGUG
+    char *ptr = strstr(s1, "AUG");
+    if (ptr){
+        printf("%s\n", ptr);  // AUGCUACAGUG
+    }
+
+    return 0;
+}
+```
+
+## Undefined Behavior
+
+這次會出現 undefined behavior 的情況只有一種：當傳入函式的字串（`strchr()`、`strrchr()` 的 str，還有 `strstr()` 的 str、substr）不是以 `\0` 結尾的話就會發生。
+
+----
+
+參考資料：
+
+1. [cppreference - strchr](https://en.cppreference.com/w/c/string/byte/strchr)
+2. [cppreference - strrchr](https://en.cppreference.com/w/c/string/byte/strrchr)
+3. [cppreference - strstr](https://en.cppreference.com/w/c/string/byte/strstr)
+4. 我的腦袋
+
+
+---
+popular: 70
+---
+pub_date: 2021-03-09
+---
+tags: C - 字串

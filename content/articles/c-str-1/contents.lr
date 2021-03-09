@@ -37,6 +37,7 @@ int main(){
 
 之後應該每兩天（說好的每天呢）會更新一篇文章，而每五篇我會把它統合在一篇內，以免我的部落格太雜亂。
 
+----
 
 參考資料：
 1. [cppreference - strlen](https://en.cppreference.com/w/c/string/byte/strlen)
