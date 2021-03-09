@@ -1,6 +1,7 @@
 [project]
 name = skyblog
 excluded_assets = *.html
+url = https://25349023.github.io/
 url_style = absolute
 
 [packages]
