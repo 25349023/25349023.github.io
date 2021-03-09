@@ -104,17 +104,17 @@
     <ul class="toc">
       
         
-          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi-159"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
+          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi-191"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
             <ul>
         
-          <li><a href="#undefined-behavior-160">Undefined Behavior</a>
+          <li><a href="#undefined-behavior-192">Undefined Behavior</a>
             <ul>
         
-          <li><a href="#strcpy-161"><code>strcpy</code></a></li>
+          <li><a href="#strcpy-193"><code>strcpy</code></a></li>
         
       
         
-          <li><a href="#strncpy-162"><code>strncpy</code></a></li>
+          <li><a href="#strncpy-194"><code>strncpy</code></a></li>
         
       </ul></li>
         
@@ -141,7 +141,7 @@
   <section class="post-content">
     <p>結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）<br>
 進入正文吧，今天要介紹的是：</p>
-<h1 id="strcpy-strncpy-zi-chuan-fu-zhi-159"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+<h1 id="strcpy-strncpy-zi-chuan-fu-zhi-191"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
 <pre><code class="language-c">char *strcpy( char *dest, const char *src );
 char *strncpy( char *dest, const char *src, size_t count );</code></pre>
@@ -192,21 +192,22 @@ int main(void){
 
     return 0;
 }</code></pre>
-<h2 id="undefined-behavior-160">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
-<h3 id="strcpy-161"><code>strcpy</code></h3><ol>
+<h2 id="undefined-behavior-192">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
+<h3 id="strcpy-193"><code>strcpy</code></h3><ol>
 <li>緩衝區溢位（其實是 dest 不夠長）</li>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 指到的不是一個字元陣列</li>
 <li>如果 src 指向的字串沒有以 <code>\0</code> 結尾</li>
 </ol>
-<h3 id="strncpy-162"><code>strncpy</code></h3><ol>
+<h3 id="strncpy-194"><code>strncpy</code></h3><ol>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 或 src 其中一個不是指向一個字串</li>
 <li>如果 dest 不夠長（比 count 短）</li>
 <li>如果 src 比 count 短而且 src 沒有以 <code>\0</code> 結尾</li>
 </ol>
-<div class="admonition admonition-note"><p>其實這個部分在 C99 已受到限制：宣告中新增了 restrict 關鍵字，關於這個關鍵字有興趣的人可以自己查查看</p></div><p><del>天啊不是我在說，blogger 首頁的文章預覽圖也太醜了吧 qq，而且是發佈後才知道</del><br>
+<div class="admonition admonition-note"><p>其實這個部分在 C99 已受到限制：宣告中新增了 <code>restrict</code> 關鍵字，對於這個關鍵字有興趣的人可以自己查查看。</p></div><p><del>天啊不是我在說，blogger 首頁的文章預覽圖也太醜了吧 qq，而且是發佈後才知道</del><br>
 （新網站就沒這個問題ㄌ）</p>
+<hr>
 <p>參考資料：</p>
 <ol>
 <li><a href="http://en.cppreference.com/w/c/string/byte/strcpy">cppreference - strcpy</a></li>

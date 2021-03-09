@@ -104,7 +104,7 @@
     <ul class="toc">
       
         
-          <li><a href="#you-const-char-zhuan-cheng-char-152">由 <code>const char*</code> 轉成 <code>char*</code></a></li>
+          <li><a href="#you-const-char-zhuan-cheng-char-184">由 <code>const char*</code> 轉成 <code>char*</code></a></li>
         
       
     </ul>
@@ -127,7 +127,7 @@
   <section class="post-content">
     <p>這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）<br>
 今天帶來的不是函式，而是一個小技巧：</p>
-<h1 id="you-const-char-zhuan-cheng-char-152">由 <code>const char*</code> 轉成 <code>char*</code></h1><p>有時候可能在將字串傳入函式時，會出現以下錯誤：</p>
+<h1 id="you-const-char-zhuan-cheng-char-184">由 <code>const char*</code> 轉成 <code>char*</code></h1><p>有時候可能在將字串傳入函式時，會出現以下錯誤：</p>
 <pre><code class="language-text">error: invalid conversion from &#x27;const char*&#x27; to &#x27;char*&#x27;
 note: expected &#x27;char *&#x27; but argument is of type &#x27;const char *&#x27;</code></pre>
 <p>這是因為 <code>const char*</code> 沒辦法自動轉換成 <code>char*</code>，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：</p>
@@ -165,7 +165,8 @@ ptr1: herlo world
 ptr2: herto world
 (after) str: herlo world</code></pre>
 <p>這裡我們使用 <code>std::string.c_str()</code> 方法來取得 <code>const char*</code>，並依照上面所說的 2. 和 3. 來進行型別間的轉換。但這裡並不保證在每個編譯器之下都會有相同的輸出，因為在行 14 的地方出現了 undefined behavior。</p>
-<div class="admonition admonition-note"><p>筆者使用的編譯器：g++ 7.5.0（Ubuntu 18.04）</p></div><p>參考資料：</p>
+<div class="admonition admonition-note"><p>筆者使用的編譯器：g++ 7.5.0（Ubuntu 18.04）</p></div><hr>
+<p>參考資料：</p>
 <ol>
 <li><a href="https://en.cppreference.com/w/cpp/language/const_cast">cppreference - const_cast</a></li>
 <li><a href="http://windsplife.blogspot.tw/2010/09/cstaticcast-dynamiccast-reinterpretcast.html">[C++] 標準類型轉換</a> 中的 const_cast 部分</li>

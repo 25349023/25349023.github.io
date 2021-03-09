@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C] 每天來點字串用法 (1) － strlen - skyblog</title>
+  <title>[C] 每天來點字串用法 (5) － strcat、strncat - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -104,7 +104,21 @@
     <ul class="toc">
       
         
-          <li><a href="#strlen-zi-chuan-chang-du-195"><code>strlen</code>：字串長度</a></li>
+          <li><a href="#strcat-strncat-chuan-jie-zi-chuan-167"><code>strcat</code>、<code>strncat</code>：串接字串</a>
+            <ul>
+        
+          <li><a href="#undefined-behavior-168">Undefined Behavior</a>
+            <ul>
+        
+          <li><a href="#strcat-169"><code>strcat</code></a></li>
+        
+      
+        
+          <li><a href="#strncat-170"><code>strncat</code></a></li>
+        
+      </ul></li>
+        
+      </ul></li>
         
       
     </ul>
@@ -115,43 +129,75 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (1) － strlen</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (5) － strcat、strncat</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 02 - 26
+        <i class="fas fa-at"></i> 2021 - 03 - 10
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。</p>
-<h1 id="strlen-zi-chuan-chang-du-195"><code>strlen</code>：字串長度</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+    <p>好的，不知道又過了幾天（廢），終於要來到第 5 篇了。</p>
+<h1 id="strcat-strncat-chuan-jie-zi-chuan-167"><code>strcat</code>、<code>strncat</code>：串接字串</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
-<pre><code class="language-c">size_t strlen( const char *str );</code></pre>
-<p>傳入一個字串 str，回傳這個字串的長度，而 <code>\0</code> 不計入長度（但 <code>\n</code> 計入）。其中的回傳值型態 <code>size_t</code> 通常是無號整數型別。</p>
-<p>以下這個程式示範了 <code>strlen()</code> 的用法：</p>
+<pre><code class="language-c">char *strcat( char *dest, const char *src );
+char *strncat( char *dest, const char *src, size_t count );</code></pre>
+<p>看到這熟悉的命名，該不會跟 <code>strcpy()</code>、<code>strncpy()</code> 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 <code>strcat()</code>。</p>
+<p><code>strcat()</code> 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 <code>\0</code> 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 <code>src[0]</code>）所取代，並在最後面補上一個 <code>\0</code> 來當做新字串的結束字元。</p>
+<p>看到名字多了一個 n 的函式，你可能會猜，是不是這個 <code>strcat()</code> 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：<code>strncat()</code>。</p>
+<p>如果有看過之前<a href="/articles/2021-03/c-str-2/">那一篇</a>的話，應該都已經知道這個函式要怎麼用了，他會多接受一個整數，作為控制最多串接的字元數。不過這裡的機制跟 <code>strcpy()</code> 有點不一樣：</p>
+<ul>
+<li>無論如何都會在最後放一個 <code>\0</code>，而這個 <code>\0</code> <strong>並不受 count 的限制</strong>。也就是說，真正串接字元數的最大值其實是 <strong>count + 1</strong>。</li>
+</ul>
+<p>讓我們來看看他們的使用範例：</p>
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
 
 int main(){
-    char s1[16], s2[16];
-    char *s3 = s2;
-    char s4[] = &quot;happy new year\n&quot;;
-    scanf(&quot;%s&quot;, s1);
-    printf(&quot;s1: %d\n&quot;, strlen(s1));
-    scanf(&quot;%s&quot;, s3);
-    printf(&quot;s3: %d\n&quot;, strlen(s3));
-    printf(&quot;s4: %d\n&quot;, strlen(s4));
+    // strcat
+    char s1[8] = &quot;hi &quot;, s2[8] = &quot;sky&quot;;
+    strcat(s1, s2);
+    printf(&quot;%s\n\n&quot;, s1);
+
+    // strncat
+    char s3[8], s4[8];
+    scanf(&quot;%s%s&quot;, s4, s3);
+    printf(&quot;s3: %s\ns4: %s\n&quot;, s3, s4);
+    strncat(s4, s3, 4);
+    printf(&quot;s3: %s\ns4: %s\n&quot;, s3, s4);
 
     return 0;
 }</code></pre>
-<p>藉由 s4 可以得知，空格和換行字元都計入長度。</p>
-<p>之後應該每兩天（說好的每天呢）會更新一篇文章，而每五篇我會把它統合在一篇內，以免我的部落格太雜亂。</p>
+<p><code>strncat()</code> 部分的輸入可分別使用以下四種：</p>
+<pre><code class="language-text">1234 123
+1234 1234
+1234 12345
+12345 12345</code></pre>
+<p>至於結果會如何，就請大家自己試一試囉XD<br>
+這裡需要知道的地方是，s3 和 s4 的記憶體配置情況，通常會是像下圖這樣：</p>
+<p><img src="/articles/2021-03/c-str-5/cstr-3.png" alt="allocation of s3, s4"></p>
+<h2 id="undefined-behavior-168">Undefined Behavior</h2><p>在使用這兩個函式時，也可能會造成 undefined behavior，以下列舉出可能的情況：</p>
+<h3 id="strcat-169"><code>strcat</code></h3><ol>
+<li>緩衝區溢位（其實是 dest 不夠長）</li>
+<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
+<li>如果 dest 或是 src 指向的字串沒有以 <code>\0</code> 結尾</li>
+</ol>
+<h3 id="strncat-170"><code>strncat</code></h3><ol>
+<li>dest 不夠長</li>
+<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
+<li>如果 src 不是指向一個字串</li>
+<li>如果 dest 指向的字串沒有以 <code>\0</code> 結尾</li>
+</ol>
+<div class="admonition admonition-note"><p>這個部分在 C99 已受到限制：宣告中新增了 <code>restrict</code> 關鍵字，對於這個關鍵字有興趣的人可以自己查查看。</p></div><p>其實這次我對 <code>strncat()</code> 那邊的解說有點不太滿意，但也想不出能更簡潔說明的方法了qwq，希望大家還是能透過實作一次了解這個函式的特色。</p>
+<p><del>另外，最近的更新頻率應該會降低許多（好像從來沒有高過），因為開學了而且還要準備升大學的資料。總之，就加油吧！</del> （三年前）</p>
 <hr>
 <p>參考資料：</p>
 <ol>
-<li><a href="https://en.cppreference.com/w/c/string/byte/strlen">cppreference - strlen</a></li>
-<li>我的腦袋</li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/strcat">cppreference - strcat</a></li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/strncat">cppreference - strncat</a></li>
+<li>最近有點混亂的腦袋</li>
 </ol>
 
   </section>
@@ -170,7 +216,7 @@ int main(){
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/c-str-1"; this.page.url = "https://25349023.github.io/articles/2021-02/c-str-1/"; };
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-5"; this.page.url = "https://25349023.github.io/articles/2021-03/c-str-5/"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -187,18 +233,11 @@ int main(){
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-03/c-str-2/">
-          <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-02/c-str-0/">
-          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法（基本篇）</h3>
+        <a href="/articles/2021-03/c-str-4/">
+          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h3>
         </a>
       </div>
     

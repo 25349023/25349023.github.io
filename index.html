@@ -106,6 +106,40 @@
         </div>
         
           
+  <a href="/articles/2021-03/c-str-5/" class="card">
+    <h3>[C] 每天來點字串用法 (5) － strcat、strncat</h3>
+    <p class="preview">
+      好的，不知道又過了幾天（廢），終於要來到第 5 篇了。
+strcat、strncat：串接字串所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strcat( char *dest, const char *src );
+char *strncat( char *dest, const char *src, size_t count );
+看到這熟悉的命名，該不會跟 strcpy()、strncpy() 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 strcat()。
+strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 \0 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 src[0]）所取代，並在最後面補上一個 \0 來當做新字串的結束字元。
+看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat()...
+    </p>
+  </a>
+
+        
+          
+  <a href="/articles/2021-03/c-str-4/" class="card">
+    <h3>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h3>
+    <p class="preview">
+      就直接進入正題吧，今天要講的是：
+字串搜尋strchr、strrchr：字串中搜尋字元所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strchr( const char *str, int ch );
+char *strrchr( const char *str, int ch );
+先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 int，但 char 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳第一個 ch 的所在位址；如果找不到，回傳 NULL。
+而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
+這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
+另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
+我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-03/algo-dfs-permutation/" class="card">
     <h3>[演算法] [C++ / Python] 當 DFS 遇上排列</h3>
     <p class="preview">
@@ -145,51 +179,6 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
 使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
 
 下面這裡提供 2. 和...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-03/py-var-ref/" class="card">
-    <h3>[Python] 關於變數與參考的二三事</h3>
-    <p class="preview">
-      寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！
-變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：
-x = 1
-就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
-print(id(x))  # 94526375507712
-我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
-這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
-進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-03/c-str-2/" class="card">
-    <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
-    <p class="preview">
-      結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
-進入正文吧，今天要介紹的是：
-strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-char *strcpy( char *dest, const char *src );
-char *strncpy( char *dest, const char *src, size_t count );
-先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
-
-第一個參數是目的地（dest），第二個是來源（src）
-會有緩衝區溢位（buffer overflow）的問題
-
-來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
-int i = 5;
-char s[8] = &amp;quot;Hi 1234&amp;quot;;
-那麼這些變數的記憶體配置可能如下：
-
-如果今天我們進行了如下操作：
-strcpy(s, &amp;quot;hello sky&amp;quot;);
-那麼記憶體裡的內容就會變成如下：
-
-於是這時 i...
     </p>
   </a>
 
@@ -269,25 +258,19 @@ strcpy(s, &amp;quot;hello sky&amp;quot;);
 
         
           
-  <a href="/articles/2021-03/algo-dfs-permutation/" class="card">
-    <h3>[演算法] [C++ / Python] 當 DFS 遇上排列</h3>
+  <a href="/articles/2021-03/c-str-4/" class="card">
+    <h3>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h3>
     <p class="preview">
-      深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。
-剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！
-蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！
-C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, &amp;quot;布&amp;quot;};
-bool visited[3] = {false};
-string arrangement[3];
-
-void dfs(int layer){
-    if (layer == 3){
-        for (int i = 0; i &amp;lt; 3; i++){
-            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
-        }
-        cout &amp;lt;&amp;lt; endl;
-        return;
-    }
-    for...
+      就直接進入正題吧，今天要講的是：
+字串搜尋strchr、strrchr：字串中搜尋字元所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strchr( const char *str, int ch );
+char *strrchr( const char *str, int ch );
+先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 int，但 char 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳第一個 ch 的所在位址；如果找不到，回傳 NULL。
+而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
+這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
+另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
+我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成...
     </p>
   </a>
 

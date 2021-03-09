@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C] 每天來點字串用法 (1) － strlen - skyblog</title>
+  <title>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -104,7 +104,20 @@
     <ul class="toc">
       
         
-          <li><a href="#strlen-zi-chuan-chang-du-195"><code>strlen</code>：字串長度</a></li>
+          <li><a href="#zi-chuan-sou-xun-171">字串搜尋</a>
+            <ul>
+        
+          <li><a href="#strchr-strrchr-zi-chuan-zhong-sou-xun-zi-yuan-172"><code>strchr</code>、<code>strrchr</code>：字串中搜尋字元</a></li>
+        
+      
+        
+          <li><a href="#strstr-zi-chuan-zhong-sou-xun-zi-chuan-173"><code>strstr</code>：字串中搜尋字串</a></li>
+        
+      
+        
+          <li><a href="#undefined-behavior-174">Undefined Behavior</a></li>
+        
+      </ul></li>
         
       
     </ul>
@@ -115,42 +128,73 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (1) － strlen</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 02 - 26
+        <i class="fas fa-at"></i> 2021 - 03 - 09
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>第一天就來個比較簡單又實用的函式好了，不然我怕我堅持不下去（誤）。</p>
-<h1 id="strlen-zi-chuan-chang-du-195"><code>strlen</code>：字串長度</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+    <p>就直接進入正題吧，今天要講的是：</p>
+<h1 id="zi-chuan-sou-xun-171">字串搜尋</h1><h2 id="strchr-strrchr-zi-chuan-zhong-sou-xun-zi-yuan-172"><code>strchr</code>、<code>strrchr</code>：字串中搜尋字元</h2><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
-<pre><code class="language-c">size_t strlen( const char *str );</code></pre>
-<p>傳入一個字串 str，回傳這個字串的長度，而 <code>\0</code> 不計入長度（但 <code>\n</code> 計入）。其中的回傳值型態 <code>size_t</code> 通常是無號整數型別。</p>
-<p>以下這個程式示範了 <code>strlen()</code> 的用法：</p>
+<pre><code class="language-c">char *strchr( const char *str, int ch );
+char *strrchr( const char *str, int ch );</code></pre>
+<p>先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 <code>int</code>，但 <code>char</code> 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳<strong>第一個</strong> ch 的所在位址；如果找不到，回傳 <code>NULL</code>。</p>
+<p>而這兩個函式的差別在於：<code>strchr()</code> 是從前面開始找 ch，而 <code>strrchr()</code> 則是從後面開始找。</p>
+<p>這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。</p>
+<p>另外，如果你想找 <code>\0</code> 這個字元的話也是可以的，反正一個字串一定會有一個 <code>\0</code> 嘛。</p>
+<p>我們可以看看下面的範例：給定一個 DNA 序列，把其中的 <code>T</code> 全部換成 <code>U</code>，使其成為合法的 RNA 序列。（轉錄什麼的不重要啦 XD）</p>
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
 
 int main(){
-    char s1[16], s2[16];
-    char *s3 = s2;
-    char s4[] = &quot;happy new year\n&quot;;
-    scanf(&quot;%s&quot;, s1);
-    printf(&quot;s1: %d\n&quot;, strlen(s1));
-    scanf(&quot;%s&quot;, s3);
-    printf(&quot;s3: %d\n&quot;, strlen(s3));
-    printf(&quot;s4: %d\n&quot;, strlen(s4));
+    char s1[16];
+    scanf(&quot;%s&quot;, s1);  // 可以輸入 ATAGCTACTG 看看
+    char *ptr = s1;
+    while (ptr != NULL){
+        ptr = strchr(s1, &#x27;T&#x27;);
+        if (ptr){
+            *ptr = &#x27;U&#x27;;  // 取得或修改 ptr 指到的字元
+        }
+    }
+
+    printf(&quot;%s\n&quot;, s1);  // 輸出 AUAGCUACUG
 
     return 0;
 }</code></pre>
-<p>藉由 s4 可以得知，空格和換行字元都計入長度。</p>
-<p>之後應該每兩天（說好的每天呢）會更新一篇文章，而每五篇我會把它統合在一篇內，以免我的部落格太雜亂。</p>
+<p>這裡請特別注意 8 ～ 11 行，我想多介紹一些字串的用法。</p>
+<p>首先是第 8 和 10 行，因為 <code>NULL</code> 的值是 0，所以我們可以利用 C 的特性：非零數值皆為真，只有 0 為假，來進行判斷式的簡化，也就是說，當 start、ptr 並不是指向 <code>NULL</code> 時，就會回傳真，代表有東西要處理，反之回傳假，代表可以結束了。</p>
+<p>其次是行 11，如果我們使用「<code>*</code>」來對指向字串的字元指標取值，就會只取到開頭的第一個字元，而我們也可以對其修改，把其他字元指定給它。</p>
+<p>這次還要介紹另一個函式：<code>strstr</code>，詳細如下。</p>
+<h2 id="strstr-zi-chuan-zhong-sou-xun-zi-chuan-173"><code>strstr</code>：字串中搜尋字串</h2><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+函式宣告：</p>
+<pre><code class="language-c">char *strstr( const char* str, const char* substr );</code></pre>
+<p>這個函式會在 str 中尋找 substr，一樣回傳 substr 的第一個出現位址，如果沒找到的話則是 <code>NULL</code>。</p>
+<p>直接看範例吧：在一串 RNA 序列中找到起始密碼子 <code>"AUG"</code>，並輸出只留下 <code>"AUG"</code> 以及其後剩餘的 RNA 序列。</p>
+<pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(){
+    char s1[32];
+    scanf(&quot;%s&quot;, s1);  // ACUGCUAUGCUACAGUG
+    char *ptr = strstr(s1, &quot;AUG&quot;);
+    if (ptr){
+        printf(&quot;%s\n&quot;, ptr);  // AUGCUACAGUG
+    }
+
+    return 0;
+}</code></pre>
+<h2 id="undefined-behavior-174">Undefined Behavior</h2><p>這次會出現 undefined behavior 的情況只有一種：當傳入函式的字串（<code>strchr()</code>、<code>strrchr()</code> 的 str，還有 <code>strstr()</code> 的 str、substr）不是以 <code>\0</code> 結尾的話就會發生。</p>
 <hr>
 <p>參考資料：</p>
 <ol>
-<li><a href="https://en.cppreference.com/w/c/string/byte/strlen">cppreference - strlen</a></li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/strchr">cppreference - strchr</a></li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/strrchr">cppreference - strrchr</a></li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/strstr">cppreference - strstr</a></li>
 <li>我的腦袋</li>
 </ol>
 
@@ -170,7 +214,7 @@ int main(){
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/c-str-1"; this.page.url = "https://25349023.github.io/articles/2021-02/c-str-1/"; };
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-4"; this.page.url = "https://25349023.github.io/articles/2021-03/c-str-4/"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -189,16 +233,16 @@ int main(){
     
       <div class="next">
         <span>Next Post</span>
-        <a href="/articles/2021-03/c-str-2/">
-          <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy <i class="fas fa-chevron-right"></i></h3>
+        <a href="/articles/2021-03/c-str-5/">
+          <h3>[C] 每天來點字串用法 (5) － strcat、strncat <i class="fas fa-chevron-right"></i></h3>
         </a>
       </div>
     
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-02/c-str-0/">
-          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法（基本篇）</h3>
+        <a href="/articles/2021-03/algo-dfs-permutation/">
+          <h3><i class="fas fa-chevron-left"></i> [演算法] [C++ / Python] 當 DFS 遇上排列</h3>
         </a>
       </div>
     
