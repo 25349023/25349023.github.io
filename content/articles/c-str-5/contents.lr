@@ -1,0 +1,95 @@
+title: [C] 每天來點字串用法 (5) － strcat、strncat
+---
+author: Sky
+---
+body:
+
+好的，不知道又過了幾天（廢），終於要來到第 5 篇了。
+
+# `strcat`、`strncat`：串接字串
+
+所屬標頭檔：`<string.h>`  
+函式宣告：
+```c
+char *strcat( char *dest, const char *src );
+char *strncat( char *dest, const char *src, size_t count );
+```
+看到這熟悉的命名，該不會跟 `strcpy()`、`strncpy()` 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 `strcat()`。
+
+`strcat()` 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 `\0` 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 `src[0]`）所取代，並在最後面補上一個 `\0` 來當做新字串的結束字元。
+
+看到名字多了一個 n 的函式，你可能會猜，是不是這個 `strcat()` 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：`strncat()`。
+
+如果有看過之前[那一篇](../c-str-2/)的話，應該都已經知道這個函式要怎麼用了，他會多接受一個整數，作為控制最多串接的字元數。不過這裡的機制跟 `strcpy()` 有點不一樣：
+
+- 無論如何都會在最後放一個 `\0`，而這個 `\0` **並不受 count 的限制**。也就是說，真正串接字元數的最大值其實是 **count + 1**。
+
+讓我們來看看他們的使用範例：
+```c,=
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    // strcat
+    char s1[8] = "hi ", s2[8] = "sky";
+    strcat(s1, s2);
+    printf("%s\n\n", s1);
+
+    // strncat
+    char s3[8], s4[8];
+    scanf("%s%s", s4, s3);
+    printf("s3: %s\ns4: %s\n", s3, s4);
+    strncat(s4, s3, 4);
+    printf("s3: %s\ns4: %s\n", s3, s4);
+
+    return 0;
+}
+```
+`strncat()` 部分的輸入可分別使用以下四種：
+```text
+1234 123
+1234 1234
+1234 12345
+12345 12345
+```
+至於結果會如何，就請大家自己試一試囉XD  
+這裡需要知道的地方是，s3 和 s4 的記憶體配置情況，通常會是像下圖這樣：
+
+![allocation of s3, s4](cstr-3.png)
+
+## Undefined Behavior
+
+在使用這兩個函式時，也可能會造成 undefined behavior，以下列舉出可能的情況：
+
+### `strcat`
+
+1. 緩衝區溢位（其實是 dest 不夠長）
+2. dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i>
+3. 如果 dest 或是 src 指向的字串沒有以 `\0` 結尾
+
+### `strncat`
+
+1. dest 不夠長
+2. dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i>
+3. 如果 src 不是指向一個字串
+4. 如果 dest 指向的字串沒有以 `\0` 結尾
+
+! 這個部分在 C99 已受到限制：宣告中新增了 `restrict` 關鍵字，對於這個關鍵字有興趣的人可以自己查查看。
+
+其實這次我對 `strncat()` 那邊的解說有點不太滿意，但也想不出能更簡潔說明的方法了qwq，希望大家還是能透過實作一次了解這個函式的特色。
+
+~~另外，最近的更新頻率應該會降低許多（好像從來沒有高過），因為開學了而且還要準備升大學的資料。總之，就加油吧！~~ （三年前）
+
+----
+
+參考資料：
+1. [cppreference - strcat](https://en.cppreference.com/w/c/string/byte/strcat)
+2. [cppreference - strncat](https://en.cppreference.com/w/c/string/byte/strncat)
+3. 最近有點混亂的腦袋
+
+---
+popular: 60
+---
+pub_date: 2021-03-10
+---
+tags: C - 字串
