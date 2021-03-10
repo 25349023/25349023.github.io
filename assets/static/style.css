@@ -1655,7 +1655,7 @@ aside nav > ul .collapsible-category ul a {
   .postpage article .post-content img {
     max-width: 60%;
   }
-  .postpage article .post-content code, .postpage article .post-content pre code, .postpage article .post-content .number-list {
+  .postpage article .post-content p code, .postpage article .post-content blockquote code, .postpage article .post-content pre code, .postpage article .post-content .number-list {
     font-size: 1.1rem;
   }
   .postpage article .post-content hr {
