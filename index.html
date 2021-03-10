@@ -122,6 +122,29 @@ strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是�
 
         
           
+  <a href="/articles/2021-03/py-arguments/" class="card">
+    <h3>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h3>
+    <p class="preview">
+      在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 *args 和 **kwargs 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。
+函式參數語法基礎預設參數一般的定義方法就不多說了，直接來看有預設值的參數：
+def plus(a, b, c=None):
+    res = a + b + (c if c else 0)
+    return res
+預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。
+但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數吧！  這時候我們可以用「*」來將引數收集到一個 tuple 中。
+* － 收集至 Tuple先來看看範例：
+def plus(*nums):
+    res = 0
+    for i in nums:
+        res += i
+    return res
+透過 * 收集的引數會被放到一個 tuple 中，所以我們可以使用 for 來對它進行迭代。
+這樣就可以理解為什麼要使用...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-03/c-str-4/" class="card">
     <h3>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h3>
     <p class="preview">
@@ -163,26 +186,6 @@ void dfs(int layer){
   </a>
 
         
-          
-  <a href="/articles/2021-03/c-str-3/" class="card">
-    <h3>[C] 每天來點字串用法 (3) － from const char* to char*</h3>
-    <p class="preview">
-      這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）
-今天帶來的不是函式，而是一個小技巧：
-由 const char* 轉成 char*有時候可能在將字串傳入函式時，會出現以下錯誤：
-error: invalid conversion from &amp;#x27;const char*&amp;#x27; to &amp;#x27;char*&amp;#x27;
-note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;const char *&amp;#x27;
-這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
-
-直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
-用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
-使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
-
-下面這裡提供 2. 和...
-    </p>
-  </a>
-
-        
         
         
   
@@ -197,6 +200,29 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
         <div class="card">
           <h2>熱門文章</h2>
         </div>
+        
+          
+  <a href="/articles/2021-03/py-arguments/" class="card">
+    <h3>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h3>
+    <p class="preview">
+      在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 *args 和 **kwargs 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。
+函式參數語法基礎預設參數一般的定義方法就不多說了，直接來看有預設值的參數：
+def plus(a, b, c=None):
+    res = a + b + (c if c else 0)
+    return res
+預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。
+但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數吧！  這時候我們可以用「*」來將引數收集到一個 tuple 中。
+* － 收集至 Tuple先來看看範例：
+def plus(*nums):
+    res = 0
+    for i in nums:
+        res += i
+    return res
+透過 * 收集的引數會被放到一個 tuple 中，所以我們可以使用 for 來對它進行迭代。
+這樣就可以理解為什麼要使用...
+    </p>
+  </a>
+
         
           
   <a href="/articles/2021-02/blog-migration/" class="card">
@@ -253,24 +279,6 @@ strcpy(s, &amp;quot;hello sky&amp;quot;);
 那麼記憶體裡的內容就會變成如下：
 
 於是這時 i...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-03/c-str-4/" class="card">
-    <h3>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h3>
-    <p class="preview">
-      就直接進入正題吧，今天要講的是：
-字串搜尋strchr、strrchr：字串中搜尋字元所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-char *strchr( const char *str, int ch );
-char *strrchr( const char *str, int ch );
-先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 int，但 char 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳第一個 ch 的所在位址；如果找不到，回傳 NULL。
-而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
-這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
-另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
-我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成...
     </p>
   </a>
 

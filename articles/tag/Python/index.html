@@ -105,6 +105,35 @@
     <div class="main-wrapper">
       
         
+  <a href="/articles/2021-03/py-arguments/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h2>
+
+        <time>2021 - 03 - 10</time>
+      </div>
+      <p class="preview">
+        在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 *args 和 **kwargs 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。
+函式參數語法基礎預設參數一般的定義方法就不多說了，直接來看有預設值的參數：
+def plus(a, b, c=None):
+    res = a + b + (c if c else 0)
+    return res
+預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。
+但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數吧！  這時候我們可以用「*」來將引數收集到一個 tuple 中。
+* － 收集至 Tuple先來看看範例：
+def plus(*nums):
+    res = 0
+    for i in nums:
+        res += i
+    return res
+透過 * 收集的引數會被放到一個 tuple 中，所以我們可以使用 for 來對它進行迭代。
+這樣就可以理解為什麼要使用...
+      </p>
+    </article>
+  </a>
+
+      
+        
   <a href="/articles/2021-03/algo-dfs-permutation/" class="post-link">
     <article>
       <div class="info">
