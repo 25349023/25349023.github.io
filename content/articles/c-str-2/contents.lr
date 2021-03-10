@@ -106,6 +106,6 @@ int main(void){
 ---
 popular: 80
 ---
-pub_date: 2021-03-01
+pub_date: 2021-03-01 00:00:00
 ---
 tags: C - 字串
