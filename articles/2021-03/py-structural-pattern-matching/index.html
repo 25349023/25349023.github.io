@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[Python 3.10] 比 switch 更強大：Structural Pattern Matching - skyblog</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/site.webmanifest">
+  <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-266M1NLNKL"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-266M1NLNKL');
+  </script>
+  
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-light.min.css"
+  />
+
+</head>
+
+
+
+<body class="postpage">
+<header>
+  <nav>
+    <ul>
+      <li class="brand">
+        <a href="/"><i class="fas fa-feather"></i> skyblog</a>
+      </li>
+      
+        <li class="option">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="option">
+          <a href="/articles/">Articles</a>
+        </li>
+      
+        <li class="option">
+          <a href="/portfolio/">Portfolio</a>
+        </li>
+      
+        <li class="option">
+          <a href="/#about">About</a>
+        </li>
+      
+      <li id="toggle-navbar"><i class="fas fa-th-large"></i></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner">
+  
+</section>
+
+
+  
+  <section class="toc-wrapper hidden" id="toc">
+    <ul class="toc">
+      
+        
+          <li><a href="#pep-634-structural-pattern-matching-210">PEP 634: Structural Pattern Matching</a>
+            <ul>
+        
+          <li><a href="#or-pattern-yu-as-pattern-211">Or pattern 與 As Pattern</a></li>
+        
+      
+        
+          <li><a href="#yong-bian-shu-lai-bu-zhuo-zi-liao-212">用變數來捕捉資料</a></li>
+        
+      
+        
+          <li><a href="#guard-yong-if-jin-xing-e-wai-pan-duan-213">Guard：用 if 進行額外判斷</a></li>
+        
+      
+        
+          <li><a href="#bi-dui-class-li-de-zi-liao-214">比對 class 裡的資料</a>
+            <ul>
+        
+          <li><a href="#shi-yong-guan-jian-zi-bi-dui-shu-xing-215">使用關鍵字比對屬性</a></li>
+        
+      
+        
+          <li><a href="#bi-dui-nei-jian-xing-bie-216">比對內建型別</a></li>
+        
+      </ul></li>
+        
+      
+        
+          <li><a href="#bi-dui-xu-lie-217">比對序列</a>
+            <ul>
+        
+          <li><a href="#ren-yi-shu-liang-yuan-su-de-bi-dui-218">任意數量元素的比對</a></li>
+        
+      </ul></li>
+        
+      
+        
+          <li><a href="#qi-ta-de-bi-dui-fang-shi-219">其他的比對方式</a></li>
+        
+      </ul></li>
+        
+      
+    </ul>
+  </section>
+
+  <main>
+    <article>
+      
+  
+  <section class="info">
+    <h1 class="title"><i class="fas fa-seedling"></i>[Python 3.10] 比 switch 更強大：Structural Pattern Matching</h1>
+    <div class="meta-data">
+      <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
+      <time class="publish-date">
+        <i class="fas fa-at"></i> 2021 - 03 - 12
+      </time>
+    </div>
+  </section>
+
+  <section class="post-content">
+    <p>幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。</p>
+<p>我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。<br>
+那我們就開始吧！</p>
+<div class="admonition admonition-tip"><p>此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 <a href="https://www.python.org/download/pre-releases/">pre-release</a> 版。<br>
+目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 </p></div><h1 id="pep-634-structural-pattern-matching-210">PEP 634: Structural Pattern Matching</h1><p>這個功能最早是由 <a href="https://www.python.org/dev/peps/pep-0622/">PEP 622</a> 所提出，後來經過討論以及修改，整理成了 <a href="https://www.python.org/dev/peps/pep-0634/">PEP 634</a>，並成為了 Python 3.10 中的一項新功能。</p>
+<p>那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 switch 結構，但功能更強大，反而比較像 Haskell 中的 Pattern Matching。</p>
+<p>我們先從最基本的語法開始：（因為是新功能所以 highlight 還未支援）</p>
+<pre><code class="language-python">match subject:
+    case &lt;pattern_1&gt;:
+        &lt;action_1&gt;
+    case &lt;pattern_2&gt;:
+        &lt;action_2&gt;
+    case &lt;pattern_3&gt;:
+        &lt;action_3&gt;
+    case _:
+        &lt;action_wildcard&gt;</code></pre>
+<p>我們使用 match 關鍵字來表示我們要進行 Structural Pattern Matching。在上面這段程式中，我們會拿 <code>subject</code> 去跟每個 case 後面的 pattern 進行比對，只要遇到符合的 pattern，就會執行該 case 的程式碼，執行完後就離開 match。</p>
+<div class="admonition admonition-note"><p>match 中不會有 Fallthrough 的情況，也就是一個 case 執行完就會離開 match，而不會繼續下一個 case。</p></div><p>接著，注意到上面程式中碼中的最後一個 case，他的 pattern 是一個底線 <code>_</code>，這稱作 wildcard，也就是會 match 所有的情況，當然這個 case 是可省略的。</p>
+<p>我們來看一個簡單的例子：</p>
+<pre class="line-numbers"><code class="language-python">def buy(thing):
+    match thing:
+        case &#x27;apple&#x27;:
+            print(&#x27;It is red.&#x27;)
+        case &#x27;banana&#x27;:
+            print(&#x27;It is yellow.&#x27;)
+        case &#x27;grape&#x27;:
+            print(&#x27;It is purple.&#x27;)
+        case _:
+            print(&#x27;You cannot buy it.&#x27;)
+
+buy(&#x27;grape&#x27;)  # It is purple.
+buy(&#x27;egg&#x27;)    # You cannot buy it.</code></pre>
+<h2 id="or-pattern-yu-as-pattern-211">Or pattern 與 As Pattern</h2><p>上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：</p>
+<pre class="line-numbers"><code class="language-python">def buy(thing):
+    match thing:
+        case &#x27;apple&#x27; | &#x27;banana&#x27; | &#x27;grape&#x27;:
+            print(&#x27;It is a fruit.&#x27;)
+
+buy(&#x27;grape&#x27;)  # It is fruit.
+buy(&#x27;egg&#x27;)    # &lt;Nothing&gt;</code></pre>
+<p>注意到我們使用直線 <code>|</code> 來把不同的 pattern 合起來，這稱做 <strong>Or Pattern</strong>。且這段程式中省略了 wildcard pattern，因此當我們傳入不符合任一 pattern 的字串時（如 <code>'egg'</code>），什麼事都不會發生。</p>
+<p>但這裡有個小麻煩，雖然把 pattern 組合起來很方便，但這樣我們就不能分辨傳入的字串是哪一種了，此時我們可以使用 as 來取得前面比對到的值：</p>
+<pre class="line-numbers"><code class="language-python">def buy(thing):
+    match thing:
+        case (&#x27;apple&#x27; | &#x27;banana&#x27; | &#x27;grape&#x27;) as fruit:
+            print(f&#x27;It is the fruit &quot;{fruit}&quot;.&#x27;)
+
+buy(&#x27;apple&#x27;)  # It is the fruit &quot;apple&quot;.
+buy(&#x27;grape&#x27;)  # It is the fruit &quot;grape&quot;.</code></pre>
+<p>這個語法叫做 <strong>As Pattern</strong>，效果就如這個例子所示。另外，這裡用了 <code>()</code> 把前面的 pattern 包起來，但並不是必要的，只是為了看起來比較清楚而已。</p>
+<p>到目前為止，我們的 pattern 都是 literal，也就是字面的值，看起來跟 C/C++ 的 switch 好像沒太大差別？所以接下來要介紹一種很有趣的 pattern，可以讓我們用變數來比對目標。</p>
+<div class="admonition admonition-note"><p>Literal 不一定要是字串，其他型別的字面值也可以，比如數值、bool、<code>None</code> 也都可以；而比較複雜的序列型態如 list 等雖然也可以用 literal 的方式比對，但因為他還有其他功能，所以會在後面更詳細地說明。</p></div><h2 id="yong-bian-shu-lai-bu-zhuo-zi-liao-212">用變數來捕捉資料</h2><p>假設我們想要對一個二維平面上的座標（tuple）進行比對，判斷它是位於原點、x、y 軸，或其他地方的話，我們可以這樣寫：</p>
+<pre class="line-numbers"><code class="language-python">def where(point):
+    match point:
+        case (0, 0):
+            print(&#x27;Origin&#x27;)
+        case (x, 0):
+            print(f&#x27;X axis with {x=}&#x27;)
+        case (0, y):
+            print(f&#x27;Y axis with {y=}&#x27;)
+        case (x, y):
+            print(f&#x27;XY plane with {x=}, {y=}&#x27;)
+        case _:
+            print(&#x27;Not a point&#x27;)
+
+where((1, 0))  # X axis with x=1
+where((3, 4))  # XY plane with x=3, y=4
+where(&#x27;spam&#x27;)  # Not a point</code></pre>
+<p>可以觀察到在 case 後的 pattern 中，我們使用 <code>x</code> 和 <code>y</code> 來表示未知、任意的值，而只要我們的目標（<code>point</code>）符合該 pattern 的形式，就會進到那個 case 裡，同時 <code>x</code>、<code>y</code> 會<strong>綁定（bind）</strong>到目標中對應的值。</p>
+<p>以 <code>where((1, 0))</code> 為例，第一個符合 <code>(1, 0)</code> 的 pattern 是 <code>(x, 0)</code>，因此進入該 case 且此時 <code>x</code> 變數為 1。</p>
+<h2 id="guard-yong-if-jin-xing-e-wai-pan-duan-213">Guard：用 if 進行額外判斷</h2><p>若我們想要在比對時增加一些額外的條件，我們可以在 pattern 後面使用 if 來判斷，這種語法稱為 <strong>Guard</strong>。</p>
+<p>舉例來說，我們如果想把上面的 where 函式稍微修改，讓他能印出 point 是在座標軸的哪一個方向（正或負），那我們可以這麼寫：（為了簡化所以省略一些 case）</p>
+<pre class="line-numbers"><code class="language-python">def where(point):
+    match point:
+        case (x, 0) if x &gt; 0:
+            print(f&#x27;+X axis with {x=}&#x27;)
+        case (x, 0) if x &lt; 0:
+            print(f&#x27;-X axis with {x=}&#x27;)
+        case (0, y) if y &gt; 0:
+            print(f&#x27;+Y axis with {y=}&#x27;)
+        case (0, y) if y &lt; 0:
+            print(f&#x27;-Y axis with {y=}&#x27;)
+        case (x, y):
+            print(f&#x27;XY plane&#x27;)
+
+where((1, 0))   # +X axis with x=1
+where((-2, 0))  # -X axis with x=-2
+where((0, 3))   # +Y axis with y=3
+where((0, -4))  # -Y axis with y=-4</code></pre>
+<h2 id="bi-dui-class-li-de-zi-liao-214">比對 class 裡的資料</h2><p>到剛剛為止，我們都是對 Python 原生的型別進行比對，那有沒有方法能比對自己寫的 class 物件呢？當然可以，做法也很簡單，讓我們再次以剛剛的座標為例：</p>
+<pre class="line-numbers"><code class="language-python">from dataclasses import dataclass
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+def where(point):
+    match point:
+        case Point(0, 0):
+            print(&#x27;Origin&#x27;)
+        case Point(x, 0):
+            print(f&#x27;X axis with {x=}&#x27;)
+        case Point(0, y):
+            print(f&#x27;Y axis with {y=}&#x27;)
+        case Point():
+            print(f&#x27;Just a point&#x27;)
+        case _:
+            print(&#x27;Not a point&#x27;)
+
+where(Point(1, 0))  # X axis with x=1
+where(Point(3, 4))  # Just a point
+where(&#x27;spam&#x27;)       # Not a point</code></pre>
+<p>這邊有一些重點：</p>
+<ul>
+<li><code>dataclass</code> 的使用：這可以讓 class 實例的屬性擁有<strong>順序</strong>，無需在 pattern 中指定屬性名稱</li>
+<li>第 10 行：我們可以用類似 literal 的方式比對物件</li>
+<li>第 12、14 行：我們也可以搭配變數（這裡的 <code>x</code>、<code>y</code>）來比對</li>
+<li>第 16 行：如果沒有指定屬性引數，則會比對到任何 Point 類別的物件（使用 <code>isinstance()</code> 檢查）</li>
+</ul>
+<h3 id="shi-yong-guan-jian-zi-bi-dui-shu-xing-215">使用關鍵字比對屬性</h3><p>上面的例子使用了 <code>dataclass</code> 來簡化 pattern 的撰寫，但如果我們的類別不是 dataclass 呢？此時，我們可以使用類似關鍵字引數的方式來比對：</p>
+<pre class="line-numbers"><code class="language-python">class Point:  # NOT a Dataclass!!
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+def where(point):
+    match point:
+        case Point(x=0, y=0):
+            print(&#x27;Origin&#x27;)
+        case Point(x=x, y=0):
+            print(f&#x27;X axis with {x=}&#x27;)
+        case Point(x=0, y=y):
+            print(f&#x27;Y axis with {y=}&#x27;)
+        case Point():
+            print(f&#x27;Just a point&#x27;)
+
+where(Point(1, 0))  # X axis with x=1
+where(Point(3, 4))  # Just a point</code></pre>
+<p>可以看到我們使用了 <code>x=</code> 和 <code>y=</code> 來比對物件的屬性。特別注意到 pattern 中的 <code>x=x</code> 以及 <code>y=y</code>，在等號前面的是關鍵字（屬性名），而等號後面是要比對的變數。</p>
+<h3 id="bi-dui-nei-jian-xing-bie-216">比對內建型別</h3><p>如果我們想比對目標是不是某個內建型態的實例，則我們可以這麼做：</p>
+<pre class="line-numbers"><code class="language-python">def typeof(arg):
+    match arg:
+        case bool(x):
+            print(f&#x27;It is bool, {x}&#x27;)
+        case int(x):
+            print(f&#x27;It is int, {x}&#x27;)
+        case str(x):
+            print(f&#x27;It is str, {x!r}&#x27;)
+
+typeof(123)      # It is int, 123
+typeof(&#x27;hello&#x27;)  # It is str, &#x27;hello&#x27;
+typeof(False)    # It is bool, False</code></pre>
+<p>注意這裡一定要先比對 bool 再比對 int，不然 bool 遇到 int 的 case 會直接比對成功（因為 bool 是 int 的子類別）。</p>
+<h2 id="bi-dui-xu-lie-217">比對序列</h2><p>接著要說明如何比對序列類型的物件，像 list 或 tuple。其實我們在前面已經有看過一個簡單的例子了，就是比對座標 tuple 的時候。但事實上，序列的比對不僅僅是那樣，因此我們要在這一節來看一看序列比對的細節，還有一些需要注意的地方。</p>
+<p>首先，使用 <code>()</code> 或 <code>[]</code> 來比對序列是沒有差別的，因此在上面的例子中若是傳入 list 也能比對成功。接著，只要是 <code>collections.abc.Sequence</code> 的實例（除了 <code>str</code>、<code>bytes</code> 或 <code>bytearray</code>）都屬於這裡所指的序列，也就是拿他們比對也可以成功。</p>
+<h3 id="ren-yi-shu-liang-yuan-su-de-bi-dui-218">任意數量元素的比對</h3><p>就像在拆解 tuple 時一樣，我們也可以使用 <code>*</code> 來比對任意數量的元素。比如我們想比對一個指令及後面的參數：</p>
+<pre class="line-numbers"><code class="language-python">def check(command: str):
+    match command.split():
+        case [cmd, *args]:
+            print(f&#x27;command: {cmd}&#x27;)
+            for i, arg in enumerate(args, 1):
+                print(f&#x27;argument #{i}: {arg}&#x27;)
+
+check(&#x27;ls -la ./mydir&#x27;)
+# command: ls
+# argument #1: -la
+# argument #2: ./mydir</code></pre>
+<p>在此例中，多出來的元素都會被收集到 args 裡，然後我們可以用 for 來迭代。</p>
+<div class="admonition admonition-note"><p>這裡的型別提示非必要。</p></div><h2 id="qi-ta-de-bi-dui-fang-shi-219">其他的比對方式</h2><ul>
+<li>巢狀 Pattern：我們可以隨意組合上面的不同 pattern 來比對目標</li>
+<li>wildcard：除了單獨使用在一個 case 中，我們也可以放在前面提到的 pattern 裡，當作單個任意值</li>
+<li><p>常數比對：我們也可以比對一個不是 literal 的值（也就是存在變數中），只要該變數名字中有 <code>.</code> 即可（如 <code>math.pi</code>）</p>
+<div class="admonition admonition-note"><p>一般的變數（名字中沒有 <code>.</code>）不行，因為會跟前面變數綁定的情況重疊。</p></div></li>
+</ul>
+<p>這次把一些未來可能比較常用的功能都介紹了一輪，還有一些有趣的特色就留到下一篇再來談吧。</p>
+<p>謝謝看到這裡的你，如果有任何問題或回饋，都歡迎在下面留言。</p>
+<hr>
+<p>參考資料：</p>
+<ol>
+<li><a href="https://docs.python.org/3.10/whatsnew/3.10.html#pep-634-structural-pattern-matching">What's New In Python 3.10</a></li>
+<li><a href="https://www.python.org/dev/peps/pep-0634">PEP 634: Specification</a></li>
+<li><a href="https://www.python.org/dev/peps/pep-0636">PEP 636: Tutorial</a></li>
+</ol>
+<p>後記：<br>
+　　原本只是想簡單介紹的，結果一不小心就寫了這麼多（笑）<br>
+　　另外雖然我有說要寫第二篇，但拖到沒空寫的可能性也滿高的XD</p>
+
+  </section>
+  
+  
+    <ul class="tags">
+      <li>
+          <a href="/articles/tag/Python/">
+            Python
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  <div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/articles/py-structural-pattern-matching"; this.page.url = "https://25349023.github.io/articles/2021-03/py-structural-pattern-matching/"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//lecielblog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+  
+  
+  <section class="adjacent-posts">
+    
+    
+      <div class="prev">
+        <span>Prev Post</span>
+        <a href="/articles/2021-03/py-arguments/">
+          <h3><i class="fas fa-chevron-left"></i> [Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h3>
+        </a>
+      </div>
+    
+  </section>
+
+
+    </article>
+  </main>
+
+  <figure class="modal hidden" id="modal">
+    <img src="" alt=""/>
+    <figcaption>Alt text</figcaption>
+  </figure>
+
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="hidden" id="sidebar">
+    <div class="blur"></div>
+    <div class="content">
+      <div class="profile-image"></div>
+      <div class="name">天ほし</div>
+      <nav>
+        <ul>
+          <li class="collapsible-category" id="root-collapsible">
+            <a>Category <i class="fas fa-angle-down"></i></a>
+            
+  
+  <ul>
+    
+    
+      
+      
+        <li class="collapsible-category">
+          <a>C <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/C-Zi-Chuan/"
+        >字串</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Cpp/"
+        >C++</a></li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Python/"
+        >Python</a></li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>演算法 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
+        >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>日常 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
+        >短談</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li><a href="/articles/tag/Test/"
+        >Test</a></li>
+      
+      
+    
+  </ul>
+
+          </li>
+          <li>
+            <a href="mailto:25349023.qq@gmail.com">Contact Me</a>
+          </li>
+          <li>
+            <a href="https://github.com/25349023/"><i class="fab fa-github"></i> GitHub</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <button class="handle"><i class="fas fa-bars"></i></button>
+  </aside>
+
+
+<a href="#" class="scroll-top hidden" id="scroll-top">
+  <i class="fas fa-chevron-up"></i>
+</a>
+<footer>&copy; Copyright 2021 by Skyline Liu.</footer>
+<script src="/static/js/scroll_top.js"></script>
+<script src="/static/js/navbar.js"></script>
+
+  
+  <script src="/static/js/sidebar.js"></script>
+  <script src="/static/js/category.js"></script>
+
+  <script src="/static/js/line_numbers.js"></script>
+  <script src="/static/js/toc.js"></script>
+  <script src="/static/js/post_image.js"></script>
+  <script src="/static/js/modal.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+
+</body>
+</html>

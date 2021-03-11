@@ -106,6 +106,20 @@
         </div>
         
           
+  <a href="/articles/2021-03/py-structural-pattern-matching/" class="card">
+    <h3>[Python 3.10] 比 switch 更強大：Structural Pattern Matching</h3>
+    <p class="preview">
+      幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
+我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。
+那我們就開始吧！
+此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
+目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
+那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-03/py-arguments/" class="card">
     <h3>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h3>
     <p class="preview">
@@ -158,30 +172,6 @@ char *strrchr( const char *str, int ch );
 這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
 另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
 我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-03/algo-dfs-permutation/" class="card">
-    <h3>[演算法] [C++ / Python] 當 DFS 遇上排列</h3>
-    <p class="preview">
-      深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。
-剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！
-蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！
-C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, &amp;quot;布&amp;quot;};
-bool visited[3] = {false};
-string arrangement[3];
-
-void dfs(int layer){
-    if (layer == 3){
-        for (int i = 0; i &amp;lt; 3; i++){
-            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
-        }
-        cout &amp;lt;&amp;lt; endl;
-        return;
-    }
-    for...
     </p>
   </a>
 
@@ -255,30 +245,15 @@ print(id(x))  # 94526375507712
 
         
           
-  <a href="/articles/2021-03/c-str-2/" class="card">
-    <h3>[C] 每天來點字串用法 (2) － strcpy、strncpy</h3>
+  <a href="/articles/2021-03/py-structural-pattern-matching/" class="card">
+    <h3>[Python 3.10] 比 switch 更強大：Structural Pattern Matching</h3>
     <p class="preview">
-      結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
-進入正文吧，今天要介紹的是：
-strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-char *strcpy( char *dest, const char *src );
-char *strncpy( char *dest, const char *src, size_t count );
-先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
-
-第一個參數是目的地（dest），第二個是來源（src）
-會有緩衝區溢位（buffer overflow）的問題
-
-來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
-int i = 5;
-char s[8] = &amp;quot;Hi 1234&amp;quot;;
-那麼這些變數的記憶體配置可能如下：
-
-如果今天我們進行了如下操作：
-strcpy(s, &amp;quot;hello sky&amp;quot;);
-那麼記憶體裡的內容就會變成如下：
-
-於是這時 i...
+      幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
+我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。
+那我們就開始吧！
+此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
+目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
+那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的...
     </p>
   </a>
 

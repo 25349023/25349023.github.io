@@ -101,6 +101,26 @@
     <div class="main-wrapper">
       
         
+  <a href="/articles/2021-03/py-structural-pattern-matching/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[Python 3.10] 比 switch 更強大：Structural Pattern Matching</h2>
+
+        <time>2021 - 03 - 12</time>
+      </div>
+      <p class="preview">
+        幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
+我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。
+那我們就開始吧！
+此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
+目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
+那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的...
+      </p>
+    </article>
+  </a>
+
+      
+        
   <a href="/articles/2021-03/py-arguments/" class="post-link">
     <article>
       <div class="info">
@@ -340,30 +360,6 @@ char *s4 = &amp;quot;hello world&amp;quot;;
 像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
 接著讓我們看看字串的輸出：
 char s1[128] = &amp;quot;hello...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-02/f-string/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[Python 3.6] 初探 f-string</h2>
-
-        <time>2021 - 02 - 23</time>
-      </div>
-      <p class="preview">
-        第一篇技術文章就決定是你了（笑）
-PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧：
-name = &amp;#x27;Sky&amp;#x27;
-print(f&amp;#x27;My name is {name}.&amp;#x27;)
-# &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n:...
       </p>
     </article>
   </a>

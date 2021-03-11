@@ -1514,7 +1514,7 @@ aside nav > ul .collapsible-category ul a {
   margin-left: 1.2rem;
   margin-top: 2rem;
 }
-.postpage article .post-content li :last-child {
+.postpage article .post-content li > :last-child {
   margin-bottom: 0.4rem;
 }
 .postpage article .post-content li:not(:last-of-type) {
@@ -1869,7 +1869,7 @@ aside nav > ul .collapsible-category ul a {
 .postpage .toc > li {
   font-weight: bold;
   font-size: 1.1rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 .postpage .toc > li > a {
   position: relative;
