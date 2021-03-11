@@ -107,7 +107,7 @@
           <li><a href="#pep-634-structural-pattern-matching-210">PEP 634: Structural Pattern Matching</a>
             <ul>
         
-          <li><a href="#or-pattern-yu-as-pattern-211">Or pattern 與 As Pattern</a></li>
+          <li><a href="#or-pattern-yu-as-pattern-211">Or Pattern 與 As Pattern</a></li>
         
       
         
@@ -196,7 +196,7 @@
 
 buy(&#x27;grape&#x27;)  # It is purple.
 buy(&#x27;egg&#x27;)    # You cannot buy it.</code></pre>
-<h2 id="or-pattern-yu-as-pattern-211">Or pattern 與 As Pattern</h2><p>上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：</p>
+<h2 id="or-pattern-yu-as-pattern-211">Or Pattern 與 As Pattern</h2><p>上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：</p>
 <pre class="line-numbers"><code class="language-python">def buy(thing):
     match thing:
         case &#x27;apple&#x27; | &#x27;banana&#x27; | &#x27;grape&#x27;:
