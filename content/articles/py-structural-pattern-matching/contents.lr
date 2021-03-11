@@ -1,0 +1,271 @@
+title: [Python 3.10] 比 switch 更強大：Structural Pattern Matching
+---
+author: Sky
+---
+body:
+
+幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
+
+我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。  
+那我們就開始吧！
+
+!!! 此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 [pre-release](https://www.python.org/download/pre-releases/) 版。  
+目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 
+
+# PEP 634: Structural Pattern Matching
+
+這個功能最早是由 [PEP 622](https://www.python.org/dev/peps/pep-0622/) 所提出，後來經過討論以及修改，整理成了 [PEP 634](https://www.python.org/dev/peps/pep-0634/)，並成為了 Python 3.10 中的一項新功能。
+
+那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 switch 結構，但功能更強大，反而比較像 Haskell 中的 Pattern Matching。
+
+我們先從最基本的語法開始：（因為是新功能所以 highlight 還未支援）
+```python
+match subject:
+    case <pattern_1>:
+        <action_1>
+    case <pattern_2>:
+        <action_2>
+    case <pattern_3>:
+        <action_3>
+    case _:
+        <action_wildcard>
+```
+我們使用 match 關鍵字來表示我們要進行 Structural Pattern Matching。在上面這段程式中，我們會拿 `subject` 去跟每個 case 後面的 pattern 進行比對，只要遇到符合的 pattern，就會執行該 case 的程式碼，執行完後就離開 match。
+
+! match 中不會有 Fallthrough 的情況，也就是一個 case 執行完就會離開 match，而不會繼續下一個 case。
+
+接著，注意到上面程式中碼中的最後一個 case，他的 pattern 是一個底線 `_`，這稱作 wildcard，也就是會 match 所有的情況，當然這個 case 是可省略的。
+
+我們來看一個簡單的例子：
+```python,=
+def buy(thing):
+    match thing:
+        case 'apple':
+            print('It is red.')
+        case 'banana':
+            print('It is yellow.')
+        case 'grape':
+            print('It is purple.')
+        case _:
+            print('You cannot buy it.')
+
+buy('grape')  # It is purple.
+buy('egg')    # You cannot buy it.
+```
+
+## Or pattern 與 As Pattern
+ 
+上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：
+```python,=
+def buy(thing):
+    match thing:
+        case 'apple' | 'banana' | 'grape':
+            print('It is a fruit.')
+
+buy('grape')  # It is fruit.
+buy('egg')    # <Nothing>
+```
+注意到我們使用直線 `|` 來把不同的 pattern 合起來，這稱做 **Or Pattern**。且這段程式中省略了 wildcard pattern，因此當我們傳入不符合任一 pattern 的字串時（如 `'egg'`），什麼事都不會發生。
+
+但這裡有個小麻煩，雖然把 pattern 組合起來很方便，但這樣我們就不能分辨傳入的字串是哪一種了，此時我們可以使用 as 來取得前面比對到的值：
+```python,=
+def buy(thing):
+    match thing:
+        case ('apple' | 'banana' | 'grape') as fruit:
+            print(f'It is the fruit "{fruit}".')
+
+buy('apple')  # It is the fruit "apple".
+buy('grape')  # It is the fruit "grape".
+```
+這個語法叫做 **As Pattern**，效果就如這個例子所示。另外，這裡用了 `()` 把前面的 pattern 包起來，但並不是必要的，只是為了看起來比較清楚而已。
+
+
+到目前為止，我們的 pattern 都是 literal，也就是字面的值，看起來跟 C/C++ 的 switch 好像沒太大差別？所以接下來要介紹一種很有趣的 pattern，可以讓我們用變數來比對目標。
+
+! Literal 不一定要是字串，其他型別的字面值也可以，比如數值、bool、`None` 也都可以；而比較複雜的序列型態如 list 等雖然也可以用 literal 的方式比對，但因為他還有其他功能，所以會在後面更詳細地說明。
+
+## 用變數來捕捉資料
+
+假設我們想要對一個二維平面上的座標（tuple）進行比對，判斷它是位於原點、x、y 軸，或其他地方的話，我們可以這樣寫：
+```python,=
+def where(point):
+    match point:
+        case (0, 0):
+            print('Origin')
+        case (x, 0):
+            print(f'X axis with {x=}')
+        case (0, y):
+            print(f'Y axis with {y=}')
+        case (x, y):
+            print(f'XY plane with {x=}, {y=}')
+        case _:
+            print('Not a point')
+
+where((1, 0))  # X axis with x=1
+where((3, 4))  # XY plane with x=3, y=4
+where('spam')  # Not a point
+```
+可以觀察到在 case 後的 pattern 中，我們使用 `x` 和 `y` 來表示未知、任意的值，而只要我們的目標（`point`）符合該 pattern 的形式，就會進到那個 case 裡，同時 `x`、`y` 會**綁定（bind）**到目標中對應的值。
+
+以 `where((1, 0))` 為例，第一個符合 `(1, 0)` 的 pattern 是 `(x, 0)`，因此進入該 case 且此時 `x` 變數為 1。
+
+## Guard：用 if 進行額外判斷
+
+若我們想要在比對時增加一些額外的條件，我們可以在 pattern 後面使用 if 來判斷，這種語法稱為 **Guard**。
+
+舉例來說，我們如果想把上面的 where 函式稍微修改，讓他能印出 point 是在座標軸的哪一個方向（正或負），那我們可以這麼寫：（為了簡化所以省略一些 case）
+```python,=
+def where(point):
+    match point:
+        case (x, 0) if x > 0:
+            print(f'+X axis with {x=}')
+        case (x, 0) if x < 0:
+            print(f'-X axis with {x=}')
+        case (0, y) if y > 0:
+            print(f'+Y axis with {y=}')
+        case (0, y) if y < 0:
+            print(f'-Y axis with {y=}')
+        case (x, y):
+            print(f'XY plane')
+
+where((1, 0))   # +X axis with x=1
+where((-2, 0))  # -X axis with x=-2
+where((0, 3))   # +Y axis with y=3
+where((0, -4))  # -Y axis with y=-4
+```
+
+## 比對 class 裡的資料
+
+到剛剛為止，我們都是對 Python 原生的型別進行比對，那有沒有方法能比對自己寫的 class 物件呢？當然可以，做法也很簡單，讓我們再次以剛剛的座標為例：
+
+```python,=
+from dataclasses import dataclass
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+def where(point):
+    match point:
+        case Point(0, 0):
+            print('Origin')
+        case Point(x, 0):
+            print(f'X axis with {x=}')
+        case Point(0, y):
+            print(f'Y axis with {y=}')
+        case Point():
+            print(f'Just a point')
+        case _:
+            print('Not a point')
+
+where(Point(1, 0))  # X axis with x=1
+where(Point(3, 4))  # Just a point
+where('spam')       # Not a point
+```
+這邊有一些重點：
+
+- `dataclass` 的使用：這可以讓 class 實例的屬性擁有**順序**，無需在 pattern 中指定屬性名稱
+- 第 10 行：我們可以用類似 literal 的方式比對物件
+- 第 12、14 行：我們也可以搭配變數（這裡的 `x`、`y`）來比對
+- 第 16 行：如果沒有指定屬性引數，則會比對到任何 Point 類別的物件（使用 `isinstance()` 檢查）
+
+### 使用關鍵字比對屬性
+
+上面的例子使用了 `dataclass` 來簡化 pattern 的撰寫，但如果我們的類別不是 dataclass 呢？此時，我們可以使用類似關鍵字引數的方式來比對：
+```python,=
+class Point:  # NOT a Dataclass!!
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+def where(point):
+    match point:
+        case Point(x=0, y=0):
+            print('Origin')
+        case Point(x=x, y=0):
+            print(f'X axis with {x=}')
+        case Point(x=0, y=y):
+            print(f'Y axis with {y=}')
+        case Point():
+            print(f'Just a point')
+
+where(Point(1, 0))  # X axis with x=1
+where(Point(3, 4))  # Just a point
+```
+可以看到我們使用了 `x=` 和 `y=` 來比對物件的屬性。特別注意到 pattern 中的 `x=x` 以及 `y=y`，在等號前面的是關鍵字（屬性名），而等號後面是要比對的變數。
+
+### 比對內建型別
+
+如果我們想比對目標是不是某個內建型態的實例，則我們可以這麼做：
+```python,=
+def typeof(arg):
+    match arg:
+        case bool(x):
+            print(f'It is bool, {x}')
+        case int(x):
+            print(f'It is int, {x}')
+        case str(x):
+            print(f'It is str, {x!r}')
+
+typeof(123)      # It is int, 123
+typeof('hello')  # It is str, 'hello'
+typeof(False)    # It is bool, False
+```
+注意這裡一定要先比對 bool 再比對 int，不然 bool 遇到 int 的 case 會直接比對成功（因為 bool 是 int 的子類別）。
+
+## 比對序列
+
+接著要說明如何比對序列類型的物件，像 list 或 tuple。其實我們在前面已經有看過一個簡單的例子了，就是比對座標 tuple 的時候。但事實上，序列的比對不僅僅是那樣，因此我們要在這一節來看一看序列比對的細節，還有一些需要注意的地方。
+
+首先，使用 `()` 或 `[]` 來比對序列是沒有差別的，因此在上面的例子中若是傳入 list 也能比對成功。接著，只要是 `collections.abc.Sequence` 的實例（除了 `str`、`bytes` 或 `bytearray`）都屬於這裡所指的序列，也就是拿他們比對也可以成功。
+
+### 任意數量元素的比對
+
+就像在拆解 tuple 時一樣，我們也可以使用 `*` 來比對任意數量的元素。比如我們想比對一個指令及後面的參數：
+```python,=
+def check(command: str):
+    match command.split():
+        case [cmd, *args]:
+            print(f'command: {cmd}')
+            for i, arg in enumerate(args, 1):
+                print(f'argument #{i}: {arg}')
+
+check('ls -la ./mydir')
+# command: ls
+# argument #1: -la
+# argument #2: ./mydir
+```
+在此例中，多出來的元素都會被收集到 args 裡，然後我們可以用 for 來迭代。
+
+! 這裡的型別提示非必要。
+
+## 其他的比對方式
+
+- 巢狀 Pattern：我們可以隨意組合上面的不同 pattern 來比對目標
+- wildcard：除了單獨使用在一個 case 中，我們也可以放在前面提到的 pattern 裡，當作單個任意值
+- 常數比對：我們也可以比對一個不是 literal 的值（也就是存在變數中），只要該變數名字中有 `.` 即可（如 `math.pi`）
+    
+    ! 一般的變數（名字中沒有 `.`）不行，因為會跟前面變數綁定的情況重疊。
+
+這次把一些未來可能比較常用的功能都介紹了一輪，還有一些有趣的特色就留到下一篇再來談吧。
+
+謝謝看到這裡的你，如果有任何問題或回饋，都歡迎在下面留言。
+
+----
+
+參考資料：
+1. [What's New In Python 3.10](https://docs.python.org/3.10/whatsnew/3.10.html#pep-634-structural-pattern-matching)
+2. [PEP 634: Specification](https://www.python.org/dev/peps/pep-0634)
+3. [PEP 636: Tutorial](https://www.python.org/dev/peps/pep-0636)
+
+後記：  
+　　原本只是想簡單介紹的，結果一不小心就寫了這麼多（笑）  
+　　另外雖然我有說要寫第二篇，但拖到沒空寫的可能性也滿高的XD
+
+---
+popular: 80
+---
+pub_date: 2021-03-12 00:00:00
+---
+tags: Python
