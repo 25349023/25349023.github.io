@@ -40,9 +40,17 @@
     text-align: right;
     right: 0;
     padding-left: 1rem;
+    font-family: $post-font;
 
     li {
       display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:nth-of-type(n + 1) {
+        margin-top: 0.2rem;
+      }
 
       a {
         text-decoration: none;
@@ -88,7 +96,7 @@
     font-weight: normal;
     font-size: 0.9rem;
     a {
-      color: rgba($postpage-ui-color, 0.7);
+      color: rgba($postpage-ui-color, 0.6);
     }
   }
 }

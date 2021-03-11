@@ -53,7 +53,7 @@ buy('grape')  # It is purple.
 buy('egg')    # You cannot buy it.
 ```
 
-## Or pattern 與 As Pattern
+## Or Pattern 與 As Pattern
  
 上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：
 ```python,=
