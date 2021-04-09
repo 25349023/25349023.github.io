@@ -261,7 +261,7 @@ it's also easy to use Markdown to write about Markdown's own syntax.
 
 ```,=
 tell application "Foo"
-    beep
+    beep<div>
 end tell
 ```
 
@@ -316,6 +316,17 @@ Unlike a pre-formatted code block, a code span indicates code within a
 normal paragraph. For example:
 
 Use the `printf()` function.
+
+### Ruby text block
+
+^^#2255BB
+(図書館)[としょかん]
+% 圖書館
+-##-
+(図|書|館)[と|しょ|かん]
+% 圖書館
+^^
+
 ---
 tags: Test
 ---

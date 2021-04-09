@@ -1599,6 +1599,13 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content del {
   color: rgba(92, 68, 58, 0.6);
 }
+.postpage article .post-content .ruby-line {
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+.postpage article .post-content ruby rt {
+  font-size: 0.5em;
+}
 .postpage article .post-content .fa-sticky-note {
   color: rgba(3, 44, 83, 0.5);
   font-size: 1rem;
