@@ -10,7 +10,7 @@ ruby_pattern = re.compile(r'\((.+?)\)\[(.+?)]')
 
 
 def convert(base, ruby):
-    return f'{base}<rp>(</rp><rt>{ruby}</rt><rp>)</rp>'
+    return f'<ruby>{base}<rp>(</rp><rt>{ruby}</rt><rp>)</rp></ruby>'
 
 
 Convertion = namedtuple('Convertion', 'span text')
@@ -49,9 +49,9 @@ class RubyBlockMixin:
             line = line[:start] + rt + line[end:]
 
         if color is not None:
-            rb_line = f'<span class="ruby-line" style="color: {color};"><ruby>{line}</ruby></span>'
+            rb_line = f'<span class="ruby-line" style="color: {color};">{line}</span>'
         else:
-            rb_line = f'<span class="ruby-line">{line}</span>'
+            rb_line = f'<span class="non-ruby-line">{line}</span>'
 
         return rb_line
 

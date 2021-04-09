@@ -183,9 +183,13 @@
     color: rgba($postpage-ui-color, 0.6);
   }
 
-  .ruby-line {
+  .non-ruby-line, .ruby-line {
     display: inline-block;
     margin-bottom: 0.2rem;
+  }
+
+  .ruby-line {
+    font-weight: bold;
   }
 
   ruby rt {
