@@ -1320,7 +1320,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .articles main .main-wrapper .preview {
   margin: 0;
-  max-height: 12rem;
+  height: 12rem;
   overflow: hidden;
   overflow-wrap: anywhere;
   font-family: "Maven Pro", "FakePearl", sans-serif;
@@ -1598,6 +1598,16 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content del {
   color: rgba(92, 68, 58, 0.6);
+}
+.postpage article .post-content .non-ruby-line, .postpage article .post-content .ruby-line {
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+.postpage article .post-content .ruby-line {
+  font-weight: bold;
+}
+.postpage article .post-content ruby rt {
+  font-size: 0.5em;
 }
 .postpage article .post-content .fa-sticky-note {
   color: rgba(3, 44, 83, 0.5);

@@ -104,17 +104,17 @@
     <ul class="toc">
       
         
-          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi-253"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
+          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi-251"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
             <ul>
         
-          <li><a href="#undefined-behavior-254">Undefined Behavior</a>
+          <li><a href="#undefined-behavior-252">Undefined Behavior</a>
             <ul>
         
-          <li><a href="#strcpy-255"><code>strcpy</code></a></li>
+          <li><a href="#strcpy-253"><code>strcpy</code></a></li>
         
       
         
-          <li><a href="#strncpy-256"><code>strncpy</code></a></li>
+          <li><a href="#strncpy-254"><code>strncpy</code></a></li>
         
       </ul></li>
         
@@ -141,7 +141,7 @@
   <section class="post-content">
     <p>結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）<br>
 進入正文吧，今天要介紹的是：</p>
-<h1 id="strcpy-strncpy-zi-chuan-fu-zhi-253"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+<h1 id="strcpy-strncpy-zi-chuan-fu-zhi-251"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
 <pre><code class="language-c">char *strcpy( char *dest, const char *src );
 char *strncpy( char *dest, const char *src, size_t count );</code></pre>
@@ -192,14 +192,14 @@ int main(void){
 
     return 0;
 }</code></pre>
-<h2 id="undefined-behavior-254">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
-<h3 id="strcpy-255"><code>strcpy</code></h3><ol>
+<h2 id="undefined-behavior-252">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
+<h3 id="strcpy-253"><code>strcpy</code></h3><ol>
 <li>緩衝區溢位（其實是 dest 不夠長）</li>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 指到的不是一個字元陣列</li>
 <li>如果 src 指向的字串沒有以 <code>\0</code> 結尾</li>
 </ol>
-<h3 id="strncpy-256"><code>strncpy</code></h3><ol>
+<h3 id="strncpy-254"><code>strncpy</code></h3><ol>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 或 src 其中一個不是指向一個字串</li>
 <li>如果 dest 不夠長（比 count 短）</li>
@@ -328,6 +328,22 @@ int main(void){
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
         >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
+        >日文</a></li>
       
       
     </ul>

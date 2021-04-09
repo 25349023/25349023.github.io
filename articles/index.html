@@ -101,6 +101,60 @@
     <div class="main-wrapper">
       
         
+  <a href="/articles/2021-04/amayadori-atr/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[歌詞翻譯] 天宿り － After the Rain</h2>
+
+        <time>2021 - 04 - 09</time>
+      </div>
+      <p class="preview">
+        這次（兩年前）試著翻了一直以來都很喜歡的歌 － 天宿り，在聽專輯的 XFD 時就很想聽整首的了，後來無意間找到了這首的音檔，於是我跟這首歌才能相遇(?)，而這篇翻譯也才能誕生(??)
+
+天(あま)宿(やど)り
+
+作詞・作曲：まふまふ
+歌：そらる
+
+強(つよ)がってばかりで　意(い)地(じ)張(は)ってばかりで
+總是在逞強　總是一意孤行
+
+背(せ)は小(ちい)さいままで　夕(ゆう)焼(や)け空(ぞら)　暮(く)れていく
+背影仍然渺小　晚霞中的夕日　逐漸西下
+
+臆(おく)病(びょう)なままだな　泣(な)き虫(むし)なままだな
+依舊懦弱　依舊是愛哭鬼
+
+あぜ道(みち)でふざけた　あの頃(ころ)から変(か)わらない
+鄉間小路的笑鬧　從那刻起就不曾改變
+
+
+いけないこととわかっている
+不被允許的事我一直都知曉
+
+許(ゆる)されないとわかっている
+不被原諒的事我也一直都明白
+
+それでも今日(きょう)は雨(あめ)が降(ふ)るから
+縱然那樣　在今日這下著雨的日子
+
+雨(あま)宿(やど)りをしていこう
+一起去避雨吧
+
+
+ああ
+啊啊
+
+借(か)り物(もの)としても
+即使身為借來之物
+
+今(いま)はた...
+      </p>
+    </article>
+  </a>
+
+      
+        
   <a href="/articles/2021-03/py-structural-pattern-matching/" class="post-link">
     <article>
       <div class="info">
@@ -114,7 +168,7 @@
 那我們就開始吧！
 此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
 目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
-那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的...
+那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 swit...
       </p>
     </article>
   </a>
@@ -143,7 +197,7 @@ def plus(*nums):
         res += i
     return res
 透過 * 收集的引數會被放到一個 tuple 中，所以我們可以使用 for 來對它進行迭代。
-這樣就可以理解為什麼要使用...
+這樣就可以理解為什麼要使用 *arg...
       </p>
     </article>
   </a>
@@ -165,7 +219,8 @@ char *strcat( char *dest, const char *src );
 char *strncat( char *dest, const char *src, size_t count );
 看到這熟悉的命名，該不會跟 strcpy()、strncpy() 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 strcat()。
 strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 \0 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 src[0]）所取代，並在最後面補上一個 \0 來當做新字串的結束字元。
-看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat()...
+看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat() 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：strncat()。
+如果有看過之前...
       </p>
     </article>
   </a>
@@ -189,7 +244,7 @@ char *strrchr( const char *str, int ch );
 而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
 這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
 另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
-我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成...
+我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成 U，使其成為合法...
       </p>
     </article>
   </a>
@@ -219,7 +274,7 @@ void dfs(int layer){
         cout &amp;lt;&amp;lt; endl;
         return;
     }
-    for...
+    for (in...
       </p>
     </article>
   </a>
@@ -245,7 +300,7 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
 用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
 使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
 
-下面這裡提供 2. 和...
+下面這裡提供 2. 和 ...
       </p>
     </article>
   </a>
@@ -267,7 +322,7 @@ x = 1
 print(id(x))  # 94526375507712
 我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
 這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
-進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python...
+進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數...
       </p>
     </article>
   </a>
@@ -302,7 +357,7 @@ char s[8] = &amp;quot;Hi 1234&amp;quot;;
 strcpy(s, &amp;quot;hello sky&amp;quot;);
 那麼記憶體裡的內容就會變成如下：
 
-於是這時 i...
+於是這時 i 的值就會變...
       </p>
     </article>
   </a>
@@ -333,33 +388,7 @@ int main(){
     printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
     scanf(&amp;quot;%s&amp;quot;, s3);
     printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
-   ...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-02/c-str-0/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[C] 每天來點字串用法（基本篇）</h2>
-
-        <time>2021 - 02 - 25</time>
-      </div>
-      <p class="preview">
-        有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）
-不，你不行。（2021 的我）
-字串的基本使用首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：
-char s1[128] = &amp;quot;hello world&amp;quot;;
-char s2[] = &amp;quot;hello world&amp;quot;;
-另外，許多函式都會使用字元指標來操作字串：
-char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
-而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
-char *s4 = &amp;quot;hello world&amp;quot;;
-像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
-接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello...
+    printf(&amp;quo...
       </p>
     </article>
   </a>
@@ -446,6 +475,22 @@ char s1[128] = &amp;quot;hello...
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
         >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
+        >日文</a></li>
       
       
     </ul>

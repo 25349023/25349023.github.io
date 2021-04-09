@@ -120,7 +120,8 @@ char *strcat( char *dest, const char *src );
 char *strncat( char *dest, const char *src, size_t count );
 看到這熟悉的命名，該不會跟 strcpy()、strncpy() 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 strcat()。
 strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 \0 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 src[0]）所取代，並在最後面補上一個 \0 來當做新字串的結束字元。
-看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat()...
+看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat() 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：strncat()。
+如果有看過之前...
       </p>
     </article>
   </a>
@@ -144,7 +145,7 @@ char *strrchr( const char *str, int ch );
 而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
 這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
 另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
-我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成...
+我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成 U，使其成為合法...
       </p>
     </article>
   </a>
@@ -170,7 +171,7 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
 用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
 使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
 
-下面這裡提供 2. 和...
+下面這裡提供 2. 和 ...
       </p>
     </article>
   </a>
@@ -205,7 +206,7 @@ char s[8] = &amp;quot;Hi 1234&amp;quot;;
 strcpy(s, &amp;quot;hello sky&amp;quot;);
 那麼記憶體裡的內容就會變成如下：
 
-於是這時 i...
+於是這時 i 的值就會變...
       </p>
     </article>
   </a>
@@ -236,7 +237,7 @@ int main(){
     printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
     scanf(&amp;quot;%s&amp;quot;, s3);
     printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
-   ...
+    printf(&amp;quo...
       </p>
     </article>
   </a>
@@ -262,7 +263,7 @@ char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
 char *s4 = &amp;quot;hello world&amp;quot;;
 像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
 接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello...
+char s1[128] = &amp;quot;hello world&amp;qu...
       </p>
     </article>
   </a>
@@ -329,6 +330,22 @@ char s1[128] = &amp;quot;hello...
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
         >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+      
+        <li class="collapsible-category">
+          <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
+        >日文</a></li>
       
       
     </ul>

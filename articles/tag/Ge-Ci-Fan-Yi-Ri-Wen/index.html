@@ -72,7 +72,7 @@
           <a href="/">Home</a>
         </li>
       
-        <li class="option active">
+        <li class="option">
           <a href="/articles/">Articles</a>
         </li>
       
@@ -98,94 +98,61 @@
 
   
   <main>
+    <div class="breadcrumb-wrapper">
+      <div class="breadcrumb"><span>歌詞翻譯</span><span>日文</span>
+      </div>
+    </div>
     <div class="main-wrapper">
       
         
-  <a href="/articles/2021-02/c-str-0/" class="post-link">
+  <a href="/articles/2021-04/amayadori-atr/" class="post-link">
     <article>
       <div class="info">
-        <h2>[C] 每天來點字串用法（基本篇）</h2>
+        <h2>[歌詞翻譯] 天宿り － After the Rain</h2>
 
-        <time>2021 - 02 - 25</time>
+        <time>2021 - 04 - 09</time>
       </div>
       <p class="preview">
-        有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）
-不，你不行。（2021 的我）
-字串的基本使用首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：
-char s1[128] = &amp;quot;hello world&amp;quot;;
-char s2[] = &amp;quot;hello world&amp;quot;;
-另外，許多函式都會使用字元指標來操作字串：
-char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
-而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
-char *s4 = &amp;quot;hello world&amp;quot;;
-像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
-接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello world&amp;qu...
-      </p>
-    </article>
-  </a>
+        這次（兩年前）試著翻了一直以來都很喜歡的歌 － 天宿り，在聽專輯的 XFD 時就很想聽整首的了，後來無意間找到了這首的音檔，於是我跟這首歌才能相遇(?)，而這篇翻譯也才能誕生(??)
 
-      
-        
-  <a href="/articles/2021-02/f-string/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[Python 3.6] 初探 f-string</h2>
+天(あま)宿(やど)り
 
-        <time>2021 - 02 - 23</time>
-      </div>
-      <p class="preview">
-        第一篇技術文章就決定是你了（笑）
-PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧：
-name = &amp;#x27;Sky&amp;#x27;
-print(f&amp;#x27;My name is {name}.&amp;#x27;)
-# &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n: &amp;quot;Lucky&amp;quot...
-      </p>
-    </article>
-  </a>
+作詞・作曲：まふまふ
+歌：そらる
 
-      
-        
-  <a href="/articles/2021-02/blog-migration/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[短談] 部落格文章搬移計劃</h2>
+強(つよ)がってばかりで　意(い)地(じ)張(は)ってばかりで
+總是在逞強　總是一意孤行
 
-        <time>2021 - 02 - 18</time>
-      </div>
-      <p class="preview">
-        過了一個寒假，我的新部落格終於完成啦～
-接下來我會慢慢地把原本部落格（天上的東東w）上的文章搬過來這裡，主要的目標是一些技術性的文章或翻譯，一些日常閒聊的就看我心情了（笑）。
-另外，我預計（又挖了一個坑）會有新的一兩篇文在寫這個部落格是怎麼建立的，主軸是如何使用 Lektor 來建立靜態網站，外加一些沒人想聽的心路歷程。
-我原本以為 Lektor 應該不會太難，但還是有不少小地方需要注意。
-不過今年可能會比以往還忙，所以還不知道會不會正常更新（藉口）。或許我可以在等 model train 好的過程中來寫個文章，不然每次都呆呆地盯著他跑也是很浪費時間。
-好了，廢話講太多了，這次就這樣吧XD
-      </p>
-    </article>
-  </a>
+背(せ)は小(ちい)さいままで　夕(ゆう)焼(や)け空(ぞら)　暮(く)れていく
+背影仍然渺小　晚霞中的夕日　逐漸西下
 
-      
-        
-  <a href="/articles/2021-02/post/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>Hello world 你好</h2>
+臆(おく)病(びょう)なままだな　泣(な)き虫(むし)なままだな
+依舊懦弱　依舊是愛哭鬼
 
-        <time>2021 - 02 - 09</time>
-      </div>
-      <p class="preview">
-        這是個用來測試的文章。Markdown: SyntaxOverviewPhilosophyMarkdown is intended to be as easy-to-read and easy-to-write as is feasible.
-Readability, however, is emphasized above all else. A Markdown-formatted
-document should be publishable as-is, as plain text, without looking
-like it&#39;s been marked up with tags or formatting instructions. While
-Markdown&#39;s syntax has been influenced by several existing text-to-HTML
-filters -- including Setext, atx, Textile, reStructuredText,
-Grutatext, and EtText -- the sin...
+あぜ道(みち)でふざけた　あの頃(ころ)から変(か)わらない
+鄉間小路的笑鬧　從那刻起就不曾改變
+
+
+いけないこととわかっている
+不被允許的事我一直都知曉
+
+許(ゆる)されないとわかっている
+不被原諒的事我也一直都明白
+
+それでも今日(きょう)は雨(あめ)が降(ふ)るから
+縱然那樣　在今日這下著雨的日子
+
+雨(あま)宿(やど)りをしていこう
+一起去避雨吧
+
+
+ああ
+啊啊
+
+借(か)り物(もの)としても
+即使身為借來之物
+
+今(いま)はた...
       </p>
     </article>
   </a>
@@ -193,29 +160,9 @@ Grutatext, and EtText -- the sin...
       
     </div>
   </main>
+
   
-    
-  <div class="pagination">
-    
-      <a href="/articles/"><i class="fas fa-chevron-left"></i></a>
-    
-
-    
-      
-        <a href="/articles/">1</a>
-      
-    
-      
-        <a class="active"
-           >2</a>
-      
-    
-
-    
-      <a class="disabled"><i class="fas fa-chevron-right"></i></a>
-    
-  </div>
-
+    <div class="pagination"></div>
   
 
   <div class="overlay hidden" id="overlay"></div>
