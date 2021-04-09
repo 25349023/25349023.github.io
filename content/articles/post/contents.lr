@@ -261,7 +261,7 @@ it's also easy to use Markdown to write about Markdown's own syntax.
 
 ```,=
 tell application "Foo"
-    beep
+    beep<div>
 end tell
 ```
 
@@ -323,7 +323,7 @@ Use the `printf()` function.
 (図書館)[としょかん]
 % 圖書館
 -##-
-(図書館)[としょかん]
+(図|書|館)[と|しょ|かん]
 % 圖書館
 ^^
 
