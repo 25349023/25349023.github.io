@@ -316,6 +316,17 @@ Unlike a pre-formatted code block, a code span indicates code within a
 normal paragraph. For example:
 
 Use the `printf()` function.
+
+### Ruby text block
+
+^^#2255BB
+(図書館)[としょかん]
+% 圖書館
+-##-
+(図書館)[としょかん]
+% 圖書館
+^^
+
 ---
 tags: Test
 ---
