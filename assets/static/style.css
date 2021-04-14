@@ -1613,6 +1613,8 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content iframe {
   margin-bottom: 0.8rem;
+  max-width: 560px;
+  height: 315px;
 }
 .postpage article .post-content .fa-sticky-note {
   color: rgba(3, 44, 83, 0.5);
@@ -1726,6 +1728,9 @@ aside nav > ul .collapsible-category ul a {
   .postpage article .post-content blockquote {
     margin-left: 1.2rem;
   }
+  .postpage article .post-content iframe {
+    height: 225px;
+  }
 }
 @media (max-width: 480px) {
   .postpage article .post-content {
@@ -1736,6 +1741,9 @@ aside nav > ul .collapsible-category ul a {
   }
   .postpage article .post-content blockquote {
     margin: 1.8rem 0 0 0.8rem;
+  }
+  .postpage article .post-content iframe {
+    height: 150px;
   }
 }
 @media (max-width: 320px) {
