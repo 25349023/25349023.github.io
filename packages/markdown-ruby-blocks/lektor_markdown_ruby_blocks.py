@@ -25,7 +25,7 @@ class RubyBlockMixin:
         if match is None:
             return super().paragraph(text)
         color = match.group(1) if match.group(1) is not None else '#5c443a'
-        ruby_text = self._rubify(escape(match.group(2).strip()), color)
+        ruby_text = self._rubify(match.group(2).strip(), color)
 
         return f'<p>{ruby_text}</p>'
 

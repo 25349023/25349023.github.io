@@ -194,6 +194,12 @@
 
   ruby rt {
     font-size: 0.5em;
+    ruby-align: center;
+    letter-spacing: 0.04rem;
+  }
+
+  iframe {
+    margin-bottom: 0.8rem;
   }
 
   .fa-sticky-note {
