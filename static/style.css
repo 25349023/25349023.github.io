@@ -1608,6 +1608,11 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage article .post-content ruby rt {
   font-size: 0.5em;
+  ruby-align: center;
+  letter-spacing: 0.04rem;
+}
+.postpage article .post-content iframe {
+  margin-bottom: 0.8rem;
 }
 .postpage article .post-content .fa-sticky-note {
   color: rgba(3, 44, 83, 0.5);

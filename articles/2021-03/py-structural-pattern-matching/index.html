@@ -104,44 +104,44 @@
     <ul class="toc">
       
         
-          <li><a href="#pep-634-structural-pattern-matching-208">PEP 634: Structural Pattern Matching</a>
+          <li><a href="#pep-634-structural-pattern-matching-204">PEP 634: Structural Pattern Matching</a>
             <ul>
         
-          <li><a href="#or-pattern-yu-as-pattern-209">Or Pattern 與 As Pattern</a></li>
+          <li><a href="#or-pattern-yu-as-pattern-205">Or Pattern 與 As Pattern</a></li>
         
       
         
-          <li><a href="#yong-bian-shu-lai-bu-zhuo-zi-liao-210">用變數來捕捉資料</a></li>
+          <li><a href="#yong-bian-shu-lai-bu-zhuo-zi-liao-206">用變數來捕捉資料</a></li>
         
       
         
-          <li><a href="#guard-yong-if-jin-xing-e-wai-pan-duan-211">Guard：用 if 進行額外判斷</a></li>
+          <li><a href="#guard-yong-if-jin-xing-e-wai-pan-duan-207">Guard：用 if 進行額外判斷</a></li>
         
       
         
-          <li><a href="#bi-dui-class-li-de-zi-liao-212">比對 class 裡的資料</a>
+          <li><a href="#bi-dui-class-li-de-zi-liao-208">比對 class 裡的資料</a>
             <ul>
         
-          <li><a href="#shi-yong-guan-jian-zi-bi-dui-shu-xing-213">使用關鍵字比對屬性</a></li>
+          <li><a href="#shi-yong-guan-jian-zi-bi-dui-shu-xing-209">使用關鍵字比對屬性</a></li>
         
       
         
-          <li><a href="#bi-dui-nei-jian-xing-bie-214">比對內建型別</a></li>
+          <li><a href="#bi-dui-nei-jian-xing-bie-210">比對內建型別</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#bi-dui-xu-lie-215">比對序列</a>
+          <li><a href="#bi-dui-xu-lie-211">比對序列</a>
             <ul>
         
-          <li><a href="#ren-yi-shu-liang-yuan-su-de-bi-dui-216">任意數量元素的比對</a></li>
+          <li><a href="#ren-yi-shu-liang-yuan-su-de-bi-dui-212">任意數量元素的比對</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#qi-ta-de-bi-dui-fang-shi-217">其他的比對方式</a></li>
+          <li><a href="#qi-ta-de-bi-dui-fang-shi-213">其他的比對方式</a></li>
         
       </ul></li>
         
@@ -168,7 +168,7 @@
 <p>我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。<br>
 那我們就開始吧！</p>
 <div class="admonition admonition-tip"><p>此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 <a href="https://www.python.org/download/pre-releases/">pre-release</a> 版。<br>
-目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 </p></div><h1 id="pep-634-structural-pattern-matching-208">PEP 634: Structural Pattern Matching</h1><p>這個功能最早是由 <a href="https://www.python.org/dev/peps/pep-0622/">PEP 622</a> 所提出，後來經過討論以及修改，整理成了 <a href="https://www.python.org/dev/peps/pep-0634/">PEP 634</a>，並成為了 Python 3.10 中的一項新功能。</p>
+目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 </p></div><h1 id="pep-634-structural-pattern-matching-204">PEP 634: Structural Pattern Matching</h1><p>這個功能最早是由 <a href="https://www.python.org/dev/peps/pep-0622/">PEP 622</a> 所提出，後來經過討論以及修改，整理成了 <a href="https://www.python.org/dev/peps/pep-0634/">PEP 634</a>，並成為了 Python 3.10 中的一項新功能。</p>
 <p>那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 switch 結構，但功能更強大，反而比較像 Haskell 中的 Pattern Matching。</p>
 <p>我們先從最基本的語法開始：（因為是新功能所以 highlight 還未支援）</p>
 <pre><code class="language-python">match subject:
@@ -196,7 +196,7 @@
 
 buy(&#x27;grape&#x27;)  # It is purple.
 buy(&#x27;egg&#x27;)    # You cannot buy it.</code></pre>
-<h2 id="or-pattern-yu-as-pattern-209">Or Pattern 與 As Pattern</h2><p>上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：</p>
+<h2 id="or-pattern-yu-as-pattern-205">Or Pattern 與 As Pattern</h2><p>上面這個程式應該很容易理解，接著我們可以稍微修改一下，讓前三個 case 合在一起，並試著省略 wildcard：</p>
 <pre class="line-numbers"><code class="language-python">def buy(thing):
     match thing:
         case &#x27;apple&#x27; | &#x27;banana&#x27; | &#x27;grape&#x27;:
@@ -215,7 +215,7 @@ buy(&#x27;apple&#x27;)  # It is the fruit &quot;apple&quot;.
 buy(&#x27;grape&#x27;)  # It is the fruit &quot;grape&quot;.</code></pre>
 <p>這個語法叫做 <strong>As Pattern</strong>，效果就如這個例子所示。另外，這裡用了 <code>()</code> 把前面的 pattern 包起來，但並不是必要的，只是為了看起來比較清楚而已。</p>
 <p>到目前為止，我們的 pattern 都是 literal，也就是字面的值，看起來跟 C/C++ 的 switch 好像沒太大差別？所以接下來要介紹一種很有趣的 pattern，可以讓我們用變數來比對目標。</p>
-<div class="admonition admonition-note"><p>Literal 不一定要是字串，其他型別的字面值也可以，比如數值、bool、<code>None</code> 也都可以；而比較複雜的序列型態如 list 等雖然也可以用 literal 的方式比對，但因為他還有其他功能，所以會在後面更詳細地說明。</p></div><h2 id="yong-bian-shu-lai-bu-zhuo-zi-liao-210">用變數來捕捉資料</h2><p>假設我們想要對一個二維平面上的座標（tuple）進行比對，判斷它是位於原點、x、y 軸，或其他地方的話，我們可以這樣寫：</p>
+<div class="admonition admonition-note"><p>Literal 不一定要是字串，其他型別的字面值也可以，比如數值、bool、<code>None</code> 也都可以；而比較複雜的序列型態如 list 等雖然也可以用 literal 的方式比對，但因為他還有其他功能，所以會在後面更詳細地說明。</p></div><h2 id="yong-bian-shu-lai-bu-zhuo-zi-liao-206">用變數來捕捉資料</h2><p>假設我們想要對一個二維平面上的座標（tuple）進行比對，判斷它是位於原點、x、y 軸，或其他地方的話，我們可以這樣寫：</p>
 <pre class="line-numbers"><code class="language-python">def where(point):
     match point:
         case (0, 0):
@@ -234,7 +234,7 @@ where((3, 4))  # XY plane with x=3, y=4
 where(&#x27;spam&#x27;)  # Not a point</code></pre>
 <p>可以觀察到在 case 後的 pattern 中，我們使用 <code>x</code> 和 <code>y</code> 來表示未知、任意的值，而只要我們的目標（<code>point</code>）符合該 pattern 的形式，就會進到那個 case 裡，同時 <code>x</code>、<code>y</code> 會<strong>綁定（bind）</strong>到目標中對應的值。</p>
 <p>以 <code>where((1, 0))</code> 為例，第一個符合 <code>(1, 0)</code> 的 pattern 是 <code>(x, 0)</code>，因此進入該 case 且此時 <code>x</code> 變數為 1。</p>
-<h2 id="guard-yong-if-jin-xing-e-wai-pan-duan-211">Guard：用 if 進行額外判斷</h2><p>若我們想要在比對時增加一些額外的條件，我們可以在 pattern 後面使用 if 來判斷，這種語法稱為 <strong>Guard</strong>。</p>
+<h2 id="guard-yong-if-jin-xing-e-wai-pan-duan-207">Guard：用 if 進行額外判斷</h2><p>若我們想要在比對時增加一些額外的條件，我們可以在 pattern 後面使用 if 來判斷，這種語法稱為 <strong>Guard</strong>。</p>
 <p>舉例來說，我們如果想把上面的 where 函式稍微修改，讓他能印出 point 是在座標軸的哪一個方向（正或負），那我們可以這麼寫：（為了簡化所以省略一些 case）</p>
 <pre class="line-numbers"><code class="language-python">def where(point):
     match point:
@@ -253,7 +253,7 @@ where((1, 0))   # +X axis with x=1
 where((-2, 0))  # -X axis with x=-2
 where((0, 3))   # +Y axis with y=3
 where((0, -4))  # -Y axis with y=-4</code></pre>
-<h2 id="bi-dui-class-li-de-zi-liao-212">比對 class 裡的資料</h2><p>到剛剛為止，我們都是對 Python 原生的型別進行比對，那有沒有方法能比對自己寫的 class 物件呢？當然可以，做法也很簡單，讓我們再次以剛剛的座標為例：</p>
+<h2 id="bi-dui-class-li-de-zi-liao-208">比對 class 裡的資料</h2><p>到剛剛為止，我們都是對 Python 原生的型別進行比對，那有沒有方法能比對自己寫的 class 物件呢？當然可以，做法也很簡單，讓我們再次以剛剛的座標為例：</p>
 <pre class="line-numbers"><code class="language-python">from dataclasses import dataclass
 
 @dataclass
@@ -284,7 +284,7 @@ where(&#x27;spam&#x27;)       # Not a point</code></pre>
 <li>第 12、14 行：我們也可以搭配變數（這裡的 <code>x</code>、<code>y</code>）來比對</li>
 <li>第 16 行：如果沒有指定屬性引數，則會比對到任何 Point 類別的物件（使用 <code>isinstance()</code> 檢查）</li>
 </ul>
-<h3 id="shi-yong-guan-jian-zi-bi-dui-shu-xing-213">使用關鍵字比對屬性</h3><p>上面的例子使用了 <code>dataclass</code> 來簡化 pattern 的撰寫，但如果我們的類別不是 dataclass 呢？此時，我們可以使用類似關鍵字引數的方式來比對：</p>
+<h3 id="shi-yong-guan-jian-zi-bi-dui-shu-xing-209">使用關鍵字比對屬性</h3><p>上面的例子使用了 <code>dataclass</code> 來簡化 pattern 的撰寫，但如果我們的類別不是 dataclass 呢？此時，我們可以使用類似關鍵字引數的方式來比對：</p>
 <pre class="line-numbers"><code class="language-python">class Point:  # NOT a Dataclass!!
     def __init__(self, x, y):
         self.x = x
@@ -304,7 +304,7 @@ def where(point):
 where(Point(1, 0))  # X axis with x=1
 where(Point(3, 4))  # Just a point</code></pre>
 <p>可以看到我們使用了 <code>x=</code> 和 <code>y=</code> 來比對物件的屬性。特別注意到 pattern 中的 <code>x=x</code> 以及 <code>y=y</code>，在等號前面的是關鍵字（屬性名），而等號後面是要比對的變數。</p>
-<h3 id="bi-dui-nei-jian-xing-bie-214">比對內建型別</h3><p>如果我們想比對目標是不是某個內建型態的實例，則我們可以這麼做：</p>
+<h3 id="bi-dui-nei-jian-xing-bie-210">比對內建型別</h3><p>如果我們想比對目標是不是某個內建型態的實例，則我們可以這麼做：</p>
 <pre class="line-numbers"><code class="language-python">def typeof(arg):
     match arg:
         case bool(x):
@@ -318,9 +318,9 @@ typeof(123)      # It is int, 123
 typeof(&#x27;hello&#x27;)  # It is str, &#x27;hello&#x27;
 typeof(False)    # It is bool, False</code></pre>
 <p>注意這裡一定要先比對 bool 再比對 int，不然 bool 遇到 int 的 case 會直接比對成功（因為 bool 是 int 的子類別）。</p>
-<h2 id="bi-dui-xu-lie-215">比對序列</h2><p>接著要說明如何比對序列類型的物件，像 list 或 tuple。其實我們在前面已經有看過一個簡單的例子了，就是比對座標 tuple 的時候。但事實上，序列的比對不僅僅是那樣，因此我們要在這一節來看一看序列比對的細節，還有一些需要注意的地方。</p>
+<h2 id="bi-dui-xu-lie-211">比對序列</h2><p>接著要說明如何比對序列類型的物件，像 list 或 tuple。其實我們在前面已經有看過一個簡單的例子了，就是比對座標 tuple 的時候。但事實上，序列的比對不僅僅是那樣，因此我們要在這一節來看一看序列比對的細節，還有一些需要注意的地方。</p>
 <p>首先，使用 <code>()</code> 或 <code>[]</code> 來比對序列是沒有差別的，因此在上面的例子中若是傳入 list 也能比對成功。接著，只要是 <code>collections.abc.Sequence</code> 的實例（除了 <code>str</code>、<code>bytes</code> 或 <code>bytearray</code>）都屬於這裡所指的序列，也就是拿他們比對也可以成功。</p>
-<h3 id="ren-yi-shu-liang-yuan-su-de-bi-dui-216">任意數量元素的比對</h3><p>就像在拆解 tuple 時一樣，我們也可以使用 <code>*</code> 來比對任意數量的元素。比如我們想比對一個指令及後面的參數：</p>
+<h3 id="ren-yi-shu-liang-yuan-su-de-bi-dui-212">任意數量元素的比對</h3><p>就像在拆解 tuple 時一樣，我們也可以使用 <code>*</code> 來比對任意數量的元素。比如我們想比對一個指令及後面的參數：</p>
 <pre class="line-numbers"><code class="language-python">def check(command: str):
     match command.split():
         case [cmd, *args]:
@@ -333,7 +333,7 @@ check(&#x27;ls -la ./mydir&#x27;)
 # argument #1: -la
 # argument #2: ./mydir</code></pre>
 <p>在此例中，多出來的元素都會被收集到 args 裡，然後我們可以用 for 來迭代。</p>
-<div class="admonition admonition-note"><p>這裡的型別提示非必要。</p></div><h2 id="qi-ta-de-bi-dui-fang-shi-217">其他的比對方式</h2><ul>
+<div class="admonition admonition-note"><p>這裡的型別提示非必要。</p></div><h2 id="qi-ta-de-bi-dui-fang-shi-213">其他的比對方式</h2><ul>
 <li>巢狀 Pattern：我們可以隨意組合上面的不同 pattern 來比對目標</li>
 <li>wildcard：除了單獨使用在一個 case 中，我們也可以放在前面提到的 pattern 裡，當作單個任意值</li>
 <li><p>常數比對：我們也可以比對一個不是 literal 的值（也就是存在變數中），只要該變數名字中有 <code>.</code> 即可（如 <code>math.pi</code>）</p>
