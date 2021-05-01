@@ -104,18 +104,18 @@
     <ul class="toc">
       
         
-          <li><a href="#zi-chuan-sou-xun-227">字串搜尋</a>
+          <li><a href="#zi-chuan-sou-xun-231">字串搜尋</a>
             <ul>
         
-          <li><a href="#strchr-strrchr-zi-chuan-zhong-sou-xun-zi-yuan-228"><code>strchr</code>、<code>strrchr</code>：字串中搜尋字元</a></li>
+          <li><a href="#strchr-strrchr-zi-chuan-zhong-sou-xun-zi-yuan-232"><code>strchr</code>、<code>strrchr</code>：字串中搜尋字元</a></li>
         
       
         
-          <li><a href="#strstr-zi-chuan-zhong-sou-xun-zi-chuan-229"><code>strstr</code>：字串中搜尋字串</a></li>
+          <li><a href="#strstr-zi-chuan-zhong-sou-xun-zi-chuan-233"><code>strstr</code>：字串中搜尋字串</a></li>
         
       
         
-          <li><a href="#undefined-behavior-230">Undefined Behavior</a></li>
+          <li><a href="#undefined-behavior-234">Undefined Behavior</a></li>
         
       </ul></li>
         
@@ -139,7 +139,7 @@
 
   <section class="post-content">
     <p>就直接進入正題吧，今天要講的是：</p>
-<h1 id="zi-chuan-sou-xun-227">字串搜尋</h1><h2 id="strchr-strrchr-zi-chuan-zhong-sou-xun-zi-yuan-228"><code>strchr</code>、<code>strrchr</code>：字串中搜尋字元</h2><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+<h1 id="zi-chuan-sou-xun-231">字串搜尋</h1><h2 id="strchr-strrchr-zi-chuan-zhong-sou-xun-zi-yuan-232"><code>strchr</code>、<code>strrchr</code>：字串中搜尋字元</h2><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
 <pre><code class="language-c">char *strchr( const char *str, int ch );
 char *strrchr( const char *str, int ch );</code></pre>
@@ -170,7 +170,7 @@ int main(){
 <p>首先是第 8 和 10 行，因為 <code>NULL</code> 的值是 0，所以我們可以利用 C 的特性：非零數值皆為真，只有 0 為假，來進行判斷式的簡化，也就是說，當 start、ptr 並不是指向 <code>NULL</code> 時，就會回傳真，代表有東西要處理，反之回傳假，代表可以結束了。</p>
 <p>其次是行 11，如果我們使用「<code>*</code>」來對指向字串的字元指標取值，就會只取到開頭的第一個字元，而我們也可以對其修改，把其他字元指定給它。</p>
 <p>這次還要介紹另一個函式：<code>strstr</code>，詳細如下。</p>
-<h2 id="strstr-zi-chuan-zhong-sou-xun-zi-chuan-229"><code>strstr</code>：字串中搜尋字串</h2><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+<h2 id="strstr-zi-chuan-zhong-sou-xun-zi-chuan-233"><code>strstr</code>：字串中搜尋字串</h2><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
 <pre><code class="language-c">char *strstr( const char* str, const char* substr );</code></pre>
 <p>這個函式會在 str 中尋找 substr，一樣回傳 substr 的第一個出現位址，如果沒找到的話則是 <code>NULL</code>。</p>
@@ -188,7 +188,7 @@ int main(){
 
     return 0;
 }</code></pre>
-<h2 id="undefined-behavior-230">Undefined Behavior</h2><p>這次會出現 undefined behavior 的情況只有一種：當傳入函式的字串（<code>strchr()</code>、<code>strrchr()</code> 的 str，還有 <code>strstr()</code> 的 str、substr）不是以 <code>\0</code> 結尾的話就會發生。</p>
+<h2 id="undefined-behavior-234">Undefined Behavior</h2><p>這次會出現 undefined behavior 的情況只有一種：當傳入函式的字串（<code>strchr()</code>、<code>strrchr()</code> 的 str，還有 <code>strstr()</code> 的 str、substr）不是以 <code>\0</code> 結尾的話就會發生。</p>
 <hr>
 <p>參考資料：</p>
 <ol>

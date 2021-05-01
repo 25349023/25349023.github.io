@@ -104,40 +104,40 @@
     <ul class="toc">
       
         
-          <li><a href="#han-shi-can-shu-yu-fa-ji-chu-214">函式參數語法基礎</a>
+          <li><a href="#han-shi-can-shu-yu-fa-ji-chu-218">函式參數語法基礎</a>
             <ul>
         
-          <li><a href="#yu-she-can-shu-215">預設參數</a></li>
+          <li><a href="#yu-she-can-shu-219">預設參數</a></li>
         
       
         
-          <li><a href="#shou-ji-zhi-tuple-216"><code>*</code> － 收集至 Tuple</a></li>
+          <li><a href="#shou-ji-zhi-tuple-220"><code>*</code> － 收集至 Tuple</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#guan-jian-zi-yin-shu-keyword-argument-217">關鍵字引數 Keyword Argument</a>
+          <li><a href="#guan-jian-zi-yin-shu-keyword-argument-221">關鍵字引數 Keyword Argument</a>
             <ul>
         
-          <li><a href="#di-yi-zhao-chai-jie-dict-218"><code>**</code> 第一招 － 拆解 Dict</a></li>
+          <li><a href="#di-yi-zhao-chai-jie-dict-222"><code>**</code> 第一招 － 拆解 Dict</a></li>
         
       
         
-          <li><a href="#di-er-zhao-shou-ji-zhi-dict-219"><code>**</code> 第二招 － 收集至 Dict</a></li>
+          <li><a href="#di-er-zhao-shou-ji-zhi-dict-223"><code>**</code> 第二招 － 收集至 Dict</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#ji-da-cheng-yu-shuang-guan-qi-xia-220">集大成－ <code>*</code> 與 <code>**</code> 雙管齊下</a></li>
+          <li><a href="#ji-da-cheng-yu-shuang-guan-qi-xia-224">集大成－ <code>*</code> 與 <code>**</code> 雙管齊下</a></li>
         
       
         
-          <li><a href="#zai-tan-de-qi-ta-yong-fa-221">再談 <code>*</code> 的其它用法</a>
+          <li><a href="#zai-tan-de-qi-ta-yong-fa-225">再談 <code>*</code> 的其它用法</a>
             <ul>
         
-          <li><a href="#chao-ji-ji-da-cheng-222">超級集大成</a></li>
+          <li><a href="#chao-ji-ji-da-cheng-226">超級集大成</a></li>
         
       </ul></li>
         
@@ -161,13 +161,13 @@
 
   <section class="post-content">
     <p>在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 <code>*args</code> 和 <code>**kwargs</code> 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。</p>
-<h1 id="han-shi-can-shu-yu-fa-ji-chu-214">函式參數語法基礎</h1><h2 id="yu-she-can-shu-215">預設參數</h2><p>一般的定義方法就不多說了，直接來看有預設值的參數：</p>
+<h1 id="han-shi-can-shu-yu-fa-ji-chu-218">函式參數語法基礎</h1><h2 id="yu-she-can-shu-219">預設參數</h2><p>一般的定義方法就不多說了，直接來看有預設值的參數：</p>
 <pre><code class="language-python">def plus(a, b, c=None):
     res = a + b + (c if c else 0)
     return res</code></pre>
 <p>預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。</p>
 <p>但如果我們想實作無限版的 <code>plus()</code> 函式呢？總不可能一直增加預設參數吧！  這時候我們可以用「<code>*</code>」來將引數收集到一個 tuple 中。</p>
-<h2 id="shou-ji-zhi-tuple-216"><code>*</code> － 收集至 Tuple</h2><p>先來看看範例：</p>
+<h2 id="shou-ji-zhi-tuple-220"><code>*</code> － 收集至 Tuple</h2><p>先來看看範例：</p>
 <pre><code class="language-python">def plus(*nums):
     res = 0
     for i in nums:
@@ -175,16 +175,16 @@
     return res</code></pre>
 <p>透過 <code>*</code> 收集的引數會被放到一個 tuple 中，所以我們可以使用 for 來對它進行迭代。</p>
 <p>這樣就可以理解為什麼要使用 <code>*args</code> 這個參數了，但是 <code>**kwargs</code> 又是什麼呢？我們要先從關鍵字引數來說起：</p>
-<h1 id="guan-jian-zi-yin-shu-keyword-argument-217">關鍵字引數 Keyword Argument</h1><p>在呼叫 <code>print()</code> 時，我們有時會指定 sep 參數做為分隔輸出的字元，或是使用 end 參數來更改最後的換行字元。像這樣不用理會參數的真正順序，而只要給定名字然後指定值的情況，就是在使用關鍵字引數。</p>
+<h1 id="guan-jian-zi-yin-shu-keyword-argument-221">關鍵字引數 Keyword Argument</h1><p>在呼叫 <code>print()</code> 時，我們有時會指定 sep 參數做為分隔輸出的字元，或是使用 end 參數來更改最後的換行字元。像這樣不用理會參數的真正順序，而只要給定名字然後指定值的情況，就是在使用關鍵字引數。</p>
 <div class="admonition admonition-note"><p>若是直接傳入函式而沒有寫明參數名的話，則稱為位置引數（Positional Argument）。</p></div><p>如果我們要指定的參數太多而造成版面不簡潔的話，可以考慮使用「**」來拆解一個裝有參數名與值的 dict。</p>
-<h2 id="di-yi-zhao-chai-jie-dict-218"><code>**</code> 第一招 － 拆解 Dict</h2><p><del>原諒我使用這麼中二的小標題XDD</del><br>
+<h2 id="di-yi-zhao-chai-jie-dict-222"><code>**</code> 第一招 － 拆解 Dict</h2><p><del>原諒我使用這麼中二的小標題XDD</del><br>
 直接看實例應該就能懂了：</p>
 <pre><code class="language-python">dt = {&#x27;sep&#x27;: &#x27; # &#x27;, &#x27;end&#x27;: &#x27;\n\n&#x27;}
 print(&#x27;hello&#x27;, &#x27;world&#x27;, **dt)
 # 等同於 print(&#x27;hello&#x27;, &#x27;world&#x27;, sep=&#x27; # &#x27;, end=&#x27;\n\n&#x27;)</code></pre>
 <p>雖然這不算真的發揮到 <code>**</code> 的長處，因為我們要指定的參數不多，但就足以展現他的功用了。</p>
 <p>上面是在處理呼叫時引數太多的問題，但如果在定義函式時，參數就太多了呢？</p>
-<h2 id="di-er-zhao-shou-ji-zhi-dict-219"><code>**</code> 第二招 － 收集至 Dict</h2><p>雖然我們可以用上面的單星號來收集到一個 tuple 中，但這樣很難知道第幾個元素代表什麼、也無法隨心所欲的選擇參數傳入了。這時我們就可以再次利用 <code>**</code> 以及 dict「具名」的性質來定義函式：</p>
+<h2 id="di-er-zhao-shou-ji-zhi-dict-223"><code>**</code> 第二招 － 收集至 Dict</h2><p>雖然我們可以用上面的單星號來收集到一個 tuple 中，但這樣很難知道第幾個元素代表什麼、也無法隨心所欲的選擇參數傳入了。這時我們就可以再次利用 <code>**</code> 以及 dict「具名」的性質來定義函式：</p>
 <pre><code class="language-python">def fun(**_settings):
     print(_settings)
 
@@ -199,11 +199,11 @@ fun(name=&#x27;Sky&#x27;, attack=100, hp=500)
 fun(name=&#x27;Sky&#x27;, attack=100, hp=500)
 # {&#x27;name&#x27;: &#x27;Sky&#x27;, &#x27;attack&#x27;: 100, &#x27;defense&#x27;: 0, &#x27;hp&#x27;: 500}</code></pre>
 <p>注意第 2、3 行，我們還可以順便給定預設值，這不就跟一開始的預設參數一樣了嗎？</p>
-<h1 id="ji-da-cheng-yu-shuang-guan-qi-xia-220">集大成－ <code>*</code> 與 <code>**</code> 雙管齊下</h1><p><code>*</code> 和 <code>**</code> 都很方便，但用了 <code>*</code> 就不能指名；而用了 <code>**</code> 就一定要指名，好像有點美中不足。其實我們可以將這兩個合併起來使用，就如同我們常看到的一樣，可以接受任意引數：</p>
+<h1 id="ji-da-cheng-yu-shuang-guan-qi-xia-224">集大成－ <code>*</code> 與 <code>**</code> 雙管齊下</h1><p><code>*</code> 和 <code>**</code> 都很方便，但用了 <code>*</code> 就不能指名；而用了 <code>**</code> 就一定要指名，好像有點美中不足。其實我們可以將這兩個合併起來使用，就如同我們常看到的一樣，可以接受任意引數：</p>
 <pre><code class="language-python">def fun(*args, **kwargs):
     print(args, kwargs, sep=&#x27;\n&#x27;)</code></pre>
 <p>唯一要注意的是，<code>*</code> 一定要在 <code>**</code> 的前面，而呼叫函式時有名字的也一定要在沒名字的後面。這種集大成的寫法通常會在裝飾器時使用，讓裝飾器可以接受參數數量不同的函式。</p>
-<h1 id="zai-tan-de-qi-ta-yong-fa-221">再談 <code>*</code> 的其它用法</h1><p>我們可以在傳入引數時使用 <code>**</code> 來拆解 dict，那就不能用 <code>*</code> 來拆解 tuple 嗎？其實是可以的，只是我覺得這個沒那麼難理解，就沒有寫出來了。</p>
+<h1 id="zai-tan-de-qi-ta-yong-fa-225">再談 <code>*</code> 的其它用法</h1><p>我們可以在傳入引數時使用 <code>**</code> 來拆解 dict，那就不能用 <code>*</code> 來拆解 tuple 嗎？其實是可以的，只是我覺得這個沒那麼難理解，就沒有寫出來了。</p>
 <p>另外，在 Python 3 裡，可以在定義函式時使用單獨的 <code>*</code> 來做為非指名參數和指名參數（唯-關鍵字引數，Keyword-Only Arguments）的區隔，底下這個範例結合了本文最上面的預設參數：</p>
 <pre class="line-numbers"><code class="language-python">def fun(a, b=20, *, kw1, kw2=40):
     print(a, b, kw1, kw2)
@@ -214,7 +214,7 @@ fun(10, kw1=30)  # 10 20 30 40
 <p>這個寫法可以限制使用者一定要指名傳入引數，而不是依賴原本的順序。</p>
 <div class="admonition admonition-info"><p>在 Python 3.8 中，引入了<strong>唯-位置參數（Positional-only Parameters）</strong>，
 使用方式是以一個斜線 <code>/</code> 來表示在這之前的參數都不能指名，而只能依靠位置來傳入。<br><br>
-有興趣的人可以參考<a href="https://docs.python.org/3/whatsnew/3.8.html#positional-only-parameters">官方文件</a>及 <a href="https://www.python.org/dev/peps/pep-0570/">PEP 570</a></p></div><h2 id="chao-ji-ji-da-cheng-222">超級集大成</h2><p>我們可以將 <code>*args</code>、分隔用的 <code>*</code>、以及 <code>**kwargs</code> 一起使用：</p>
+有興趣的人可以參考<a href="https://docs.python.org/3/whatsnew/3.8.html#positional-only-parameters">官方文件</a>及 <a href="https://www.python.org/dev/peps/pep-0570/">PEP 570</a></p></div><h2 id="chao-ji-ji-da-cheng-226">超級集大成</h2><p>我們可以將 <code>*args</code>、分隔用的 <code>*</code>、以及 <code>**kwargs</code> 一起使用：</p>
 <pre><code class="language-python">def fun(a, *args, kw1, **kwargs):
     print(a, args, kw1, kwargs, sep=&#x27; # &#x27;)
 
