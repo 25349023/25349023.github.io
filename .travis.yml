@@ -1,7 +1,7 @@
 language: python
 python: 3.6
 install:
-  - "pip install Werkzeug==1.0.1"
+  - "pip install Flask<2"
   - "pip install Lektor"
 script: "lektor build"
 deploy:
