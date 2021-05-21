@@ -1,7 +1,7 @@
 language: python
 python: 3.6
 install:
-  - "pip install Flask<2"
+  - "pip install \"Flask<2\""
   - "pip install Lektor"
 script: "lektor build"
 deploy:
