@@ -1,6 +1,8 @@
 language: python
 python: 3.6
-install: "pip install Lektor"
+install:
+  - "pip install Werkzeug==1.0.1"
+  - "pip install Lektor"
 script: "lektor build"
 deploy:
   provider: script
