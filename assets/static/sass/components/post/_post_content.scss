@@ -89,7 +89,7 @@
   }
 
   ol > li::marker {
-    font-weight: bold;
+    font-weight: 600;
     color: rgba($postpage-ui-color, 0.8);
   }
 
@@ -111,8 +111,12 @@
     padding: 0.2rem 0 0.2rem 0.8rem;
     position: relative;
     font-style: italic;
-    font-weight: bold;
+    font-weight: 500;
     color: $postpage-quote-color;
+
+    strong {
+      font-weight: 700;
+    }
 
     blockquote {
       margin-top: 2rem;
@@ -189,7 +193,7 @@
   }
 
   .ruby-line {
-    font-weight: bold;
+    font-weight: 600;
   }
 
   ruby rt {

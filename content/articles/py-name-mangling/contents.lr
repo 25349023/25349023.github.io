@@ -1,0 +1,96 @@
+title: [Python] Name Mangling 的大範圍攻擊
+---
+author: Sky
+---
+body:
+
+早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。
+
+# Name Mangling
+
+在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 `__spam`），這個屬性的名字最後就會被重組成 `_Cls__spam` 這樣的形式，這項技術稱作 **Name Mangling**，提供了類似其他語言的私用屬性。
+
+但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。
+
+```python,=
+class MyClass:
+    def __init__(self):
+        self.__bar = 1
+
+m = MyClass()
+print(m._MyClass__bar)  # 1
+```
+
+但其實，Name Mangling 有個鮮為人知的~~陰謀~~...
+
+## 哪些東西會被 Mangling？
+
+「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 `__bar` 會是重組的目標，但其實，還有一些**東西**也是。
+
+根據 Python 官方文件表示：
+
+> When an identifier that textually occurs in a class definition **begins with two or more underscore characters and does not end in two or more underscores**, it is considered a private name of that class.  ...  This transformation is **independent of the syntactical context in which the identifier is used**.
+
+前面的粗體字說明了被重組的名稱必須以 2 個或以上的底線所開頭，且結尾最多只有一個底線；而後面的粗體則是說，這個 mangling 轉換並不侷限於特定的語境（syntactical context），亦即不只有 `self.__spam` 這裡的 `__spam` 會被重組，任何出現在 class 內文的變數，只要名稱形式符合，都會被重組。
+
+舉例來說：
+
+```python,=
+class MyClass:
+    def hello(self):
+        __foo = 101  # this will be mangling
+        return _MyClass__foo
+    
+    def __print(self):
+        print("this will be mangling, too")
+
+    __cls_attr = 'another identifier that will be mangling'
+
+m = MyClass()
+print(m.hello())  # 101
+m._MyClass__print()  # this will be mangling, too
+print(MyClass._MyClass__cls_attr)  # another identifier that will be mangling
+```
+
+上例中列出了會被名稱重組的三種可能情況，其中比較有趣的是 `hello` 方法中的 `__foo`，在原始方法內文中，我們可以同時使用兩種名稱來存取他，分別是 `__foo` 和 mangling 後的 `_MyClass__foo`。
+
+## 那些不會被重組的
+
+前面的引文也有提到，被重組的名稱必須是個 identifier，因此單純的**字串**內出現 `__foo` 這樣的文字並不會被替換，不過這會有什麼問題嗎？
+
+有時候我們會使用 `__dict__` 或其他函式來存取實例的屬性，而如果目標屬性會被 mangling 所影響，那麼我們對 `__dict__` 所使用的鍵或傳入其他函式的引數就必須是已經重組過的名字：
+
+```python,=
+class MyClass:
+   def __init__(self):
+       self.__data = 101
+   
+   def get_data(self):
+       return self.__dict__['_MyClass__data'] 
+ 
+m = MyClass()
+m.get_data()  # 101
+```
+
+雖然這個例子不太好，但能夠展示我想表達的就行了。
+
+這次講的內容其實並不容易造成什麼問題，只是偶然在 werkzeug 的 source code 裡發現一些神奇的地方，再經過自己實驗後觀察到的現象。
+
+最後，感謝看到這裡的你，如果發現這篇文章有什麼瑕疵或想回饋的，都可以在下面留言。
+
+----
+
+參考資料：
+1. [Python language reference 6.2.1 - Identifiers](https://docs.python.org/3/reference/expressions.html#atom-identifiers)
+2. [Python language reference 9.6 - Private Variables](https://docs.python.org/3/tutorial/classes.html?#private-variables)
+
+後記：  
+　　不知道有沒有人發現前兩篇歌詞翻譯的作者欄位裡並不是我的名字XD  
+　　話說上一篇（Answer）的搜尋排名跟次數大幅上升中，目前已經擠到搜尋結果的前三了OAO，有點受寵若驚，我是不是該轉職了（誤）
+
+---
+popular: 30
+---
+pub_date: 2021-05-21 21:00:00
+---
+tags: Python

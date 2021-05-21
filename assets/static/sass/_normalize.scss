@@ -51,6 +51,10 @@ h1 {
   margin: 0.67em 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
 /* Grouping content
    ========================================================================== */
 
@@ -103,7 +107,7 @@ abbr[title] {
 
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 600;
 }
 
 /**

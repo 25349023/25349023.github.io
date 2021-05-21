@@ -47,6 +47,10 @@ h1 {
   margin: 0.67em 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
 /* Grouping content
    ========================================================================== */
 /**
@@ -100,7 +104,7 @@ abbr[title] {
  */
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 600;
 }
 
 /**
@@ -350,12 +354,17 @@ template {
 @font-face {
   font-family: FakePearl;
   src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Light.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Light.woff) format("woff");
-  font-weight: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: FakePearl;
+  src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff) format("woff");
+  font-weight: 500;
 }
 @font-face {
   font-family: FakePearl;
   src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Medium.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Medium.woff) format("woff");
-  font-weight: bold;
+  font-weight: 700;
 }
 pre code.hljs {
   padding: 0;
@@ -443,7 +452,7 @@ header nav ul li:last-of-type {
   }
 }
 header nav ul li.active {
-  font-weight: bold;
+  font-weight: 600;
 }
 header nav ul li a {
   color: #123a6e;
@@ -1507,7 +1516,7 @@ aside nav > ul .collapsible-category ul a {
   transform: scaleX(0.75);
 }
 .postpage article .post-content ol > li::marker {
-  font-weight: bold;
+  font-weight: 600;
   color: rgba(92, 68, 58, 0.8);
 }
 .postpage article .post-content li blockquote {
@@ -1525,8 +1534,11 @@ aside nav > ul .collapsible-category ul a {
   padding: 0.2rem 0 0.2rem 0.8rem;
   position: relative;
   font-style: italic;
-  font-weight: bold;
+  font-weight: 500;
   color: #42b170;
+}
+.postpage article .post-content blockquote strong {
+  font-weight: 700;
 }
 .postpage article .post-content blockquote blockquote {
   margin-top: 2rem;
@@ -1604,7 +1616,7 @@ aside nav > ul .collapsible-category ul a {
   margin-bottom: 0.2rem;
 }
 .postpage article .post-content .ruby-line {
-  font-weight: bold;
+  font-weight: 600;
 }
 .postpage article .post-content ruby rt {
   font-size: 0.5em;
@@ -1897,7 +1909,7 @@ aside nav > ul .collapsible-category ul a {
   color: #1bb159;
 }
 .postpage .toc > li {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.1rem;
   line-height: 1.5;
 }
