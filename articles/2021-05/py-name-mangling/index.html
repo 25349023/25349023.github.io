@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C] 每天來點字串用法 (5) － strcat、strncat - skyblog</title>
+  <title>[Python] Name Mangling 的大範圍攻擊 - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -104,19 +104,14 @@
     <ul class="toc">
       
         
-          <li><a href="#strcat-strncat-chuan-jie-zi-chuan-239"><code>strcat</code>、<code>strncat</code>：串接字串</a>
+          <li><a href="#name-mangling-217">Name Mangling</a>
             <ul>
         
-          <li><a href="#undefined-behavior-240">Undefined Behavior</a>
-            <ul>
-        
-          <li><a href="#strcat-241"><code>strcat</code></a></li>
+          <li><a href="#na-xie-dong-xi-hui-bei-mangling-218">哪些東西會被 Mangling？</a></li>
         
       
         
-          <li><a href="#strncat-242"><code>strncat</code></a></li>
-        
-      </ul></li>
+          <li><a href="#na-xie-bu-hui-bei-zhong-zu-de-219">那些不會被重組的</a></li>
         
       </ul></li>
         
@@ -129,84 +124,78 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (5) － strcat、strncat</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i>[Python] Name Mangling 的大範圍攻擊</h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 03 - 10
+        <i class="fas fa-at"></i> 2021 - 05 - 21
       </time>
     </div>
   </section>
 
   <section class="post-content">
-    <p>好的，不知道又過了幾天（廢），終於要來到第 5 篇了。</p>
-<h1 id="strcat-strncat-chuan-jie-zi-chuan-239"><code>strcat</code>、<code>strncat</code>：串接字串</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
-函式宣告：</p>
-<pre><code class="language-c">char *strcat( char *dest, const char *src );
-char *strncat( char *dest, const char *src, size_t count );</code></pre>
-<p>看到這熟悉的命名，該不會跟 <code>strcpy()</code>、<code>strncpy()</code> 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 <code>strcat()</code>。</p>
-<p><code>strcat()</code> 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 <code>\0</code> 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 <code>src[0]</code>）所取代，並在最後面補上一個 <code>\0</code> 來當做新字串的結束字元。</p>
-<p>看到名字多了一個 n 的函式，你可能會猜，是不是這個 <code>strcat()</code> 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：<code>strncat()</code>。</p>
-<p>如果有看過之前<a href="/articles/2021-03/c-str-2/">那一篇</a>的話，應該都已經知道這個函式要怎麼用了，他會多接受一個整數，作為控制最多串接的字元數。不過這裡的機制跟 <code>strcpy()</code> 有點不一樣：</p>
-<ul>
-<li>無論如何都會在最後放一個 <code>\0</code>，而這個 <code>\0</code> <strong>並不受 count 的限制</strong>。也就是說，真正串接字元數的最大值其實是 <strong>count + 1</strong>。</li>
-</ul>
-<p>讓我們來看看他們的使用範例：</p>
-<pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
+    <p>早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。</p>
+<h1 id="name-mangling-217">Name Mangling</h1><p>在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 <code>__spam</code>），這個屬性的名字最後就會被重組成 <code>_Cls__spam</code> 這樣的形式，這項技術稱作 <strong>Name Mangling</strong>，提供了類似其他語言的私用屬性。</p>
+<p>但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。</p>
+<pre class="line-numbers"><code class="language-python">class MyClass:
+    def __init__(self):
+        self.__bar = 1
 
-int main(){
-    // strcat
-    char s1[8] = &quot;hi &quot;, s2[8] = &quot;sky&quot;;
-    strcat(s1, s2);
-    printf(&quot;%s\n\n&quot;, s1);
+m = MyClass()
+print(m._MyClass__bar)  # 1</code></pre>
+<p>但其實，Name Mangling 有個鮮為人知的<del>陰謀</del>...</p>
+<h2 id="na-xie-dong-xi-hui-bei-mangling-218">哪些東西會被 Mangling？</h2><p>「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 <code>__bar</code> 會是重組的目標，但其實，還有一些<strong>東西</strong>也是。</p>
+<p>根據 Python 官方文件表示：</p>
+<blockquote><p>When an identifier that textually occurs in a class definition <strong>begins with two or more underscore characters and does not end in two or more underscores</strong>, it is considered a private name of that class.  ...  This transformation is <strong>independent of the syntactical context in which the identifier is used</strong>.</p>
+</blockquote>
+<p>前面的粗體字說明了被重組的名稱必須以 2 個或以上的底線所開頭，且結尾最多只有一個底線；而後面的粗體則是說，這個 mangling 轉換並不侷限於特定的語境（syntactical context），亦即不只有 <code>self.__spam</code> 這裡的 <code>__spam</code> 會被重組，任何出現在 class 內文的變數，只要名稱形式符合，都會被重組。</p>
+<p>舉例來說：</p>
+<pre class="line-numbers"><code class="language-python">class MyClass:
+    def hello(self):
+        __foo = 101  # this will be mangling
+        return _MyClass__foo
 
-    // strncat
-    char s3[8], s4[8];
-    scanf(&quot;%s%s&quot;, s4, s3);
-    printf(&quot;s3: %s\ns4: %s\n&quot;, s3, s4);
-    strncat(s4, s3, 4);
-    printf(&quot;s3: %s\ns4: %s\n&quot;, s3, s4);
+    def __print(self):
+        print(&quot;this will be mangling, too&quot;)
 
-    return 0;
-}</code></pre>
-<p><code>strncat()</code> 部分的輸入可分別使用以下四種：</p>
-<pre><code class="language-text">1234 123
-1234 1234
-1234 12345
-12345 12345</code></pre>
-<p>至於結果會如何，就請大家自己試一試囉XD<br>
-這裡需要知道的地方是，s3 和 s4 的記憶體配置情況，通常會是像下圖這樣：</p>
-<p><img src="/articles/2021-03/c-str-5/cstr-3.png" alt="allocation of s3, s4"></p>
-<h2 id="undefined-behavior-240">Undefined Behavior</h2><p>在使用這兩個函式時，也可能會造成 undefined behavior，以下列舉出可能的情況：</p>
-<h3 id="strcat-241"><code>strcat</code></h3><ol>
-<li>緩衝區溢位（其實是 dest 不夠長）</li>
-<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
-<li>如果 dest 或是 src 指向的字串沒有以 <code>\0</code> 結尾</li>
-</ol>
-<h3 id="strncat-242"><code>strncat</code></h3><ol>
-<li>dest 不夠長</li>
-<li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
-<li>如果 src 不是指向一個字串</li>
-<li>如果 dest 指向的字串沒有以 <code>\0</code> 結尾</li>
-</ol>
-<div class="admonition admonition-note"><p>這個部分在 C99 已受到限制：宣告中新增了 <code>restrict</code> 關鍵字，對於這個關鍵字有興趣的人可以自己查查看。</p></div><p>其實這次我對 <code>strncat()</code> 那邊的解說有點不太滿意，但也想不出能更簡潔說明的方法了qwq，希望大家還是能透過實作一次了解這個函式的特色。</p>
-<p><del>另外，最近的更新頻率應該會降低許多（好像從來沒有高過），因為開學了而且還要準備升大學的資料。總之，就加油吧！</del> （三年前）</p>
+    __cls_attr = &#x27;another identifier that will be mangling&#x27;
+
+m = MyClass()
+print(m.hello())  # 101
+m._MyClass__print()  # this will be mangling, too
+print(MyClass._MyClass__cls_attr)  # another identifier that will be mangling</code></pre>
+<p>上例中列出了會被名稱重組的三種可能情況，其中比較有趣的是 <code>hello</code> 方法中的 <code>__foo</code>，在原始方法內文中，我們可以同時使用兩種名稱來存取他，分別是 <code>__foo</code> 和 mangling 後的 <code>_MyClass__foo</code>。</p>
+<h2 id="na-xie-bu-hui-bei-zhong-zu-de-219">那些不會被重組的</h2><p>前面的引文也有提到，被重組的名稱必須是個 identifier，因此單純的<strong>字串</strong>內出現 <code>__foo</code> 這樣的文字並不會被替換，不過這會有什麼問題嗎？</p>
+<p>有時候我們會使用 <code>__dict__</code> 或其他函式來存取實例的屬性，而如果目標屬性會被 mangling 所影響，那麼我們對 <code>__dict__</code> 所使用的鍵或傳入其他函式的引數就必須是已經重組過的名字：</p>
+<pre class="line-numbers"><code class="language-python">class MyClass:
+   def __init__(self):
+       self.__data = 101
+
+   def get_data(self):
+       return self.__dict__[&#x27;_MyClass__data&#x27;] 
+
+m = MyClass()
+m.get_data()  # 101</code></pre>
+<p>雖然這個例子不太好，但能夠展示我想表達的就行了。</p>
+<p>這次講的內容其實並不容易造成什麼問題，只是偶然在 werkzeug 的 source code 裡發現一些神奇的地方，再經過自己實驗後觀察到的現象。</p>
+<p>最後，感謝看到這裡的你，如果發現這篇文章有什麼瑕疵或想回饋的，都可以在下面留言。</p>
 <hr>
 <p>參考資料：</p>
 <ol>
-<li><a href="https://en.cppreference.com/w/c/string/byte/strcat">cppreference - strcat</a></li>
-<li><a href="https://en.cppreference.com/w/c/string/byte/strncat">cppreference - strncat</a></li>
-<li>最近有點混亂的腦袋</li>
+<li><a href="https://docs.python.org/3/reference/expressions.html#atom-identifiers">Python language reference 6.2.1 - Identifiers</a></li>
+<li><a href="https://docs.python.org/3/tutorial/classes.html?#private-variables">Python language reference 9.6 - Private Variables</a></li>
 </ol>
+<p>後記：<br>
+　　不知道有沒有人發現前兩篇歌詞翻譯的作者欄位裡並不是我的名字XD<br>
+　　話說上一篇（Answer）的搜尋排名跟次數大幅上升中，目前已經擠到搜尋結果的前三了OAO，有點受寵若驚，我是不是該轉職了（誤）</p>
 
   </section>
   
   
     <ul class="tags">
       <li>
-          <a href="/articles/tag/C-Zi-Chuan/">
-            C - 字串
+          <a href="/articles/tag/Python/">
+            Python
           </a>
         </li>
       
@@ -216,7 +205,7 @@ int main(){
   <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/c-str-5"; this.page.url = "https://25349023.github.io/articles/2021-03/c-str-5/"; };
+  var disqus_config = function() { this.page.identifier = "/articles/py-name-mangling"; this.page.url = "https://25349023.github.io/articles/2021-05/py-name-mangling/"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -233,18 +222,11 @@ int main(){
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-03/py-arguments/">
-          <h3>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！ <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-03/c-str-4/">
-          <h3><i class="fas fa-chevron-left"></i> [C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h3>
+        <a href="/articles/2021-04/answer-ikura/">
+          <h3><i class="fas fa-chevron-left"></i> [歌詞翻譯] Answer － 幾田りら</h3>
         </a>
       </div>
     

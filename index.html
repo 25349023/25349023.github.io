@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/static/style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com"/>
   <link
-    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <link
@@ -106,6 +106,18 @@
         </div>
         
           
+  <a href="/articles/2021-05/py-name-mangling/" class="card">
+    <h3>[Python] Name Mangling 的大範圍攻擊</h3>
+    <p class="preview">
+      早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。
+Name Mangling在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 __spam），這個屬性的名字最後就會被重組成 _Cls__spam 這樣的形式，這項技術稱作 Name Mangling，提供了類似其他語言的私用屬性。
+但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。
+class MyCla...
+    </p>
+  </a>
+
+        
+          
   <a href="/articles/2021-04/answer-ikura/" class="card">
     <h3>[歌詞翻譯] Answer － 幾田りら</h3>
     <p class="preview">
@@ -168,21 +180,6 @@ Answer
 那我們就開始吧！
 此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
 目前...
-    </p>
-  </a>
-
-        
-          
-  <a href="/articles/2021-03/py-arguments/" class="card">
-    <h3>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h3>
-    <p class="preview">
-      在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 *args 和 **kwargs 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。
-函式參數語法基礎預設參數一般的定義方法就不多說了，直接來看有預設值的參數：
-def plus(a, b, c=None):
-    res = a + b + (c if c else 0)
-    return res
-預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。
-但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數...
     </p>
   </a>
 

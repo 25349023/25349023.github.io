@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/static/style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com"/>
   <link
-    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <link
@@ -99,6 +99,31 @@
   
   <main>
     <div class="main-wrapper">
+      
+        
+  <a href="/articles/2021-05/py-name-mangling/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[Python] Name Mangling 的大範圍攻擊</h2>
+
+        <time>2021 - 05 - 21</time>
+      </div>
+      <p class="preview">
+        早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。
+Name Mangling在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 __spam），這個屬性的名字最後就會被重組成 _Cls__spam 這樣的形式，這項技術稱作 Name Mangling，提供了類似其他語言的私用屬性。
+但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。
+class MyClass:
+    def __init__(self):
+        self.__bar = 1
+
+m = MyClass()
+print(m._MyClass__bar)  # 1
+但其實，Name Mangling 有個鮮為人知的陰謀...
+哪些東西會被 Mangling？「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 __bar 會是重組的...
+      </p>
+    </article>
+  </a>
+
       
         
   <a href="/articles/2021-04/answer-ikura/" class="post-link">
@@ -376,41 +401,6 @@ print(id(x))  # 94526375507712
 我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
 這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
 進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-03/c-str-2/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[C] 每天來點字串用法 (2) － strcpy、strncpy</h2>
-
-        <time>2021 - 03 - 01</time>
-      </div>
-      <p class="preview">
-        結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）
-進入正文吧，今天要介紹的是：
-strcpy、strncpy：字串複製所屬標頭檔：&amp;lt;string.h&amp;gt;
-函式宣告：
-char *strcpy( char *dest, const char *src );
-char *strncpy( char *dest, const char *src, size_t count );
-先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
-
-第一個參數是目的地（dest），第二個是來源（src）
-會有緩衝區溢位（buffer overflow）的問題
-
-來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
-int i = 5;
-char s[8] = &amp;quot;Hi 1234&amp;quot;;
-那麼這些變數的記憶體配置可能如下：
-
-如果今天我們進行了如下操作：
-strcpy(s, &amp;quot;hello sky&amp;quot;);
-那麼記憶體裡的內容就會變成如下：
-
-於是這時 i 的值就會變...
       </p>
     </article>
   </a>

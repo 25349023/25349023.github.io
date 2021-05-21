@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/static/style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com"/>
   <link
-    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <link
@@ -103,6 +103,31 @@
       </div>
     </div>
     <div class="main-wrapper">
+      
+        
+  <a href="/articles/2021-05/py-name-mangling/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[Python] Name Mangling 的大範圍攻擊</h2>
+
+        <time>2021 - 05 - 21</time>
+      </div>
+      <p class="preview">
+        早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。
+Name Mangling在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 __spam），這個屬性的名字最後就會被重組成 _Cls__spam 這樣的形式，這項技術稱作 Name Mangling，提供了類似其他語言的私用屬性。
+但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。
+class MyClass:
+    def __init__(self):
+        self.__bar = 1
+
+m = MyClass()
+print(m._MyClass__bar)  # 1
+但其實，Name Mangling 有個鮮為人知的陰謀...
+哪些東西會被 Mangling？「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 __bar 會是重組的...
+      </p>
+    </article>
+  </a>
+
       
         
   <a href="/articles/2021-03/py-structural-pattern-matching/" class="post-link">
