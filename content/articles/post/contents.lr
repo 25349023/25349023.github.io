@@ -337,12 +337,12 @@ asd | zxc asd asd asdas das dasda sdas das   | zxc asd asd asdas das dasda sdas 
 asd | qwe   | zxc
 asd | qwe   | zxc
 asd | qwe   | zxc
-asd | qwe   | zxc
-asd | qwe   | zxc
-asd | qwe   | zxc
-asd | qwe   | zxc
 
-test paragraph
+## Math Supports
+
+The following is the solution to \\( ax^2 + bx + c = 0 \\):
+\\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\\]
+
 
 ---
 tags: Test
