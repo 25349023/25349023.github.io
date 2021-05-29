@@ -104,14 +104,14 @@
     <ul class="toc">
       
         
-          <li><a href="#zi-chuan-de-ji-ben-shi-yong-268">字串的基本使用</a>
+          <li><a href="#zi-chuan-de-ji-ben-shi-yong-272">字串的基本使用</a>
             <ul>
         
-          <li><a href="#guan-yu-0-zi-yuan-269">關於 <code>'\0'</code> 字元</a></li>
+          <li><a href="#guan-yu-0-zi-yuan-273">關於 <code>'\0'</code> 字元</a></li>
         
       
         
-          <li><a href="#shu-ru-zi-yuan-zhen-lie-270">輸入字元陣列</a></li>
+          <li><a href="#shu-ru-zi-yuan-zhen-lie-274">輸入字元陣列</a></li>
         
       </ul></li>
         
@@ -136,7 +136,7 @@
   <section class="post-content">
     <p>有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）<br>
 <del>不，你不行。（2021 的我）</del></p>
-<h1 id="zi-chuan-de-ji-ben-shi-yong-268">字串的基本使用</h1><p>首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：</p>
+<h1 id="zi-chuan-de-ji-ben-shi-yong-272">字串的基本使用</h1><p>首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：</p>
 <pre><code class="language-c">char s1[128] = &quot;hello world&quot;;
 char s2[] = &quot;hello world&quot;;</code></pre>
 <p>另外，許多函式都會使用字元指標來操作字串：</p>
@@ -156,14 +156,14 @@ printf(&quot;%s\n&quot;, s3);  // hello world
 
 char *s4 = &quot;hello world&quot;;
 printf(&quot;%s\n&quot;, s4);  // hello world</code></pre>
-<h2 id="guan-yu-0-zi-yuan-269">關於 <code>'\0'</code> 字元</h2><p>說到 C 的字串，絕對不能不提到 <code>\0</code> 這個字元，不要看它有兩個字（<code>\</code> 和 <code>0</code>），其實它是一個單一的字元，就像換行字元 <code>\n</code> 一樣。</p>
+<h2 id="guan-yu-0-zi-yuan-273">關於 <code>'\0'</code> 字元</h2><p>說到 C 的字串，絕對不能不提到 <code>\0</code> 這個字元，不要看它有兩個字（<code>\</code> 和 <code>0</code>），其實它是一個單一的字元，就像換行字元 <code>\n</code> 一樣。</p>
 <p>他的功用是：<strong>標記出字串的結束</strong>。看到我們上面輸出中的 s1 字串，我們明明就宣告了 128 個空間，但為什麼輸出結果只有 11 個字元？剩下的去哪了呢？正是被 <code>\0</code> 擋掉了。<code>\0</code> 明確的告訴程式：在我後面的都是垃圾，不要用，因此我們才能正確的輸出。</p>
 <p>但是，我們在初始化的時候並沒有把 <code>\0</code> 寫出來啊？其實是編譯器會幫我們在字串結尾補上 <code>\0</code>，所以基本上我們不用擔心忘記加上 <code>\0</code> 就會世界毀滅之類的（並不會。  另外，<code>\0</code> 的 ASCII 值正好是 0。</p>
 <p>我們可以利用 sizeof 來驗證 '\0' 的存在：</p>
 <pre><code class="language-c">char str[] = &quot;hello world&quot;;
 printf(&quot;%d\n&quot;, sizeof str);  // 12</code></pre>
 <p>可以看到，str 本身只有 11 個字元，但是佔用的空間是 12 個 byte，證實了有一個看不到的字元被放入了 str。</p>
-<h2 id="shu-ru-zi-yuan-zhen-lie-270">輸入字元陣列</h2><p>如果要輸入字串的話，有以下幾種方法：</p>
+<h2 id="shu-ru-zi-yuan-zhen-lie-274">輸入字元陣列</h2><p>如果要輸入字串的話，有以下幾種方法：</p>
 <pre class="line-numbers"><code class="language-c">char s1[48];
 scanf(&quot;%s&quot;, s1);
 printf(&quot;%s\n&quot;, s1);
@@ -378,6 +378,8 @@ fgets(str, 128, stdin);</code></pre>
   <script>
       hljs.initHighlightingOnLoad();
   </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </body>
 </html>

@@ -104,17 +104,17 @@
     <ul class="toc">
       
         
-          <li><a href="#strcat-strncat-chuan-jie-zi-chuan-239"><code>strcat</code>、<code>strncat</code>：串接字串</a>
+          <li><a href="#strcat-strncat-chuan-jie-zi-chuan-243"><code>strcat</code>、<code>strncat</code>：串接字串</a>
             <ul>
         
-          <li><a href="#undefined-behavior-240">Undefined Behavior</a>
+          <li><a href="#undefined-behavior-244">Undefined Behavior</a>
             <ul>
         
-          <li><a href="#strcat-241"><code>strcat</code></a></li>
+          <li><a href="#strcat-245"><code>strcat</code></a></li>
         
       
         
-          <li><a href="#strncat-242"><code>strncat</code></a></li>
+          <li><a href="#strncat-246"><code>strncat</code></a></li>
         
       </ul></li>
         
@@ -140,7 +140,7 @@
 
   <section class="post-content">
     <p>好的，不知道又過了幾天（廢），終於要來到第 5 篇了。</p>
-<h1 id="strcat-strncat-chuan-jie-zi-chuan-239"><code>strcat</code>、<code>strncat</code>：串接字串</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+<h1 id="strcat-strncat-chuan-jie-zi-chuan-243"><code>strcat</code>、<code>strncat</code>：串接字串</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
 <pre><code class="language-c">char *strcat( char *dest, const char *src );
 char *strncat( char *dest, const char *src, size_t count );</code></pre>
@@ -178,13 +178,13 @@ int main(){
 <p>至於結果會如何，就請大家自己試一試囉XD<br>
 這裡需要知道的地方是，s3 和 s4 的記憶體配置情況，通常會是像下圖這樣：</p>
 <p><img src="/articles/2021-03/c-str-5/cstr-3.png" alt="allocation of s3, s4"></p>
-<h2 id="undefined-behavior-240">Undefined Behavior</h2><p>在使用這兩個函式時，也可能會造成 undefined behavior，以下列舉出可能的情況：</p>
-<h3 id="strcat-241"><code>strcat</code></h3><ol>
+<h2 id="undefined-behavior-244">Undefined Behavior</h2><p>在使用這兩個函式時，也可能會造成 undefined behavior，以下列舉出可能的情況：</p>
+<h3 id="strcat-245"><code>strcat</code></h3><ol>
 <li>緩衝區溢位（其實是 dest 不夠長）</li>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 或是 src 指向的字串沒有以 <code>\0</code> 結尾</li>
 </ol>
-<h3 id="strncat-242"><code>strncat</code></h3><ol>
+<h3 id="strncat-246"><code>strncat</code></h3><ol>
 <li>dest 不夠長</li>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 src 不是指向一個字串</li>
@@ -394,6 +394,8 @@ int main(){
   <script>
       hljs.initHighlightingOnLoad();
   </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </body>
 </html>

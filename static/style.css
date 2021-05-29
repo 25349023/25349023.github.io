@@ -2099,6 +2099,30 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 
+.postpage article .post-content table {
+  padding-bottom: 1rem;
+  text-align: center;
+  border-spacing: 0.25rem;
+}
+.postpage article .post-content table thead th {
+  border-bottom: 4px solid rgba(67, 116, 155, 0.5);
+}
+.postpage article .post-content table tbody td {
+  padding: 0.4rem 1rem;
+  border-radius: 2px;
+  background-color: rgba(182, 212, 236, 0.2);
+  min-width: 8rem;
+  transition: background-color 0.2s;
+}
+@media (max-width: 668px) {
+  .postpage article .post-content table tbody td {
+    min-width: unset;
+  }
+}
+.postpage article .post-content table tbody tr:hover td {
+  background-color: rgba(182, 212, 236, 0.4);
+}
+
 .portfolio .banner {
   height: 40vh;
   position: relative;
