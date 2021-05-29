@@ -327,6 +327,23 @@ Use the `printf()` function.
 % 圖書館
 ^^
 
+
+## Table Elements
+
+A   | B     | C
+----|-------|-----
+asd | qwe   | zxc
+asd | zxc asd asd asdas das dasda sdas das   | zxc asd asd asdas das dasda sdas das
+asd | qwe   | zxc
+asd | qwe   | zxc
+asd | qwe   | zxc
+asd | qwe   | zxc
+asd | qwe   | zxc
+asd | qwe   | zxc
+asd | qwe   | zxc
+
+test paragraph
+
 ---
 tags: Test
 ---

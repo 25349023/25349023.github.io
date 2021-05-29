@@ -1,0 +1,30 @@
+.postpage article .post-content {
+  table {
+    padding-bottom: 1rem;
+    text-align: center;
+    border-spacing: 0.25rem;
+
+    thead th {
+      border-bottom: 4px solid rgba($postpage-table-th-color, 0.5);
+    }
+
+    tbody {
+      td {
+        padding: 0.4rem 1rem;
+        border-radius: 2px;
+        background-color: rgba($postpage-table-td-color, 0.2);
+        min-width: 8rem;
+        transition: background-color 0.2s;
+
+        @include brk-down($brk-small) {
+          min-width: unset;
+        }
+      }
+
+      tr:hover td {
+        background-color: rgba($postpage-table-td-color, 0.4);
+      }
+    }
+  }
+
+}
