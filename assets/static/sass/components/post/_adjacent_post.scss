@@ -36,11 +36,17 @@
 
   h3 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    line-height: 1.2;
     transition: color 0.2s;
 
     &:hover {
       color: rgba($postpage-link-color, 1);
+    }
+
+    i {
+      position: relative;
+      top: 2px;
     }
   }
 
@@ -48,7 +54,7 @@
     align-self: flex-end;
 
     i {
-      margin-left: 1rem;
+      margin-left: 0.8rem;
     }
   }
 
@@ -58,7 +64,7 @@
     margin-top: 1rem;
 
     i {
-      margin-right: 1rem;
+      margin-right: 0.8rem;
     }
   }
 
