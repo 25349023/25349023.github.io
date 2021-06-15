@@ -1870,7 +1870,7 @@ aside nav > ul .collapsible-category ul a {
     max-height: 40vh;
   }
 }
-@media (max-width: 1080px) {
+@media (max-width: 1192px) {
   .postpage .toc-wrapper {
     display: none;
   }
@@ -1977,17 +1977,22 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage .adjacent-posts h3 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 1.2;
   transition: color 0.2s;
 }
 .postpage .adjacent-posts h3:hover {
   color: #1bb159;
 }
+.postpage .adjacent-posts h3 i {
+  position: relative;
+  top: 2px;
+}
 .postpage .adjacent-posts .next {
   align-self: flex-end;
 }
 .postpage .adjacent-posts .next i {
-  margin-left: 1rem;
+  margin-left: 0.8rem;
 }
 .postpage .adjacent-posts .prev {
   text-align: right;
@@ -1995,7 +2000,7 @@ aside nav > ul .collapsible-category ul a {
   margin-top: 1rem;
 }
 .postpage .adjacent-posts .prev i {
-  margin-right: 1rem;
+  margin-right: 0.8rem;
 }
 @media (max-width: 480px) {
   .postpage .adjacent-posts .next {
