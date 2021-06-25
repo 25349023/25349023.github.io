@@ -183,7 +183,7 @@
 <div class="admonition admonition-tip"><p>本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 <a href="https://www.python.org/download/pre-releases/">pre-release</a> 版。<br>
 目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 </p></div><h1 id="pep-634-structural-pattern-matching-309">PEP 634: Structural Pattern Matching</h1><h2 id="bi-dui-ying-she-mapping-310">比對映射（Mapping）</h2><p>我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。</p>
 <p>就像序列是使用 <code>[]</code> 或 <code>()</code> 來比對，那映射當然就是使用 <code>{}</code> 來比對啦。</p>
-<p>但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。</p>
+<p>但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（<a href="/ articles/2021-03/py-structural-pattern-matching/#qi-ta-de-bi-dui-fang-shi-12772">前篇的最後一節</a>有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。</p>
 <p>另外，pattern 中不能出現兩個相同的 key。</p>
 <p>接下來就來看個例子：</p>
 <pre class="line-numbers"><code class="language-python">def parse(action):
@@ -278,7 +278,7 @@ where(&#x27;spam&#x27;)       # Not a point</code></pre>
 <li>對於關鍵字引數，檢查目標物件中對應屬性的值是否符合（每個值都會照著前面提過的方式來比對）</li>
 <li>對於位置引數，利用 <code>__match_args__</code> 將引數轉換成關鍵字引數再進行比對。若沒有定義<code>__match_args__</code>，預設會是空的 tuple。</li>
 </ol>
-<p>另外，內建型別（如 <code>bool</code>、 <code>int</code>、 <code>str</code>、 <code>list</code> 等）會接受一個位置引數來比對整個目標物件。（前篇有範例）</p>
+<p>另外，內建型別（如 <code>bool</code>、 <code>int</code>、 <code>str</code>、 <code>list</code> 等）會接受一個位置引數來比對整個目標物件。（前篇有<a href="/articles/2021-03/py-structural-pattern-matching/#bi-dui-nei-jian-xing-bie-12769">範例</a>可供參考）</p>
 <h2 id="qi-ta-zhu-yi-shi-xiang-321">其他注意事項</h2><p>最後，使用 <code>match</code> 時要特別注意，被補捉的變數在 <code>match</code> 區塊結束之後依然可用，而且會覆蓋原本進入 <code>match</code> 之前的值。</p>
 <p>這趟 Structural Pattern Matching 之旅就到這裡結束了，感謝看完這兩篇文章的你，如果有任何問題或回饋，都歡迎在下面留言、反應。</p>
 <hr>
