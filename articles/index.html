@@ -101,6 +101,27 @@
     <div class="main-wrapper">
       
         
+  <a href="/articles/2021-06/py-structural-pattern-matching-in-depth/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[Python 3.10] 打開黑盒子：細談 Structural Pattern Matching</h2>
+
+        <time>2021 - 06 - 25</time>
+      </div>
+      <p class="preview">
+        還沒看過上一篇的朋友請往這邊走。沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，我好棒。
+這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。
+那就直接進入我們的主題吧！
+本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
+目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
+就像序列是使用 [] 或 () 來比對，那映射當然就是使用 {} 來比對啦。
+但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提...
+      </p>
+    </article>
+  </a>
+
+      
+        
   <a href="/articles/2021-05/py-name-mangling/" class="post-link">
     <article>
       <div class="info">
@@ -384,28 +405,6 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
   </a>
 
       
-        
-  <a href="/articles/2021-03/py-var-ref/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[Python] 關於變數與參考的二三事</h2>
-
-        <time>2021 - 03 - 06</time>
-      </div>
-      <p class="preview">
-        寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！
-變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：
-x = 1
-就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
-print(id(x))  # 94526375507712
-我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
-這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
-進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數...
-      </p>
-    </article>
-  </a>
-
-      
     </div>
   </main>
   
@@ -449,10 +448,17 @@ print(id(x))  # 94526375507712
     
     
       
+
+      
       
         <li class="collapsible-category">
           <a>C <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/C/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/C-Zi-Chuan/"
@@ -465,6 +471,8 @@ print(id(x))  # 94526375507712
       
     
       
+
+      
       
         <li><a href="/articles/tag/Cpp/"
         >C++</a></li>
@@ -472,17 +480,40 @@ print(id(x))  # 94526375507712
       
     
       
+
+      
+      
+        <li class="collapsible-category">
+          <a>Python <i class="fas fa-angle-down"></i></a>
+          <ul>
       
         <li><a href="/articles/tag/Python/"
-        >Python</a></li>
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Python-Structural-Pattern-Matching/"
+        >Structural Pattern Matching</a></li>
+      
+      
+    </ul>
+        </li>
       
       
     
+      
+
       
       
         <li class="collapsible-category">
           <a>演算法 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
@@ -495,10 +526,17 @@ print(id(x))  # 94526375507712
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
@@ -511,10 +549,17 @@ print(id(x))  # 94526375507712
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>日常 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ri-Chang/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
@@ -526,6 +571,8 @@ print(id(x))  # 94526375507712
       
       
     
+      
+
       
       
         <li><a href="/articles/tag/Test/"

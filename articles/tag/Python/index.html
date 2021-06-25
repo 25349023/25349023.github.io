@@ -105,6 +105,27 @@
     <div class="main-wrapper">
       
         
+  <a href="/articles/2021-06/py-structural-pattern-matching-in-depth/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[Python 3.10] 打開黑盒子：細談 Structural Pattern Matching</h2>
+
+        <time>2021 - 06 - 25</time>
+      </div>
+      <p class="preview">
+        還沒看過上一篇的朋友請往這邊走。沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，我好棒。
+這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。
+那就直接進入我們的主題吧！
+本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
+目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
+就像序列是使用 [] 或 () 來比對，那映射當然就是使用 {} 來比對啦。
+但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提...
+      </p>
+    </article>
+  </a>
+
+      
+        
   <a href="/articles/2021-05/py-name-mangling/" class="post-link">
     <article>
       <div class="info">
@@ -277,10 +298,17 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
     
     
       
+
+      
       
         <li class="collapsible-category">
           <a>C <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/C/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/C-Zi-Chuan/"
@@ -293,6 +321,8 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
       
     
       
+
+      
       
         <li><a href="/articles/tag/Cpp/"
         >C++</a></li>
@@ -300,17 +330,40 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
       
     
       
+
+      
+      
+        <li class="collapsible-category">
+          <a>Python <i class="fas fa-angle-down"></i></a>
+          <ul>
       
         <li><a href="/articles/tag/Python/"
-        >Python</a></li>
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Python-Structural-Pattern-Matching/"
+        >Structural Pattern Matching</a></li>
+      
+      
+    </ul>
+        </li>
       
       
     
+      
+
       
       
         <li class="collapsible-category">
           <a>演算法 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
@@ -323,10 +376,17 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
@@ -339,10 +399,17 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>日常 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ri-Chang/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
@@ -354,6 +421,8 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
       
       
     
+      
+
       
       
         <li><a href="/articles/tag/Test/"

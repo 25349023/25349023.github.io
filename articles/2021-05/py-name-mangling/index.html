@@ -104,14 +104,14 @@
     <ul class="toc">
       
         
-          <li><a href="#name-mangling-221">Name Mangling</a>
+          <li><a href="#name-mangling-322">Name Mangling</a>
             <ul>
         
-          <li><a href="#na-xie-dong-xi-hui-bei-mangling-222">哪些東西會被 Mangling？</a></li>
+          <li><a href="#na-xie-dong-xi-hui-bei-mangling-323">哪些東西會被 Mangling？</a></li>
         
       
         
-          <li><a href="#na-xie-bu-hui-bei-zhong-zu-de-223">那些不會被重組的</a></li>
+          <li><a href="#na-xie-bu-hui-bei-zhong-zu-de-324">那些不會被重組的</a></li>
         
       </ul></li>
         
@@ -135,7 +135,7 @@
 
   <section class="post-content">
     <p>早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。</p>
-<h1 id="name-mangling-221">Name Mangling</h1><p>在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 <code>__spam</code>），這個屬性的名字最後就會被重組成 <code>_Cls__spam</code> 這樣的形式，這項技術稱作 <strong>Name Mangling</strong>，提供了類似其他語言的私用屬性。</p>
+<h1 id="name-mangling-322">Name Mangling</h1><p>在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 <code>__spam</code>），這個屬性的名字最後就會被重組成 <code>_Cls__spam</code> 這樣的形式，這項技術稱作 <strong>Name Mangling</strong>，提供了類似其他語言的私用屬性。</p>
 <p>但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。</p>
 <pre class="line-numbers"><code class="language-python">class MyClass:
     def __init__(self):
@@ -144,7 +144,7 @@
 m = MyClass()
 print(m._MyClass__bar)  # 1</code></pre>
 <p>但其實，Name Mangling 有個鮮為人知的<del>陰謀</del>...</p>
-<h2 id="na-xie-dong-xi-hui-bei-mangling-222">哪些東西會被 Mangling？</h2><p>「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 <code>__bar</code> 會是重組的目標，但其實，還有一些<strong>東西</strong>也是。</p>
+<h2 id="na-xie-dong-xi-hui-bei-mangling-323">哪些東西會被 Mangling？</h2><p>「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 <code>__bar</code> 會是重組的目標，但其實，還有一些<strong>東西</strong>也是。</p>
 <p>根據 Python 官方文件表示：</p>
 <blockquote><p>When an identifier that textually occurs in a class definition <strong>begins with two or more underscore characters and does not end in two or more underscores</strong>, it is considered a private name of that class.  ...  This transformation is <strong>independent of the syntactical context in which the identifier is used</strong>.</p>
 </blockquote>
@@ -165,7 +165,7 @@ print(m.hello())  # 101
 m._MyClass__print()  # this will be mangling, too
 print(MyClass._MyClass__cls_attr)  # another identifier that will be mangling</code></pre>
 <p>上例中列出了會被名稱重組的三種可能情況，其中比較有趣的是 <code>hello</code> 方法中的 <code>__foo</code>，在原始方法內文中，我們可以同時使用兩種名稱來存取他，分別是 <code>__foo</code> 和 mangling 後的 <code>_MyClass__foo</code>。</p>
-<h2 id="na-xie-bu-hui-bei-zhong-zu-de-223">那些不會被重組的</h2><p>前面的引文也有提到，被重組的名稱必須是個 identifier，因此單純的<strong>字串</strong>內出現 <code>__foo</code> 這樣的文字並不會被替換，不過這會有什麼問題嗎？</p>
+<h2 id="na-xie-bu-hui-bei-zhong-zu-de-324">那些不會被重組的</h2><p>前面的引文也有提到，被重組的名稱必須是個 identifier，因此單純的<strong>字串</strong>內出現 <code>__foo</code> 這樣的文字並不會被替換，不過這會有什麼問題嗎？</p>
 <p>有時候我們會使用 <code>__dict__</code> 或其他函式來存取實例的屬性，而如果目標屬性會被 mangling 所影響，那麼我們對 <code>__dict__</code> 所使用的鍵或傳入其他函式的引數就必須是已經重組過的名字：</p>
 <pre class="line-numbers"><code class="language-python">class MyClass:
    def __init__(self):
@@ -222,6 +222,13 @@ m.get_data()  # 101</code></pre>
   
   <section class="adjacent-posts">
     
+      <div class="next">
+        <span>Next Post</span>
+        <a href="/articles/2021-06/py-structural-pattern-matching-in-depth/">
+          <h3>[Python 3.10] 打開黑盒子：細談 Structural Pattern Matching <i class="fas fa-chevron-right"></i></h3>
+        </a>
+      </div>
+    
     
       <div class="prev">
         <span>Prev Post</span>
@@ -257,10 +264,17 @@ m.get_data()  # 101</code></pre>
     
     
       
+
+      
       
         <li class="collapsible-category">
           <a>C <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/C/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/C-Zi-Chuan/"
@@ -273,6 +287,8 @@ m.get_data()  # 101</code></pre>
       
     
       
+
+      
       
         <li><a href="/articles/tag/Cpp/"
         >C++</a></li>
@@ -280,17 +296,40 @@ m.get_data()  # 101</code></pre>
       
     
       
+
+      
+      
+        <li class="collapsible-category">
+          <a>Python <i class="fas fa-angle-down"></i></a>
+          <ul>
       
         <li><a href="/articles/tag/Python/"
-        >Python</a></li>
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Python-Structural-Pattern-Matching/"
+        >Structural Pattern Matching</a></li>
+      
+      
+    </ul>
+        </li>
       
       
     
+      
+
       
       
         <li class="collapsible-category">
           <a>演算法 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
@@ -303,10 +342,17 @@ m.get_data()  # 101</code></pre>
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
@@ -319,10 +365,17 @@ m.get_data()  # 101</code></pre>
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>日常 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ri-Chang/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
@@ -334,6 +387,8 @@ m.get_data()  # 101</code></pre>
       
       
     
+      
+
       
       
         <li><a href="/articles/tag/Test/"

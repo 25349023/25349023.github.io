@@ -582,12 +582,17 @@ aside .content {
 }
 aside .content .profile-image {
   margin-top: 1rem;
-  width: 75%;
+  width: 60%;
   background-image: url("./images/peashooter.jpg");
   background-origin: border-box;
   background-size: cover;
   border-radius: 50%;
   border: 8px solid rgba(0, 0, 0, 0.4);
+}
+@media (max-width: 668px) {
+  aside .content .profile-image {
+    width: 75%;
+  }
 }
 aside .content .profile-image:after {
   content: "";

@@ -72,7 +72,7 @@
           <a href="/">Home</a>
         </li>
       
-        <li class="option active">
+        <li class="option">
           <a href="/articles/">Articles</a>
         </li>
       
@@ -98,25 +98,80 @@
 
   
   <main>
+    <div class="breadcrumb-wrapper">
+      <div class="breadcrumb"><span>C</span>
+      </div>
+    </div>
     <div class="main-wrapper">
       
         
-  <a href="/articles/2021-03/py-var-ref/" class="post-link">
+  <a href="/articles/2021-03/c-str-5/" class="post-link">
     <article>
       <div class="info">
-        <h2>[Python] 關於變數與參考的二三事</h2>
+        <h2>[C] 每天來點字串用法 (5) － strcat、strncat</h2>
+
+        <time>2021 - 03 - 10</time>
+      </div>
+      <p class="preview">
+        好的，不知道又過了幾天（廢），終於要來到第 5 篇了。
+strcat、strncat：串接字串所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strcat( char *dest, const char *src );
+char *strncat( char *dest, const char *src, size_t count );
+看到這熟悉的命名，該不會跟 strcpy()、strncpy() 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 strcat()。
+strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 \0 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 src[0]）所取代，並在最後面補上一個 \0 來當做新字串的結束字元。
+看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat() 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：strncat()。
+如果有看過之前...
+      </p>
+    </article>
+  </a>
+
+      
+        
+  <a href="/articles/2021-03/c-str-4/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[C] 每天來點字串用法 (4) － strchr、strrchr、strstr</h2>
+
+        <time>2021 - 03 - 09</time>
+      </div>
+      <p class="preview">
+        就直接進入正題吧，今天要講的是：
+字串搜尋strchr、strrchr：字串中搜尋字元所屬標頭檔：&amp;lt;string.h&amp;gt;
+函式宣告：
+char *strchr( const char *str, int ch );
+char *strrchr( const char *str, int ch );
+先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 int，但 char 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳第一個 ch 的所在位址；如果找不到，回傳 NULL。
+而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
+這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
+另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
+我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成 U，使其成為合法...
+      </p>
+    </article>
+  </a>
+
+      
+        
+  <a href="/articles/2021-03/c-str-3/" class="post-link">
+    <article>
+      <div class="info">
+        <h2>[C] 每天來點字串用法 (3) － from const char* to char*</h2>
 
         <time>2021 - 03 - 06</time>
       </div>
       <p class="preview">
-        寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！
-變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：
-x = 1
-就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
-print(id(x))  # 94526375507712
-我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
-這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
-進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數...
+        這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）
+今天帶來的不是函式，而是一個小技巧：
+由 const char* 轉成 char*有時候可能在將字串傳入函式時，會出現以下錯誤：
+error: invalid conversion from &amp;#x27;const char*&amp;#x27; to &amp;#x27;char*&amp;#x27;
+note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;const char *&amp;#x27;
+這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
+
+直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
+用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
+使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
+
+下面這裡提供 2. 和 ...
       </p>
     </article>
   </a>
@@ -214,96 +269,11 @@ char s1[128] = &amp;quot;hello world&amp;qu...
   </a>
 
       
-        
-  <a href="/articles/2021-02/f-string/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[Python 3.6] 初探 f-string</h2>
-
-        <time>2021 - 02 - 23</time>
-      </div>
-      <p class="preview">
-        第一篇技術文章就決定是你了（笑）
-PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧：
-name = &amp;#x27;Sky&amp;#x27;
-print(f&amp;#x27;My name is {name}.&amp;#x27;)
-# &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n: &amp;quot;Lucky&amp;quot...
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-02/blog-migration/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>[短談] 部落格文章搬移計劃</h2>
-
-        <time>2021 - 02 - 18</time>
-      </div>
-      <p class="preview">
-        過了一個寒假，我的新部落格終於完成啦～
-接下來我會慢慢地把原本部落格（天上的東東w）上的文章搬過來這裡，主要的目標是一些技術性的文章或翻譯，一些日常閒聊的就看我心情了（笑）。
-另外，我預計（又挖了一個坑）會有新的一兩篇文在寫這個部落格是怎麼建立的，主軸是如何使用 Lektor 來建立靜態網站，外加一些沒人想聽的心路歷程。
-我原本以為 Lektor 應該不會太難，但還是有不少小地方需要注意。
-不過今年可能會比以往還忙，所以還不知道會不會正常更新（藉口）。或許我可以在等 model train 好的過程中來寫個文章，不然每次都呆呆地盯著他跑也是很浪費時間。
-好了，廢話講太多了，這次就這樣吧XD
-      </p>
-    </article>
-  </a>
-
-      
-        
-  <a href="/articles/2021-02/post/" class="post-link">
-    <article>
-      <div class="info">
-        <h2>Hello world 你好</h2>
-
-        <time>2021 - 02 - 09</time>
-      </div>
-      <p class="preview">
-        這是個用來測試的文章。Markdown: SyntaxOverviewPhilosophyMarkdown is intended to be as easy-to-read and easy-to-write as is feasible.
-Readability, however, is emphasized above all else. A Markdown-formatted
-document should be publishable as-is, as plain text, without looking
-like it&#39;s been marked up with tags or formatting instructions. While
-Markdown&#39;s syntax has been influenced by several existing text-to-HTML
-filters -- including Setext, atx, Textile, reStructuredText,
-Grutatext, and EtText -- the sin...
-      </p>
-    </article>
-  </a>
-
-      
     </div>
   </main>
+
   
-    
-  <div class="pagination">
-    
-      <a href="/articles/"><i class="fas fa-chevron-left"></i></a>
-    
-
-    
-      
-        <a href="/articles/">1</a>
-      
-    
-      
-        <a class="active"
-           >2</a>
-      
-    
-
-    
-      <a class="disabled"><i class="fas fa-chevron-right"></i></a>
-    
-  </div>
-
+    <div class="pagination"></div>
   
 
   <div class="overlay hidden" id="overlay"></div>

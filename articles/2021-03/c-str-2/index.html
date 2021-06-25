@@ -104,17 +104,17 @@
     <ul class="toc">
       
         
-          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi-267"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
+          <li><a href="#strcpy-strncpy-zi-chuan-fu-zhi-368"><code>strcpy</code>、<code>strncpy</code>：字串複製</a>
             <ul>
         
-          <li><a href="#undefined-behavior-268">Undefined Behavior</a>
+          <li><a href="#undefined-behavior-369">Undefined Behavior</a>
             <ul>
         
-          <li><a href="#strcpy-269"><code>strcpy</code></a></li>
+          <li><a href="#strcpy-370"><code>strcpy</code></a></li>
         
       
         
-          <li><a href="#strncpy-270"><code>strncpy</code></a></li>
+          <li><a href="#strncpy-371"><code>strncpy</code></a></li>
         
       </ul></li>
         
@@ -141,7 +141,7 @@
   <section class="post-content">
     <p>結果隔了四天才更新 qwq，前幾天根本忘得一乾二淨 XD（同時適用於三年前及現在）<br>
 進入正文吧，今天要介紹的是：</p>
-<h1 id="strcpy-strncpy-zi-chuan-fu-zhi-267"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+<h1 id="strcpy-strncpy-zi-chuan-fu-zhi-368"><code>strcpy</code>、<code>strncpy</code>：字串複製</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
 函式宣告：</p>
 <pre><code class="language-c">char *strcpy( char *dest, const char *src );
 char *strncpy( char *dest, const char *src, size_t count );</code></pre>
@@ -192,14 +192,14 @@ int main(void){
 
     return 0;
 }</code></pre>
-<h2 id="undefined-behavior-268">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
-<h3 id="strcpy-269"><code>strcpy</code></h3><ol>
+<h2 id="undefined-behavior-369">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
+<h3 id="strcpy-370"><code>strcpy</code></h3><ol>
 <li>緩衝區溢位（其實是 dest 不夠長）</li>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 指到的不是一個字元陣列</li>
 <li>如果 src 指向的字串沒有以 <code>\0</code> 結尾</li>
 </ol>
-<h3 id="strncpy-270"><code>strncpy</code></h3><ol>
+<h3 id="strncpy-371"><code>strncpy</code></h3><ol>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 dest 或 src 其中一個不是指向一個字串</li>
 <li>如果 dest 不夠長（比 count 短）</li>
@@ -219,6 +219,11 @@ int main(void){
   
   
     <ul class="tags">
+      <li>
+          <a href="/articles/tag/C/">
+            C
+          </a>
+        </li>
       <li>
           <a href="/articles/tag/C-Zi-Chuan/">
             C - 字串
@@ -290,10 +295,17 @@ int main(void){
     
     
       
+
+      
       
         <li class="collapsible-category">
           <a>C <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/C/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/C-Zi-Chuan/"
@@ -306,6 +318,8 @@ int main(void){
       
     
       
+
+      
       
         <li><a href="/articles/tag/Cpp/"
         >C++</a></li>
@@ -313,17 +327,40 @@ int main(void){
       
     
       
+
+      
+      
+        <li class="collapsible-category">
+          <a>Python <i class="fas fa-angle-down"></i></a>
+          <ul>
       
         <li><a href="/articles/tag/Python/"
-        >Python</a></li>
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Python-Structural-Pattern-Matching/"
+        >Structural Pattern Matching</a></li>
+      
+      
+    </ul>
+        </li>
       
       
     
+      
+
       
       
         <li class="collapsible-category">
           <a>演算法 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
@@ -336,10 +373,17 @@ int main(void){
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
@@ -352,10 +396,17 @@ int main(void){
       
     
       
+
+      
       
         <li class="collapsible-category">
           <a>日常 <i class="fas fa-angle-down"></i></a>
           <ul>
+      
+        <li><a href="/articles/tag/Ri-Chang/"
+        >All</a></li>
+      
+
       
       
         <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
@@ -367,6 +418,8 @@ int main(void){
       
       
     
+      
+
       
       
         <li><a href="/articles/tag/Test/"

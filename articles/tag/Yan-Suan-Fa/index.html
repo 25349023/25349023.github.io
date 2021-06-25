@@ -99,59 +99,36 @@
   
   <main>
     <div class="breadcrumb-wrapper">
-      <div class="breadcrumb"><span>幾田りら</span>
+      <div class="breadcrumb"><span>演算法</span>
       </div>
     </div>
     <div class="main-wrapper">
       
         
-  <a href="/articles/2021-04/answer-ikura/" class="post-link">
+  <a href="/articles/2021-03/algo-dfs-permutation/" class="post-link">
     <article>
       <div class="info">
-        <h2>[歌詞翻譯] Answer － 幾田りら</h2>
+        <h2>[演算法] [C++ / Python] 當 DFS 遇上排列</h2>
 
-        <time>2021 - 04 - 14</time>
+        <time>2021 - 03 - 07</time>
       </div>
       <p class="preview">
-        之前無意間看到朋友圈有人推了這首歌，然後覺得封面很好看（膚淺），就去找來聽了。
-聽了後覺得滿有感觸的，而且歌詞簡單，就決定有空要來翻譯一下。
-另外說一下這位歌手 － 幾田りら，她其實就是 YOASOBI 的主唱 ikura，我覺得她的歌聲跟這首歌很搭。
-Youtube 連結：
+        深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。
+剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！
+蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！
+C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, &amp;quot;布&amp;quot;};
+bool visited[3] = {false};
+string arrangement[3];
 
-Answer
-
-作詞・作曲：幾田りら
-歌：幾田りら
-
-このままどこまで　歩(ある)いていくんだろう
-就這樣走下去　會到達哪裡呢
-
-鏡(かがみ)にうつる自(じ)分(ぶん)を見(み)つめて
-凝視著鏡中的自己
-
-答(こた)えは見(み)つからない
-答案仍未找到
-
-まだ少(すこ)し欠(か)けてる心(こころ)
-依舊有些欠缺的心
-
-抱(だ)き締(し)めていたい今(いま)は
-現在好想抱得緊緊的啊
-
-
-うずくまって涙(なみだ)こぼした夜(よる)
-蹲坐著流下眼淚的夜晚
-
-孤(こ)独(どく)が僕(ぼく)を育(そだ)てていく
-是孤獨將我培育養大
-
-不器用(ぶきよう)なだけに不甲斐(ふがい)ない
-既笨拙又沒出息
-
-自分(じぶん)を恨(うら)んでも
-就算憎恨這樣的自己
-
-続(つづ)く日々(ひび)の中(なか)で　夢(ゆめ)を見(み)て...
+void dfs(int layer){
+    if (layer == 3){
+        for (int i = 0; i &amp;lt; 3; i++){
+            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
+        }
+        cout &amp;lt;&amp;lt; endl;
+        return;
+    }
+    for (in...
       </p>
     </article>
   </a>
