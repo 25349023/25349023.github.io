@@ -3,6 +3,11 @@
   <ul>
     {% set stack = [] %}
     {% for key, value in categories.items() recursive %}
+      {% if loop.depth0 == 1 %}
+        <li><a href="{{ ('/articles@tag/' ~ ' - '.join(stack))|url }}"
+        >All</a></li>
+      {% endif %}
+
       {% do stack.append(key) %}
       {% if value %}
         <li class="collapsible-category">

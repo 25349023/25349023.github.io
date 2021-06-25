@@ -48,7 +48,7 @@ parse({'shift': 4, 'data': 'foo'})  # shift to state 4
 
 ### 捕捉剩餘的鍵-值對
 
-前面提到，match 不會去理會那些不重要（未出現在 pattern 中）的鍵-值對（key-value pair），但如果我們想要把他們特別捕捉出來呢？
+前面提到，`match` 不會去理會那些不重要（未出現在 pattern 中）的鍵-值對（key-value pair），但如果我們想要把他們特別捕捉出來呢？
 
 就像一般在函式定義中，我們可以用 `**` 來捕捉關鍵字引數一樣，在 pattern matching 中我們也可以使用 `**` 來把剩下的鍵-值對全部打包起來，收集到一個 dict 中。
 
@@ -75,7 +75,7 @@ get_info({'OS': 'WTF', 'what': 'spam'})
 ```
 
 這個例子有幾個可以特別注意的地方：
-1. 使用 `**` 將剩下的資料捕捉成名字叫 `rest` 的 dict
+1. 使用 `**` 將剩下的資料捕捉成名字叫 `rest` 的 `dict`
 2. 用 literal 指明 value 的值（如 `'Windows'`）
 3. 使用 wildcard（`_`）來比對任意值但不捕捉
 
@@ -125,7 +125,7 @@ where('spam')       # Not a point
 
 接下來就是比較細節的部分了，如果先跳過也沒關係。
 
-首先是 `match` 和 `case` 這兩個關鍵字，他們被稱作 **soft keywords**，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？
+首先是 `match` 和 `case` 這兩個關鍵字，他們被稱作 **soft keyword**s，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？
 
 一般來說，像 `while` 或 `try` 這種關鍵字是不能做為變數或函式引數名稱的，但是 `match` 和 `case` 可以。事實上，`match` 和 `case` 只會在我們要使用 pattern matching 時才會被當作關鍵字來看待，其他情況下就只會是普通的變數名。
 
@@ -141,7 +141,7 @@ where('spam')       # Not a point
 
 ### Value Patterns
 
-所謂 Value Pattern，指的是那些名字中有 `.` 的變數，比如 math.pi 或是 Enum 類型的成員。而 Value Pattern 是用 `==` 來比對。
+所謂 Value Pattern，指的是那些名字中有 `.` 的變數，比如 `math.pi` 或是 `Enum` 類型的成員。而 Value Pattern 是用 `==` 來比對。
 
 ### Sequence Patterns
 
@@ -199,6 +199,9 @@ where('spam')       # Not a point
 ---
 popular: 60
 ---
-pub_date: 2021-06-06 00:00:00
+pub_date: 2021-06-25 00:00:00
 ---
-tags: Python
+tags:
+
+Python
+Python - Structural Pattern Matching

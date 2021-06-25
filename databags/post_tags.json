@@ -3,7 +3,9 @@
     "字串": {}
   },
   "C++": {},
-  "Python": {},
+  "Python": {
+    "Structural Pattern Matching": {}
+  },
   "演算法": {
     "搜尋": {}
   },

@@ -14,12 +14,16 @@ aside .content {
 
   .profile-image {
     margin-top: 1rem;
-    width: 75%;
+    width: 60%;
     background-image: url("./images/peashooter.jpg");
     background-origin: border-box;
     background-size: cover;
     border-radius: 50%;
     border: 8px solid rgba($color: rgb(0, 0, 0), $alpha: 0.4);
+
+    @include brk-down($brk-small) {
+      width: 75%;
+    }
 
     &:after {
       content: "";
