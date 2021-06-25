@@ -1,0 +1,204 @@
+title: [Python 3.10] 打開黑盒子：細談 Structural Pattern Matching
+---
+author: Sky
+---
+body:
+
+!! 還沒看過上一篇的朋友請往**[這邊](/articles/2021-03/py-structural-pattern-matching/)**走。
+
+沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，~~我好棒~~。
+
+這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。
+
+那就直接進入我們的主題吧！
+
+!!! 本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 [pre-release](https://www.python.org/download/pre-releases/) 版。  
+目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 
+
+# PEP 634: Structural Pattern Matching
+
+## 比對映射（Mapping）
+
+我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
+
+就像序列是使用 `[]` 或 `()` 來比對，那映射當然就是使用 `{}` 來比對啦。
+
+但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。
+
+另外，pattern 中不能出現兩個相同的 key。
+
+接下來就來看個例子：
+
+```python,=
+def parse(action):
+    match action:
+        case {'shift': s}:
+            print(f'shift to state {s}')
+        case {'reduce': r}:
+            print(f'reduce using rule {r}')
+        case {'goto': s}:
+            print(f'go to state {s}')
+
+parse({'reduce': 7})  # reduce using rule 7
+parse({'goto': 3})    # go to state 3
+parse({'shift': 4, 'data': 'foo'})  # shift to state 4
+```
+
+上面這個程式的運作應該如我們的預期，除了最後一行的情況有點特殊：雖然丟進 match 的 dict 還包含了其他資料（也就是 `'data': 'foo'`），但還是能比對成功。事實上，match 在比對映射物件時，會去檢查 pattern 裡的每個 key 有沒有存在於目標物件中，而目標物件中其他的 item 都會被忽略。
+
+### 捕捉剩餘的鍵-值對
+
+前面提到，match 不會去理會那些不重要（未出現在 pattern 中）的鍵-值對（key-value pair），但如果我們想要把他們特別捕捉出來呢？
+
+就像一般在函式定義中，我們可以用 `**` 來捕捉關鍵字引數一樣，在 pattern matching 中我們也可以使用 `**` 來把剩下的鍵-值對全部打包起來，收集到一個 dict 中。
+
+看個例子比較好理解：
+
+```python,=
+def get_info(config):
+    match config:
+        case {'OS': 'Windows', **rest}:
+            print(f'OS: Windows, other configs: {rest}')
+        case {'OS': 'Linux', **rest}:
+            print(f'OS: Linux, other configs: {rest}')
+        case {'OS': 'macOS', **rest}:
+            print(f'OS: macOS, other configs: {rest}')
+        case {'OS': _, **rest}:
+            print(f'OS: Unknown, other configs: {rest}')
+
+get_info({'OS': 'Windows', 'version': '10'})
+# OS: Windows, other configs: {'version': '10'}
+get_info({'OS': 'Linux', 'dist': 'Ubuntu', 'version': '20.04'})
+# OS: Linux, other configs: {'dist': 'Ubuntu', 'version': '20.04'}
+get_info({'OS': 'WTF', 'what': 'spam'})
+# OS: Unknown, other configs: {'what': 'spam'}
+```
+
+這個例子有幾個可以特別注意的地方：
+1. 使用 `**` 將剩下的資料捕捉成名字叫 `rest` 的 dict
+2. 用 literal 指明 value 的值（如 `'Windows'`）
+3. 使用 wildcard（`_`）來比對任意值但不捕捉
+
+最後要注意的是，`**_` 這種 pattern 在是不合法的，因為一般情況下比對映射物件時本來就會忽略多餘的 item 了，不需要再多此一舉。
+
+## 類別屬性的順序
+
+在前一篇有提到，我們可以透過 `dataclass` 來讓類別實例的屬性擁有**順序**，以方便類別比對時的撰寫；而我們也提過，如果實例屬性沒有順序的話，那就要使用關鍵字引數的方式來比對。
+
+有沒有方法可以讓我們的類別不使用 `dataclass`，但實例的屬性仍然有順序呢？
+
+### `__match_args__` 類別屬性
+
+事實上，我們可以透過設定類別屬性 `__match_args__`，來讓我們的實例屬性擁有順序。
+
+看個例子應該就能理解了，這是跟上一篇很相似的例子：
+
+```python,=
+class Point:
+    __match_args__ = ('x', 'y')  # a tuple contains attr's name
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+def where(point):
+    match point:
+        case Point(0, 0):
+            print('Origin')
+        case Point(x, 0):
+            print(f'X axis with {x=}')
+        case Point(0, y):
+            print(f'Y axis with {y=}')
+        case Point():
+            print(f'Just a point')
+        case _:
+            print('Not a point')
+
+where(Point(1, 0))  # X axis with x=1
+where(Point(3, 4))  # Just a point
+where('spam')       # Not a point
+```
+
+! 事實上，標準函式庫中的 `namedtuple` 和 `dataclass` 會自動生成出正確的 `__match_args__`，因此可以正確地運作。  
+另外，如果使用 `dataclass` 時有些欄位（屬性）被設定為 `init=False` 的話，這些屬性就不會被放到 `__match_args__` 裡。
+
+## Soft Keyword：只在特定場合才是關鍵字
+
+接下來就是比較細節的部分了，如果先跳過也沒關係。
+
+首先是 `match` 和 `case` 這兩個關鍵字，他們被稱作 **soft keywords**，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？
+
+一般來說，像 `while` 或 `try` 這種關鍵字是不能做為變數或函式引數名稱的，但是 `match` 和 `case` 可以。事實上，`match` 和 `case` 只會在我們要使用 pattern matching 時才會被當作關鍵字來看待，其他情況下就只會是普通的變數名。
+
+這種做法的好處是不會影響現有的程式，但又能引入新的功能。
+
+## 到底是怎麼比對的？
+
+最後，我們要來看看不同 pattern 的背後到底是怎麼比對的。
+
+### Literal Patterns
+
+數字和字串是使用 `==` 來比對，而 `True`、`False`、`None` 則是使用 `is` 來比對。
+
+### Value Patterns
+
+所謂 Value Pattern，指的是那些名字中有 `.` 的變數，比如 math.pi 或是 Enum 類型的成員。而 Value Pattern 是用 `==` 來比對。
+
+### Sequence Patterns
+
+首先，Sequence Pattern 所比對的序列類別基本上指的是 `collections.abc.Sequence` 的子類別。
+
+!! `str`、`bytes`、`bytearray` 並不會被當作序列來比對。
+
+! 還有一些類型的 class 也會被當作序列來比對，例如註冊（register）為 `collections.abc.Sequence` 的類別、內部實作中有設定 `Py_TPFLAGS_SEQUENCE` 的類別等。例如標準函式庫中的 `array.array`、`collections.deque` 都屬於序列。
+
+而 python 在比對序列時的步驟大致上是這樣的：
+
+1. 檢查長度是否符合（使用 `len` 函式）
+2. 依序檢查每個元素是否符合 pattern 中指定的樣式，只要遇到比對失敗的元素，就直接結束目前 `case` 的比對
+
+### Mapping Patterns
+
+跟前面的序列很像，映射（mapping）指的是繼承或註冊為 `collections.abc.Mapping` 的類別。
+
+! 也包含內部實作有設定 `Py_TPFLAGS_MAPPING` 的類別。
+
+映射的比對會依照下面的規則來進行：
+
+1. 先檢查 pattern 中的 key 是不是都有在目標物件裡
+2. 使用映射物件的 `get` 方法檢查每個 item 的 value 是否跟 pattern 中對應的 value 相等。
+
+! 不會比對到**未存在而自動産生**的鍵-值對，例如當目標物件是 `defaultdict` 的實例時。
+
+### Class Patterns
+
+類別的比對會根據以下步驟進行：
+
+1. 使用 `isinstance` 檢查目標物件的型別
+2. 對於關鍵字引數，檢查目標物件中對應屬性的值是否符合（每個值都會照著前面提過的方式來比對）
+3. 對於位置引數，利用 `__match_args__` 將引數轉換成關鍵字引數再進行比對。若沒有定義`__match_args__`，預設會是空的 tuple。
+
+另外，內建型別（如 `bool`、 `int`、 `str`、 `list` 等）會接受一個位置引數來比對整個目標物件。（前篇有範例）
+
+## 其他注意事項
+
+最後，使用 `match` 時要特別注意，被補捉的變數在 `match` 區塊結束之後依然可用，而且會覆蓋原本進入 `match` 之前的值。
+
+
+這趟 Structural Pattern Matching 之旅就到這裡結束了，感謝看完這兩篇文章的你，如果有任何問題或回饋，都歡迎在下面留言、反應。
+
+----
+
+參考資料：
+1. [PEP 634: Specification](https://www.python.org/dev/peps/pep-0634)
+2. [PEP 636: Tutorial](https://www.python.org/dev/peps/pep-0636)
+
+後記：  
+　　這大概是我第一次把 PEP 讀得那麼仔細，雖然標題是寫細談啦，不過有些我覺得太細的東西就還是沒有寫進來，希望這麼做能讓這篇比較好讀。  
+　　另外我原本以為這篇會拖到 python 3.10 已經推出正式版本後才發，看來我的拖延症還不算嚴重嘛（笑）。
+
+---
+popular: 60
+---
+pub_date: 2021-06-06 00:00:00
+---
+tags: Python
