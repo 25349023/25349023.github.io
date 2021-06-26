@@ -839,15 +839,18 @@ aside nav > ul .collapsible-category ul a {
   height: 100vh;
   position: relative;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  text-align: center;
 }
 .home .banner .foreground h1 {
   margin: 0;
+  padding-bottom: 0.3rem;
   font-size: 4.5rem;
   font-family: "Exo 2", "Maven Pro", "Noto Sans TC", sans-serif;
-  background-image: linear-gradient(#d3f8e4 70%, rgba(211, 248, 228, 0.3));
+  background-image: linear-gradient(#d3f8e4 60%, rgba(211, 248, 228, 0.2));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -859,12 +862,97 @@ aside nav > ul .collapsible-category ul a {
 }
 @media (max-width: 480px) {
   .home .banner .foreground h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
 }
 @media (max-width: 320px) {
   .home .banner .foreground h1 {
-    font-size: 2.8rem;
+    font-size: 2.7rem;
+  }
+}
+.home .banner .foreground h2 {
+  margin: 0.4rem 0 0 0;
+  font-size: 2.4rem;
+  font-weight: normal;
+  font-family: "Kalam", "Maven Pro", "Noto Sans TC", sans-serif;
+  letter-spacing: 0.12rem;
+  background-image: linear-gradient(rgba(211, 248, 228, 0.2), rgba(211, 255, 238, 0.9) 66%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (max-width: 824px) {
+  .home .banner .foreground h2 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 480px) {
+  .home .banner .foreground h2 {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 320px) {
+  .home .banner .foreground h2 {
+    font-size: 1.5rem;
+    letter-spacing: 0.06rem;
+  }
+}
+.home .banner .foreground h2:before, .home .banner .foreground h2:after {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+@media (max-width: 824px) {
+  .home .banner .foreground h2:before, .home .banner .foreground h2:after {
+    width: 30%;
+  }
+}
+@media (max-width: 480px) {
+  .home .banner .foreground h2:before, .home .banner .foreground h2:after {
+    width: 25%;
+  }
+}
+.home .banner .foreground h2:before {
+  right: 0.5em;
+  margin-left: -50%;
+  background-image: linear-gradient(to left, rgba(211, 248, 228, 0), #d3f8e4 80%);
+}
+@media (max-width: 824px) {
+  .home .banner .foreground h2:before {
+    margin-left: -30%;
+  }
+}
+@media (max-width: 480px) {
+  .home .banner .foreground h2:before {
+    margin-left: -25%;
+  }
+}
+@media (max-width: 320px) {
+  .home .banner .foreground h2:before {
+    display: none;
+  }
+}
+.home .banner .foreground h2:after {
+  left: 0.5em;
+  margin-right: -50%;
+  background-image: linear-gradient(to right, rgba(211, 248, 228, 0), #d3f8e4 80%);
+}
+@media (max-width: 824px) {
+  .home .banner .foreground h2:after {
+    margin-right: -30%;
+  }
+}
+@media (max-width: 480px) {
+  .home .banner .foreground h2:after {
+    margin-right: -25%;
+  }
+}
+@media (max-width: 320px) {
+  .home .banner .foreground h2:after {
+    display: none;
   }
 }
 .home .banner .foreground:before {

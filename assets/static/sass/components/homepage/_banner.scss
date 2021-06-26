@@ -9,18 +9,21 @@
     position: relative;
 
     display: flex;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    text-align: center;
 
     h1 {
       margin: 0;
+      padding-bottom: 0.3rem;
       font-size: 4.5rem;
       font-family: $title-font;
 
       background-image: linear-gradient(
-        $banner-title-color 70%,
-        rgba($banner-title-color, 0.3)
+          $banner-title-color 60%,
+          rgba($banner-title-color, 0.2)
       );
       -webkit-background-clip: text;
       background-clip: text;
@@ -31,12 +34,96 @@
       }
 
       @include brk-down($brk-tiny) {
-        font-size: 3.2rem;
+        font-size: 3rem;
       }
 
       @include brk-down($brk-x-tiny) {
-        font-size: 2.8rem;
+        font-size: 2.7rem;
       }
+    }
+
+    h2 {
+      margin: 0.4rem 0 0 0;
+      font-size: 2.4rem;
+      font-weight: normal;
+      font-family: $title-motto-font;
+      letter-spacing: 0.12rem;
+
+      background-image: linear-gradient(
+          rgba($banner-title-color, 0.2),
+          rgba($banner-title-color2, 0.9) 66%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      @include brk-down($brk-large) {
+        font-size: 2rem;
+      }
+      @include brk-down($brk-tiny) {
+        font-size: 1.6rem;
+      }
+      @include brk-down($brk-x-tiny) {
+        font-size: 1.5rem;
+        letter-spacing: 0.06rem;
+      }
+
+      &:before, &:after {
+        content: "";
+        display: inline-block;
+        height: 1px;
+        position: relative;
+        vertical-align: middle;
+        width: 50%;
+
+        @include brk-down($brk-large) {
+          width: 30%;
+        }
+        @include brk-down($brk-tiny) {
+          width: 25%;
+        }
+      }
+
+      &:before {
+        right: 0.5em;
+        margin-left: -50%;
+        background-image: linear-gradient(
+            to left,
+            rgba($banner-title-color, 0),
+            $banner-title-color 80%
+        );
+
+        @include brk-down($brk-large) {
+          margin-left: -30%;
+        }
+        @include brk-down($brk-tiny) {
+          margin-left: -25%;
+        }
+        @include brk-down($brk-x-tiny) {
+          display: none;
+        }
+      }
+
+      &:after {
+        left: 0.5em;
+        margin-right: -50%;
+        background-image: linear-gradient(
+            to right,
+            rgba($banner-title-color, 0),
+            $banner-title-color 80%
+        );
+
+        @include brk-down($brk-large) {
+          margin-right: -30%;
+        }
+        @include brk-down($brk-tiny) {
+          margin-right: -25%;
+        }
+        @include brk-down($brk-x-tiny) {
+          display: none;
+        }
+      }
+
     }
 
     &:before {
