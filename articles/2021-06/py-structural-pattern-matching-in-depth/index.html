@@ -106,57 +106,57 @@
     <ul class="toc">
       
         
-          <li><a href="#pep-634-structural-pattern-matching-309">PEP 634: Structural Pattern Matching</a>
+          <li><a href="#pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</a>
             <ul>
         
-          <li><a href="#bi-dui-ying-she-mapping-310">比對映射（Mapping）</a>
+          <li><a href="#bi-dui-ying-she-mapping-1">比對映射（Mapping）</a>
             <ul>
         
-          <li><a href="#bu-zhuo-sheng-yu-de-jian-zhi-dui-311">捕捉剩餘的鍵-值對</a></li>
+          <li><a href="#bu-zhuo-sheng-yu-de-jian-zhi-dui-2">捕捉剩餘的鍵-值對</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#lei-bie-shu-xing-de-shun-xu-312">類別屬性的順序</a>
+          <li><a href="#lei-bie-shu-xing-de-shun-xu-3">類別屬性的順序</a>
             <ul>
         
-          <li><a href="#match-args-lei-bie-shu-xing-313"><code>__match_args__</code> 類別屬性</a></li>
+          <li><a href="#match-args-lei-bie-shu-xing-4"><code>__match_args__</code> 類別屬性</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#soft-keyword-zhi-zai-te-ding-chang-he-cai-shi-guan-jian-zi-314">Soft Keyword：只在特定場合才是關鍵字</a></li>
+          <li><a href="#soft-keyword-zhi-zai-te-ding-chang-he-cai-shi-guan-jian-zi-5">Soft Keyword：只在特定場合才是關鍵字</a></li>
         
       
         
-          <li><a href="#dao-di-shi-zen-mo-bi-dui-de-315">到底是怎麼比對的？</a>
+          <li><a href="#dao-di-shi-zen-mo-bi-dui-de-6">到底是怎麼比對的？</a>
             <ul>
         
-          <li><a href="#literal-patterns-316">Literal Patterns</a></li>
+          <li><a href="#literal-patterns-7">Literal Patterns</a></li>
         
       
         
-          <li><a href="#value-patterns-317">Value Patterns</a></li>
+          <li><a href="#value-patterns-8">Value Patterns</a></li>
         
       
         
-          <li><a href="#sequence-patterns-318">Sequence Patterns</a></li>
+          <li><a href="#sequence-patterns-9">Sequence Patterns</a></li>
         
       
         
-          <li><a href="#mapping-patterns-319">Mapping Patterns</a></li>
+          <li><a href="#mapping-patterns-10">Mapping Patterns</a></li>
         
       
         
-          <li><a href="#class-patterns-320">Class Patterns</a></li>
+          <li><a href="#class-patterns-11">Class Patterns</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#qi-ta-zhu-yi-shi-xiang-321">其他注意事項</a></li>
+          <li><a href="#qi-ta-zhu-yi-shi-xiang-12">其他注意事項</a></li>
         
       </ul></li>
         
@@ -183,9 +183,9 @@
 <p>這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。</p>
 <p>那就直接進入我們的主題吧！</p>
 <div class="admonition admonition-tip"><p>本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 <a href="https://www.python.org/download/pre-releases/">pre-release</a> 版。<br>
-目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 </p></div><h1 id="pep-634-structural-pattern-matching-309">PEP 634: Structural Pattern Matching</h1><h2 id="bi-dui-ying-she-mapping-310">比對映射（Mapping）</h2><p>我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。</p>
+目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 </p></div><h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><h2 id="bi-dui-ying-she-mapping-1">比對映射（Mapping）</h2><p>我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。</p>
 <p>就像序列是使用 <code>[]</code> 或 <code>()</code> 來比對，那映射當然就是使用 <code>{}</code> 來比對啦。</p>
-<p>但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（<a href="/ articles/2021-03/py-structural-pattern-matching/#qi-ta-de-bi-dui-fang-shi-12772">前篇的最後一節</a>有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。</p>
+<p>但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（<a href="/articles/2021-03/py-structural-pattern-matching/#qi-ta-de-bi-dui-fang-shi-9">前篇的最後一節</a>有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。</p>
 <p>另外，pattern 中不能出現兩個相同的 key。</p>
 <p>接下來就來看個例子：</p>
 <pre class="line-numbers"><code class="language-python">def parse(action):
@@ -201,7 +201,7 @@ parse({&#x27;reduce&#x27;: 7})  # reduce using rule 7
 parse({&#x27;goto&#x27;: 3})    # go to state 3
 parse({&#x27;shift&#x27;: 4, &#x27;data&#x27;: &#x27;foo&#x27;})  # shift to state 4</code></pre>
 <p>上面這個程式的運作應該如我們的預期，除了最後一行的情況有點特殊：雖然丟進 match 的 dict 還包含了其他資料（也就是 <code>'data': 'foo'</code>），但還是能比對成功。事實上，match 在比對映射物件時，會去檢查 pattern 裡的每個 key 有沒有存在於目標物件中，而目標物件中其他的 item 都會被忽略。</p>
-<h3 id="bu-zhuo-sheng-yu-de-jian-zhi-dui-311">捕捉剩餘的鍵-值對</h3><p>前面提到，<code>match</code> 不會去理會那些不重要（未出現在 pattern 中）的鍵-值對（key-value pair），但如果我們想要把他們特別捕捉出來呢？</p>
+<h3 id="bu-zhuo-sheng-yu-de-jian-zhi-dui-2">捕捉剩餘的鍵-值對</h3><p>前面提到，<code>match</code> 不會去理會那些不重要（未出現在 pattern 中）的鍵-值對（key-value pair），但如果我們想要把他們特別捕捉出來呢？</p>
 <p>就像一般在函式定義中，我們可以用 <code>**</code> 來捕捉關鍵字引數一樣，在 pattern matching 中我們也可以使用 <code>**</code> 來把剩下的鍵-值對全部打包起來，收集到一個 dict 中。</p>
 <p>看個例子比較好理解：</p>
 <pre class="line-numbers"><code class="language-python">def get_info(config):
@@ -228,9 +228,9 @@ get_info({&#x27;OS&#x27;: &#x27;WTF&#x27;, &#x27;what&#x27;: &#x27;spam&#x27;})
 <li>使用 wildcard（<code>_</code>）來比對任意值但不捕捉</li>
 </ol>
 <p>最後要注意的是，<code>**_</code> 這種 pattern 在是不合法的，因為一般情況下比對映射物件時本來就會忽略多餘的 item 了，不需要再多此一舉。</p>
-<h2 id="lei-bie-shu-xing-de-shun-xu-312">類別屬性的順序</h2><p>在前一篇有提到，我們可以透過 <code>dataclass</code> 來讓類別實例的屬性擁有<strong>順序</strong>，以方便類別比對時的撰寫；而我們也提過，如果實例屬性沒有順序的話，那就要使用關鍵字引數的方式來比對。</p>
+<h2 id="lei-bie-shu-xing-de-shun-xu-3">類別屬性的順序</h2><p>在前一篇有提到，我們可以透過 <code>dataclass</code> 來讓類別實例的屬性擁有<strong>順序</strong>，以方便類別比對時的撰寫；而我們也提過，如果實例屬性沒有順序的話，那就要使用關鍵字引數的方式來比對。</p>
 <p>有沒有方法可以讓我們的類別不使用 <code>dataclass</code>，但實例的屬性仍然有順序呢？</p>
-<h3 id="match-args-lei-bie-shu-xing-313"><code>__match_args__</code> 類別屬性</h3><p>事實上，我們可以透過設定類別屬性 <code>__match_args__</code>，來讓我們的實例屬性擁有順序。</p>
+<h3 id="match-args-lei-bie-shu-xing-4"><code>__match_args__</code> 類別屬性</h3><p>事實上，我們可以透過設定類別屬性 <code>__match_args__</code>，來讓我們的實例屬性擁有順序。</p>
 <p>看個例子應該就能理解了，這是跟上一篇很相似的例子：</p>
 <pre class="line-numbers"><code class="language-python">class Point:
     __match_args__ = (&#x27;x&#x27;, &#x27;y&#x27;)  # a tuple contains attr&#x27;s name
@@ -255,33 +255,33 @@ where(Point(1, 0))  # X axis with x=1
 where(Point(3, 4))  # Just a point
 where(&#x27;spam&#x27;)       # Not a point</code></pre>
 <div class="admonition admonition-note"><p>事實上，標準函式庫中的 <code>namedtuple</code> 和 <code>dataclass</code> 會自動生成出正確的 <code>__match_args__</code>，因此可以正確地運作。<br>
-另外，如果使用 <code>dataclass</code> 時有些欄位（屬性）被設定為 <code>init=False</code> 的話，這些屬性就不會被放到 <code>__match_args__</code> 裡。</p></div><h2 id="soft-keyword-zhi-zai-te-ding-chang-he-cai-shi-guan-jian-zi-314">Soft Keyword：只在特定場合才是關鍵字</h2><p>接下來就是比較細節的部分了，如果先跳過也沒關係。</p>
+另外，如果使用 <code>dataclass</code> 時有些欄位（屬性）被設定為 <code>init=False</code> 的話，這些屬性就不會被放到 <code>__match_args__</code> 裡。</p></div><h2 id="soft-keyword-zhi-zai-te-ding-chang-he-cai-shi-guan-jian-zi-5">Soft Keyword：只在特定場合才是關鍵字</h2><p>接下來就是比較細節的部分了，如果先跳過也沒關係。</p>
 <p>首先是 <code>match</code> 和 <code>case</code> 這兩個關鍵字，他們被稱作 <strong>soft keyword</strong>s，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？</p>
 <p>一般來說，像 <code>while</code> 或 <code>try</code> 這種關鍵字是不能做為變數或函式引數名稱的，但是 <code>match</code> 和 <code>case</code> 可以。事實上，<code>match</code> 和 <code>case</code> 只會在我們要使用 pattern matching 時才會被當作關鍵字來看待，其他情況下就只會是普通的變數名。</p>
 <p>這種做法的好處是不會影響現有的程式，但又能引入新的功能。</p>
-<h2 id="dao-di-shi-zen-mo-bi-dui-de-315">到底是怎麼比對的？</h2><p>最後，我們要來看看不同 pattern 的背後到底是怎麼比對的。</p>
-<h3 id="literal-patterns-316">Literal Patterns</h3><p>數字和字串是使用 <code>==</code> 來比對，而 <code>True</code>、<code>False</code>、<code>None</code> 則是使用 <code>is</code> 來比對。</p>
-<h3 id="value-patterns-317">Value Patterns</h3><p>所謂 Value Pattern，指的是那些名字中有 <code>.</code> 的變數，比如 <code>math.pi</code> 或是 <code>Enum</code> 類型的成員。而 Value Pattern 是用 <code>==</code> 來比對。</p>
-<h3 id="sequence-patterns-318">Sequence Patterns</h3><p>首先，Sequence Pattern 所比對的序列類別基本上指的是 <code>collections.abc.Sequence</code> 的子類別。</p>
+<h2 id="dao-di-shi-zen-mo-bi-dui-de-6">到底是怎麼比對的？</h2><p>最後，我們要來看看不同 pattern 的背後到底是怎麼比對的。</p>
+<h3 id="literal-patterns-7">Literal Patterns</h3><p>數字和字串是使用 <code>==</code> 來比對，而 <code>True</code>、<code>False</code>、<code>None</code> 則是使用 <code>is</code> 來比對。</p>
+<h3 id="value-patterns-8">Value Patterns</h3><p>所謂 Value Pattern，指的是那些名字中有 <code>.</code> 的變數，比如 <code>math.pi</code> 或是 <code>Enum</code> 類型的成員。而 Value Pattern 是用 <code>==</code> 來比對。</p>
+<h3 id="sequence-patterns-9">Sequence Patterns</h3><p>首先，Sequence Pattern 所比對的序列類別基本上指的是 <code>collections.abc.Sequence</code> 的子類別。</p>
 <div class="admonition admonition-info"><p><code>str</code>、<code>bytes</code>、<code>bytearray</code> 並不會被當作序列來比對。</p></div><div class="admonition admonition-note"><p>還有一些類型的 class 也會被當作序列來比對，例如註冊（register）為 <code>collections.abc.Sequence</code> 的類別、內部實作中有設定 <code>Py_TPFLAGS_SEQUENCE</code> 的類別等。例如標準函式庫中的 <code>array.array</code>、<code>collections.deque</code> 都屬於序列。</p></div><p>而 python 在比對序列時的步驟大致上是這樣的：</p>
 <ol>
 <li>檢查長度是否符合（使用 <code>len</code> 函式）</li>
 <li>依序檢查每個元素是否符合 pattern 中指定的樣式，只要遇到比對失敗的元素，就直接結束目前 <code>case</code> 的比對</li>
 </ol>
-<h3 id="mapping-patterns-319">Mapping Patterns</h3><p>跟前面的序列很像，映射（mapping）指的是繼承或註冊為 <code>collections.abc.Mapping</code> 的類別。</p>
+<h3 id="mapping-patterns-10">Mapping Patterns</h3><p>跟前面的序列很像，映射（mapping）指的是繼承或註冊為 <code>collections.abc.Mapping</code> 的類別。</p>
 <div class="admonition admonition-note"><p>也包含內部實作有設定 <code>Py_TPFLAGS_MAPPING</code> 的類別。</p></div><p>映射的比對會依照下面的規則來進行：</p>
 <ol>
 <li>先檢查 pattern 中的 key 是不是都有在目標物件裡</li>
 <li>使用映射物件的 <code>get</code> 方法檢查每個 item 的 value 是否跟 pattern 中對應的 value 相等。</li>
 </ol>
-<div class="admonition admonition-note"><p>不會比對到<strong>未存在而自動産生</strong>的鍵-值對，例如當目標物件是 <code>defaultdict</code> 的實例時。</p></div><h3 id="class-patterns-320">Class Patterns</h3><p>類別的比對會根據以下步驟進行：</p>
+<div class="admonition admonition-note"><p>不會比對到<strong>未存在而自動産生</strong>的鍵-值對，例如當目標物件是 <code>defaultdict</code> 的實例時。</p></div><h3 id="class-patterns-11">Class Patterns</h3><p>類別的比對會根據以下步驟進行：</p>
 <ol>
 <li>使用 <code>isinstance</code> 檢查目標物件的型別</li>
 <li>對於關鍵字引數，檢查目標物件中對應屬性的值是否符合（每個值都會照著前面提過的方式來比對）</li>
 <li>對於位置引數，利用 <code>__match_args__</code> 將引數轉換成關鍵字引數再進行比對。若沒有定義<code>__match_args__</code>，預設會是空的 tuple。</li>
 </ol>
-<p>另外，內建型別（如 <code>bool</code>、 <code>int</code>、 <code>str</code>、 <code>list</code> 等）會接受一個位置引數來比對整個目標物件。（前篇有<a href="/articles/2021-03/py-structural-pattern-matching/#bi-dui-nei-jian-xing-bie-12769">範例</a>可供參考）</p>
-<h2 id="qi-ta-zhu-yi-shi-xiang-321">其他注意事項</h2><p>最後，使用 <code>match</code> 時要特別注意，被補捉的變數在 <code>match</code> 區塊結束之後依然可用，而且會覆蓋原本進入 <code>match</code> 之前的值。</p>
+<p>另外，內建型別（如 <code>bool</code>、 <code>int</code>、 <code>str</code>、 <code>list</code> 等）會接受一個位置引數來比對整個目標物件。（前篇有<a href="/articles/2021-03/py-structural-pattern-matching/#bi-dui-nei-jian-xing-bie-6">範例</a>可供參考）</p>
+<h2 id="qi-ta-zhu-yi-shi-xiang-12">其他注意事項</h2><p>最後，使用 <code>match</code> 時要特別注意，被補捉的變數在 <code>match</code> 區塊結束之後依然可用，而且會覆蓋原本進入 <code>match</code> 之前的值。</p>
 <p>這趟 Structural Pattern Matching 之旅就到這裡結束了，感謝看完這兩篇文章的你，如果有任何問題或回饋，都歡迎在下面留言、反應。</p>
 <hr>
 <p>參考資料：</p>

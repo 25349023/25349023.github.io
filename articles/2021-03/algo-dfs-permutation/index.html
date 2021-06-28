@@ -106,41 +106,41 @@
     <ul class="toc">
       
         
-          <li><a href="#jian-dao-shi-tou-bu-quan-bu-pai-lie-352">剪刀、石頭、布！－全部排列</a>
+          <li><a href="#jian-dao-shi-tou-bu-quan-bu-pai-lie-0">剪刀、石頭、布！－全部排列</a>
             <ul>
         
-          <li><a href="#c-353">C++</a></li>
+          <li><a href="#c-1">C++</a></li>
         
       
         
-          <li><a href="#python-354">Python</a></li>
+          <li><a href="#python-2">Python</a></li>
         
       
         
-          <li><a href="#jie-mi-shi-jian-355">解密時間！</a></li>
+          <li><a href="#jie-mi-shi-jian-3">解密時間！</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#fa-fang-tang-guo-you-xiang-tong-wu-de-pai-lie-356">發放糖果－有相同物的排列</a></li>
+          <li><a href="#fa-fang-tang-guo-you-xiang-tong-wu-de-pai-lie-4">發放糖果－有相同物的排列</a></li>
         
       
         
-          <li><a href="#shui-shi-qian-san-ming-n-wu-qu-k-wu-de-pai-lie-357">誰是前三名？－ n 物取 k 物的排列</a>
+          <li><a href="#shui-shi-qian-san-ming-n-wu-qu-k-wu-de-pai-lie-5">誰是前三名？－ n 物取 k 物的排列</a>
             <ul>
         
-          <li><a href="#c-358">C++</a></li>
+          <li><a href="#c-6">C++</a></li>
         
       
         
-          <li><a href="#python-359">Python</a></li>
+          <li><a href="#python-7">Python</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#dong-nao-shi-jian-360">動腦時間！</a></li>
+          <li><a href="#dong-nao-shi-jian-8">動腦時間！</a></li>
         
       
     </ul>
@@ -162,9 +162,9 @@
 
   <section class="post-content">
     <p>深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。</p>
-<h1 id="jian-dao-shi-tou-bu-quan-bu-pai-lie-352">剪刀、石頭、布！－全部排列</h1><p>現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！</p>
+<h1 id="jian-dao-shi-tou-bu-quan-bu-pai-lie-0">剪刀、石頭、布！－全部排列</h1><p>現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！</p>
 <p>蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！</p>
-<h2 id="c-353">C++</h2><pre class="line-numbers"><code class="language-cpp">string gesture[3] = {&quot;剪刀&quot;, &quot;石頭&quot;, &quot;布&quot;};
+<h2 id="c-1">C++</h2><pre class="line-numbers"><code class="language-cpp">string gesture[3] = {&quot;剪刀&quot;, &quot;石頭&quot;, &quot;布&quot;};
 bool visited[3] = {false};
 string arrangement[3];
 
@@ -186,7 +186,7 @@ void dfs(int layer){
         visited[i] = false;
     }
 }</code></pre>
-<h2 id="python-354">Python</h2><pre class="line-numbers"><code class="language-python">gesture = [&#x27;剪刀&#x27;, &#x27;石頭&#x27;, &#x27;布&#x27;]
+<h2 id="python-2">Python</h2><pre class="line-numbers"><code class="language-python">gesture = [&#x27;剪刀&#x27;, &#x27;石頭&#x27;, &#x27;布&#x27;]
 visited = [False] * 3
 arrangement = [&#x27;&#x27;] * 3
 
@@ -210,7 +210,7 @@ def dfs(layer):
 石頭  布    剪刀
 布    剪刀  石頭
 布    石頭  剪刀</code></pre>
-<h2 id="jie-mi-shi-jian-355">解密時間！</h2><p>到底為什麼我們可以用 DFS 來列出所有排列的可能呢？首先讓我們回想一下，我們平時在窮舉排列方法時會用的方法：先固定前面，再從最後面慢慢的替換。</p>
+<h2 id="jie-mi-shi-jian-3">解密時間！</h2><p>到底為什麼我們可以用 DFS 來列出所有排列的可能呢？首先讓我們回想一下，我們平時在窮舉排列方法時會用的方法：先固定前面，再從最後面慢慢的替換。</p>
 <p>比如說，求 1、2、3、4 的排列時，我們通常會先從 1234 出發，下一個變成 1243，再下一個則是 1324...以此類推，可以看到第一位數字都還沒被換掉，而第二位數字只換了一次，換最多次的是三、四位數字。</p>
 <p>根據這樣的想法，我們可以發現 DFS 可以很容易的解決這個問題：將一位數字交由一層 DFS 來處理，而在每一層 DFS 中，我們要做以下這些事情：</p>
 <ol>
@@ -226,15 +226,15 @@ def dfs(layer):
 <p>那我們要進入下一個問題囉：要怎麼處理比較特別的排列？比如說物品不限使用次數的排列，或著有相同物的排列。</p>
 <p>物品不限使用次數的排列，也就是上述的遊戲中，沒有限定三人一定要出不同的拳，想怎麼出就怎麼出。這種的比較簡單，也許你已經知道了，就是不要使用 <code>visited[]</code> 來記錄使用情況嘛！沒錯，所以我們只要把跟 <code>visited[]</code> 有關的部分全部砍掉就好了。</p>
 <p>接下來的比較複雜（其實也還好）：只能用特定數量來排列的有相同物之排列。</p>
-<h1 id="fa-fang-tang-guo-you-xiang-tong-wu-de-pai-lie-356">發放糖果－有相同物的排列</h1><p>現在你手上有四顆糖果，分別是兩顆紅色且完全相同的、一顆藍色的，以及一顆黃色的，要分給甲、乙、丙、丁四人，會有哪些分法呢？</p>
+<h1 id="fa-fang-tang-guo-you-xiang-tong-wu-de-pai-lie-4">發放糖果－有相同物的排列</h1><p>現在你手上有四顆糖果，分別是兩顆紅色且完全相同的、一顆藍色的，以及一顆黃色的，要分給甲、乙、丙、丁四人，會有哪些分法呢？</p>
 <p>乍看之下好像有點複雜，因為要考慮那兩顆紅色的糖果，就算交換位置也還是一樣的分法，感覺好像要刪去一些分法，也很麻煩。這時可能會想說「畫個樹狀圖好了」，結果畫出來... 參差不齊的，根本很難對它做 DFS。</p>
 <p>這時候，我們只要換一下想法就好，找出剛剛那個邏輯的不適合處加以替換。很顯然的，是我們用來記錄有沒有用過的 <code>visited[]</code> 陣列出了問題，因為對於紅色糖果來說，用掉一顆並不算真正的用完了，於是在這裡就會出現一些問題。那我們該怎麼處理呢？這裡就交給讀者們想囉。</p>
-<div class="admonition admonition-note"><p>參考答案：<a href="https://github.com/25349023/Blogger/blob/master/DFS/candyDistribution.cpp">C++</a> / <a href="https://github.com/25349023/Blogger/blob/master/DFS/candyDistribution.py">Python</a></p></div><h1 id="shui-shi-qian-san-ming-n-wu-qu-k-wu-de-pai-lie-357">誰是前三名？－ n 物取 k 物的排列</h1><p>最後我們來思考一下，n 物取 k 物的排列方法，也就是高中所學的 P 幾取幾。</p>
+<div class="admonition admonition-note"><p>參考答案：<a href="https://github.com/25349023/Blogger/blob/master/DFS/candyDistribution.cpp">C++</a> / <a href="https://github.com/25349023/Blogger/blob/master/DFS/candyDistribution.py">Python</a></p></div><h1 id="shui-shi-qian-san-ming-n-wu-qu-k-wu-de-pai-lie-5">誰是前三名？－ n 物取 k 物的排列</h1><p>最後我們來思考一下，n 物取 k 物的排列方法，也就是高中所學的 P 幾取幾。</p>
 <p>班上有甲～戊五人是段考常勝軍，每次前三名一定是由他們其中三人組成的，能不能用 DFS 排出有幾種可能呢？當然是可以的，來想想看要怎麼處理吧。</p>
 <p>首先是 <code>visited[]</code> 陣列，既然剛剛的案例似乎都是它出問題，這次也是嗎？不，這次不是它的問題，因為甲～戊這五人都是唯一的，所以並沒有違反當初我們使用 <code>visited[]</code> 的用意。</p>
 <p>那麼應該也只剩下一個地方有疑點了：判斷是否為最後一層的地方。一直都沒思考這地方 if 判斷式裡的數字是怎麼來的，因為之前是有幾個要排就填多少，但這次我們只要取前三個，所以數字就填 3 吧。（沒錯，就是這樣）</p>
 <p>先看程式碼應該比較好懂：</p>
-<h2 id="c-358">C++</h2><pre class="line-numbers"><code class="language-cpp">bool visited[5] = {false};
+<h2 id="c-6">C++</h2><pre class="line-numbers"><code class="language-cpp">bool visited[5] = {false};
 int arrangement[3];
 string people[5] = {&quot;甲&quot;, &quot;乙&quot;, &quot;丙&quot;, &quot;丁&quot;, &quot;戊&quot;};
 
@@ -255,7 +255,7 @@ void dfs(int layer){
         visited[i] = false;
     }
 }</code></pre>
-<h2 id="python-359">Python</h2><pre class="line-numbers"><code class="language-python">visited = [False] * 5
+<h2 id="python-7">Python</h2><pre class="line-numbers"><code class="language-python">visited = [False] * 5
 arrangement = [&#x27;&#x27;] * 3
 people = [&#x27;甲&#x27;, &#x27;乙&#x27;, &#x27;丙&#x27;, &#x27;丁&#x27;, &#x27;戊&#x27;]
 
@@ -273,7 +273,7 @@ def dfs(layer):
         visited[i] = False</code></pre>
 <p>完整請見：<a href="https://github.com/25349023/Blogger/blob/master/DFS/ranking.cpp">C++</a> / <a href="https://github.com/25349023/Blogger/blob/master/DFS/ranking.py">Python</a></p>
 <p>可以看到雖然有五個人在輪，但 if 判斷的地方只要跑 3 層 DFS 就會停止，這樣就可以達到我們只要取前三名的目的了。</p>
-<h1 id="dong-nao-shi-jian-360">動腦時間！</h1><p>看了這麼多到底有沒有吸收到腦中呢？試著思考與回答這些問題吧：</p>
+<h1 id="dong-nao-shi-jian-8">動腦時間！</h1><p>看了這麼多到底有沒有吸收到腦中呢？試著思考與回答這些問題吧：</p>
 <ol>
 <li><p>下圖是最後這個程式執行結果的一部分，試問若把 if 判斷中的數字改為 2 的話，會不會造成輸出中有三組「甲 乙」、「甲 丙」...等情況，也就是只有下圖中的第三直行消失而已？為什麼會 / 不會？</p>
 <p><img src="/articles/2021-03/algo-dfs-permutation/dfs-output.png" alt="part of output"></p>

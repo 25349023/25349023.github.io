@@ -106,28 +106,28 @@
     <ul class="toc">
       
         
-          <li><a href="#bian-shu-362">變數</a></li>
+          <li><a href="#bian-shu-0">變數</a></li>
         
       
         
-          <li><a href="#list-de-xian-jing-363">List 的陷阱</a>
+          <li><a href="#list-de-xian-jing-1">List 的陷阱</a>
             <ul>
         
-          <li><a href="#zhi-ding-364">指定「<code>=</code>」</a></li>
+          <li><a href="#zhi-ding-2">指定「<code>=</code>」</a></li>
         
       
         
-          <li><a href="#chuan-jie-365">串接「<code>+</code>」</a></li>
+          <li><a href="#chuan-jie-3">串接「<code>+</code>」</a></li>
         
       
         
-          <li><a href="#zhong-fu-366">重複「<code>*</code>」</a></li>
+          <li><a href="#zhong-fu-4">重複「<code>*</code>」</a></li>
         
       </ul></li>
         
       
         
-          <li><a href="#copy-yu-zong-jie-367">copy() 與總結</a></li>
+          <li><a href="#copy-yu-zong-jie-5">copy() 與總結</a></li>
         
       
     </ul>
@@ -149,7 +149,7 @@
 
   <section class="post-content">
     <p>寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 <code>copy</code> 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！</p>
-<h1 id="bian-shu-362">變數</h1><p>首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：</p>
+<h1 id="bian-shu-0">變數</h1><p>首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：</p>
 <pre><code class="language-python">x = 1</code></pre>
 <p>就代表我們把 x 的值指定為 1 了，<strong>是嗎？</strong>事實上並不是這樣的，而是讓 x 這個變數<strong>參考</strong>到了 1 這個物件，我們可以用 <code>id()</code> 函式來看看這個物件在記憶體中的位址究竟在哪：</p>
 <pre><code class="language-python">print(id(x))  # 94526375507712</code></pre>
@@ -157,7 +157,7 @@
 <p>這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。</p>
 <p>進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數：<strong>N 次貼</strong>。變數就像 N 次貼一樣，上面寫著變數的名字，然後我們讓他參考到不同的物件時，就像拿著這個 N 次貼到處黏貼一樣，因此只要是黏到（參考）不同的東西（物件），就一定是在不同的位置上（記憶體位址）。</p>
 <p>在這裡我們也可以看到為什麼 Python 的變數可以一下儲存整數，一下又是字串，因為就如同剛剛所說的，我們終究只是拿著 N 次貼在到處黏而已，而這 N 次貼上又沒有規定我們一定要黏在什麼東西上<del>不然就會爆炸什麼的（呃</del>，所以我們可以把他黏到各種型態上面都沒問題。</p>
-<h1 id="list-de-xian-jing-363">List 的陷阱</h1><h2 id="zhi-ding-364">指定「<code>=</code>」</h2><p>接下來的小節中都會以上面 N 次貼的概念來講解。當我們把一個參考到 list 的變數指定給另一個變數時：</p>
+<h1 id="list-de-xian-jing-1">List 的陷阱</h1><h2 id="zhi-ding-2">指定「<code>=</code>」</h2><p>接下來的小節中都會以上面 N 次貼的概念來講解。當我們把一個參考到 list 的變數指定給另一個變數時：</p>
 <pre><code class="language-python">Lt = [1, 2, 3]
 Lt2 = Lt</code></pre>
 <p>看起來好像是我們把 <code>[1, 2, 3]</code> 複製了一遍，再指定給 Lt2，但實際上只是把寫著「<code>Lt2</code>」的 N 次貼也貼到那個 list 上而已，我們可以透過 <code>id()</code> 來驗證。所以當我們對其中一個 list 做變動的話... 就會兩個變數一起被更改！<del>也就是踏入黑魔法的第一步。</del></p>
@@ -178,7 +178,7 @@ print(Lt4)  # [1, 2, 3]
 print(Lt5)  # [1, 2, 3]
 print(Lt6)  # [1, 2, 3]</code></pre>
 <p>可以看到，透過 <code>copy()</code> 取得的 list 就會是確實的複製過一遍後再讓其他變數去參考，就不會造成一次修改到兩個變數的問題。</p>
-<h2 id="chuan-jie-365">串接「<code>+</code>」</h2><p>再來看看如果我們有兩個 list 如下：</p>
+<h2 id="chuan-jie-3">串接「<code>+</code>」</h2><p>再來看看如果我們有兩個 list 如下：</p>
 <pre><code class="language-python">Lt = [1, 2, 3]
 Lt2 = [4, 5, 6]</code></pre>
 <p>我們可以想像有一個箱子，裡面有編號 1~3 的球。箱子上貼著一個寫著 「Lt」 的 N 次貼，而 1、2、3 號球分別黏了上面寫著 「<code>Lt[0]</code>」、「<code>Lt[1]</code>」、「<code>Lt[2]</code>」的 N 次貼；而 Lt2 亦是如此。</p>
@@ -213,7 +213,7 @@ print(Lt3)  # [[1, 9], [2]]
 print(Lt4)  # [[1, 9], [2]]
 print(Lt5)  # [[1], [2]]</code></pre>
 <p>這樣就可以了。</p>
-<h2 id="zhong-fu-366">重複「<code>*</code>」</h2><p>好的，這一小節是最後一個陷阱了，也是我不久前才踩進的陷阱。當初我想製造一個二維的 list，然後每個元素都一樣，所以我寫了類似下面這行的東西：</p>
+<h2 id="zhong-fu-4">重複「<code>*</code>」</h2><p>好的，這一小節是最後一個陷阱了，也是我不久前才踩進的陷阱。當初我想製造一個二維的 list，然後每個元素都一樣，所以我寫了類似下面這行的東西：</p>
 <pre><code class="language-python">Lt = [[0] * 3] * 3</code></pre>
 <p>結果我只是改了 <code>Lt[0][0]</code> 的值，就連同 <code>Lt[1][0]</code> 和 <code>Lt[2][0]</code> 一起改到了，因為使用 * 來重複 list 的話，事實上也只是 <code>Lt[0]</code>、<code>Lt[1]</code>、<code>Lt[2]</code> 都貼到（參考到）同一個箱子（list），並不會產生 3 個不一樣的 list。</p>
 <p>解決的方法除了上面的 <code>copy()</code>（這裡要用 <code>copy()</code> 的話好像也不太適合），我們可以使用 for 迴圈來一次次的把一個 list <code>append()</code> 進另一個空的 list：</p>
@@ -223,7 +223,7 @@ for i in range(3)
 <p>像上面這樣。甚至我們還可以搭配 list comprehension，寫成下面這樣：</p>
 <pre><code class="language-python">Lt = [[0] * 3 for i in range(3)]</code></pre>
 <p>就可以完美化解我們遇到的問題了。</p>
-<h1 id="copy-yu-zong-jie-367">copy() 與總結</h1><p>再稍微講一點點 copy 模組的細節：<code>copy()</code> 函式的運作就像是只複製了最外面的箱子，所以是淺層複製；而 <code>deepcopy()</code> 則會以遞迴的方式去複製箱子裡的任何東西，所以可以給出完全複製過的物件。</p>
+<h1 id="copy-yu-zong-jie-5">copy() 與總結</h1><p>再稍微講一點點 copy 模組的細節：<code>copy()</code> 函式的運作就像是只複製了最外面的箱子，所以是淺層複製；而 <code>deepcopy()</code> 則會以遞迴的方式去複製箱子裡的任何東西，所以可以給出完全複製過的物件。</p>
 <p>好了，到最後我們就可以來喘口氣、統整一下上面所講的內容：一開始說明了變數與物件的關係，就如同 N 次貼和物品的關係一般；然後提到了三個會呼喚黑魔法的途徑，分別是指定、串接和重複，也講到了各自的解法：copy() 函式、slice 運算，deepcopy() 函式，以及與 for 相關的兩種寫法。</p>
 <p>就這樣了！感謝大家的閱讀，如果有疑慮或指正歡迎留言提出。</p>
 <hr>
