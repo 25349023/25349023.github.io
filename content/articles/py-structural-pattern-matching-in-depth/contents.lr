@@ -23,7 +23,7 @@ body:
 
 就像序列是使用 `[]` 或 `()` 來比對，那映射當然就是使用 `{}` 來比對啦。
 
-但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（[前篇的最後一節](/ articles/2021-03/py-structural-pattern-matching/#qi-ta-de-bi-dui-fang-shi-12772)有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。
+但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（[前篇的最後一節](/articles/2021-03/py-structural-pattern-matching/#qi-ta-de-bi-dui-fang-shi-9)有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。
 
 另外，pattern 中不能出現兩個相同的 key。
 
@@ -177,7 +177,7 @@ where('spam')       # Not a point
 2. 對於關鍵字引數，檢查目標物件中對應屬性的值是否符合（每個值都會照著前面提過的方式來比對）
 3. 對於位置引數，利用 `__match_args__` 將引數轉換成關鍵字引數再進行比對。若沒有定義`__match_args__`，預設會是空的 tuple。
 
-另外，內建型別（如 `bool`、 `int`、 `str`、 `list` 等）會接受一個位置引數來比對整個目標物件。（前篇有[範例](/articles/2021-03/py-structural-pattern-matching/#bi-dui-nei-jian-xing-bie-12769)可供參考）
+另外，內建型別（如 `bool`、 `int`、 `str`、 `list` 等）會接受一個位置引數來比對整個目標物件。（前篇有[範例](/articles/2021-03/py-structural-pattern-matching/#bi-dui-nei-jian-xing-bie-6)可供參考）
 
 ## 其他注意事項
 
