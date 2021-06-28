@@ -8,19 +8,29 @@ from collections import namedtuple
 TocEntry = namedtuple('TocEntry', ['anchor', 'title', 'children'])
 
 
+class HeaderAnchorMixin:
+    counter = 0
+
+    @classmethod
+    def reset_cnt(cls):
+        cls.counter = 0
+
+    def header(renderer, text, level, raw):
+        anchor = f'{slugify(raw)}-{HeaderAnchorMixin.counter}'
+        HeaderAnchorMixin.counter += 1
+        renderer.meta['toc'].append((level, anchor, Markup(text)))
+        return '<h%d id="%s">%s</h%d>' % (level, anchor, text, level)
+
+
 class MarkdownHeaderAnchorsCntsuffixPlugin(Plugin):
     name = 'Markdown Header Anchors with Counting Suffix'
     description = 'Lektor plugin that adds anchors and table of contents to markdown headers.'
 
-    def on_markdown_config(self, config, **extra):
-        class HeaderAnchorMixin:
-            counter = 0
+    def on_before_build(self, source, prog, **extra):
+        # print(f'building {source.source_filename}')
+        HeaderAnchorMixin.reset_cnt()
 
-            def header(renderer, text, level, raw):
-                anchor = f'{slugify(raw)}-{renderer.counter}'
-                renderer.counter += 1
-                renderer.meta['toc'].append((level, anchor, Markup(text)))
-                return '<h%d id="%s">%s</h%d>' % (level, anchor, text, level)
+    def on_markdown_config(self, config, **extra):
         config.renderer_mixins.append(HeaderAnchorMixin)
 
     def on_markdown_meta_init(self, meta, **extra):
