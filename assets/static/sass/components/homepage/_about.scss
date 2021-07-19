@@ -138,4 +138,14 @@
       }
     }
   }
+
+  .card.project-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+      font-size: 2rem;
+    }
+  }
 }

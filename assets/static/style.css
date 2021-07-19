@@ -1323,6 +1323,14 @@ aside nav > ul .collapsible-category ul a {
 .home .content .about .card.skill-card:hover .preview > span:nth-last-of-type(n + 3) {
   border-bottom: 1px solid rgba(210, 243, 232, 0.8);
 }
+.home .content .about .card.project-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home .content .about .card.project-card h3 {
+  font-size: 2rem;
+}
 
 .articles main .main-wrapper a.post-link {
   display: flex;
