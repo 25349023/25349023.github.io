@@ -1,23 +1,17 @@
 .portfolio .main-wrapper .project-card {
   text-decoration: none;
   color: $postpage-ui-color;
-  border: 1px solid transparent;
-  border-image: linear-gradient(
-      to top,
-      rgba($portfolio-card-hover-color, 0.35),
-      rgba($portfolio-card-color, 0.5) 40%) 1;
+  background-color: rgba($portfolio-card-color, 0.18);
   transition: all 0.3s;
-  //background-color: rgba($portfolio-card-color, 0.2);
 
   &:hover {
     background-color: rgba($portfolio-card-hover-color, 0.65);
-    border-image: none;
     color: $portfolio-color;
   }
 
   @include brk-down($brk-tiny) {
     border-radius: 0;
-    border-color: rgba($portfolio-card-color, 0.5);
+    
     img {
       border-radius: 0;
     }

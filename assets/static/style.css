@@ -2261,19 +2261,16 @@ aside nav > ul .collapsible-category ul a {
 .portfolio .main-wrapper .project-card {
   text-decoration: none;
   color: #5c443a;
-  border: 1px solid transparent;
-  border-image: linear-gradient(to top, rgba(105, 76, 69, 0.35), rgba(223, 200, 190, 0.5) 40%) 1;
+  background-color: rgba(223, 202, 190, 0.18);
   transition: all 0.3s;
 }
 .portfolio .main-wrapper .project-card:hover {
   background-color: rgba(105, 76, 69, 0.65);
-  border-image: none;
   color: #f8f8f8;
 }
 @media (max-width: 480px) {
   .portfolio .main-wrapper .project-card {
     border-radius: 0;
-    border-color: rgba(223, 200, 190, 0.5);
   }
   .portfolio .main-wrapper .project-card img {
     border-radius: 0;

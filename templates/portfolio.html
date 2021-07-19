@@ -1,12 +1,35 @@
 {% extends "layout-normal.html" %}
+{% from "macros/project_card.html" import render_project_card %}
 {% block title %}Portfolio - skyblog{% endblock %}
 
 {% block banner %}
-  <h1>Coming Soon</h1>
+  <h1>Portfolio</h1>
 {% endblock %}
 
 {% block main %}
   <main>
-    <div class="main-wrapper"></div>
+    <div class="main-wrapper">
+      <h2>Featured Projects</h2>
+      <section class="featured-project">
+        {% for project in this.projects.blocks %}
+          {% if project.class == 'featured' %}
+            {{ render_project_card(project, this) }}
+          {% endif %}
+        {% endfor %}
+      </section>
+
+      <h2>All Projects</h2>
+      <section class="all-project">
+        {% for project in this.projects.blocks %}
+          {{ render_project_card(project, this) }}
+        {% endfor %}
+        <a href="https://github.com/25349023" class="project-card">
+          <h3>
+            更多作品
+            <i class="fas fa-angle-double-right"></i>
+          </h3>
+        </a>
+      </section>
+    </div>
   </main>
 {% endblock %}

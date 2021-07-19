@@ -1,0 +1,52 @@
+projects:
+
+#### project ####
+name: skyblog
+----
+image: skyblog.png
+----
+url: https://25349023.github.io/
+----
+body: 從無到有一手打造的部落格
+----
+class: all
+#### project ####
+name: Be Your Voice
+----
+image: beyourvoice.png
+----
+url: https://github.com/25349023/Be-Your-Voice
+----
+body: 使用生成對抗網路（DCGAN）依據人們的照片産生對應的聲音。
+----
+class: featured
+#### project ####
+name: NTHU CoursInfo
+----
+image: nthucoursinfo.png
+----
+url: https://coursinfo.herokuapp.com/
+----
+body: NTHU 課程心得交流平台
+----
+class: featured
+#### project ####
+name: BTshooting
+----
+image: btshooting.png
+----
+url: https://github.com/25349023/BTshooting
+----
+body: 你能五關全過嗎？
+----
+class: featured
+#### project ####
+name: MathCrash
+----
+image: mathcrash.png
+----
+url: https://github.com/25349023/MathCrash
+----
+body: 四則運算 × 卡牌遊戲
+----
+class: all
