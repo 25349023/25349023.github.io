@@ -1,13 +1,26 @@
 .portfolio .main-wrapper .project-card {
   text-decoration: none;
   color: $postpage-ui-color;
-  border: 1px solid $portfolio-card-color;
-  border-radius: 5px;
+  border: 1px solid transparent;
+  border-image: linear-gradient(
+      to top,
+      rgba($portfolio-card-hover-color, 0.35),
+      rgba($portfolio-card-color, 0.5) 40%) 1;
   transition: all 0.3s;
+  //background-color: rgba($portfolio-card-color, 0.2);
 
   &:hover {
     background-color: rgba($portfolio-card-hover-color, 0.65);
+    border-image: none;
     color: $portfolio-color;
+  }
+
+  @include brk-down($brk-tiny) {
+    border-radius: 0;
+    border-color: rgba($portfolio-card-color, 0.5);
+    img {
+      border-radius: 0;
+    }
   }
 
   .intro {
@@ -47,6 +60,10 @@
 
       p {
         max-height: 220px;
+
+        @include brk-down($brk-medium) {
+          max-height: 168px;
+        }
       }
     }
   }
@@ -77,12 +94,29 @@
 
       background-color: rgba($portfolio-card-hover-color, 0.5);
       color: $portfolio-color;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-family: $default-font;
       line-height: 1.4;
 
       &:hover {
         background-color: rgba($portfolio-card-hover-color, 0.8);
+      }
+
+      @include brk-down($brk-medium) {
+        font-size: 1.3rem;
+      }
+
+      @include brk-down($brk-tiny) {
+        height: 6rem;
+        background-color: unset;
+        border: none;
+        font-size: 1.2rem;
+        color: $portfolio-card-hover-color;
+
+        &:hover {
+          color: $portfolio-color;
+          background-color: rgba($portfolio-card-hover-color, 0.5);
+        }
       }
     }
   }

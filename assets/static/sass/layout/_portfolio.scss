@@ -9,29 +9,57 @@
   .main-wrapper {
     margin-bottom: 2rem;
     min-height: 80vh;
-    padding: 2rem;
+    padding: 2rem 3rem;
     flex-basis: 1080px;
     color: $postpage-ui-color;
+
+    @include brk-down($brk-large) {
+      padding: 2rem 2.4rem;
+    }
+
+    @include brk-down($brk-tiny) {
+      padding: 2rem 1.6rem;
+    }
 
     h2 {
       margin: 2rem 0;
       font-size: 2rem;
+
+      @include brk-down($brk-tiny) {
+        font-size: 1.6rem;
+      }
     }
 
     .featured-project, .all-project {
       display: grid;
-      gap: 1.8rem 1.2rem;
+      gap: 1.2rem 1rem;
       padding-bottom: 1rem;
     }
 
     .featured-project {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       grid-template-rows: 550px;
+
+      @include brk-down($brk-medium) {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: repeat(3, 500px);
+      }
     }
 
     .all-project {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-auto-rows: 360px;
+
+      @include brk-down($brk-huge) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      @include brk-down($brk-medium) {
+        gap: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @include brk-down($brk-tiny) {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
   }
 }
