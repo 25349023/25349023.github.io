@@ -7,7 +7,7 @@ function collapseExpand(e) {
     let content = li.querySelector(":scope > ul");
 
     arrow.classList.toggle("opened");
-    if (li == categoryRoot) {
+    if (li === categoryRoot) {
         categoryRoot.classList.toggle("expanded");
     }
 
@@ -19,10 +19,10 @@ function collapseExpand(e) {
 
     for (
         let parent = li;
-        parent.id != "root-collapsible";
+        parent.id !== "root-collapsible";
         parent = parent.parentNode
     ) {
-        if (parent.tagName != "UL") {
+        if (parent.tagName !== "UL") {
             continue;
         }
         adjustHeight(parent, content.scrollHeight);
