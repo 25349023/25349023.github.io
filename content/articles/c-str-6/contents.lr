@@ -1,0 +1,83 @@
+title: [C] 每天來點字串用法 (6) － atoi、atol、atof
+---
+author: Sky
+---
+body:
+
+~~嗯我居然忘了把這篇搬過來。（2021）~~
+
+今天要介紹很好用的函式：
+
+# `atoi`、`atol`：字串轉整數
+
+所屬標頭檔：`<stdlib.h>`  
+函式宣告：
+```c
+int atoi( const char *str );
+long atol( const char *str );
+```
+
+首先要注意到：這次的標頭檔並不是我們熟悉的 `<string.h>`，而是 `<stdlib.h>`。
+
+這兩是個可以把字串中的有效部分轉換成整數、長整數的函式，而怎麼樣算有效呢？基本上要符合以下條件：
+
+1. 可能有正負號（`+` / `-`）
+2. 數字
+
+如果這個字串的開頭有一些空格的話，這兩個函式會自動跳過；而如果在有效部分後面還有一些文字的話（例如小數點），函式將不會理會這些多餘的字。
+
+# `atof`：字串轉浮點數
+
+所屬標頭檔：`<stdlib.h>`  
+函式宣告：
+```c
+double atof( const char* str );
+```
+
+這兩是個可以把字串中的有效部分轉換成雙精度浮點數的函式，而怎麼樣算有效呢？基本上要符合以下條件：
+
+1. 可能有正負號（`+` / `-`）
+2. 數字（可能有小數點）
+3. 可能以 `e`、`E` 來表示的科學計號
+4. 無限：inf 或 infinity（忽略大小寫）
+5. 非數：NaN（忽略大小寫）
+
+如果這個字串的開頭有空格的話，這兩個函式會自動跳過；而如果在有效部分後面還有一些文字的話（不含上述提到的記號），函式將不會理會這些多餘的字。 
+
+另外，如果沒辦法轉換的話，`atoi()`、`atol()` 會回傳 `0`，`atof()` 會回傳 `0.0`；而如果轉換後超出該型態可儲存的範圍，將會是 undefined behavior。
+
+範例如下： 
+```c=
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    const char *str = "  12.34e5trash";
+    int i = atoi(str);
+    long l = atol(str);
+    double d = atof(str);
+    printf("%d\n%ld\n%f\n", i, l, d);
+
+    return 0;
+}
+```
+
+可以發現 `atoi()` 和 `atol()` 都讀到小數點就停下來了，而 `atof()` 則是讀到後面的 `trash` 才停止。
+
+這次的篇幅有點短，原本想放入 `strtol()` 的，但是怕太長，而且我懶得一次打那麼多東西，所以就作罷了XD。
+
+參考資料：
+1. [cppreference - atoi、atol](https://en.cppreference.com/w/c/string/byte/atoi)
+2. [cppreference - atof](https://en.cppreference.com/w/c/string/byte/atof)
+3. 我懶惰的腦袋
+
+---
+popular: 30
+---
+pub_date: 2021-10-18 00:00:00
+---
+tags:
+
+C
+C - 字串
