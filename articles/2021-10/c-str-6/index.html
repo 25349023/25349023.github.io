@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[C] 每天來點字串用法 (6) － atoi、atol、atof - skyblog</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/site.webmanifest">
+  <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-266M1NLNKL"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-266M1NLNKL');
+  </script>
+  
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atom-one-light.min.css"
+  />
+
+</head>
+
+
+
+<body class="postpage">
+<header>
+  <nav>
+    <ul>
+      <li class="brand">
+        <a href="/"><i class="fas fa-feather"></i> skyblog</a>
+      </li>
+      
+        <li class="option">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="option">
+          <a href="/articles/">Articles</a>
+        </li>
+      
+        <li class="option">
+          <a href="/portfolio/">Portfolio</a>
+        </li>
+      
+        <li class="option">
+          <a href="/#about">About</a>
+        </li>
+      
+      <li id="toggle-navbar"><i class="fas fa-th-large"></i></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner">
+  
+</section>
+
+
+  
+  <section class="toc-wrapper hidden" id="toc">
+    <ul class="toc">
+      
+        
+          <li><a href="#atoi-atol-zi-chuan-zhuan-zheng-shu-0"><code>atoi</code>、<code>atol</code>：字串轉整數</a></li>
+        
+      
+        
+          <li><a href="#atof-zi-chuan-zhuan-fu-dian-shu-1"><code>atof</code>：字串轉浮點數</a></li>
+        
+      
+    </ul>
+  </section>
+
+  <main>
+    <article>
+      
+  
+  <section class="info">
+    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法 (6) － atoi、atol、atof</h1>
+    <div class="meta-data">
+      <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
+      <time class="publish-date">
+        <i class="fas fa-at"></i> 2021 - 10 - 18
+      </time>
+    </div>
+  </section>
+
+  <section class="post-content">
+    <p><del>嗯我居然忘了把這篇搬過來。（2021）</del></p>
+<p>今天要介紹很好用的函式：</p>
+<h1 id="atoi-atol-zi-chuan-zhuan-zheng-shu-0"><code>atoi</code>、<code>atol</code>：字串轉整數</h1><p>所屬標頭檔：<code>&lt;stdlib.h&gt;</code><br>
+函式宣告：</p>
+<pre><code class="language-c">int atoi( const char *str );
+long atol( const char *str );</code></pre>
+<p>首先要注意到：這次的標頭檔並不是我們熟悉的 <code>&lt;string.h&gt;</code>，而是 <code>&lt;stdlib.h&gt;</code>。</p>
+<p>這兩是個可以把字串中的有效部分轉換成整數、長整數的函式，而怎麼樣算有效呢？基本上要符合以下條件：</p>
+<ol>
+<li>可能有正負號（<code>+</code> / <code>-</code>）</li>
+<li>數字</li>
+</ol>
+<p>如果這個字串的開頭有一些空格的話，這兩個函式會自動跳過；而如果在有效部分後面還有一些文字的話（例如小數點），函式將不會理會這些多餘的字。</p>
+<h1 id="atof-zi-chuan-zhuan-fu-dian-shu-1"><code>atof</code>：字串轉浮點數</h1><p>所屬標頭檔：<code>&lt;stdlib.h&gt;</code><br>
+函式宣告：</p>
+<pre><code class="language-c">double atof( const char* str );</code></pre>
+<p>這兩是個可以把字串中的有效部分轉換成雙精度浮點數的函式，而怎麼樣算有效呢？基本上要符合以下條件：</p>
+<ol>
+<li>可能有正負號（<code>+</code> / <code>-</code>）</li>
+<li>數字（可能有小數點）</li>
+<li>可能以 <code>e</code>、<code>E</code> 來表示的科學計號</li>
+<li>無限：inf 或 infinity（忽略大小寫）</li>
+<li>非數：NaN（忽略大小寫）</li>
+</ol>
+<p>如果這個字串的開頭有空格的話，這兩個函式會自動跳過；而如果在有效部分後面還有一些文字的話（不含上述提到的記號），函式將不會理會這些多餘的字。</p>
+<p>另外，如果沒辦法轉換的話，<code>atoi()</code>、<code>atol()</code> 會回傳 <code>0</code>，<code>atof()</code> 會回傳 <code>0.0</code>；而如果轉換後超出該型態可儲存的範圍，將會是 undefined behavior。</p>
+<p>範例如下：</p>
+<pre><code class="language-c=">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+    const char *str = &quot;  12.34e5trash&quot;;
+    int i = atoi(str);
+    long l = atol(str);
+    double d = atof(str);
+    printf(&quot;%d\n%ld\n%f\n&quot;, i, l, d);
+
+    return 0;
+}</code></pre>
+<p>可以發現 <code>atoi()</code> 和 <code>atol()</code> 都讀到小數點就停下來了，而 <code>atof()</code> 則是讀到後面的 <code>trash</code> 才停止。</p>
+<p>這次的篇幅有點短，原本想放入 <code>strtol()</code> 的，但是怕太長，而且我懶得一次打那麼多東西，所以就作罷了XD。</p>
+<p>參考資料：</p>
+<ol>
+<li><a href="https://en.cppreference.com/w/c/string/byte/atoi">cppreference - atoi、atol</a></li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/atof">cppreference - atof</a></li>
+<li>我懶惰的腦袋</li>
+</ol>
+
+  </section>
+  
+  
+    <ul class="tags">
+      <li>
+          <a href="/articles/tag/C/">
+            C
+          </a>
+        </li>
+      <li>
+          <a href="/articles/tag/C-Zi-Chuan/">
+            C - 字串
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  <div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-6"; this.page.url = "https://25349023.github.io/articles/2021-10/c-str-6/"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//lecielblog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+  
+  
+  <section class="adjacent-posts">
+    
+    
+      <div class="prev">
+        <span>Prev Post</span>
+        <a href="/articles/2021-09/bokuoshikatte-soraru/">
+          <h3><i class="fas fa-chevron-left"></i> [歌詞翻譯] ぼくを叱って － そらる</h3>
+        </a>
+      </div>
+    
+  </section>
+
+
+    </article>
+  </main>
+
+  <figure class="modal hidden" id="modal">
+    <img src="" alt=""/>
+    <figcaption>Alt text</figcaption>
+  </figure>
+
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="hidden" id="sidebar">
+    <div class="blur"></div>
+    <div class="content">
+      <div class="profile-image"></div>
+      <div class="name">天ほし</div>
+      <nav>
+        <ul>
+          <li class="collapsible-category" id="root-collapsible">
+            <a>Category <i class="fas fa-angle-down"></i></a>
+            
+  
+  <ul>
+    
+    
+      
+
+      
+      
+        <li class="collapsible-category">
+          <a>C <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+        <li><a href="/articles/tag/C/"
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/C-Zi-Chuan/"
+        >字串</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+
+      
+      
+        <li><a href="/articles/tag/Cpp/"
+        >C++</a></li>
+      
+      
+    
+      
+
+      
+      
+        <li class="collapsible-category">
+          <a>Python <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+        <li><a href="/articles/tag/Python/"
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Python-Structural-Pattern-Matching/"
+        >Structural Pattern Matching</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+
+      
+      
+        <li class="collapsible-category">
+          <a>演算法 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa/"
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Yan-Suan-Fa-Sou-Xun/"
+        >搜尋</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+
+      
+      
+        <li class="collapsible-category">
+          <a>歌詞翻譯 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi/"
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Ge-Ci-Fan-Yi-Ri-Wen/"
+        >日文</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+
+      
+      
+        <li class="collapsible-category">
+          <a>日常 <i class="fas fa-angle-down"></i></a>
+          <ul>
+      
+        <li><a href="/articles/tag/Ri-Chang/"
+        >All</a></li>
+      
+
+      
+      
+        <li><a href="/articles/tag/Ri-Chang-Duan-Tan/"
+        >短談</a></li>
+      
+      
+    </ul>
+        </li>
+      
+      
+    
+      
+
+      
+      
+        <li><a href="/articles/tag/Test/"
+        >Test</a></li>
+      
+      
+    
+  </ul>
+
+          </li>
+          <li>
+            <a href="mailto:25349023.qq@gmail.com">Contact Me</a>
+          </li>
+          <li>
+            <a href="https://github.com/25349023/"><i class="fab fa-github"></i> GitHub</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <button class="handle"><i class="fas fa-bars"></i></button>
+  </aside>
+
+
+<a href="#" class="scroll-top hidden" id="scroll-top">
+  <i class="fas fa-chevron-up"></i>
+</a>
+<footer>&copy; Copyright 2021 by Skyline Liu.</footer>
+<script src="/static/js/scroll_top.js"></script>
+<script src="/static/js/navbar.js"></script>
+
+  
+  <script src="/static/js/sidebar.js"></script>
+  <script src="/static/js/category.js"></script>
+
+  <script src="/static/js/line_numbers.js"></script>
+  <script src="/static/js/toc.js"></script>
+  <script src="/static/js/post_image.js"></script>
+  <script src="/static/js/modal.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>
+      hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>
+</html>
