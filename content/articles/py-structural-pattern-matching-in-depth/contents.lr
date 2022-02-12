@@ -12,8 +12,6 @@ body:
 
 那就直接進入我們的主題吧！
 
-!!! 本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 [pre-release](https://www.python.org/download/pre-releases/) 版。  
-目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 
 
 # PEP 634: Structural Pattern Matching
 

@@ -9,8 +9,6 @@ body:
 我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。  
 那我們就開始吧！
 
-!!! 此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 [pre-release](https://www.python.org/download/pre-releases/) 版。  
-目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 
 
 # PEP 634: Structural Pattern Matching
 
@@ -62,7 +60,7 @@ def buy(thing):
         case 'apple' | 'banana' | 'grape':
             print('It is a fruit.')
 
-buy('grape')  # It is fruit.
+buy('grape')  # It is a fruit.
 buy('egg')    # <Nothing>
 ```
 注意到我們使用直線 `|` 來把不同的 pattern 合起來，這稱做 **Or Pattern**。且這段程式中省略了 wildcard pattern，因此當我們傳入不符合任一 pattern 的字串時（如 `'egg'`），什麼事都不會發生。
