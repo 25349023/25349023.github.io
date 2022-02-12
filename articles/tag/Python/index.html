@@ -118,10 +118,14 @@
         還沒看過上一篇的朋友請往這邊走。沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，我好棒。
 這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。
 那就直接進入我們的主題吧！
-本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
-目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
+PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
 就像序列是使用 [] 或 () 來比對，那映射當然就是使用 {} 來比對啦。
-但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提...
+但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。
+另外，pattern 中不能出現兩個相同的 key。
+接下來就來看個例子：
+def parse(action):
+    match action:
+        ...
       </p>
     </article>
   </a>
@@ -164,9 +168,11 @@ print(m._MyClass__bar)  # 1
         幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
 我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。
 那我們就開始吧！
-此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 pre-release 版。
-目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
-那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 swit...
+PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
+那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 switch 結構，但功能更強大，反而比較像 Haskell 中的 Pattern Matching。
+我們先從最基本的語法開始：（因為是新功能所以 highlight 還未支援）
+match subject:
+    case &amp;lt;...
       </p>
     </article>
   </a>

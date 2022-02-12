@@ -169,8 +169,7 @@
     <p>幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。</p>
 <p>我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。<br>
 那我們就開始吧！</p>
-<div class="admonition admonition-tip"><p>此篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 <a href="https://www.python.org/download/pre-releases/">pre-release</a> 版。<br>
-目前（本文撰寫時）最新的版本號為 3.10.0a6，且可能會有一些 bug。 </p></div><h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><p>這個功能最早是由 <a href="https://www.python.org/dev/peps/pep-0622/">PEP 622</a> 所提出，後來經過討論以及修改，整理成了 <a href="https://www.python.org/dev/peps/pep-0634/">PEP 634</a>，並成為了 Python 3.10 中的一項新功能。</p>
+<h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><p>這個功能最早是由 <a href="https://www.python.org/dev/peps/pep-0622/">PEP 622</a> 所提出，後來經過討論以及修改，整理成了 <a href="https://www.python.org/dev/peps/pep-0634/">PEP 634</a>，並成為了 Python 3.10 中的一項新功能。</p>
 <p>那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 switch 結構，但功能更強大，反而比較像 Haskell 中的 Pattern Matching。</p>
 <p>我們先從最基本的語法開始：（因為是新功能所以 highlight 還未支援）</p>
 <pre><code class="language-python">match subject:
@@ -204,7 +203,7 @@ buy(&#x27;egg&#x27;)    # You cannot buy it.</code></pre>
         case &#x27;apple&#x27; | &#x27;banana&#x27; | &#x27;grape&#x27;:
             print(&#x27;It is a fruit.&#x27;)
 
-buy(&#x27;grape&#x27;)  # It is fruit.
+buy(&#x27;grape&#x27;)  # It is a fruit.
 buy(&#x27;egg&#x27;)    # &lt;Nothing&gt;</code></pre>
 <p>注意到我們使用直線 <code>|</code> 來把不同的 pattern 合起來，這稱做 <strong>Or Pattern</strong>。且這段程式中省略了 wildcard pattern，因此當我們傳入不符合任一 pattern 的字串時（如 <code>'egg'</code>），什麼事都不會發生。</p>
 <p>但這裡有個小麻煩，雖然把 pattern 組合起來很方便，但這樣我們就不能分辨傳入的字串是哪一種了，此時我們可以使用 as 來取得前面比對到的值：</p>
@@ -353,7 +352,7 @@ check(&#x27;ls -la ./mydir&#x27;)
 <p>後記：<br>
 　　原本只是想簡單介紹的，結果一不小心就寫了這麼多（笑）<br>
 　　另外雖然我有說要寫第二篇，但拖到沒空寫的可能性也滿高的XD</p>
-
+<div class="admonition admonition-info"><p>後篇已經發布啦！請往<strong><a href="/articles/2021-06/py-structural-pattern-matching-in-depth/">這邊</a></strong>走。</p></div>
   </section>
   
   

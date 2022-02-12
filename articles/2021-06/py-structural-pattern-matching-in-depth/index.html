@@ -182,8 +182,7 @@
     <div class="admonition admonition-info"><p>還沒看過上一篇的朋友請往<strong><a href="/articles/2021-03/py-structural-pattern-matching/">這邊</a></strong>走。</p></div><p>沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，<del>我好棒</del>。</p>
 <p>這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。</p>
 <p>那就直接進入我們的主題吧！</p>
-<div class="admonition admonition-tip"><p>本篇文章所介紹的語法在 Python 3.10 後才支援，而目前 3.10 版還沒釋出正式版本，因此想嘗試的讀者需要安裝 <a href="https://www.python.org/download/pre-releases/">pre-release</a> 版。<br>
-目前（本文撰寫時）最新的版本號為 3.10.0b3，請斟酌使用。 </p></div><h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><h2 id="bi-dui-ying-she-mapping-1">比對映射（Mapping）</h2><p>我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。</p>
+<h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><h2 id="bi-dui-ying-she-mapping-1">比對映射（Mapping）</h2><p>我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。</p>
 <p>就像序列是使用 <code>[]</code> 或 <code>()</code> 來比對，那映射當然就是使用 <code>{}</code> 來比對啦。</p>
 <p>但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（<a href="/articles/2021-03/py-structural-pattern-matching/#qi-ta-de-bi-dui-fang-shi-9">前篇的最後一節</a>有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。</p>
 <p>另外，pattern 中不能出現兩個相同的 key。</p>
@@ -256,7 +255,7 @@ where(Point(3, 4))  # Just a point
 where(&#x27;spam&#x27;)       # Not a point</code></pre>
 <div class="admonition admonition-note"><p>事實上，標準函式庫中的 <code>namedtuple</code> 和 <code>dataclass</code> 會自動生成出正確的 <code>__match_args__</code>，因此可以正確地運作。<br>
 另外，如果使用 <code>dataclass</code> 時有些欄位（屬性）被設定為 <code>init=False</code> 的話，這些屬性就不會被放到 <code>__match_args__</code> 裡。</p></div><h2 id="soft-keyword-zhi-zai-te-ding-chang-he-cai-shi-guan-jian-zi-5">Soft Keyword：只在特定場合才是關鍵字</h2><p>接下來就是比較細節的部分了，如果先跳過也沒關係。</p>
-<p>首先是 <code>match</code> 和 <code>case</code> 這兩個關鍵字，他們被稱作 <strong>soft keyword</strong>s，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？</p>
+<p>首先是 <code>match</code> 和 <code>case</code> 這兩個關鍵字，他們被稱作 <strong>soft keywords</strong>，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？</p>
 <p>一般來說，像 <code>while</code> 或 <code>try</code> 這種關鍵字是不能做為變數或函式引數名稱的，但是 <code>match</code> 和 <code>case</code> 可以。事實上，<code>match</code> 和 <code>case</code> 只會在我們要使用 pattern matching 時才會被當作關鍵字來看待，其他情況下就只會是普通的變數名。</p>
 <p>這種做法的好處是不會影響現有的程式，但又能引入新的功能。</p>
 <h2 id="dao-di-shi-zen-mo-bi-dui-de-6">到底是怎麼比對的？</h2><p>最後，我們要來看看不同 pattern 的背後到底是怎麼比對的。</p>
