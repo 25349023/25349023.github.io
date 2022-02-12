@@ -3,3 +3,4 @@ packages/*/*.egg-info/
 packages/*/__pycache__/
 
 *~
+

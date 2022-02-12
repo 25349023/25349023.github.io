@@ -261,6 +261,8 @@ check('ls -la ./mydir')
 　　原本只是想簡單介紹的，結果一不小心就寫了這麼多（笑）  
 　　另外雖然我有說要寫第二篇，但拖到沒空寫的可能性也滿高的XD
 
+!! 後篇已經發布啦！請往**[這邊](/articles/2021-06/py-structural-pattern-matching-in-depth/)**走。
+
 ---
 popular: 80
 ---

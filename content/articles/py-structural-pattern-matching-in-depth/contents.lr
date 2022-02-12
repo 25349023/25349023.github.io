@@ -123,7 +123,7 @@ where('spam')       # Not a point
 
 接下來就是比較細節的部分了，如果先跳過也沒關係。
 
-首先是 `match` 和 `case` 這兩個關鍵字，他們被稱作 **soft keyword**s，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？
+首先是 `match` 和 `case` 這兩個關鍵字，他們被稱作 **soft keywords**，也就是只有在特定的語境（context）底下才會是關鍵字。這是什麼意思？
 
 一般來說，像 `while` 或 `try` 這種關鍵字是不能做為變數或函式引數名稱的，但是 `match` 和 `case` 可以。事實上，`match` 和 `case` 只會在我們要使用 pattern matching 時才會被當作關鍵字來看待，其他情況下就只會是普通的變數名。
 
