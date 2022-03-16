@@ -1,6 +1,16 @@
 projects:
 
 #### project ####
+name: ADUDA: Autonomous Driving with Unsupervised Domain Adaptation
+----
+image: husky-white.png
+----
+url: https://elsa-lab.github.io/ADUDA/
+----
+body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
+----
+class: featured
+#### project ####
 name: skyblog
 ----
 image: skyblog.png
@@ -29,7 +39,7 @@ url: https://coursinfo.herokuapp.com/
 ----
 body: NTHU 課程心得交流平台
 ----
-class: featured
+class: all
 #### project ####
 name: BTshooting
 ----
