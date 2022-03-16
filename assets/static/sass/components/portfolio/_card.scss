@@ -19,6 +19,8 @@
 
   .intro {
     padding: 0.8rem 1.2rem;
+    min-width: 0;
+    min-height: 0;
 
     h3 {
       overflow: hidden;
@@ -30,6 +32,7 @@
       margin: 0;
       font-size: 1.3rem;
       line-height: 1.3;
+      min-height: 0;
 
       overflow-y: hidden;
       text-overflow: ellipsis;
@@ -63,18 +66,40 @@
   }
 
   .all-project .project-card {
+    flex: 0 0 200px;
+    max-height: 200px;
+
+    article {
+      display: flex;
+      height: 100%;
+    }
 
     @include brk-down($brk-tiny) {
-      flex: 0 0 320px;
+      flex: 0 0 360px;
     }
 
     img {
-      width: 100%;
-      height: 150px;
+      height: 100%;
+      width: 220px;
       object-fit: cover;
     }
 
+    @include brk-down($brk-small) {
+      max-height: none;
+
+      article {
+        flex-flow: column;
+      }
+
+      img {
+        width: 100%;
+        height: 180px;
+      }
+    }
+
     .intro {
+      flex: 1;
+
       h3 {
         margin: 0 0 0.75rem 0;
         font-size: 1.4rem;
@@ -84,7 +109,7 @@
         max-height: 140px;
 
         @include brk-down($brk-tiny) {
-          max-height: 100px;
+          max-height: 110px;
         }
       }
     }
@@ -95,11 +120,20 @@
       align-items: center;
       justify-content: center;
 
-      background-color: rgba($portfolio-card-hover-color, 0.5);
-      color: $portfolio-color;
+      flex-basis: 0;
+      padding: 1rem 2rem;
+      align-self: end;
+
+      //background-color: rgba($portfolio-card-hover-color, 0.5);
+      //color: $portfolio-color;
       font-size: 1.4rem;
       font-family: $default-font;
       line-height: 1.4;
+
+      h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
 
       &:hover {
         background-color: rgba($portfolio-card-hover-color, 0.8);
