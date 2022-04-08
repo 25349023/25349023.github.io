@@ -753,7 +753,7 @@ aside nav > ul .collapsible-category ul a {
   text-decoration: none;
   font-size: 1.2rem;
   color: #455d72;
-  transition: background-color 0.4s;
+  transition: background-color 0.2s;
 }
 .pagination a:nth-of-type(n + 2) {
   margin-left: 0.6rem;
@@ -2517,7 +2517,7 @@ aside nav > ul .collapsible-category ul a {
 @media (max-width: 824px) {
   .articles .main-wrapper {
     padding: 3rem 2.4rem;
-    row-gap: 0.5rem;
+    row-gap: 1.2rem;
   }
 }
 @media (max-width: 668px) {

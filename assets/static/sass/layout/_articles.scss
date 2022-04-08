@@ -21,7 +21,7 @@
 
     @include brk-down($brk-large) {
       padding: 3rem 2.4rem;
-      row-gap: 0.5rem;
+      row-gap: 1.2rem;
     }
 
     @include brk-down($brk-small) {
