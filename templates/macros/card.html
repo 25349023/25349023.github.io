@@ -33,7 +33,7 @@
         <time>{{ post.pub_date|dateformat('Y - MM - dd') }}</time>
       </div>
       <p class="preview">
-        {{ post.body|striphtmltags|truncate(500, True) }}
+        {{ post.body|striphtmltags|truncate(300, True) }}
       </p>
     </article>
   </a>

@@ -18,19 +18,23 @@
     }
 
     article {
-      margin: 3rem 0 3rem -4rem;
-      padding: 2rem 5rem 2rem 0;
-      flex-basis: 1080px;
+      margin: 3rem 2rem;
+      padding: 2rem 6rem;
+      flex: 1;
       color: $postpage-ui-color;
 
+      .article-wrapper {
+        max-width: 1080px;
+      }
+
       @include brk-down($brk-x-huge) {
-        margin-left: 3rem;
+        margin-left: 0;
         margin-top: 2rem;
         flex-basis: 960px;
       }
 
       @include brk-down($brk-huge) {
-        margin-left: 0;
+        margin-right: 0;
         padding: 1.2rem 3rem;
         flex: 1;
         min-width: 0;
@@ -69,6 +73,9 @@
       }
 
       .title {
+        display: flex;
+        position: relative;
+
         margin: 0;
         margin-right: auto;
         font-size: 2.4rem;
@@ -77,6 +84,13 @@
           font-size: 1.8rem;
           margin-right: 0.8rem;
           color: rgba($postpage-ui-color, 0.6);
+
+          position: relative;
+          top: 0.7rem;
+
+          @include brk-down($brk-tiny) {
+            display: none;
+          }
         }
 
         @include brk-down($brk-huge) {

@@ -1,6 +1,6 @@
 {% macro render_info(post) %}
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>{{ post.title }}</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>{{ post.title }}</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> {{ post.author }}</span>
       <time class="publish-date">
@@ -48,10 +48,13 @@
 
 {% macro render_post(post) %}
   {{ render_info(post) }}
-  <section class="post-content">
-    {{ post.body }}
-  </section>
-  {{ render_tag_list(post) }}
-  <div class="comments">{{ render_disqus_comments() }}</div>
-  {{ render_adj_post(post) }}
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      {{ post.body }}
+    </section>
+    {{ render_tag_list(post) }}
+    <div class="comments">{{ render_disqus_comments() }}</div>
+    {{ render_adj_post(post) }}
+  </div>
 {% endmacro %}
