@@ -25,12 +25,21 @@
 
       .article-wrapper {
         max-width: 1080px;
+        padding-right: 4rem;
+
+        @include brk-down($brk-x-huge) {
+          padding-right: 0;
+        }
       }
 
       @include brk-down($brk-x-huge) {
         margin-left: 0;
         margin-top: 2rem;
         flex-basis: 960px;
+      }
+
+      @include brk-down($brk-semi-x-huge) {
+        margin-right: 0;
       }
 
       @include brk-down($brk-huge) {
@@ -129,11 +138,15 @@
         white-space: nowrap;
 
         @include brk-down($brk-large) {
-          margin: 0.6rem 0 0.3rem;
+          margin: 0.6rem 0 0.3rem 2rem;
         }
 
         @include brk-down($brk-small) {
           font-size: 1rem;
+        }
+
+        @include brk-down($brk-tiny) {
+          margin-left: 0;
         }
 
         i {
