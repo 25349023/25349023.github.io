@@ -120,12 +120,7 @@
 那就直接進入我們的主題吧！
 PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
 就像序列是使用 [] 或 () 來比對，那映射當然就是使用 {} 來比對啦。
-但要特別注意的是，映射物件裡的 key 只能用字面值（literal）或著常數（前篇的最後一節有提到）的方式來比對，亦即不能使用變數來捕捉映射的 key。另一方面，value 就沒有這個問題，可以使用前篇提過的各種方式來比對（甚至是巢狀的映射比對也可以）。
-另外，pattern 中不能出現兩個相同的 key。
-接下來就來看個例子：
-def parse(action):
-    match action:
-        ...
+但要特別注意的是，映射物...
       </p>
     </article>
   </a>
@@ -143,14 +138,7 @@ def parse(action):
         早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。
 Name Mangling在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 __spam），這個屬性的名字最後就會被重組成 _Cls__spam 這樣的形式，這項技術稱作 Name Mangling，提供了類似其他語言的私用屬性。
 但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。
-class MyClass:
-    def __init__(self):
-        self.__bar = 1
-
-m = MyClass()
-print(m._MyClass__bar)  # 1
-但其實，Name Mangling 有個鮮為人知的陰謀...
-哪些東西會被 Mangling？「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 __bar 會是重組的...
+class MyCla...
       </p>
     </article>
   </a>
@@ -168,11 +156,7 @@ print(m._MyClass__bar)  # 1
         幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
 我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。
 那我們就開始吧！
-PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 634，並成為了 Python 3.10 中的一項新功能。
-那麼，到底什麼是 Structural Pattern Matching 呢？他有點像 C/C++ 的 switch 結構，但功能更強大，反而比較像 Haskell 中的 Pattern Matching。
-我們先從最基本的語法開始：（因為是新功能所以 highlight 還未支援）
-match subject:
-    case &amp;lt;...
+PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 6...
       </p>
     </article>
   </a>
@@ -193,15 +177,7 @@ def plus(a, b, c=None):
     res = a + b + (c if c else 0)
     return res
 預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。
-但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數吧！  這時候我們可以用「*」來將引數收集到一個 tuple 中。
-* － 收集至 Tuple先來看看範例：
-def plus(*nums):
-    res = 0
-    for i in nums:
-        res += i
-    return res
-透過 * 收集的引數會被放到一個 tuple 中，所以我們可以使用 for 來對它進行迭代。
-這樣就可以理解為什麼要使用 *arg...
+但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數...
       </p>
     </article>
   </a>
@@ -223,15 +199,7 @@ C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, 
 bool visited[3] = {false};
 string arrangement[3];
 
-void dfs(int layer){
-    if (layer == 3){
-        for (int i = 0; i &amp;lt; 3; i++){
-            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
-        }
-        cout &amp;lt;&amp;lt; endl;
-        return;
-    }
-    for (in...
+void dfs(int layer)...
       </p>
     </article>
   </a>
@@ -251,9 +219,7 @@ void dfs(int layer){
 x = 1
 就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
 print(id(x))  # 94526375507712
-我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
-這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
-進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數...
+我們可以看到，有一個奇怪的數字被印出來了。而如果我們將...
       </p>
     </article>
   </a>
@@ -273,11 +239,7 @@ PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成
 name = &amp;#x27;Sky&amp;#x27;
 print(f&amp;#x27;My name is {name}.&amp;#x27;)
 # &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n: &amp;quot;Lucky&amp;quot...
+有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F...
       </p>
     </article>
   </a>

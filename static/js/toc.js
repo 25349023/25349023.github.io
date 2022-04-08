@@ -12,8 +12,8 @@ window.addEventListener("scroll", function () {
         toc.classList.add("hidden");
     }
     else if (
-        document.body.scrollTop > 240 ||
-        document.documentElement.scrollTop > 240
+        document.body.scrollTop > 480 ||
+        document.documentElement.scrollTop > 480
     ) {
         toc.classList.remove("hidden");
     } else {

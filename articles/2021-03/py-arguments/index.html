@@ -152,7 +152,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[Python] *args 和 **kwargs 是什麼？一次搞懂它們！</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -161,8 +161,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <p>在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 <code>*args</code> 和 <code>**kwargs</code> 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <p>在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 <code>*args</code> 和 <code>**kwargs</code> 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。</p>
 <h1 id="han-shi-can-shu-yu-fa-ji-chu-0">函式參數語法基礎</h1><h2 id="yu-she-can-shu-1">預設參數</h2><p>一般的定義方法就不多說了，直接來看有預設值的參數：</p>
 <pre><code class="language-python">def plus(a, b, c=None):
     res = a + b + (c if c else 0)
@@ -234,8 +236,8 @@ fun(1, 2, 3, 4, 5, kw1=6, g=7, f=8, m=9)
 　　其實那個什麼「唯-關鍵字引數」是我亂翻的XDD（看也知道<br>
 　　另外我也終於把這個 <code>*</code> 的用法給搞懂了～ 希望這篇文不會太難懂</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -247,7 +249,7 @@ fun(1, 2, 3, 4, 5, kw1=6, g=7, f=8, m=9)
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/py-arguments"; this.page.url = "https://25349023.github.io/articles/2021-03/py-arguments/"; };
@@ -263,7 +265,7 @@ fun(1, 2, 3, 4, 5, kw1=6, g=7, f=8, m=9)
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -284,6 +286,7 @@ fun(1, 2, 3, 4, 5, kw1=6, g=7, f=8, m=9)
     
   </section>
 
+  </div>
 
     </article>
   </main>

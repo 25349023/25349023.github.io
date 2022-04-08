@@ -127,16 +127,7 @@ long atol( const char *str );
 可能有正負號（+ / -）
 數字
 
-如果這個字串的開頭有一些空格的話，這兩個函式會自動跳過；而如果在有效部分後面還有一些文字的話（例如小數點），函式將不會理會這些多餘的字。
-atof：字串轉浮點數所屬標頭檔：&amp;lt;stdlib.h&amp;gt;
-函式宣告：
-double atof( const char* str );
-這兩是個可以把字串中的有效部分轉換成雙精度浮點數的函式，而怎麼樣算有效呢？基本上要符合以下條件：
-
-可能有正負號（+ / -）
-數字（可能有小數點）
-可能以 e、E 來表示的科學計號
-...
+如果這個字串的開頭有一些空格的話，這兩個函式會自動跳過；而如果在有...
       </p>
     </article>
   </a>
@@ -157,9 +148,7 @@ strcat、strncat：串接字串所屬標頭檔：&amp;lt;string.h&amp;gt;
 char *strcat( char *dest, const char *src );
 char *strncat( char *dest, const char *src, size_t count );
 看到這熟悉的命名，該不會跟 strcpy()、strncpy() 那組函式很像吧？沒錯，所以按照上次的慣例，我們先來看看 strcat()。
-strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src 接到 dest 後面，再回傳 dest 指向的字串。那你可能會問：那原本 dest 的 \0 字元會跑去哪呢？答案是會被 src 的第一個字元（也就是 src[0]）所取代，並在最後面補上一個 \0 來當做新字串的結束字元。
-看到名字多了一個 n 的函式，你可能會猜，是不是這個 strcat() 也會造成緩衝區溢位的問題呢？沒錯，所以接下來要介紹比較推薦的函式：strncat()。
-如果有看過之前...
+strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是將 src ...
       </p>
     </article>
   </a>
@@ -180,10 +169,7 @@ strcat() 有兩個參數，分別是 dest 和 src，而這個函式的功用是�
 char *strchr( const char *str, int ch );
 char *strrchr( const char *str, int ch );
 先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 int，但 char 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳第一個 ch 的所在位址；如果找不到，回傳 NULL。
-而這兩個函式的差別在於：strchr() 是從前面開始找 ch，而 strrchr() 則是從後面開始找。
-這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。
-另外，如果你想找 \0 這個字元的話也是可以的，反正一個字串一定會有一個 \0 嘛。
-我們可以看看下面的範例：給定一個 DNA 序列，把其中的 T 全部換成 U，使其成為合法...
+而這兩個函式的差別在於：strchr(...
       </p>
     </article>
   </a>
@@ -203,13 +189,7 @@ char *strrchr( const char *str, int ch );
 由 const char* 轉成 char*有時候可能在將字串傳入函式時，會出現以下錯誤：
 error: invalid conversion from &amp;#x27;const char*&amp;#x27; to &amp;#x27;char*&amp;#x27;
 note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;const char *&amp;#x27;
-這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
-
-直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
-用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
-使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
-
-下面這裡提供 2. 和 ...
+這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一...
       </p>
     </article>
   </a>
@@ -232,19 +212,7 @@ char *strcpy( char *dest, const char *src );
 char *strncpy( char *dest, const char *src, size_t count );
 先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
 
-第一個參數是目的地（dest），第二個是來源（src）
-會有緩衝區溢位（buffer overflow）的問題
-
-來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
-int i = 5;
-char s[8] = &amp;quot;Hi 1234&amp;quot;;
-那麼這些變數的記憶體配置可能如下：
-
-如果今天我們進行了如下操作：
-strcpy(s, &amp;quot;hello sky&amp;quot;);
-那麼記憶體裡的內容就會變成如下：
-
-於是這時 i 的值就會變...
+第一個參數是目的地（dest），第二個是來源（sr...
       </p>
     </article>
   </a>
@@ -270,12 +238,7 @@ size_t strlen( const char *str );
 int main(){
     char s1[16], s2[16];
     char *s3 = s2;
-    char s4[] = &amp;quot;happy new year\n&amp;quot;;
-    scanf(&amp;quot;%s&amp;quot;, s1);
-    printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
-    scanf(&amp;quot;%s&amp;quot;, s3);
-    printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
-    printf(&amp;quo...
+    char s4[] =...
       </p>
     </article>
   </a>
@@ -297,11 +260,7 @@ char s1[128] = &amp;quot;hello world&amp;quot;;
 char s2[] = &amp;quot;hello world&amp;quot;;
 另外，許多函式都會使用字元指標來操作字串：
 char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
-而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
-char *s4 = &amp;quot;hello world&amp;quot;;
-像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
-接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello world&amp;qu...
+而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字...
       </p>
     </article>
   </a>

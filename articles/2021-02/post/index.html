@@ -211,7 +211,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>Hello world 你好</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>Hello world 你好</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -220,8 +220,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <div class="admonition admonition-note"><p>這是個用來測試的文章。</p></div><h1 id="markdown-syntax-0">Markdown: Syntax</h1><h2 id="overview-1">Overview</h2><h3 id="philosophy-2">Philosophy</h3><p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <div class="admonition admonition-note"><p>這是個用來測試的文章。</p></div><h1 id="markdown-syntax-0">Markdown: Syntax</h1><h2 id="overview-1">Overview</h2><h3 id="philosophy-2">Philosophy</h3><p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p>
 <p>Readability, however, is emphasized above all else. A Markdown-formatted
 document should be publishable as-is, as plain text, without looking
 like it's been marked up with tags or formatting instructions. While
@@ -480,8 +482,8 @@ normal paragraph. For example:</p>
 <h2 id="math-supports-24">Math Supports</h2><p>The following is the solution to \( ax^2 + bx + c = 0 \):
 \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -493,7 +495,7 @@ normal paragraph. For example:</p>
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/post"; this.page.url = "https://25349023.github.io/articles/2021-02/post/"; };
@@ -509,7 +511,7 @@ normal paragraph. For example:</p>
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -523,6 +525,7 @@ normal paragraph. For example:</p>
     
   </section>
 
+  </div>
 
     </article>
   </main>

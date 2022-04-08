@@ -126,7 +126,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[C] 每天來點字串用法（基本篇）</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[C] 每天來點字串用法（基本篇）</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -135,8 +135,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <p>有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）<br>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <p>有感於 C 的字元陣列實在有夠難（只是你廢），所以決定每天搞懂一點關於它的性質或用法之類的，希望我能夠持之以恆。（2018 的我）<br>
 <del>不，你不行。（2021 的我）</del></p>
 <h1 id="zi-chuan-de-ji-ben-shi-yong-0">字串的基本使用</h1><p>首先，C 的字串指的其實是字元陣列，而字元陣列的使用通常有以下幾種：</p>
 <pre><code class="language-c">char s1[128] = &quot;hello world&quot;;
@@ -186,8 +188,8 @@ fgets(str, 128, stdin);</code></pre>
 <p>上述範例中的 <code>fgets()</code> 原本是要從檔案指標中讀取一行字串時使用的函式，一行指的是遇到 <code>\n</code> 或 EOF，讀取完後，會將 <code>\n</code>（如果有遇到）和 <code>\0</code> 放入字串尾。</p>
 <p>把 str 傳入第一個參數，就能把讀取結果存入 str 內，這裡在它的第三個參數傳入了 <code>stdin</code>，這是標準輸入（通常是鍵盤）的指標，讓我們可以獲取鍵盤輸入的資料。而第二個參數控制的是讀取進來的字元數（包含 <code>\0</code>），不能超過這個值。</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -204,7 +206,7 @@ fgets(str, 128, stdin);</code></pre>
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/c-str-0"; this.page.url = "https://25349023.github.io/articles/2021-02/c-str-0/"; };
@@ -220,7 +222,7 @@ fgets(str, 128, stdin);</code></pre>
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -241,6 +243,7 @@ fgets(str, 128, stdin);</code></pre>
     
   </section>
 
+  </div>
 
     </article>
   </main>

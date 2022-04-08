@@ -151,7 +151,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[演算法] [C++ / Python] 當 DFS 遇上排列</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[演算法] [C++ / Python] 當 DFS 遇上排列</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -160,8 +160,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <p>深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <p>深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。</p>
 <h1 id="jian-dao-shi-tou-bu-quan-bu-pai-lie-0">剪刀、石頭、布！－全部排列</h1><p>現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！</p>
 <p>蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！</p>
 <h2 id="c-1">C++</h2><pre class="line-numbers"><code class="language-cpp">string gesture[3] = {&quot;剪刀&quot;, &quot;石頭&quot;, &quot;布&quot;};
@@ -288,8 +290,8 @@ def dfs(layer):
 　　至於後面的題目，算是一時興起的吧（欸），列出了我在寫這篇時突然想到的一些問題，可是我明明記得還有很多問題的啊，看來寫一寫就自動消失了呢，真不錯（是嗎</p>
 <p>希望中間那個留給讀者思考不會被發現是我懶得打字。</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -316,7 +318,7 @@ def dfs(layer):
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/algo-dfs-permutation"; this.page.url = "https://25349023.github.io/articles/2021-03/algo-dfs-permutation/"; };
@@ -332,7 +334,7 @@ def dfs(layer):
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -353,6 +355,7 @@ def dfs(layer):
     
   </section>
 
+  </div>
 
     </article>
   </main>

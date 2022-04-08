@@ -138,7 +138,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[Python] 關於變數與參考的二三事</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[Python] 關於變數與參考的二三事</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -147,8 +147,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <p>寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 <code>copy</code> 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <p>寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 <code>copy</code> 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！</p>
 <h1 id="bian-shu-0">變數</h1><p>首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：</p>
 <pre><code class="language-python">x = 1</code></pre>
 <p>就代表我們把 x 的值指定為 1 了，<strong>是嗎？</strong>事實上並不是這樣的，而是讓 x 這個變數<strong>參考</strong>到了 1 這個物件，我們可以用 <code>id()</code> 函式來看看這個物件在記憶體中的位址究竟在哪：</p>
@@ -236,8 +238,8 @@ for i in range(3)
 <p>後記：<br>
 　　希望引進 N 次貼的概念後不會把問題更加複雜化，其實這個想法（N 次貼）從我一開始知道有這個情況的時候就開始構築了，但都沒有拿他來解釋其他的現象，所以有點擔心會不會變得太複雜XD</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -249,7 +251,7 @@ for i in range(3)
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/py-var-ref"; this.page.url = "https://25349023.github.io/articles/2021-03/py-var-ref/"; };
@@ -265,7 +267,7 @@ for i in range(3)
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -286,6 +288,7 @@ for i in range(3)
     
   </section>
 
+  </div>
 
     </article>
   </main>

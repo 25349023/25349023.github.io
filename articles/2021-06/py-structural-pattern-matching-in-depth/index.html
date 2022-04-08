@@ -169,7 +169,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[Python 3.10] 打開黑盒子：細談 Structural Pattern Matching</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[Python 3.10] 打開黑盒子：細談 Structural Pattern Matching</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -178,8 +178,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <div class="admonition admonition-info"><p>還沒看過上一篇的朋友請往<strong><a href="/articles/2021-03/py-structural-pattern-matching/">這邊</a></strong>走。</p></div><p>沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，<del>我好棒</del>。</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <div class="admonition admonition-info"><p>還沒看過上一篇的朋友請往<strong><a href="/articles/2021-03/py-structural-pattern-matching/">這邊</a></strong>走。</p></div><p>沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，<del>我好棒</del>。</p>
 <p>這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。</p>
 <p>那就直接進入我們的主題吧！</p>
 <h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><h2 id="bi-dui-ying-she-mapping-1">比對映射（Mapping）</h2><p>我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。</p>
@@ -292,8 +294,8 @@ where(&#x27;spam&#x27;)       # Not a point</code></pre>
 　　這大概是我第一次把 PEP 讀得那麼仔細，雖然標題是寫細談啦，不過有些我覺得太細的東西就還是沒有寫進來，希望這麼做能讓這篇比較好讀。<br>
 　　另外我原本以為這篇會拖到 python 3.10 已經推出正式版本後才發，看來我的拖延症還不算嚴重嘛（笑）。</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -310,7 +312,7 @@ where(&#x27;spam&#x27;)       # Not a point</code></pre>
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/py-structural-pattern-matching-in-depth"; this.page.url = "https://25349023.github.io/articles/2021-06/py-structural-pattern-matching-in-depth/"; };
@@ -326,7 +328,7 @@ where(&#x27;spam&#x27;)       # Not a point</code></pre>
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -347,6 +349,7 @@ where(&#x27;spam&#x27;)       # Not a point</code></pre>
     
   </section>
 
+  </div>
 
     </article>
   </main>

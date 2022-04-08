@@ -118,15 +118,7 @@ C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, 
 bool visited[3] = {false};
 string arrangement[3];
 
-void dfs(int layer){
-    if (layer == 3){
-        for (int i = 0; i &amp;lt; 3; i++){
-            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
-        }
-        cout &amp;lt;&amp;lt; endl;
-        return;
-    }
-    for (in...
+void dfs(int layer)...
       </p>
     </article>
   </a>
@@ -146,13 +138,7 @@ void dfs(int layer){
 由 const char* 轉成 char*有時候可能在將字串傳入函式時，會出現以下錯誤：
 error: invalid conversion from &amp;#x27;const char*&amp;#x27; to &amp;#x27;char*&amp;#x27;
 note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;const char *&amp;#x27;
-這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
-
-直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
-用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
-使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
-
-下面這裡提供 2. 和 ...
+這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一...
       </p>
     </article>
   </a>
@@ -172,9 +158,7 @@ note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;cons
 x = 1
 就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
 print(id(x))  # 94526375507712
-我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 x 加上 1，也就是 x += 1 之後，再對 x 使用 id() 的話，我們會發現，輸出結果，也就是物件的位址變得不同了，這似乎和 C++ 這類的靜態語言很不一樣。
-這個差別很重要嗎？可能在處理數值型態如整數之類的型態不太需要去注意，但在處理 list － 也就是我們今天的主角時就很重要了。
-進到下一個小節前，我們先來整理一下，不論你是不是已經完全懂了，我想拿個東西來比喻 Python 的變數...
+我們可以看到，有一個奇怪的數字被印出來了。而如果我們將...
       </p>
     </article>
   </a>
@@ -197,19 +181,7 @@ char *strcpy( char *dest, const char *src );
 char *strncpy( char *dest, const char *src, size_t count );
 先說 strcpy()，將來源字串（src）複製到目的地（dest），並回傳 dest 指向的字串，要注意的有以下兩點：
 
-第一個參數是目的地（dest），第二個是來源（src）
-會有緩衝區溢位（buffer overflow）的問題
-
-來看看何謂緩衝區溢位：假設有一程式進行了如下宣告：
-int i = 5;
-char s[8] = &amp;quot;Hi 1234&amp;quot;;
-那麼這些變數的記憶體配置可能如下：
-
-如果今天我們進行了如下操作：
-strcpy(s, &amp;quot;hello sky&amp;quot;);
-那麼記憶體裡的內容就會變成如下：
-
-於是這時 i 的值就會變...
+第一個參數是目的地（dest），第二個是來源（sr...
       </p>
     </article>
   </a>
@@ -235,12 +207,7 @@ size_t strlen( const char *str );
 int main(){
     char s1[16], s2[16];
     char *s3 = s2;
-    char s4[] = &amp;quot;happy new year\n&amp;quot;;
-    scanf(&amp;quot;%s&amp;quot;, s1);
-    printf(&amp;quot;s1: %d\n&amp;quot;, strlen(s1));
-    scanf(&amp;quot;%s&amp;quot;, s3);
-    printf(&amp;quot;s3: %d\n&amp;quot;, strlen(s3));
-    printf(&amp;quo...
+    char s4[] =...
       </p>
     </article>
   </a>
@@ -262,11 +229,7 @@ char s1[128] = &amp;quot;hello world&amp;quot;;
 char s2[] = &amp;quot;hello world&amp;quot;;
 另外，許多函式都會使用字元指標來操作字串：
 char *s3 = s1;  // 相當於 char *s3 = &amp;amp;s1[0]
-而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字元指標類的字串有初始值：
-char *s4 = &amp;quot;hello world&amp;quot;;
-像 s4 這種情況，是由編譯器在唯讀記憶體中放入 &#34;hello world&#34; 這個字元陣列，再讓 s4 這個指標指向它。因為是唯讀的記憶體，所以我們不能更改這個字串的內容，但可以更改 s4 指向的位址。
-接著讓我們看看字串的輸出：
-char s1[128] = &amp;quot;hello world&amp;qu...
+而對於字元指標的宣告，C 有一個特別的地方，他可以直接讓字...
       </p>
     </article>
   </a>
@@ -286,11 +249,7 @@ PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成
 name = &amp;#x27;Sky&amp;#x27;
 print(f&amp;#x27;My name is {name}.&amp;#x27;)
 # &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的開始，右大括號則是標示出了這個欄位的結束。
-Replacement field  取代欄位在這個欄位中，基本上可以放入任何 Python表示式，甚至包含 lambda 函式：
-myNumber = 5
-print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a 
-{(lambda n: &amp;quot;Lucky&amp;quot...
+有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F...
       </p>
     </article>
   </a>
@@ -328,10 +287,7 @@ print(f&amp;#x27;&amp;#x27;&amp;#x27;My number is a
         這是個用來測試的文章。Markdown: SyntaxOverviewPhilosophyMarkdown is intended to be as easy-to-read and easy-to-write as is feasible.
 Readability, however, is emphasized above all else. A Markdown-formatted
 document should be publishable as-is, as plain text, without looking
-like it&#39;s been marked up with tags or formatting instructions. While
-Markdown&#39;s syntax has been influenced by several existing text-to-HTML
-filters -- including Setext, atx, Textile, reStructuredText,
-Grutatext, and EtText -- the sin...
+like it&#39;s been marked up with tag...
       </p>
     </article>
   </a>

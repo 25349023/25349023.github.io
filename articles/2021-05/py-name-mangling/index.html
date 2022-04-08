@@ -126,7 +126,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[Python] Name Mangling 的大範圍攻擊</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[Python] Name Mangling 的大範圍攻擊</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -135,8 +135,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <p>早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <p>早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。</p>
 <h1 id="name-mangling-0">Name Mangling</h1><p>在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 <code>__spam</code>），這個屬性的名字最後就會被重組成 <code>_Cls__spam</code> 這樣的形式，這項技術稱作 <strong>Name Mangling</strong>，提供了類似其他語言的私用屬性。</p>
 <p>但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。</p>
 <pre class="line-numbers"><code class="language-python">class MyClass:
@@ -191,8 +193,8 @@ m.get_data()  # 101</code></pre>
 　　不知道有沒有人發現前兩篇歌詞翻譯的作者欄位裡並不是我的名字XD<br>
 　　話說上一篇（Answer）的搜尋排名跟次數大幅上升中，目前已經擠到搜尋結果的前三了OAO，有點受寵若驚，我是不是該轉職了（誤）</p>
 
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -204,7 +206,7 @@ m.get_data()  # 101</code></pre>
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/py-name-mangling"; this.page.url = "https://25349023.github.io/articles/2021-05/py-name-mangling/"; };
@@ -220,7 +222,7 @@ m.get_data()  # 101</code></pre>
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -241,6 +243,7 @@ m.get_data()  # 101</code></pre>
     
   </section>
 
+  </div>
 
     </article>
   </main>

@@ -156,7 +156,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i>[Python 3.10] 比 switch 更強大：Structural Pattern Matching</h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[Python 3.10] 比 switch 更強大：Structural Pattern Matching</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -165,8 +165,10 @@
     </div>
   </section>
 
-  <section class="post-content">
-    <p>幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。</p>
+
+  <div class="article-wrapper">
+    <section class="post-content">
+      <p>幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。</p>
 <p>我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。<br>
 那我們就開始吧！</p>
 <h1 id="pep-634-structural-pattern-matching-0">PEP 634: Structural Pattern Matching</h1><p>這個功能最早是由 <a href="https://www.python.org/dev/peps/pep-0622/">PEP 622</a> 所提出，後來經過討論以及修改，整理成了 <a href="https://www.python.org/dev/peps/pep-0634/">PEP 634</a>，並成為了 Python 3.10 中的一項新功能。</p>
@@ -353,8 +355,8 @@ check(&#x27;ls -la ./mydir&#x27;)
 　　原本只是想簡單介紹的，結果一不小心就寫了這麼多（笑）<br>
 　　另外雖然我有說要寫第二篇，但拖到沒空寫的可能性也滿高的XD</p>
 <div class="admonition admonition-info"><p>後篇已經發布啦！請往<strong><a href="/articles/2021-06/py-structural-pattern-matching-in-depth/">這邊</a></strong>走。</p></div>
-  </section>
-  
+    </section>
+    
   
     <ul class="tags">
       <li>
@@ -371,7 +373,7 @@ check(&#x27;ls -la ./mydir&#x27;)
     </ul>
   
 
-  <div class="comments">
+    <div class="comments">
 <div id="disqus_thread"></div>
 <script>
   var disqus_config = function() { this.page.identifier = "/articles/py-structural-pattern-matching"; this.page.url = "https://25349023.github.io/articles/2021-03/py-structural-pattern-matching/"; };
@@ -387,7 +389,7 @@ check(&#x27;ls -la ./mydir&#x27;)
     rel="nofollow">comments powered by Disqus.</a>
 </noscript>
 </div>
-  
+    
   
   <section class="adjacent-posts">
     
@@ -408,6 +410,7 @@ check(&#x27;ls -la ./mydir&#x27;)
     
   </section>
 
+  </div>
 
     </article>
   </main>

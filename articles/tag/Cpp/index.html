@@ -122,15 +122,7 @@ C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, 
 bool visited[3] = {false};
 string arrangement[3];
 
-void dfs(int layer){
-    if (layer == 3){
-        for (int i = 0; i &amp;lt; 3; i++){
-            cout &amp;lt;&amp;lt; arrangement[i] &amp;lt;&amp;lt; &amp;quot;\t&amp;quot;;
-        }
-        cout &amp;lt;&amp;lt; endl;
-        return;
-    }
-    for (in...
+void dfs(int layer)...
       </p>
     </article>
   </a>
@@ -150,13 +142,7 @@ void dfs(int layer){
 由 const char* 轉成 char*有時候可能在將字串傳入函式時，會出現以下錯誤：
 error: invalid conversion from &amp;#x27;const char*&amp;#x27; to &amp;#x27;char*&amp;#x27;
 note: expected &amp;#x27;char *&amp;#x27; but argument is of type &amp;#x27;const char *&amp;#x27;
-這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：
-
-直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
-用 const_cast&amp;lt;char*&amp;gt;(cptr)，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
-使用上一篇提到的 strcpy()，但小心緩衝區覆蓋，或是使用到不知道指到什麼的指標。
-
-下面這裡提供 2. 和 ...
+這是因為 const char* 沒辦法自動轉換成 char*，那麼基本上是沒救了啦，不過有一...
       </p>
     </article>
   </a>
