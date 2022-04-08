@@ -2558,12 +2558,23 @@ aside nav > ul .collapsible-category ul a {
 }
 .postpage main article .article-wrapper {
   max-width: 1080px;
+  padding-right: 4rem;
+}
+@media (max-width: 1296px) {
+  .postpage main article .article-wrapper {
+    padding-right: 0;
+  }
 }
 @media (max-width: 1296px) {
   .postpage main article {
     margin-left: 0;
     margin-top: 2rem;
     flex-basis: 960px;
+  }
+}
+@media (max-width: 1192px) {
+  .postpage main article {
+    margin-right: 0;
   }
 }
 @media (max-width: 1080px) {
@@ -2669,12 +2680,17 @@ aside nav > ul .collapsible-category ul a {
 }
 @media (max-width: 824px) {
   .postpage main article .meta-data {
-    margin: 0.6rem 0 0.3rem;
+    margin: 0.6rem 0 0.3rem 2rem;
   }
 }
 @media (max-width: 668px) {
   .postpage main article .meta-data {
     font-size: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .postpage main article .meta-data {
+    margin-left: 0;
   }
 }
 .postpage main article .meta-data i {
