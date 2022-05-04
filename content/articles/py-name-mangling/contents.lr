@@ -23,7 +23,7 @@ print(m._MyClass__bar)  # 1
 
 但其實，Name Mangling 有個鮮為人知的~~陰謀~~...
 
-## 哪些東西會被 Mangling？
+## 哪些東西會被 Mangled？
 
 「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 `__bar` 會是重組的目標，但其實，還有一些**東西**也是。
 
@@ -38,18 +38,18 @@ print(m._MyClass__bar)  # 1
 ```python,=
 class MyClass:
     def hello(self):
-        __foo = 101  # this will be mangling
+        __foo = 101  # this will be mangled
         return _MyClass__foo
     
     def __print(self):
-        print("this will be mangling, too")
+        print("this will be mangled, too")
 
-    __cls_attr = 'another identifier that will be mangling'
+    __cls_attr = 'another identifier that will be mangled'
 
 m = MyClass()
 print(m.hello())  # 101
-m._MyClass__print()  # this will be mangling, too
-print(MyClass._MyClass__cls_attr)  # another identifier that will be mangling
+m._MyClass__print()  # this will be mangled, too
+print(MyClass._MyClass__cls_attr)  # another identifier that will be mangled
 ```
 
 上例中列出了會被名稱重組的三種可能情況，其中比較有趣的是 `hello` 方法中的 `__foo`，在原始方法內文中，我們可以同時使用兩種名稱來存取他，分別是 `__foo` 和 mangling 後的 `_MyClass__foo`。
