@@ -109,7 +109,7 @@
           <li><a href="#name-mangling-0">Name Mangling</a>
             <ul>
         
-          <li><a href="#na-xie-dong-xi-hui-bei-mangling-1">哪些東西會被 Mangling？</a></li>
+          <li><a href="#na-xie-dong-xi-hui-bei-mangled-1">哪些東西會被 Mangled？</a></li>
         
       
         
@@ -148,7 +148,7 @@
 m = MyClass()
 print(m._MyClass__bar)  # 1</code></pre>
 <p>但其實，Name Mangling 有個鮮為人知的<del>陰謀</del>...</p>
-<h2 id="na-xie-dong-xi-hui-bei-mangling-1">哪些東西會被 Mangling？</h2><p>「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 <code>__bar</code> 會是重組的目標，但其實，還有一些<strong>東西</strong>也是。</p>
+<h2 id="na-xie-dong-xi-hui-bei-mangled-1">哪些東西會被 Mangled？</h2><p>「這話是什麼意思？不就是兩個底線開頭的屬性嗎？」看到標題後，有些人應該會這麼問。的確，像上例的 <code>__bar</code> 會是重組的目標，但其實，還有一些<strong>東西</strong>也是。</p>
 <p>根據 Python 官方文件表示：</p>
 <blockquote><p>When an identifier that textually occurs in a class definition <strong>begins with two or more underscore characters and does not end in two or more underscores</strong>, it is considered a private name of that class.  ...  This transformation is <strong>independent of the syntactical context in which the identifier is used</strong>.</p>
 </blockquote>
@@ -156,18 +156,18 @@ print(m._MyClass__bar)  # 1</code></pre>
 <p>舉例來說：</p>
 <pre class="line-numbers"><code class="language-python">class MyClass:
     def hello(self):
-        __foo = 101  # this will be mangling
+        __foo = 101  # this will be mangled
         return _MyClass__foo
 
     def __print(self):
-        print(&quot;this will be mangling, too&quot;)
+        print(&quot;this will be mangled, too&quot;)
 
-    __cls_attr = &#x27;another identifier that will be mangling&#x27;
+    __cls_attr = &#x27;another identifier that will be mangled&#x27;
 
 m = MyClass()
 print(m.hello())  # 101
-m._MyClass__print()  # this will be mangling, too
-print(MyClass._MyClass__cls_attr)  # another identifier that will be mangling</code></pre>
+m._MyClass__print()  # this will be mangled, too
+print(MyClass._MyClass__cls_attr)  # another identifier that will be mangled</code></pre>
 <p>上例中列出了會被名稱重組的三種可能情況，其中比較有趣的是 <code>hello</code> 方法中的 <code>__foo</code>，在原始方法內文中，我們可以同時使用兩種名稱來存取他，分別是 <code>__foo</code> 和 mangling 後的 <code>_MyClass__foo</code>。</p>
 <h2 id="na-xie-bu-hui-bei-zhong-zu-de-2">那些不會被重組的</h2><p>前面的引文也有提到，被重組的名稱必須是個 identifier，因此單純的<strong>字串</strong>內出現 <code>__foo</code> 這樣的文字並不會被替換，不過這會有什麼問題嗎？</p>
 <p>有時候我們會使用 <code>__dict__</code> 或其他函式來存取實例的屬性，而如果目標屬性會被 mangling 所影響，那麼我們對 <code>__dict__</code> 所使用的鍵或傳入其他函式的引數就必須是已經重組過的名字：</p>
