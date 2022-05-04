@@ -115,12 +115,7 @@
         <time>2021 - 06 - 25</time>
       </div>
       <p class="preview">
-        還沒看過上一篇的朋友請往這邊走。沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，我好棒。
-這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。
-那就直接進入我們的主題吧！
-PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。
-就像序列是使用 [] 或 () 來比對，那映射當然就是使用 {} 來比對啦。
-但要特別注意的是，映射物...
+        還沒看過上一篇的朋友請往這邊走。沒想到我那麼快就把 Structural Pattern Matching 的第二篇趕出來了，我好棒。 這一篇會把上次遺漏的細節都補上，特別是 Structural Pattern Matching 背後的運作機制。 那就直接進入我們的主題吧！ PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇已經看過如何比對序列類型的容器了，這次要介紹的是映射（也就是 dict 那類的）類型的物件要如何比對。 就像序列是使用 [] 或 () 來比對，那映射當然就是使用 {} 來比對啦。 但要特別注意的是，映射物...
       </p>
     </article>
   </a>
@@ -135,10 +130,7 @@ PEP 634: Structural Pattern Matching比對映射（Mapping）我們在前一篇�
         <time>2021 - 05 - 21</time>
       </div>
       <p class="preview">
-        早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。
-Name Mangling在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 __spam），這個屬性的名字最後就會被重組成 _Cls__spam 這樣的形式，這項技術稱作 Name Mangling，提供了類似其他語言的私用屬性。
-但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。
-class MyCla...
+        早安，有段時間沒見了，而這一篇文只是確認生存用的，所以並不會太長。 Name Mangling在 Python 中撰寫 class 時，只要在屬性名字的前面加上兩個底線（如 __spam），這個屬性的名字最後就會被重組成 _Cls__spam 這樣的形式，這項技術稱作 Name Mangling，提供了類似其他語言的私用屬性。 但要注意的是，就如前面所提到的，類別外部的實例依舊可用重組後的名稱來存取該屬性，所以這並不能做為防止有心人士修改重要資料的方法；事實上，Name Mangling 的存在是為了避免外界對特定屬性的意外存取，或不小心覆寫了父類別的屬性、方法。 class MyCla...
       </p>
     </article>
   </a>
@@ -153,10 +145,7 @@ class MyCla...
         <time>2021 - 03 - 12</time>
       </div>
       <p class="preview">
-        幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。
-我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。
-那我們就開始吧！
-PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 6...
+        幾天前無意間在推特上看到前 BDFL 發了一則有關 Python 3.10 的新功能 Pattern Matching 的推，就想說去看看那是什麼東東。結果一看不得了，這功能也太酷了吧！所以決定來寫幾篇文講講 Structural Pattern Matching 到底是何方神聖。 我預計會寫兩篇文章，一篇是粗略地介紹以及快速入門（此篇），而另一篇則會深入地談談 Pattern Matching 的語法以及細節等。 那我們就開始吧！ PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出，後來經過討論以及修改，整理成了 PEP 6...
       </p>
     </article>
   </a>
@@ -171,13 +160,7 @@ PEP 634: Structural Pattern Matching這個功能最早是由 PEP 622 所提出�
         <time>2021 - 03 - 10</time>
       </div>
       <p class="preview">
-        在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 *args 和 **kwargs 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。
-函式參數語法基礎預設參數一般的定義方法就不多說了，直接來看有預設值的參數：
-def plus(a, b, c=None):
-    res = a + b + (c if c else 0)
-    return res
-預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。
-但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數...
+        在翻閱 Python 的函式庫時常常會看到定義參數的地方放了 *args 和 **kwargs 這樣的東西，這究竟是什麼呢？讓我們先談談函式參數的定義。 函式參數語法基礎預設參數一般的定義方法就不多說了，直接來看有預設值的參數： def plus(a, b, c=None): res = a + b + (c if c else 0) return res 預設參數的用處通常是實作函式重載用的，可以使一個函式在接受引數時更有彈性，而要注意的語法問題是：預設參數在函式定義時一定要放在非預設參數的後面。 但如果我們想實作無限版的 plus() 函式呢？總不可能一直增加預設參數吧！ 這時候我們...
       </p>
     </article>
   </a>
@@ -192,14 +175,7 @@ def plus(a, b, c=None):
         <time>2021 - 03 - 07</time>
       </div>
       <p class="preview">
-        深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。
-剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！
-蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！
-C++string gesture[3] = {&amp;quot;剪刀&amp;quot;, &amp;quot;石頭&amp;quot;, &amp;quot;布&amp;quot;};
-bool visited[3] = {false};
-string arrangement[3];
-
-void dfs(int layer)...
+        深度優先搜尋（DFS）是樹或圖的一種走訪方式，而我們也可以將他應用在「排列」上。 剪刀、石頭、布！－全部排列現在有三個人：甲、乙、丙在猜拳，已知他們會出完全不同的拳，而你想知道依照甲、乙、丙的順序，他們出拳的排列有哪幾種的話，就可以用 DFS 來算喔！ 蛤？用 DFS？這不是樹的走訪嗎？管他的，先上程式碼！ C++string gesture[3] = {&#34;剪刀&#34;, &#34;石頭&#34;, &#34;布&#34;}; bool visited[3] = {false}; string arrangement[3]; void dfs(int layer){ if (layer == 3){ for (int i =...
       </p>
     </article>
   </a>
@@ -214,12 +190,7 @@ void dfs(int layer)...
         <time>2021 - 03 - 06</time>
       </div>
       <p class="preview">
-        寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！
-變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了：
-x = 1
-就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪：
-print(id(x))  # 94526375507712
-我們可以看到，有一個奇怪的數字被印出來了。而如果我們將...
+        寫過 Python 的人大概都知道，在複製 list 的時候最好不要直接指定，而要使用 copy 函式，但可能有些時候，我們還是會不小心觸發這個黑魔法，所以今天我們要來破解這個魔咒，看看到底背後藏了什麼祕密！ 變數首先我們要來看一下 Python 的變數到底是如何運作的，假設我們輸入了： x = 1 就代表我們把 x 的值指定為 1 了，是嗎？事實上並不是這樣的，而是讓 x 這個變數參考到了 1 這個物件，我們可以用 id() 函式來看看這個物件在記憶體中的位址究竟在哪： print(id(x)) # 94526375507712 我們可以看到，有一個奇怪的數字被印出來了。而如果我們將 ...
       </p>
     </article>
   </a>
@@ -234,12 +205,7 @@ print(id(x))  # 94526375507712
         <time>2021 - 02 - 23</time>
       </div>
       <p class="preview">
-        第一篇技術文章就決定是你了（笑）
-PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧：
-name = &amp;#x27;Sky&amp;#x27;
-print(f&amp;#x27;My name is {name}.&amp;#x27;)
-# &amp;#x27;My name is Sky.&amp;#x27;
-有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F...
+        第一篇技術文章就決定是你了（笑） PEP 498: Formatted string literalsFormatted string literals，我暫時翻譯成格式化字串實字，是 Python 在 3.6 版加入的新特色，這個功能源自於 PEP 中的 498 號提案，而這個特色又被稱作 f-string，讓我們來看看要怎麼使用吧： name = &#39;Sky&#39; print(f&#39;My name is {name}.&#39;) # &#39;My name is Sky.&#39; 有看到單引號前的 f 嗎？那是表示這個字串中會包含需要被取代的部分（F 也可以），然後讓我們看看字串中間的左大括號，這是取代欄位的...
       </p>
     </article>
   </a>
