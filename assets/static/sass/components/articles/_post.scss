@@ -91,7 +91,7 @@
     line-height: 1.5;
 
     @include brk-down($brk-tiny) {
-      max-height: 8rem;
+      max-height: 5rem;
       font-size: 1.1rem;
     }
   }
