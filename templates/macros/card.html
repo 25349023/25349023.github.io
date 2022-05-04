@@ -2,7 +2,7 @@
   <a href="{{ post|url }}" class="card">
     <h3>{{ post.title }}</h3>
     <p class="preview">
-      {{ post.body|striphtmltags|truncate(300, True) }}
+      {{ post.body|striptags|truncate(300, True) }}
     </p>
   </a>
 {% endmacro %}
@@ -33,7 +33,7 @@
         <time>{{ post.pub_date|dateformat('Y - MM - dd') }}</time>
       </div>
       <p class="preview">
-        {{ post.body|striphtmltags|truncate(300, True) }}
+        {{ post.body|striptags|truncate(300, True) }}
       </p>
     </article>
   </a>
