@@ -162,8 +162,8 @@ char *s4 = &quot;hello world&quot;;
 printf(&quot;%s\n&quot;, s4);  // hello world</code></pre>
 <h2 id="guan-yu-0-zi-yuan-1">關於 <code>'\0'</code> 字元</h2><p>說到 C 的字串，絕對不能不提到 <code>\0</code> 這個字元，不要看它有兩個字（<code>\</code> 和 <code>0</code>），其實它是一個單一的字元，就像換行字元 <code>\n</code> 一樣。</p>
 <p>他的功用是：<strong>標記出字串的結束</strong>。看到我們上面輸出中的 s1 字串，我們明明就宣告了 128 個空間，但為什麼輸出結果只有 11 個字元？剩下的去哪了呢？正是被 <code>\0</code> 擋掉了。<code>\0</code> 明確的告訴程式：在我後面的都是垃圾，不要用，因此我們才能正確的輸出。</p>
-<p>但是，我們在初始化的時候並沒有把 <code>\0</code> 寫出來啊？其實是編譯器會幫我們在字串結尾補上 <code>\0</code>，所以基本上我們不用擔心忘記加上 <code>\0</code> 就會世界毀滅之類的（並不會。  另外，<code>\0</code> 的 ASCII 值正好是 0。</p>
-<p>我們可以利用 sizeof 來驗證 '\0' 的存在：</p>
+<p>但是，我們在初始化的時候並沒有把 <code>\0</code> 寫出來啊？其實是編譯器會幫我們在字串結尾補上 <code>\0</code>，所以基本上我們不用擔心忘記加上 <code>\0</code> 就會世界毀滅之類的（並不會）。  另外，<code>\0</code> 的 ASCII 值正好是 0。</p>
+<p>我們可以利用 sizeof 來驗證 <code>\0</code> 的存在：</p>
 <pre><code class="language-c">char str[] = &quot;hello world&quot;;
 printf(&quot;%d\n&quot;, sizeof str);  // 12</code></pre>
 <p>可以看到，str 本身只有 11 個字元，但是佔用的空間是 12 個 byte，證實了有一個看不到的字元被放入了 str。</p>
@@ -178,8 +178,8 @@ scanf(&quot;%s&quot;, s3);
 printf(&quot;%s\n&quot;, s3);</code></pre>
 <p>這裡要注意的有幾點：首先是輸入只有兩種選擇，至於為什麼，多看一下應該很容易理解；另外就是在對字串使用 <code>scanf()</code> 時，後面的引數不用加 <code>&amp;</code>，原因是：</p>
 <ol>
-<li>s1 代表 s1[0] 的位址</li>
-<li>因為 s3 指向 s2[0]，所以 s3 本身儲存了 s2[0] 的位址</li>
+<li><code>s1</code> 代表 <code>s1[0]</code> 的位址</li>
+<li>因為 <code>s3</code> 指向 <code>s2[0]</code>，所以 <code>s3</code> 本身儲存了 <code>s2[0]</code> 的位址</li>
 </ol>
 <p>最後要注意的是：<code>scanf()</code> 讀字串時遇到空格就會斷開，而如果有剩下的部分，會被留在緩衝區裡等待下一次的 <code>scanf()</code>。另外，<code>scanf()</code> 也會在讀入的字串後補上 <code>\0</code>。</p>
 <p>如果想要連同空格一起吃入字串的話，可以這麼寫：</p>
