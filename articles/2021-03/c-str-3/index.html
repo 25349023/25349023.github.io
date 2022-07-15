@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C] 每天來點字串用法 (3) － from const char* to char* - skyblog</title>
+  <title>[C/C++] 每天來點字串用法 (3) － const char* to char* - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -117,7 +117,7 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i><span>[C] 每天來點字串用法 (3) － from const char* to char*</span></h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[C/C++] 每天來點字串用法 (3) － const char* to char*</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
@@ -138,7 +138,7 @@ note: expected &#x27;char *&#x27; but argument is of type &#x27;const char *&#x2
 <ol>
 <li>直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。</li>
 <li>用 <code>const_cast&lt;char*&gt;(cptr)</code>，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。</li>
-<li>使用上一篇提到的 <code>strcpy()</code>，但小心<strong>緩衝區覆蓋</strong>，或是使用到不知道指到什麼的指標。</li>
+<li>使用上一篇提到的 <code>strcpy()</code> 複製出一份新的字串，但小心<strong>緩衝區溢位</strong>，或是使用到不知道指到什麼的指標。</li>
 </ol>
 <p>下面這裡提供 2. 和 3. 的使用範例：</p>
 <pre class="line-numbers"><code class="language-c">#include &lt;iostream&gt;
@@ -154,8 +154,9 @@ int main(){
     char *ptr1, *ptr2 = s;
     // ptr1 = str.c_str();   error: c_str() 回傳 const char*
     ptr1 = const_cast&lt;char*&gt;(str.c_str());
-    ptr1[2] = &#x27;r&#x27;;  // undefined behavior
+    ptr1[2] = &#x27;r&#x27;;  // undefined behavior!!
     cout &lt;&lt; &quot;ptr1: &quot; &lt;&lt; ptr1 &lt;&lt; endl;
+
     strcpy(ptr2, str.c_str());
     ptr2[3] = &#x27;t&#x27;;
     cout &lt;&lt; &quot;ptr2: &quot; &lt;&lt; ptr2 &lt;&lt; endl;

@@ -149,7 +149,7 @@
 char *strrchr( const char *str, int ch );</code></pre>
 <p>先傳入一個字串 str，再傳入一個字元 ch（雖然宣告裡它的型態是 <code>int</code>，但 <code>char</code> 本來就是用 ASCII 碼存的，所以傳入後會被當成整數來使用），如果有在 str 裡找到 ch，回傳<strong>第一個</strong> ch 的所在位址；如果找不到，回傳 <code>NULL</code>。</p>
 <p>而這兩個函式的差別在於：<code>strchr()</code> 是從前面開始找 ch，而 <code>strrchr()</code> 則是從後面開始找。</p>
-<p>這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三...個的話，要從「回傳的位址 + 1」開始找。</p>
+<p>這兩個函式還滿簡單的，比較需要注意的地方是：由於回傳的是第一個 ch 出現的地方，所以如果要繼續找第二、三、... 個的話，要從「回傳的位址 + 1」開始找。</p>
 <p>另外，如果你想找 <code>\0</code> 這個字元的話也是可以的，反正一個字串一定會有一個 <code>\0</code> 嘛。</p>
 <p>我們可以看看下面的範例：給定一個 DNA 序列，把其中的 <code>T</code> 全部換成 <code>U</code>，使其成為合法的 RNA 序列。（轉錄什麼的不重要啦 XD）</p>
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;

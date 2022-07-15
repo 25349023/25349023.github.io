@@ -167,16 +167,22 @@ char s[8] = &quot;Hi 1234&quot;;</code></pre>
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
-int main(void){
+int main(void) {
     int i = 5;
     char s[8] = &quot;Hi 1234&quot;;
-    printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);  // i: 0028ff1c, s: 0028ff14
+    printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);
+
     strcpy(s, &quot;hello sky&quot;);
-    printf(&quot;value of s: %s\nvalue of i: %d\n&quot;, s, i);  // s: hello sky, : 121
+    printf(&quot;value of s: %s\nvalue of i: %d\n&quot;, s, i);
 
     return 0;
 }</code></pre>
-<p>為了解決這樣的問題，我們可以改用 <code>strncpy()</code>，他比 <code>strcpy()</code> 多了一個參數：count，用來控制最多複製幾個字元，而它一樣會回傳 dest 指向的字串。這裡也有些地方要注意：</p>
+<p>參考輸出：</p>
+<pre><code class="language-text">address of i: 000000000061FE1C
+address of s: 000000000061FE14
+value of s: hello sky
+value of i: 121</code></pre>
+<div class="admonition admonition-note"><p>使用不同的編譯器可能會有不同的結果，這裡筆者用的是 gcc 8.1.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)。</p></div><p>為了解決這樣的問題，我們可以改用 <code>strncpy()</code>，他比 <code>strcpy()</code> 多了一個參數：count，用來控制最多複製幾個字元，而它一樣會回傳 dest 指向的字串。這裡也有些地方要注意：</p>
 <ol>
 <li>如果 src 字元數（含 <code>\0</code>）比 count 少，會把剩下未滿 count 的部分通通補上 <code>\0</code></li>
 <li>如果 src 字元數（含 <code>\0</code>）比 count 多，他<strong>不會</strong>幫你補 <code>\0</code>，而是要自己補</li>
@@ -185,17 +191,24 @@ int main(void){
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
-int main(void){
+int main(void) {
     int i = 67;  // ASCII 的 &#x27;C&#x27;
     char s[8] = &quot;Hi 1234&quot;;
     printf(&quot;address of i: %p\naddress of s: %p\n&quot;, &amp;i, s);
+
     strncpy(s, &quot;hello sky&quot;, 8);
-    printf(&quot;(1) value of s: %s\nvalue of i: %d\n&quot;, s, i);  // s: hello skC, i: 67
+    printf(&quot;value of i: %d\n(1) value of s: %s\n&quot;, i, s);
     s[7] = &#x27;\0&#x27;;  // 自己補 &#x27;\0&#x27;
-    printf(&quot;(2) value of s: %s\n&quot;, s);  //  s: hello s
+    printf(&quot;(2) value of s: %s\n&quot;, s);
 
     return 0;
 }</code></pre>
+<p>參考輸出：</p>
+<pre><code class="language-text">address of i: 000000000061FE1C
+address of s: 000000000061FE14
+value of i: 67
+(1) value of s: hello skC
+(2) value of s: hello s</code></pre>
 <h2 id="undefined-behavior-1">Undefined Behavior</h2><p>在使用這兩個函式時，可能會造成 undefined behavior，以下列舉可能的情況：</p>
 <h3 id="strcpy-2"><code>strcpy</code></h3><ol>
 <li>緩衝區溢位（其實是 dest 不夠長）</li>

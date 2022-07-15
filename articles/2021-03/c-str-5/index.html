@@ -189,7 +189,7 @@ int main(){
 <li>如果 dest 或是 src 指向的字串沒有以 <code>\0</code> 結尾</li>
 </ol>
 <h3 id="strncat-3"><code>strncat</code></h3><ol>
-<li>dest 不夠長</li>
+<li>dest 不夠長（包含最後多放的 <code>\0</code>）</li>
 <li>dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i></li>
 <li>如果 src 不是指向一個字串</li>
 <li>如果 dest 指向的字串沒有以 <code>\0</code> 結尾</li>
