@@ -1,4 +1,4 @@
-title: [C] 每天來點字串用法 (3) － from const char* to char*
+title: [C/C++] 每天來點字串用法 (3) － const char* to char*
 ---
 author: Sky
 ---
@@ -18,7 +18,7 @@ note: expected 'char *' but argument is of type 'const char *'
 
 1. 直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。
 2. 用 `const_cast<char*>(cptr)`，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。
-3. 使用上一篇提到的 `strcpy()`，但小心**緩衝區覆蓋**，或是使用到不知道指到什麼的指標。
+3. 使用上一篇提到的 `strcpy()` 複製出一份新的字串，但小心**緩衝區溢位**，或是使用到不知道指到什麼的指標。
 
 下面這裡提供 2. 和 3. 的使用範例：
 ```c,=
@@ -35,8 +35,9 @@ int main(){
     char *ptr1, *ptr2 = s;
     // ptr1 = str.c_str();   error: c_str() 回傳 const char*
     ptr1 = const_cast<char*>(str.c_str());
-    ptr1[2] = 'r';  // undefined behavior
+    ptr1[2] = 'r';  // undefined behavior!!
     cout << "ptr1: " << ptr1 << endl;
+    
     strcpy(ptr2, str.c_str());
     ptr2[3] = 't';
     cout << "ptr2: " << ptr2 << endl;

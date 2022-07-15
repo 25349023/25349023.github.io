@@ -69,7 +69,7 @@ int main(){
 
 ### `strncat`
 
-1. dest 不夠長
+1. dest 不夠長（包含最後多放的 `\0`）
 2. dest 和 src 有重疊的部分 <i class="fas fa-sticky-note"></i>
 3. 如果 src 不是指向一個字串
 4. 如果 dest 指向的字串沒有以 `\0` 結尾

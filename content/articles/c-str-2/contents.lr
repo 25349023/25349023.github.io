@@ -41,16 +41,27 @@ strcpy(s, "hello sky");
 #include <stdio.h>
 #include <string.h>
 
-int main(void){
+int main(void) {
     int i = 5;
     char s[8] = "Hi 1234";
-    printf("address of i: %p\naddress of s: %p\n", &i, s);  // i: 0028ff1c, s: 0028ff14
+    printf("address of i: %p\naddress of s: %p\n", &i, s);
+    
     strcpy(s, "hello sky");
-    printf("value of s: %s\nvalue of i: %d\n", s, i);  // s: hello sky, : 121
+    printf("value of s: %s\nvalue of i: %d\n", s, i);
 
     return 0;
 }
 ```
+
+參考輸出：
+```text
+address of i: 000000000061FE1C
+address of s: 000000000061FE14
+value of s: hello sky
+value of i: 121
+```
+
+! 使用不同的編譯器可能會有不同的結果，這裡筆者用的是 gcc 8.1.0 (x86_64-posix-seh-rev0, Built by MinGW-W64 project)。
 
 為了解決這樣的問題，我們可以改用 `strncpy()`，他比 `strcpy()` 多了一個參數：count，用來控制最多複製幾個字元，而它一樣會回傳 dest 指向的字串。這裡也有些地方要注意：
 1. 如果 src 字元數（含 `\0`）比 count 少，會把剩下未滿 count 的部分通通補上 `\0`
@@ -61,17 +72,27 @@ int main(void){
 #include <stdio.h>
 #include <string.h>
 
-int main(void){
+int main(void) {
     int i = 67;  // ASCII 的 'C'
     char s[8] = "Hi 1234";
     printf("address of i: %p\naddress of s: %p\n", &i, s);
+    
     strncpy(s, "hello sky", 8);
-    printf("(1) value of s: %s\nvalue of i: %d\n", s, i);  // s: hello skC, i: 67
+    printf("value of i: %d\n(1) value of s: %s\n", i, s);
     s[7] = '\0';  // 自己補 '\0'
-    printf("(2) value of s: %s\n", s);  //  s: hello s
+    printf("(2) value of s: %s\n", s);
 
     return 0;
 }
+```
+
+參考輸出：
+```text
+address of i: 000000000061FE1C
+address of s: 000000000061FE14
+value of i: 67
+(1) value of s: hello skC
+(2) value of s: hello s
 ```
 
 ## Undefined Behavior
