@@ -18,7 +18,7 @@ class ImageResizeMixin:
             style_str += f'height="{match[3]}" '
 
         base_img_tag = super().image(match[1], title, text)
-        base_img_tag = base_img_tag[:5] + style_str + base_img_tag[5:]
+        base_img_tag = base_img_tag[:-1] + style_str + base_img_tag[-1:]
         return base_img_tag
 
 
