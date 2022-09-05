@@ -1,6 +1,6 @@
-from collections import namedtuple
-from html import escape
 import re
+from collections import namedtuple
+
 from lektor.pluginsystem import Plugin
 
 # group 1: color of the text, group 2: the content

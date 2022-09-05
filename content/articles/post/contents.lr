@@ -111,9 +111,9 @@ Quote Level from the Text menu.
 
 ### Images
 
-![image](/static/images/peashooter.jpg)
+![image](/static/images/peashooter.jpg =256x256)
 
-![image 2](/static/images/peashooter2.jpg)
+![image 2](/static/images/peashooter2.jpg =400x)
 
 ### Lists
 
@@ -303,11 +303,11 @@ Use 1 ~ 4 `!` to create a admonition block.
 
 ! Hello Note
 
-!! Hello Info
+!! Hello Tip
 
-!!! Hello Tip
+!!! Hello Warning
 
-!!!! Hello Warning
+!!!! Hello Danger
 
 ### Code
 
