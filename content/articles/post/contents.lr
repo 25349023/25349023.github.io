@@ -330,13 +330,13 @@ Use the `printf()` function.
 
 ## Table Elements
 
-A   | B     | C
-----|-------|-----
-asd | qwe   | zxc
-asd | zxc asd asd asdas das dasda sdas das   | zxc asd asd asdas das dasda sdas das
-asd | qwe   | zxc
-asd | qwe   | zxc
-asd | qwe   | zxc
+A   | B     | C   | D
+----|-------|-----|-----
+asd | qwe   | zxc | adf wer
+asd | zxc asd asd asdas das dasda sdas das   | zxc asd asd asdas das dasda sdas das | ewaewf as
+asd | qwe   | zxc | wqwr3t43
+asd | qwe   | zxc | zxcv
+asd | qwe   | zxc | 1235 34
 
 ## Math Supports
 

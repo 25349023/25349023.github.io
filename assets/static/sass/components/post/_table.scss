@@ -23,6 +23,10 @@
 
       tr:hover td {
         background-color: rgba($postpage-table-td-color, 0.4);
+
+        &:hover {
+          background-color: rgba($postpage-table-td-color, 0.6);
+        }
       }
     }
   }
