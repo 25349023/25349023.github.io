@@ -2205,6 +2205,9 @@ aside nav > ul .collapsible-category ul a {
 .postpage article .post-content table tbody tr:hover td {
   background-color: rgba(182, 212, 236, 0.4);
 }
+.postpage article .post-content table tbody tr:hover td:hover {
+  background-color: rgba(182, 212, 236, 0.6);
+}
 
 .portfolio .banner {
   height: 40vh;
