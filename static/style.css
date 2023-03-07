@@ -1298,11 +1298,14 @@ aside nav > ul .collapsible-category ul a {
     content: "GitHub";
   }
 }
+.home .content .about .card.skill-card {
+  padding: 1.2rem 1.4rem 1.4rem;
+}
 .home .content .about .card.skill-card .preview {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 3rem;
-  padding: 0 1rem;
+  grid-auto-rows: 1fr;
+  padding: 0 0.5rem;
 }
 .home .content .about .card.skill-card .preview > span {
   display: flex;
