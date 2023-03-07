@@ -13,4 +13,4 @@ jobs:
       - run: pip install "Flask<2"
       - run: pip install Lektor
       - run: lektor build
-      - run: lektor deploy ghpages
+      - run: lektor deploy ghpages --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
