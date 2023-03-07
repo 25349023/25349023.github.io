@@ -1,0 +1,16 @@
+name: deploy-ghpage
+run-name: building lektor pages
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install "Flask<2"
+      - run: pip install Lektor
+      - run: lektor build
+      - run: lektor deploy ghpages
