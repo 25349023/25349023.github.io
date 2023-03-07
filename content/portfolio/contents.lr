@@ -11,15 +11,15 @@ body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學�
 ----
 class: featured
 #### project ####
-name: skyblog
+name: NTHU CCXP Decaptcha
 ----
-image: skyblog.png
+image: ccxp_decaptcha.png
 ----
-url: https://25349023.github.io/
+url: https://github.com/25349023/nthu-ccxp-captcha
 ----
-body: 從無到有一手打造的部落格
+body: 自動填寫 NTHU 校務系統之驗證碼。
 ----
-class: all
+class: featured
 #### project ####
 name: Be Your Voice
 ----
@@ -30,6 +30,16 @@ url: https://github.com/25349023/Be-Your-Voice
 body: 使用生成對抗網路（DCGAN）依據人們的照片産生對應的聲音。
 ----
 class: featured
+#### project ####
+name: skyblog
+----
+image: skyblog.png
+----
+url: https://25349023.github.io/
+----
+body: 從無到有一手打造的部落格
+----
+class: all
 #### project ####
 name: NTHU CoursInfo
 ----
@@ -49,7 +59,7 @@ url: https://github.com/25349023/BTshooting
 ----
 body: 你能五關全過嗎？
 ----
-class: featured
+class: all
 #### project ####
 name: MathCrash
 ----

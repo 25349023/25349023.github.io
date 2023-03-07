@@ -103,11 +103,13 @@
   }
 
   .card.skill-card {
+    padding: 1.2rem 1.4rem 1.4rem;
+
     .preview {
       display: grid;
       grid-template-columns: repeat(2, minmax(0,  1fr));
-      grid-auto-rows: 3rem;
-      padding: 0 1rem;
+      grid-auto-rows: 1fr;
+      padding: 0 0.5rem;
 
       > span {
         display: flex;
