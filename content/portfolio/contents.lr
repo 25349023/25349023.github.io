@@ -5,7 +5,7 @@ name: ADUDA: Autonomous Driving with Unsupervised Domain Adaptation
 ----
 image: husky-white.png
 ----
-url: https://elsa-lab.github.io/ADUDA/
+url: /ADUDA/
 ----
 body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
 ----
