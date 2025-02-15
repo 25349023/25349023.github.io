@@ -144,7 +144,7 @@
 </li>
 </ol>
 <p>當 <code>strtok</code> 找不到下一個 token，例如已經到底（<code>\0</code>）或字串剩下的部分都是分隔字元，則會回傳 <code>NULL</code>。</p>
-<p>不過為什麼只傳入 <code>NULL</code>，<code>strtok</code> 就會知道要從哪裡繼續呢？其實 <code>strtok</code> 函式使用了<a href="https://github.com/bminor/glibc/blob/1b6f868625403d6b7683af840e87d2b18d5d7731/string/strtok.c#L33">靜態（<code>static</code>）變數</a>來儲存上次分割處的下一個位址，以利在後續呼叫時使用。</p>
+<div class="admonition admonition-note"><p><code>strtok</code> 會直接修改原本的字串，需謹慎使用。</p></div><p>不過為什麼只傳入 <code>NULL</code>，<code>strtok</code> 就會知道要從哪裡繼續呢？其實 <code>strtok</code> 函式使用了<a href="https://github.com/bminor/glibc/blob/1b6f868625403d6b7683af840e87d2b18d5d7731/string/strtok.c#L33">靜態（<code>static</code>）變數</a>來儲存上次分割處的下一個位址，以利在後續呼叫時使用。</p>
 <div class="admonition admonition-tip"><p>每次 <code>strtok</code> 都會修改這個靜態變數，導致這個函式並不是<strong>執行緒安全（thread-safe）</strong>的。</p></div><p>來看看具體的使用範例：</p>
 <pre><code class="language-c=">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
