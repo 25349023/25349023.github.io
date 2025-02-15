@@ -20,7 +20,7 @@ size_t strlen( const char *str );
 ```c,=
 #include <stdio.h>
 
-int main(){
+int main() {
     char s1[16], s2[16];
     char *s3 = s2;
     char s4[] = "happy new year\n";

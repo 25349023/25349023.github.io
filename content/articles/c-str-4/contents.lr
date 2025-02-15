@@ -29,7 +29,7 @@ char *strrchr( const char *str, int ch );
 #include <stdio.h>
 #include <string.h>
 
-int main(){
+int main(void) {
     char s1[16];
     scanf("%s", s1);  // 可以輸入 ATAGCTACTG 看看
     char *ptr = s1;
@@ -67,7 +67,7 @@ char *strstr( const char* str, const char* substr );
 #include <stdio.h>
 #include <string.h>
 
-int main(){
+int main(void) {
     char s1[32];
     scanf("%s", s1);  // ACUGCUAUGCUACAGUG
     char *ptr = strstr(s1, "AUG");

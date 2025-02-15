@@ -28,7 +28,7 @@ note: expected 'char *' but argument is of type 'const char *'
 
 using namespace std;
 
-int main(){
+int main() {
     string str("hello world");
     cout << "(before) str: " << str << endl;
     char s[16];
