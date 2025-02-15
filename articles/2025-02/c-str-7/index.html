@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[C/C++] 每天來點字串用法 (3) － const char* to char* - skyblog</title>
+  <title>[C] 每天來點字串用法 (7) － strtok - skyblog</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
@@ -106,7 +106,7 @@
     <ul class="toc">
       
         
-          <li><a href="#you-const-char-zhuan-cheng-char-0">由 <code>const char*</code> 轉成 <code>char*</code></a></li>
+          <li><a href="#strtok-zi-chuan-fen-ge-0"><code>strtok</code>：字串分割</a></li>
         
       
     </ul>
@@ -117,11 +117,11 @@
       
   
   <section class="info">
-    <h1 class="title"><i class="fas fa-seedling"></i><span>[C/C++] 每天來點字串用法 (3) － const char* to char*</span></h1>
+    <h1 class="title"><i class="fas fa-seedling"></i><span>[C] 每天來點字串用法 (7) － strtok</span></h1>
     <div class="meta-data">
       <span class="author"><i class="fas fa-feather-alt"></i> Sky</span>
       <time class="publish-date">
-        <i class="fas fa-at"></i> 2021 - 03 - 06
+        <i class="fas fa-at"></i> 2025 - 02 - 15
       </time>
     </div>
   </section>
@@ -129,54 +129,74 @@
 
   <div class="article-wrapper">
     <section class="post-content">
-      <p>這次沒有拖到欸d(`･∀･)b（然而三年後拖到了）<br>
-今天帶來的不是函式，而是一個小技巧：</p>
-<h1 id="you-const-char-zhuan-cheng-char-0">由 <code>const char*</code> 轉成 <code>char*</code></h1><p>有時候可能在將字串傳入函式時，會出現以下錯誤：</p>
-<pre><code class="language-text">error: invalid conversion from &#x27;const char*&#x27; to &#x27;char*&#x27;
-note: expected &#x27;char *&#x27; but argument is of type &#x27;const char *&#x27;</code></pre>
-<p>這是因為 <code>const char*</code> 沒辦法自動轉換成 <code>char*</code>，那麼基本上是沒救了啦，不過有一些方法可以繞過編譯器檢查或達到與轉換型別相同的效果：</p>
+      <p>想不到吧，這個部落格居然還活著，而且還會填坑。</p>
+<p>原本以為常用的字串函式都介紹得差不多了，直到最近工作時看到 <code>strtok</code> 才想到，好像還沒介紹過他。</p>
+<h1 id="strtok-zi-chuan-fen-ge-0"><code>strtok</code>：字串分割</h1><p>所屬標頭檔：<code>&lt;string.h&gt;</code><br>
+函式宣告：</p>
+<pre><code class="language-c">char* strtok( char* restrict str, const char* restrict delim );</code></pre>
+<p><code>strtok</code> 的功能是將字串分成一個個的 <strong>token</strong>，也就是字串片段。聽起來好像很簡單，不過 <code>strtok</code> 的運作方式可能會讓人有點意外。</p>
+<p>先說明參數的部分：第一個參數 <code>str</code> 是要被分割的字串，而第二個 <code>delim</code> 則表示要以哪些字元來分割字串，在 <code>delim</code> 裡的所有字元皆會被用於分割 <code>str</code>。</p>
+<p>接著來看看 <code>strtok</code> 的使用方式，<code>strtok</code> 的呼叫分為兩種類型：<strong>初次呼叫</strong>及<strong>後續呼叫</strong>。</p>
 <ol>
-<li>直接修改函式參數的型態定義，但原本函式庫裡的宣告根本不能改。</li>
-<li>用 <code>const_cast&lt;char*&gt;(cptr)</code>，這個雖然可以強制轉換，但若透過轉換後的指標更改常數的值，將會是 undefined behavior。</li>
-<li>使用上一篇提到的 <code>strcpy()</code> 複製出一份新的字串，但小心<strong>緩衝區溢位</strong>，或是使用到不知道指到什麼的指標。</li>
+<li><p><strong>初次呼叫</strong>：以<strong>非 <code>NULL</code></strong> 的字串 <code>str</code> 呼叫 <code>strtok(str, delim)</code>，<code>strtok</code> 會將 <code>str</code> 中第一個遇到的分隔字元替換為 <code>\0</code>，也就是進行<strong>分割</strong>，然後回傳此 token 的指標。</p>
+</li>
+<li><p><strong>後續呼叫</strong>：在初次呼叫之後，我們要改用 <strong><code>NULL</code></strong> 來呼叫 <code>strtok</code>，也就是 <code>strtok(NULL, delim)</code>。這種情況下，<code>strtok</code> 會從上次分割的地方繼續，尋找下一個分隔字元並進行分割，最後將新找到的 token 回傳。</p>
+</li>
 </ol>
-<p>下面這裡提供 2. 和 3. 的使用範例：</p>
-<pre class="line-numbers"><code class="language-c">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;string&gt;
+<p>當 <code>strtok</code> 找不到下一個 token，例如已經到底（<code>\0</code>）或字串剩下的部分都是分隔字元，則會回傳 <code>NULL</code>。</p>
+<p>不過為什麼只傳入 <code>NULL</code>，<code>strtok</code> 就會知道要從哪裡繼續呢？其實 <code>strtok</code> 函式使用了<a href="https://github.com/bminor/glibc/blob/1b6f868625403d6b7683af840e87d2b18d5d7731/string/strtok.c#L33">靜態（<code>static</code>）變數</a>來儲存上次分割處的下一個位址，以利在後續呼叫時使用。</p>
+<div class="admonition admonition-tip"><p>每次 <code>strtok</code> 都會修改這個靜態變數，導致這個函式並不是<strong>執行緒安全（thread-safe）</strong>的。</p></div><p>來看看具體的使用範例：</p>
+<pre><code class="language-c=">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
 
-using namespace std;
+int main(void) {
+    char str[32] = &quot;hello world foo bar span&quot;;
 
-int main() {
-    string str(&quot;hello world&quot;);
-    cout &lt;&lt; &quot;(before) str: &quot; &lt;&lt; str &lt;&lt; endl;
-    char s[16];
-    char *ptr1, *ptr2 = s;
-    // ptr1 = str.c_str();   error: c_str() 回傳 const char*
-    ptr1 = const_cast&lt;char*&gt;(str.c_str());
-    ptr1[2] = &#x27;r&#x27;;  // undefined behavior!!
-    cout &lt;&lt; &quot;ptr1: &quot; &lt;&lt; ptr1 &lt;&lt; endl;
-
-    strcpy(ptr2, str.c_str());
-    ptr2[3] = &#x27;t&#x27;;
-    cout &lt;&lt; &quot;ptr2: &quot; &lt;&lt; ptr2 &lt;&lt; endl;
-    cout &lt;&lt; &quot;(after) str: &quot; &lt;&lt; str &lt;&lt; endl;
+    char *token;
+    token = strtok(str, &quot; &quot;);
+    while (token) {
+        printf(&quot;%s\n&quot;, token);
+        token = strtok(NULL, &quot; &quot;);
+    }
 
     return 0;
 }</code></pre>
-<p>參考輸出：</p>
-<pre><code class="language-text">(before) str: hello world
-ptr1: herlo world
-ptr2: herto world
-(after) str: herlo world</code></pre>
-<p>這裡我們使用 <code>std::string.c_str()</code> 方法來取得 <code>const char*</code>，並依照上面所說的 2. 和 3. 來進行型別間的轉換。但這裡並不保證在每個編譯器之下都會有相同的輸出，因為在行 14 的地方出現了 undefined behavior。</p>
-<div class="admonition admonition-note"><p>筆者使用的編譯器：g++ 7.5.0（Ubuntu 18.04）</p></div><hr>
+<p>細心的讀者們可能會想到，要是字串開頭就是分隔字元會發生什麼事呢？這時候 <code>strtok</code> 會一路向後尋找第一個不是分隔字元的字元，並當作此次 token 的起始位置，若找不到則回傳 <code>NULL</code>。</p>
+<p>另外，若 <code>str</code> 或 <code>delim</code> 不是以 <code>\0</code> 結尾的字串，就會造成 Undefined behavior。</p>
+<p>最後再來看同時有多個分隔字元的例子：</p>
+<pre><code class="language-c=">#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(void) {
+    char str[512] =  // Note: this paragraph is generated by ChatGPT
+        &quot;The deep sea remains one of the most mysterious places on Earth, with vast areas still unexplored by humans. Strange &quot;
+        &quot;creatures, like bioluminescent fish and giant squid, thrive in its cold, dark depths. Scientists believe that &quot;
+        &quot;studying these extreme environments could help us understand life on other planets. As technology advances, we may &quot;
+        &quot;one day uncover the secrets hidden in the ocean&#x27;s abyss.&quot;;
+
+    char *sentence;
+    sentence = strtok(str, &quot;,.&quot;);  // split by , or .
+    while (sentence) {
+        while (isspace(sentence[0])) {  // Skip spaces if any
+            sentence++;
+        }
+        printf(&quot;%s\n&quot;, sentence);
+        sentence = strtok(NULL, &quot;,.&quot;);
+    }
+
+    return 0;
+}</code></pre>
+<hr>
 <p>參考資料：</p>
 <ol>
-<li><a href="https://en.cppreference.com/w/cpp/language/const_cast">cppreference - const_cast</a></li>
-<li><a href="http://windsplife.blogspot.tw/2010/09/cstaticcast-dynamiccast-reinterpretcast.html">[C++] 標準類型轉換</a> 中的 const_cast 部分</li>
-<li>我的腦袋</li>
+<li><a href="https://en.cppreference.com/w/c/string/byte/strtok">cppreference - strtok</a></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strtok.c;h=d0c69afc1ff0e5aad1913870afdcb425865e1921;hb=HEAD">glibc 中 strtok 的實作</a>、<a href="https://github.com/bminor/glibc/blob/master/string/strtok.c">GitHub 上非官方的 mirror</a></li>
+<li>我休息了好幾年的腦袋</li>
 </ol>
+<p>後記：<br>
+　　好久不見，這幾年經歷的事實在是太多了，去年更是從年頭忙到年尾。雖然發了篇新文，但也不代表之後會固定更新就是ㄌ<br>
+　　其實是看到 Google 搜尋後台的報告中，點閱數逐漸下滑，才在想是不是該來救一下的，不過大概也不是發幾篇文就能救得起來XD</p>
 
     </section>
     
@@ -192,11 +212,6 @@ ptr2: herto world
             C - 字串
           </a>
         </li>
-      <li>
-          <a href="/articles/tag/Cpp/">
-            C++
-          </a>
-        </li>
       
     </ul>
   
@@ -204,7 +219,7 @@ ptr2: herto world
     <div class="comments">
 <div id="disqus_thread"></div>
 <script>
-  var disqus_config = function() { this.page.identifier = "/articles/c-str-3"; this.page.url = "https://25349023.github.io/articles/2021-03/c-str-3/"; };
+  var disqus_config = function() { this.page.identifier = "/articles/c-str-7"; this.page.url = "https://25349023.github.io/articles/2025-02/c-str-7/"; };
   (function() {
     var d = document, s = d.createElement('script');
     s.src = '//lecielblog.disqus.com/embed.js';
@@ -221,18 +236,11 @@ ptr2: herto world
   
   <section class="adjacent-posts">
     
-      <div class="next">
-        <span>Next Post</span>
-        <a href="/articles/2021-03/algo-dfs-permutation/">
-          <h3>[演算法] [C++ / Python] 當 DFS 遇上排列 <i class="fas fa-chevron-right"></i></h3>
-        </a>
-      </div>
-    
     
       <div class="prev">
         <span>Prev Post</span>
-        <a href="/articles/2021-03/py-var-ref/">
-          <h3><i class="fas fa-chevron-left"></i> [Python] 關於變數與參考的二三事</h3>
+        <a href="/articles/2023-01/imawoikirunoda-saucydog/">
+          <h3><i class="fas fa-chevron-left"></i> [歌詞翻譯] 現在を生きるのだ。 － Saucy Dog</h3>
         </a>
       </div>
     

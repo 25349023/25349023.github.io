@@ -155,7 +155,7 @@ char *strrchr( const char *str, int ch );</code></pre>
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
-int main(){
+int main(void) {
     char s1[16];
     scanf(&quot;%s&quot;, s1);  // 可以輸入 ATAGCTACTG 看看
     char *ptr = s1;
@@ -182,7 +182,7 @@ int main(){
 <pre class="line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
-int main(){
+int main(void) {
     char s1[32];
     scanf(&quot;%s&quot;, s1);  // ACUGCUAUGCUACAGUG
     char *ptr = strstr(s1, &quot;AUG&quot;);

@@ -163,8 +163,7 @@ long atol( const char *str );</code></pre>
 <pre><code class="language-c=">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
-int main()
-{
+int main(void) {
     const char *str = &quot;  12.34e5trash&quot;;
     int i = atoi(str);
     long l = atol(str);
@@ -175,6 +174,7 @@ int main()
 }</code></pre>
 <p>可以發現 <code>atoi()</code> 和 <code>atol()</code> 都讀到小數點就停下來了，而 <code>atof()</code> 則是讀到後面的 <code>trash</code> 才停止。</p>
 <p>這次的篇幅有點短，原本想放入 <code>strtol()</code> 的，但是怕太長，而且我懶得一次打那麼多東西，所以就作罷了XD。</p>
+<hr>
 <p>參考資料：</p>
 <ol>
 <li><a href="https://en.cppreference.com/w/c/string/byte/atoi">cppreference - atoi、atol</a></li>
