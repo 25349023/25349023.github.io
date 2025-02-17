@@ -1,9 +1,16 @@
 let navToggle = document.getElementById("toggle-navbar");
 let items = document.querySelectorAll("header nav .option");
+let smallView = false;
 
 function hideNavbar() {
     for (let li of items) {
         li.style.display = "none";
+    }
+}
+
+function showNavbar() {
+    for (let li of items) {
+        li.style.removeProperty("display");
     }
 }
 
@@ -12,11 +19,11 @@ navToggle.addEventListener("click", () => {
     if (toHide) {
         setTimeout(hideNavbar, 805);
     } else {
-        for (let li of items) {
-            li.style.removeProperty("display");
-        }
+        showNavbar();
+        setTimeout(hideNavbar, 810);
+        setTimeout(showNavbar, 812);
     }
-    setTimeout(function() {
+    setTimeout(function() {  // takes 800 ms
         for (let li of items) {
             li.classList.toggle("expanded");
         }
@@ -25,19 +32,20 @@ navToggle.addEventListener("click", () => {
 
 window.addEventListener("load", function() {
     if (window.innerWidth <= 668) {
+        smallView = true;
         hideNavbar();
     }
 });
 
 window.addEventListener("resize", function() {
-    if (window.innerWidth <= 668) {
+    if (window.innerWidth <= 668 && !smallView) {
+        smallView = true;
         hideNavbar();
         for (let li of items) {
             li.classList.remove("expanded");
         }
-    } else {
-        for (let li of items) {
-            li.style.removeProperty("display");
-        }
+    } else if (window.innerWidth > 668 && smallView) {
+        smallView = false;
+        showNavbar();
     }
 });
