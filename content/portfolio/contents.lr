@@ -1,6 +1,16 @@
 projects:
 
 #### project ####
+name: Language-Guided Pattern Formation for Swarm Robotics with Multi-Agent Reinforcement Learning
+----
+image: lgpf.png
+----
+url: https://omron-sinicx.github.io/language-guided-pattern-formation/
+----
+body: 本論文提出一個名為 LGPF（語言引導之圖樣形成）的新框架，利用 LLM 將自然語言描述轉換為集群機器人需排列成的圖樣。該系統結合了圖樣形成與多智能強化學習（MARL），使機器人在無需直接通訊的情況下協調行動並避免碰撞。透過模擬與實體實驗驗證，LGPF 能夠準確且安全地生成各種使用者指定的複雜圖樣。
+----
+class: featured
+#### project ####
 name: ADUDA: Autonomous Driving with Unsupervised Domain Adaptation
 ----
 image: husky-white.png
@@ -29,7 +39,7 @@ url: https://github.com/25349023/Be-Your-Voice
 ----
 body: 使用生成對抗網路（DCGAN）依據人們的照片産生對應的聲音。
 ----
-class: featured
+class: all
 #### project ####
 name: skyblog
 ----
