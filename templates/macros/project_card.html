@@ -16,3 +16,22 @@
     </article>
   </a>
 {% endmacro %}
+
+{% macro render_featured_project_card(project, record) %}
+  <a href="{{ project.url }}" class="project-card">
+    <article>
+      {% set img = record.attachments.images.get(project.image) %}
+      {% if img %}
+        <img src="{{ img|url }}" alt="project-image">
+      {% else %}
+        <img src="{{ record.attachments.images.get('default.jpg')|url }}" alt="project-image">
+      {% endif %}
+      <div class="intro">
+        <h3>{{ project.name }}</h3>
+        <p>
+          {{ project.summary }}
+        </p>
+      </div>
+    </article>
+  </a>
+{% endmacro %}

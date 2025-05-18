@@ -7,7 +7,14 @@ image: lgpf.png
 ----
 url: https://omron-sinicx.github.io/language-guided-pattern-formation/
 ----
-body: 本論文提出一個名為 LGPF（語言引導之圖樣形成）的新框架，利用 LLM 將自然語言描述轉換為集群機器人需排列成的圖樣。該系統結合了圖樣形成與多智能強化學習（MARL），使機器人在無需直接通訊的情況下協調行動並避免碰撞。透過模擬與實體實驗驗證，LGPF 能夠準確且安全地生成各種使用者指定的複雜圖樣。
+summary: 本論文提出一個名為 LGPF（語言引導之圖樣形成）的新框架，利用大型語言模型（LLM）將自然語言描述轉換為集群機器人需排列成的圖樣。
+----
+body: 本論文提出一個名為 LGPF（語言引導之圖樣形成）的新框架，利用大型語言模型（LLM）將自然語言描述轉換為集群機器人需排列成的圖樣。該系統結合了圖樣形成與多智能強化學習（MARL），使機器人在無需直接通訊的情況下協調行動並避免碰撞。透過模擬與實體實驗驗證，LGPF 能夠準確且安全地生成各種使用者指定的複雜圖樣。
+----
+tags:
+
+IROS 2024
+Master
 ----
 class: featured
 #### project ####
@@ -17,7 +24,11 @@ image: husky-white.png
 ----
 url: /ADUDA/
 ----
+summary: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
+----
 body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
+----
+tags: 
 ----
 class: featured
 #### project ####
@@ -27,7 +38,11 @@ image: ccxp_decaptcha.png
 ----
 url: https://github.com/25349023/nthu-ccxp-captcha
 ----
-body: 自動填寫 NTHU 校務系統之驗證碼。
+summary: 自動填寫 NTHU 校務系統之驗證碼。
+----
+body: 利用機器學習技術進行光學字元辨識（OCR），自動填寫 NTHU 校務系統之驗證碼。
+----
+tags: 
 ----
 class: featured
 #### project ####
@@ -37,7 +52,11 @@ image: beyourvoice.png
 ----
 url: https://github.com/25349023/Be-Your-Voice
 ----
+summary: 
+----
 body: 使用生成對抗網路（DCGAN）依據人們的照片産生對應的聲音。
+----
+tags: 
 ----
 class: all
 #### project ####
@@ -47,7 +66,11 @@ image: skyblog.png
 ----
 url: https://25349023.github.io/
 ----
+summary: 
+----
 body: 從無到有一手打造的部落格
+----
+tags: 
 ----
 class: all
 #### project ####
@@ -57,7 +80,11 @@ image: nthucoursinfo.png
 ----
 url: https://coursinfo.herokuapp.com/
 ----
+summary: 
+----
 body: NTHU 課程心得交流平台
+----
+tags: 
 ----
 class: all
 #### project ####
@@ -67,7 +94,11 @@ image: btshooting.png
 ----
 url: https://github.com/25349023/BTshooting
 ----
+summary: 
+----
 body: 你能五關全過嗎？
+----
+tags: 
 ----
 class: all
 #### project ####
@@ -77,6 +108,10 @@ image: mathcrash.png
 ----
 url: https://github.com/25349023/MathCrash
 ----
+summary: 
+----
 body: 四則運算 × 卡牌遊戲
+----
+tags: 
 ----
 class: all

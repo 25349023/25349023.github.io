@@ -1,5 +1,5 @@
 {% extends "layout-normal.html" %}
-{% from "macros/project_card.html" import render_project_card %}
+{% from "macros/project_card.html" import render_project_card, render_featured_project_card %}
 {% block title %}Portfolio - skyblog{% endblock %}
 
 {% block banner %}
@@ -13,7 +13,7 @@
       <section class="featured-project">
         {% for project in this.projects.blocks %}
           {% if project.class == 'featured' %}
-            {{ render_project_card(project, this) }}
+            {{ render_featured_project_card(project, this) }}
           {% endif %}
         {% endfor %}
       </section>
