@@ -7,11 +7,18 @@
       {% else %}
         <img src="{{ record.attachments.images.get('default.jpg')|url }}" alt="project-image">
       {% endif %}
-      <div class="intro">
-        <h3>{{ project.name }}</h3>
-        <p>
-          {{ project.body }}
-        </p>
+      <div class="card-content-wrapper">
+        <div class="intro">
+          <h3>{{ project.name }}</h3>
+          <p>
+            {{ project.body }}
+          </p>
+        </div>
+        <div class="tags">
+          {% for tag in ['abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi',] %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
       </div>
     </article>
   </a>
@@ -26,11 +33,18 @@
       {% else %}
         <img src="{{ record.attachments.images.get('default.jpg')|url }}" alt="project-image">
       {% endif %}
-      <div class="intro">
-        <h3>{{ project.name }}</h3>
-        <p>
-          {{ project.summary }}
-        </p>
+      <div class="card-content-wrapper">
+        <div class="intro">
+          <h3>{{ project.name }}</h3>
+          <p>
+            {{ project.summary }}
+          </p>
+        </div>
+        <div class="tags">
+          {% for tag in ['abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi',] %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
       </div>
     </article>
   </a>

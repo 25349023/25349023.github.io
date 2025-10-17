@@ -7,6 +7,11 @@
   &:hover {
     background-color: rgba($portfolio-card-hover-color, 0.65);
     color: $portfolio-color;
+
+    .tags .tag {
+      background-color: $portfolio-color;
+      color: rgba($portfolio-card-hover-color, 0.75);
+    }
   }
 
   @include brk-down($brk-tiny) {
@@ -17,8 +22,17 @@
     }
   }
 
+  .card-content-wrapper {
+    display: flex;
+    flex-flow: column;
+    gap: 0.9rem;
+
+    min-width: 0;
+    min-height: 0;
+    padding: 0.9rem 1.2rem;
+  }
+
   .intro {
-    padding: 0.8rem 1.2rem;
     min-width: 0;
     min-height: 0;
 
@@ -39,24 +53,53 @@
       overflow-wrap: anywhere;
     }
   }
+
+  .tags {
+    flex: 0 0 1.65rem; // 1.65rem = padding (0.25 * 2) + line height (1.15)
+
+    display: flex;
+    gap: 0.8rem;
+    flex-flow: row wrap;
+    overflow: hidden;
+
+    .tag {
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+      background-color: $portfolio-card-tag-bg-color;
+      color: $portfolio-color;
+      font-weight: bold;
+    }
+  }
 }
 
 .portfolio {
   .featured-project .project-card {
+    article {
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+    }
+
     img {
       width: 100%;
       height: 250px;
       object-fit: cover;
     }
 
+    .card-content-wrapper {
+      height: 100%;
+    }
+
     .intro {
+      flex: 1;
+
       h3 {
         margin: 0 0 1rem 0;
         font-size: 1.6rem;
       }
 
       p {
-        max-height: 220px;
+        max-height: 190px;
 
         @include brk-down($brk-medium) {
           max-height: 168px;
@@ -67,7 +110,7 @@
 
   .all-project .project-card {
     flex: 0 0 200px;
-    max-height: 200px;
+    max-height: 300px;
 
     article {
       display: flex;
@@ -95,6 +138,10 @@
         width: 100%;
         height: 180px;
       }
+    }
+
+    .card-content-wrapper {
+      flex: 1;
     }
 
     .intro {
