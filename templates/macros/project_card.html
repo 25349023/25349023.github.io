@@ -15,7 +15,7 @@
           </p>
         </div>
         <div class="tags">
-          {% for tag in ['abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi',] %}
+          {% for tag in project.tags %}
             <span class="tag">{{ tag }}</span>
           {% endfor %}
         </div>
@@ -41,7 +41,7 @@
           </p>
         </div>
         <div class="tags">
-          {% for tag in ['abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi','abc', 'def', 'ghi',] %}
+          {% for tag in project.tags %}
             <span class="tag">{{ tag }}</span>
           {% endfor %}
         </div>

@@ -14,7 +14,8 @@ body: 本論文提出一個名為 LGPF（語言引導之圖樣形成）的新框
 tags:
 
 IROS 2024
-Master
+LLM
+MARL
 ----
 class: featured
 #### project ####
@@ -29,6 +30,10 @@ summary: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中�
 body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
 ----
 tags: 
+Computer Vision
+Self-driving
+Robotics
+UDA
 ----
 class: featured
 #### project ####
@@ -42,7 +47,10 @@ summary: 自動填寫 NTHU 校務系統之驗證碼。
 ----
 body: 利用機器學習技術進行光學字元辨識（OCR），自動填寫 NTHU 校務系統之驗證碼。
 ----
-tags: 
+tags:
+Computer Vision
+OCR
+Browser Extension
 ----
 class: featured
 #### project ####
@@ -57,6 +65,9 @@ summary:
 body: 使用生成對抗網路（DCGAN）依據人們的照片産生對應的聲音。
 ----
 tags: 
+Generative Model
+GAN
+Voice Synthesis
 ----
 class: all
 #### project ####
@@ -71,6 +82,8 @@ summary:
 body: 從無到有一手打造的部落格
 ----
 tags: 
+Web Development
+Lektor
 ----
 class: all
 #### project ####
@@ -85,6 +98,8 @@ summary:
 body: NTHU 課程心得交流平台
 ----
 tags: 
+Web Development
+React
 ----
 class: all
 #### project ####
@@ -99,6 +114,8 @@ summary:
 body: 你能五關全過嗎？
 ----
 tags: 
+Game
+C
 ----
 class: all
 #### project ####
@@ -113,5 +130,7 @@ summary:
 body: 四則運算 × 卡牌遊戲
 ----
 tags: 
+Game
+Lua
 ----
 class: all
