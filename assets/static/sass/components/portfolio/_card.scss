@@ -114,7 +114,7 @@
     }
   }
 
-  .all-project .project-card {
+  .normal-project .project-card {
     flex: 0 0 200px;
     max-height: 300px;
 
@@ -168,47 +168,44 @@
       }
     }
 
-    &:last-child {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  }
 
-      flex-basis: 0;
-      padding: 1rem 2rem;
-      align-self: end;
+  .more-card {
+    text-decoration: none;
+    color: $postpage-ui-color;
+    background-color: rgba($portfolio-card-color, 0.18);
+    transition: all 0.3s;
 
-      //background-color: rgba($portfolio-card-hover-color, 0.5);
-      //color: $portfolio-color;
-      font-size: 1.4rem;
-      font-family: $default-font;
-      line-height: 1.4;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 0.5rem;
 
-      h3 {
-        margin: 0;
-        font-size: 1.2rem;
-      }
+    padding: 0.8rem 0;
 
-      &:hover {
-        background-color: rgba($portfolio-card-hover-color, 0.8);
-      }
+    font-size: 1.4rem;
+    font-family: $default-font;
+    line-height: 1.4;
 
-      @include brk-down($brk-medium) {
-        font-size: 1.3rem;
-      }
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
 
-      @include brk-down($brk-tiny) {
-        flex-basis: 6rem;
-        background-color: unset;
-        border: none;
-        font-size: 1.2rem;
-        color: $portfolio-card-hover-color;
+    .fas {
+      padding-bottom: 1px;
+    }
 
-        &:hover {
-          color: $portfolio-color;
-          background-color: rgba($portfolio-card-hover-color, 0.5);
-        }
-      }
+    &:hover {
+      color: $portfolio-color;
+      background-color: rgba($portfolio-card-hover-color, 0.65);
+    }
+
+    @include brk-down($brk-tiny) {
+      flex-basis: 6rem;
+      background-color: unset;
+      border: none;
+      color: $portfolio-card-hover-color;
     }
   }
 }

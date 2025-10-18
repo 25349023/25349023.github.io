@@ -9,7 +9,7 @@
 {% block main %}
   <main>
     <div class="main-wrapper">
-      <h2>Featured Projects</h2>
+      <h2>Featured Works</h2>
       <section class="featured-project">
         {% for project in this.projects.blocks %}
           {% if project.class == 'featured' %}
@@ -18,18 +18,23 @@
         {% endfor %}
       </section>
 
-      <h2>All Projects</h2>
-      <section class="all-project">
+      <h2>Publications & Research</h2>
+      <section class="normal-project">
         {% for project in this.projects.blocks %}
           {{ render_project_card(project, this) }}
         {% endfor %}
-        <a href="https://github.com/25349023" class="project-card">
-          <h3>
-            更多作品
-            <i class="fas fa-angle-double-right"></i>
-          </h3>
-        </a>
       </section>
+
+      <h2>Other Projects</h2>
+      <section class="normal-project">
+        {% for project in this.projects.blocks %}
+          {{ render_project_card(project, this) }}
+        {% endfor %}
+      </section>
+      <a href="https://github.com/25349023" class="more-card">
+        <h3>Discover More</h3>
+        <i class="fas fa-angle-double-right"></i>
+      </a>
     </div>
   </main>
 {% endblock %}

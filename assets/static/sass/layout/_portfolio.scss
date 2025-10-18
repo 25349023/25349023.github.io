@@ -7,7 +7,7 @@
   }
 
   .main-wrapper {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     min-height: 80vh;
     min-width: 0;
     padding: 2rem 3rem;
@@ -31,10 +31,10 @@
       }
     }
 
-    .featured-project, .all-project {
+    .featured-project, .normal-project {
       display: grid;
       gap: 1.5rem 1rem;
-      padding-bottom: 1rem;
+      padding-bottom: 1.5rem;
     }
 
     .featured-project {
@@ -47,7 +47,7 @@
       }
     }
 
-    .all-project {
+    .normal-project {
       display: flex;
       flex-flow: column;
 
