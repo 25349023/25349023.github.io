@@ -2274,7 +2274,7 @@ aside nav > ul .collapsible-category ul a {
 .portfolio .main-wrapper .project-card .card-content-wrapper {
   display: flex;
   flex-flow: column;
-  gap: 0.9rem;
+  gap: 1rem;
   min-width: 0;
   min-height: 0;
   padding: 0.9rem 1.2rem;
@@ -2333,6 +2333,9 @@ aside nav > ul .collapsible-category ul a {
   font-size: 1.6rem;
 }
 .portfolio .featured-project .project-card .intro p {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
   max-height: 190px;
 }
 @media (max-width: 720px) {
@@ -2383,6 +2386,9 @@ aside nav > ul .collapsible-category ul a {
 }
 .portfolio .all-project .project-card .intro p {
   max-height: 140px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 @media (max-width: 480px) {
   .portfolio .all-project .project-card .intro p {

@@ -25,7 +25,7 @@
   .card-content-wrapper {
     display: flex;
     flex-flow: column;
-    gap: 0.9rem;
+    gap: 1rem;
 
     min-width: 0;
     min-height: 0;
@@ -99,6 +99,11 @@
       }
 
       p {
+        // for overflow -> ellipsis
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+
         max-height: 190px;
 
         @include brk-down($brk-medium) {
@@ -155,6 +160,10 @@
 
       p {
         max-height: 140px;
+        // for overflow -> ellipsis
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
 
         @include brk-down($brk-tiny) {
           max-height: 110px;
