@@ -13,10 +13,9 @@ body: 本論文提出一個名為 LGPF（語言引導之圖樣形成）的新框
 ----
 tags:
 
-IROS 2024
+IROS 2024 (Oral)
 LLM
 MARL
-Sim-to-Real
 Swarm Robotics
 Pattern Formation
 ----
@@ -117,9 +116,9 @@ image: husky-white.png
 ----
 url: /ADUDA/
 ----
-summary: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
+summary: 將 UDA 應用在自駕車駕駛上，讓強化學習智慧代理人（Agent）能在虛擬環境中學習，並直接轉移至真實世界中執行任務。
 ----
-body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學習，並在真實世界中執行任務。
+body: 將 UDA 應用在自駕車駕駛上，讓強化學習智慧代理人（Agent）能在虛擬環境中學習，並直接轉移至真實世界中執行任務。
 ----
 tags: 
 Computer Vision
@@ -155,7 +154,7 @@ url: https://github.com/25349023/OpenGL-IndoorRendering/
 ----
 summary:
 ----
-body: 使用 OpenGL 開發的室內場景渲染專案，其中實作了各類光源、FXAA 抗鋸齒，以及 Non-photorealistic rendering （非真實感繪製）等多種渲染技術。
+body: 使用 OpenGL 開發的室內場景渲染專案，其中實作了各類光源、FXAA 抗鋸齒，以及非真實感繪製（Non-photorealistic rendering）等多種渲染技術。
 另外，使用者可透過程式提供的 UI 來調整埸景的渲染設定。
 ----
 tags:
@@ -190,7 +189,7 @@ url: https://github.com/25349023/Be-Your-Voice
 ----
 summary: 
 ----
-body: 使用生成對抗網路（DCGAN）依據人們的照片産生對應的聲音。
+body: 使用生成對抗網路（DCGAN）依據人們的臉部照片産生對應的聲音。
 ----
 tags: 
 Generative Model
