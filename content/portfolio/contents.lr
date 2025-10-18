@@ -94,6 +94,23 @@ UDA
 ----
 class: research
 #### project ####
+name: Q-steer RC Car Controller with Arduino
+----
+image: qsteer.jpeg
+----
+url: https://github.com/25349023/qsteer-rccar
+----
+summary: 
+----
+body: 使用 Arduino 實作 Q-steer 系列遙控車的遙控器。
+----
+tags:
+Arduino
+Remote Control
+Maker
+----
+class: all
+#### project ####
 name: ADUDA: Autonomous Driving with Unsupervised Domain Adaptation
 ----
 image: husky-white.png
@@ -126,6 +143,7 @@ body: 利用機器學習技術進行光學字元辨識（OCR），自動填寫 N
 tags:
 Computer Vision
 OCR
+Captcha
 Browser Extension
 ----
 class: featured-all
@@ -155,7 +173,7 @@ url: https://25349023.github.io/
 ----
 summary: 
 ----
-body: 從無到有一手打造的部落格
+body: 從無到有一手打造的部落格，佈景主題完全由本人設計。
 ----
 tags: 
 Web Development
@@ -163,7 +181,7 @@ Lektor
 ----
 class: all
 #### project ####
-name: NTHU CoursInfo
+name: NTHU CoursInfo (Offline)
 ----
 image: nthucoursinfo.png
 ----
@@ -187,7 +205,7 @@ url: https://github.com/25349023/BTshooting
 ----
 summary: 
 ----
-body: 你能五關全過嗎？
+body: 你能五關全過嗎？用 C 語言開發的像素風彈幕遊戲。
 ----
 tags: 
 Game
@@ -203,7 +221,7 @@ url: https://github.com/25349023/MathCrash
 ----
 summary: 
 ----
-body: 四則運算 × 卡牌遊戲
+body: 四則運算 X 卡牌遊戲
 ----
 tags: 
 Game
