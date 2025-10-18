@@ -100,7 +100,7 @@ image: qsteer.jpeg
 ----
 url: https://github.com/25349023/qsteer-rccar
 ----
-summary: 
+summary: 使用 Arduino 實作 Q-steer 系列遙控車的遙控器。
 ----
 body: 使用 Arduino 實作 Q-steer 系列遙控車的遙控器。
 ----
@@ -109,7 +109,7 @@ Arduino
 Remote Control
 Maker
 ----
-class: all
+class: featured-all
 #### project ####
 name: ADUDA: Autonomous Driving with Unsupervised Domain Adaptation
 ----
@@ -128,7 +128,7 @@ Sim-to-Real
 Robotics
 UDA
 ----
-class: featured-all
+class: research
 #### project ####
 name: NTHU CCXP Decaptcha
 ----
