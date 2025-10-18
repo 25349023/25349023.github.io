@@ -2259,6 +2259,10 @@ aside nav > ul .collapsible-category ul a {
   background-color: rgba(105, 76, 69, 0.65);
   color: #f8f8f8;
 }
+.portfolio .main-wrapper .project-card:hover .tags .tag {
+  background-color: #f8f8f8;
+  color: rgba(105, 76, 69, 0.75);
+}
 @media (max-width: 480px) {
   .portfolio .main-wrapper .project-card {
     border-radius: 0;
@@ -2267,8 +2271,15 @@ aside nav > ul .collapsible-category ul a {
     border-radius: 0;
   }
 }
+.portfolio .main-wrapper .project-card .card-content-wrapper {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  min-width: 0;
+  min-height: 0;
+  padding: 0.9rem 1.2rem;
+}
 .portfolio .main-wrapper .project-card .intro {
-  padding: 0.8rem 1.2rem;
   min-width: 0;
   min-height: 0;
 }
@@ -2286,18 +2297,46 @@ aside nav > ul .collapsible-category ul a {
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
 }
+.portfolio .main-wrapper .project-card .tags {
+  flex: 0 0 1.65rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-flow: row wrap;
+  overflow: hidden;
+}
+.portfolio .main-wrapper .project-card .tags .tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  background-color: #a18f83;
+  color: #f8f8f8;
+  font-weight: bold;
+}
 
+.portfolio .featured-project .project-card article {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
 .portfolio .featured-project .project-card img {
   width: 100%;
   height: 250px;
   object-fit: cover;
+}
+.portfolio .featured-project .project-card .card-content-wrapper {
+  height: 100%;
+}
+.portfolio .featured-project .project-card .intro {
+  flex: 1;
 }
 .portfolio .featured-project .project-card .intro h3 {
   margin: 0 0 1rem 0;
   font-size: 1.6rem;
 }
 .portfolio .featured-project .project-card .intro p {
-  max-height: 220px;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  max-height: 190px;
 }
 @media (max-width: 720px) {
   .portfolio .featured-project .project-card .intro p {
@@ -2306,7 +2345,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .portfolio .all-project .project-card {
   flex: 0 0 200px;
-  max-height: 200px;
+  max-height: 300px;
 }
 .portfolio .all-project .project-card article {
   display: flex;
@@ -2318,7 +2357,8 @@ aside nav > ul .collapsible-category ul a {
   }
 }
 .portfolio .all-project .project-card img {
-  height: 100%;
+  height: 200px;
+  min-height: 100%;
   width: 220px;
   object-fit: cover;
 }
@@ -2334,6 +2374,9 @@ aside nav > ul .collapsible-category ul a {
     height: 180px;
   }
 }
+.portfolio .all-project .project-card .card-content-wrapper {
+  flex: 1;
+}
 .portfolio .all-project .project-card .intro {
   flex: 1;
 }
@@ -2343,6 +2386,9 @@ aside nav > ul .collapsible-category ul a {
 }
 .portfolio .all-project .project-card .intro p {
   max-height: 140px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 @media (max-width: 480px) {
   .portfolio .all-project .project-card .intro p {
@@ -2748,7 +2794,7 @@ aside nav > ul .collapsible-category ul a {
 }
 .portfolio .main-wrapper .featured-project, .portfolio .main-wrapper .all-project {
   display: grid;
-  gap: 1.2rem 1rem;
+  gap: 1.5rem 1rem;
   padding-bottom: 1rem;
 }
 .portfolio .main-wrapper .featured-project {
@@ -2768,7 +2814,6 @@ aside nav > ul .collapsible-category ul a {
 @media (max-width: 668px) {
   .portfolio .main-wrapper .all-project {
     display: grid;
-    gap: 1rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-rows: 400px;
   }
