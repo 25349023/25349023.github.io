@@ -2341,6 +2341,7 @@ aside nav > ul .collapsible-category ul a {
 @media (max-width: 720px) {
   .portfolio .featured-project .project-card .intro p {
     max-height: 168px;
+    -webkit-line-clamp: 5;
   }
 }
 .portfolio .all-project .project-card {
@@ -2372,6 +2373,7 @@ aside nav > ul .collapsible-category ul a {
   .portfolio .all-project .project-card img {
     width: 100%;
     height: 180px;
+    min-height: unset;
   }
 }
 .portfolio .all-project .project-card .card-content-wrapper {
@@ -2385,15 +2387,9 @@ aside nav > ul .collapsible-category ul a {
   font-size: 1.4rem;
 }
 .portfolio .all-project .project-card .intro p {
-  max-height: 140px;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
-}
-@media (max-width: 480px) {
-  .portfolio .all-project .project-card .intro p {
-    max-height: 110px;
-  }
 }
 .portfolio .all-project .project-card:last-child {
   text-align: center;
