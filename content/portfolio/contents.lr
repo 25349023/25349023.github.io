@@ -16,8 +16,83 @@ tags:
 IROS 2024
 LLM
 MARL
+Sim-to-Real
+Swarm Robotics
+Pattern Formation
 ----
-class: featured
+class: featured-research
+#### project ####
+name: Retraining-Free Merging of Sparse Mixture-of-Experts via Hierarchical Clustering
+----
+image: hc-smoe.png
+----
+url: https://arxiv.org/abs/2410.08589
+----
+summary: 
+----
+body: To address the high memory demands of Sparse Mixture-of-Experts (SMoE) models caused by numerous expert components, we introduces 
+Hierarchical Clustering for Sparsely activated Mixture of Experts (HC-SMoE), a task-agnostic expert merging framework for parameter 
+reduction without retraining. HC-SMoE introduces a novel hierarchical clustering approach based on expert outputs to ensure merging
+robustness independent of routing decisions. The proposed output-based clustering method enables effective capture
+of functional relationships between experts for large-scale architectures. We provide theoretical analysis and 
+comprehensive evaluations across multiple zero-shot language tasks to demonstrate HC-SMoE's effectiveness in
+state-of-the-art models including Qwen and Mixtral.
+----
+tags:
+
+ICML 2025
+LLM
+Mixture of Experts
+----
+class: research
+class: featured-research
+#### project ####
+name: Investigation of Factorized Optical Flows as Mid-Level Representations
+----
+image: optflow.png
+----
+url: https://arxiv.org/abs/2203.04927
+----
+summary: 
+----
+body: We introduce a new concept of incorporating factorized flow maps as mid-level representations, for 
+bridging the perception and the control modules in modular learning based robotic frameworks. To investigate the
+advantages of factorized flow maps and examine their interplay with the other types of mid-level representations, 
+we develop a framework with four different environments that contain both static and 
+dynamic objects, for analyzing the impacts of factorized optical flow maps on the performance of deep reinforcement 
+learning agents.
+----
+tags:
+
+IROS 2022
+Computer Vision
+Optical Flow
+Reinforcement Learning
+----
+class: research
+#### project ####
+name: ELDA: Using Edges to Have an Edge on Semantic Segmentation Based UDA
+----
+image: elda.png
+----
+url: https://arxiv.org/abs/2211.08888
+----
+summary: 
+----
+body: We introduce Edge Learning based Domain Adaptation (ELDA), a novel unsupervised domain 
+adaptation (UDA) framework which incorporates edge information into its training process to serve as a type of domain
+invariant information. In our experiments, we quantitatively and qualitatively demonstrate that the incorporation
+of edge information is indeed beneficial and effective, as it enables ELDA to outperform the contemporary 
+state-of-the-art methods on benchmarks for semantic segmentation based UDA tasks.
+----
+tags:
+
+BMVC 2022
+Computer Vision
+Image Segmentation
+UDA
+----
+class: research
 #### project ####
 name: ADUDA: Autonomous Driving with Unsupervised Domain Adaptation
 ----
@@ -32,10 +107,11 @@ body: 將 UDA 應用在自駕車駕駛上，讓 Agent 能在虛擬環境中學�
 tags: 
 Computer Vision
 Self-driving
+Sim-to-Real
 Robotics
 UDA
 ----
-class: featured
+class: featured-all
 #### project ####
 name: NTHU CCXP Decaptcha
 ----
@@ -52,7 +128,7 @@ Computer Vision
 OCR
 Browser Extension
 ----
-class: featured
+class: featured-all
 #### project ####
 name: Be Your Voice
 ----

@@ -2320,6 +2320,7 @@ aside nav > ul .collapsible-category ul a {
 .portfolio .featured-project .project-card img {
   width: 100%;
   height: 250px;
+  min-height: 250px;
   object-fit: cover;
 }
 .portfolio .featured-project .project-card .card-content-wrapper {

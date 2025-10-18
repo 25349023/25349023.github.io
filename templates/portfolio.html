@@ -12,7 +12,7 @@
       <h2>Featured Works</h2>
       <section class="featured-project">
         {% for project in this.projects.blocks %}
-          {% if project.class == 'featured' %}
+          {% if project.class.startswith('featured') %}
             {{ render_featured_project_card(project, this) }}
           {% endif %}
         {% endfor %}
@@ -21,14 +21,18 @@
       <h2>Publications & Research</h2>
       <section class="normal-project">
         {% for project in this.projects.blocks %}
-          {{ render_project_card(project, this) }}
+          {% if project.class.endswith('research') %}
+            {{ render_project_card(project, this) }}
+          {% endif %}
         {% endfor %}
       </section>
 
       <h2>Other Projects</h2>
       <section class="normal-project">
         {% for project in this.projects.blocks %}
-          {{ render_project_card(project, this) }}
+          {% if project.class.endswith('all') %}
+            {{ render_project_card(project, this) }}
+          {% endif %}
         {% endfor %}
       </section>
       <a href="https://github.com/25349023" class="more-card">
