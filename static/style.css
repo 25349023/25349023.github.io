@@ -2320,6 +2320,7 @@ aside nav > ul .collapsible-category ul a {
 .portfolio .featured-project .project-card img {
   width: 100%;
   height: 250px;
+  min-height: 250px;
   object-fit: cover;
 }
 .portfolio .featured-project .project-card .card-content-wrapper {
@@ -2344,88 +2345,84 @@ aside nav > ul .collapsible-category ul a {
     -webkit-line-clamp: 5;
   }
 }
-.portfolio .all-project .project-card {
+.portfolio .normal-project .project-card {
   flex: 0 0 200px;
   max-height: 300px;
 }
-.portfolio .all-project .project-card article {
+.portfolio .normal-project .project-card article {
   display: flex;
   height: 100%;
 }
 @media (max-width: 480px) {
-  .portfolio .all-project .project-card {
+  .portfolio .normal-project .project-card {
     flex: 0 0 360px;
   }
 }
-.portfolio .all-project .project-card img {
+.portfolio .normal-project .project-card img {
   height: 200px;
   min-height: 100%;
   width: 220px;
   object-fit: cover;
 }
 @media (max-width: 668px) {
-  .portfolio .all-project .project-card {
+  .portfolio .normal-project .project-card {
     max-height: none;
   }
-  .portfolio .all-project .project-card article {
+  .portfolio .normal-project .project-card article {
     flex-flow: column;
   }
-  .portfolio .all-project .project-card img {
+  .portfolio .normal-project .project-card img {
     width: 100%;
     height: 180px;
     min-height: unset;
   }
 }
-.portfolio .all-project .project-card .card-content-wrapper {
+.portfolio .normal-project .project-card .card-content-wrapper {
   flex: 1;
 }
-.portfolio .all-project .project-card .intro {
+.portfolio .normal-project .project-card .intro {
   flex: 1;
 }
-.portfolio .all-project .project-card .intro h3 {
+.portfolio .normal-project .project-card .intro h3 {
   margin: 0 0 0.75rem 0;
   font-size: 1.4rem;
 }
-.portfolio .all-project .project-card .intro p {
+.portfolio .normal-project .project-card .intro p {
   display: -webkit-box;
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
 }
-.portfolio .all-project .project-card:last-child {
-  text-align: center;
+.portfolio .more-card {
+  text-decoration: none;
+  color: #5c443a;
+  background-color: rgba(223, 202, 190, 0.18);
+  transition: all 0.3s;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
-  flex-basis: 0;
-  padding: 1rem 2rem;
-  align-self: end;
+  gap: 0.5rem;
+  padding: 0.8rem 0;
   font-size: 1.4rem;
   font-family: "Maven Pro", "Noto Sans TC", sans-serif;
   line-height: 1.4;
 }
-.portfolio .all-project .project-card:last-child h3 {
+.portfolio .more-card h3 {
   margin: 0;
   font-size: 1.2rem;
 }
-.portfolio .all-project .project-card:last-child:hover {
-  background-color: rgba(105, 76, 69, 0.8);
+.portfolio .more-card .fas {
+  padding-bottom: 1px;
 }
-@media (max-width: 720px) {
-  .portfolio .all-project .project-card:last-child {
-    font-size: 1.3rem;
-  }
+.portfolio .more-card:hover {
+  color: #f8f8f8;
+  background-color: rgba(105, 76, 69, 0.65);
 }
 @media (max-width: 480px) {
-  .portfolio .all-project .project-card:last-child {
+  .portfolio .more-card {
     flex-basis: 6rem;
     background-color: unset;
     border: none;
-    font-size: 1.2rem;
     color: #694c45;
-  }
-  .portfolio .all-project .project-card:last-child:hover {
-    color: #f8f8f8;
-    background-color: rgba(105, 76, 69, 0.5);
   }
 }
 
@@ -2762,7 +2759,7 @@ aside nav > ul .collapsible-category ul a {
   font-family: "Maven Pro", "FakePearl", sans-serif;
 }
 .portfolio .main-wrapper {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   min-height: 80vh;
   min-width: 0;
   padding: 2rem 3rem;
@@ -2788,10 +2785,10 @@ aside nav > ul .collapsible-category ul a {
     font-size: 1.6rem;
   }
 }
-.portfolio .main-wrapper .featured-project, .portfolio .main-wrapper .all-project {
+.portfolio .main-wrapper .featured-project, .portfolio .main-wrapper .normal-project {
   display: grid;
   gap: 1.5rem 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
 }
 .portfolio .main-wrapper .featured-project {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2803,19 +2800,19 @@ aside nav > ul .collapsible-category ul a {
     grid-template-rows: repeat(3, 500px);
   }
 }
-.portfolio .main-wrapper .all-project {
+.portfolio .main-wrapper .normal-project {
   display: flex;
   flex-flow: column;
 }
 @media (max-width: 668px) {
-  .portfolio .main-wrapper .all-project {
+  .portfolio .main-wrapper .normal-project {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-rows: 480px;
   }
 }
 @media (max-width: 480px) {
-  .portfolio .main-wrapper .all-project {
+  .portfolio .main-wrapper .normal-project {
     display: flex;
     flex-flow: column;
   }
