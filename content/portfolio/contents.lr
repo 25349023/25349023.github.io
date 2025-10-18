@@ -130,6 +130,40 @@ UDA
 ----
 class: research
 #### project ####
+name: Parallel Ray Tracing with CUDA
+----
+image: raytracing.png
+----
+url: https://github.com/25349023/CUDA-Raytracing
+----
+summary:
+----
+body: 使用 CUDA 實作平行化版本的光線追蹤（Ray Tracing）演算法。
+----
+tags:
+Parallel Programming
+Ray Tracing
+CUDA
+----
+class: all
+#### project ####
+name: Indoor Rendering with OpenGL
+----
+image: indoor.png
+----
+url: https://github.com/25349023/OpenGL-IndoorRendering/
+----
+summary:
+----
+body: 使用 OpenGL 開發的室內場景渲染專案，其中實作了各類光源、FXAA 抗鋸齒，以及 Non-photorealistic rendering （非真實感繪製）等多種渲染技術。
+另外，使用者可透過程式提供的 UI 來調整埸景的渲染設定。
+----
+tags:
+Computer Graphics
+OpenGL
+----
+class: all
+#### project ####
 name: NTHU CCXP Decaptcha
 ----
 image: ccxp_decaptcha.png
