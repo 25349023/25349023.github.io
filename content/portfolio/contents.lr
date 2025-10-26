@@ -25,7 +25,7 @@ name: Retraining-Free Merging of Sparse Mixture-of-Experts via Hierarchical Clus
 ----
 image: hc-smoe.png
 ----
-url: https://arxiv.org/abs/2410.08589
+url: https://wazenmai.github.io/HC-SMoE/
 ----
 summary: 
 ----
